@@ -1,4 +1,4 @@
-package gg.hta.lol;
+package gg.hta.lol.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
