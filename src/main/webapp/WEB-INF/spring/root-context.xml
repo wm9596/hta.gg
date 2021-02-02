@@ -13,7 +13,7 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
-		<property name="username" value="test02" />
+		<property name="username" value="final" />
 		<property name="password" value="1234" />
 	</bean>
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -24,4 +24,8 @@
 	</bean>
 	
 	<mybatis-spring:scan base-package="gg.hta.lol.mapper"/>
+	
+	<context:component-scan base-package="gg.hta.lol">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
 </beans>
