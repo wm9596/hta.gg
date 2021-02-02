@@ -114,6 +114,19 @@
 		justify-content: center;
         align-items: center;
 	}
+	
+	#main_home {
+		text-align: center;
+	}
+	
+	#main_logo {
+		width: 300px;
+		height: 200px;
+	}
+	
+	#main_home_search {
+		width: 500px;
+	}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
