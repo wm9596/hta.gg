@@ -1,0 +1,300 @@
+-- 접속 기록/visitLog
+create table visitLog
+(
+	vDate date not null
+);
+
+-- 소환사 정보/Summoner
+create table summoner
+(
+	sNum number primary key,	--소환사 번호
+	sNickname varchar2(255),	--소환사 이름
+	sLevel number,	--소환사 레벨
+	icon varchar2(255),	--프로필아이콘
+	tier varchar2(255),	--티어
+	win varchar2(255),	--승리
+	lose varchar2(255)	--패배
+);
+
+-- 프로필 평가(rating)
+create table rating
+(
+	sNum number references Summoner(sNum) not null,
+	rate varchar2(100) 
+);
+
+-- 회원/MEMBER
+create table member
+(
+	username varchar2(50) primary key ,	--아이디
+	sNum number references Summoner(sNum) not null,	--소환사번호
+	password varchar2(100) not null,	--비밀번호
+	enable char(1) default '1' check(enable in('0', '1')),	--enable(사용가능)
+	email varchar2(50),	-- 이메일
+	regdate date,	--가입날짜
+	nickname varchar2(12),	--커뮤니티 닉네임
+	point number	--포인트
+);
+
+-- 이메일 인증번호/auth
+create table auth
+(
+	username varchar2(50) references member(username) not null,	--아이디
+	code varchar2(1000)	--이메일 인증번호
+);
+
+-- 쪽지/message
+create table message
+(
+	msgNum number primary key,	--쪽지 번호
+	sender varchar2(50) references member(username),	--보낸 사람 아이디
+	receiver varchar2(50) references member(username),	--받는 사람 아이디
+	msg varchar2(4000),		--메세지 내용
+	sendTime date,		--보낸 시간
+	open varchar2(255) --확인여부
+);
+
+-- 권한/authorities
+create table authorities
+(
+	username varchar2(50) not null,	--아이디
+	authority varchar2(100) not null, --권한
+	constraint fk_authorities_users  foreign key(username) references member(username)
+);
+create unique index ix_auth_username on authorities (username,authority);	
+
+-- 경기 일정/match
+create table match
+(
+	mNum number primary key,	--경기 번호
+	mDate date,	--경기 시간
+	mRate number,	--배당율
+	mWinlose varchar2(255)	--승패여부
+);
+
+-- 팀정보/battingTeamInfo
+create table battingTeamInfo
+(
+	tNum number primary key,	--팀 번호
+	mNum number references match(mNum) not null,	--경기 번호
+	tName varchar2(255)	--팀 이름
+);
+
+-- 배팅내역/battingLog
+create table battingLog
+(
+	bNum number primary key,	--배팅내역 번호
+	mNum number references match(mNum) not null,	--경기 번호
+	username varchar2(50) references member(username) not null,	--아이디
+	choice number	--배팅한 팀
+);
+
+-- 게시판/community
+create table community
+(
+	pNum number primary key,	--게시글 번호
+	username varchar2(50) references member(username) not null,	--아이디
+	cNum number not null,	--카테고리
+	title varchar2(255),	--글 제목
+	content varchar2(4000),	--글 내용
+	hit number,		--추천수
+	nohit number,	--반대수
+	viewCount number,	--조회수
+	commentCount number	--댓글수
+);
+
+-- 신고/report
+create table report
+(
+	rNum number primary key, --신고번호
+	pNum number references community(pNum) not null,	--게시글 번호
+	detail varchar2(4000)	--신고내용
+);
+
+-- 첨부파일/Addfile
+create table Addfile
+(
+	fileNum number primary key,	--첨부파일 번호
+	pNum number references community(pNum) not null,	--게시글 번호
+	orgPath varchar2(2000),	--원본파일경로
+	realPath varchar2(1000)	--저장파일명
+);
+
+-- 댓글/reply
+create table reply
+(
+	rNum number primary key,	--댓글 번호
+	pNum number references community(pNum) not null,	--게시글 번호
+	rereNum number,	--대댓글 번호
+	rWriter varchar2(255),	--댓글작성자
+	rContent varchar2(255),	--댓글내용
+	regdate date --댓글 작성날짜
+);
+
+-- 전체 게임정보/matchinfo
+create table matchinfo
+(
+	matchid varchar2(255) primary key,	--경기고유 id
+	type varchar2(255),	--게임 타입
+	runtime varchar2(255),	--게임 진행시간
+	startTime date	--게임 시작시간
+);
+
+-- 팀정보/teaminfo
+CREATE TABLE "TEAMINFO" 
+(   
+	"TEAMID" VARCHAR2(255 BYTE) NOT NULL ENABLE, --팀 id
+    "MATCHID" VARCHAR2(255 BYTE) NOT NULL ENABLE, --경기 고유 id
+    "WINLOSE" VARCHAR2(255 BYTE), --승패여부
+    "FIRSTBLOOD" VARCHAR2(255 BYTE), --퍼스트블러드
+    "FIRSTTOWER" VARCHAR2(255 BYTE), --퍼스트타워
+    "BARONKILL" NUMBER, --바론 킬
+    "DRAGONKILL" NUMBER, --드래곤 킬
+    "TOWERKILL" NUMBER, --포탑 킬
+    CONSTRAINT "TEAMINFO_PK" PRIMARY KEY ("TEAMID", "MATCHID"),
+    CONSTRAINT "TEAMINFO_FK1" FOREIGN KEY ("MATCHID") REFERENCES "FINAL"."MATCHINFO" ("MATCHID")
+);
+
+--아이템/item
+create table item
+(
+	iNum number primary key,	--아이템 번호
+	icon varchar2(255),	--아이템 아이콘
+	name varchar2(255),	--아이템이름
+	price number,	--아이템 가격
+	effect varchar2(255)	--아이템효과
+);
+
+--챔피언/champion
+create table champion
+(
+	championid varchar2(255) primary key,	--챔피언id
+	name varchar2(255),	--챔피언 이름
+	pickCount number,	--픽된 횟수
+	banCount number,	--밴된 횟수
+	winCount number,	--승리 횟수
+	loseCount number,	--패배 횟수
+	picture varchar2(255),	--초상화
+	skillP_icon varchar2(255),	--패시브 스킬 아이콘
+	skillP_info varchar2(255),	--패시브 스킬 설명
+	skillQ_icon varchar2(255),	--q스킬 아이콘
+	skillQ_info varchar2(255),	--q스킬 설명
+	skillW_icon varchar2(255),	--W스킬 아이콘
+	skillW_info varchar2(255),	--W스킬 설명
+	skillE_icon varchar2(255),	--E스킬 아이콘
+	skillE_info varchar2(255),	--E스킬 설명
+	skillR_icon varchar2(255),	--r스킬 아이콘
+	skillR_info varchar2(255),	--r스킬 설명
+	story varchar2(4000),	--스토리
+	tip varchar2(4000)	--팁
+);
+
+--밴픽목록/banList
+create table banList
+(
+	bNum number primary key,
+	championid	varchar2(255) references champion(championid)
+);
+
+--팀원 정보/teamMemberinfo
+CREATE TABLE TEAMMEMBERINFO
+(   
+	"TMNUM" NUMBER, 
+    "SNUM" NUMBER, 
+    "TEAMID" VARCHAR2(255 BYTE), 
+    "MATCHID" VARCHAR2(2555 BYTE), 
+    "CHAMPIONID" VARCHAR2(255 BYTE), 
+    "KILL" NUMBER, 
+    "DEATH" NUMBER, 
+    "ASSIST" NUMBER, 
+    "CHAMPIONLEVEL" NUMBER, 
+    "SPELL1" NUMBER, 
+    "SPELL2" NUMBER, 
+    "RUNE1" NUMBER, 
+    "RUNE2" NUMBER, 
+    "TIER" VARCHAR2(255 BYTE), 
+    "CHAMPIONDAMAGE" NUMBER, 
+    "TAKENDAMAGE" NUMBER, 
+    "CS" NUMBER, 
+    "WARDINSTALL" NUMBER, 
+    "WARDREMOVE" NUMBER, 
+    "GOLD" NUMBER, 
+    "ITEM1" NUMBER, 
+    "ITEM2" NUMBER, 
+    "ITEM3" NUMBER, 
+    "ITEM4" NUMBER, 
+    "ITEM5" NUMBER, 
+    "ITEM6" NUMBER, 
+    "ACCESSORY" NUMBER, 
+    "MULTIKILL" NUMBER, 
+    PRIMARY KEY ("TMNUM"),
+    CONSTRAINT "TEAMMEMBERINFO_FK1" FOREIGN KEY ("SNUM")
+    REFERENCES "FINAL"."SUMMONER" ("SNUM") ENABLE, 
+    CONSTRAINT "TEAMMEMBERINFO_FK2" FOREIGN KEY ("TEAMID", "MATCHID")
+    REFERENCES "FINAL"."TEAMINFO" ("TEAMID", "MATCHID") ENABLE, 
+    CONSTRAINT "TEAMMEMBERINFO_FK3" FOREIGN KEY ("CHAMPIONID")
+    REFERENCES "FINAL"."CHAMPION" ("CHAMPIONID") ENABLE, 
+    CONSTRAINT "TEAMMEMBERINFO_FK4" FOREIGN KEY ("ITEM1")
+    REFERENCES "FINAL"."ITEM" ("INUM") ENABLE, 
+    CONSTRAINT "TEAMMEMBERINFO_FK5" FOREIGN KEY ("ITEM2")
+    REFERENCES "FINAL"."ITEM" ("INUM") ENABLE, 
+    CONSTRAINT "TEAMMEMBERINFO_FK6" FOREIGN KEY ("ITEM3")
+    REFERENCES "FINAL"."ITEM" ("INUM") ENABLE, 
+    CONSTRAINT "TEAMMEMBERINFO_FK7" FOREIGN KEY ("ITEM4")
+    REFERENCES "FINAL"."ITEM" ("INUM") ENABLE, 
+    CONSTRAINT "TEAMMEMBERINFO_FK8" FOREIGN KEY ("ITEM5")
+    REFERENCES "FINAL"."ITEM" ("INUM") ENABLE, 
+    CONSTRAINT "TEAMMEMBERINFO_FK9" FOREIGN KEY ("ITEM6")
+    REFERENCES "FINAL"."ITEM" ("INUM") ENABLE
+);
+
+---------- drop table ---------- 
+drop table visitLog;
+drop table authorities;
+drop table message;
+drop table battingTeamInfo;
+drop table battingLog;
+drop table match;
+drop table rating;
+drop table reply;
+drop table Addfile;
+drop table report;
+drop table community;
+drop table auth;
+drop table member;
+drop table banList;
+drop table teamMemberinfo;
+drop table teaminfo;
+drop table matchinfo;
+drop table Summoner;
+drop table champion;
+drop table item;
+
+---------- create sequence -----------
+create SEQUENCE msgNum_seq;
+create SEQUENCE tNum_seq;
+create SEQUENCE mNum_seq;
+create SEQUENCE bNum_seq; --배팅번호
+create SEQUENCE sNum_seq;
+create SEQUENCE fileNum_seq;
+create SEQUENCE rNum_seq; --신고번호
+create SEQUENCE reNum_seq; --댓글번호
+create SEQUENCE pNum_seq;
+create SEQUENCE tmNum_seq;
+create SEQUENCE iNum_seq;
+create SEQUENCE banNum_seq;	--밴 번호
+
+
+---------- drop sequence -------------
+drop SEQUENCE msgNum_seq;
+drop SEQUENCE tNum_seq;
+drop SEQUENCE mNum_seq;
+drop SEQUENCE bNum_seq; --배팅번호
+drop SEQUENCE sNum_seq;
+drop SEQUENCE fileNum_seq;
+drop SEQUENCE rNum_seq; --신고번호
+drop SEQUENCE reNum_seq; --댓글번호
+drop SEQUENCE pNum_seq;
+drop SEQUENCE tmNum_seq;
+drop SEQUENCE iNum_seq;
+drop SEQUENCE banNum_seq;	--밴 번호
