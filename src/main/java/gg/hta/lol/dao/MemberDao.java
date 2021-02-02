@@ -1,5 +1,6 @@
 package gg.hta.lol.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,7 +17,9 @@ public class MemberDao {
 	public int insert(MemberVo vo) {
 		return sqlSession.insert(NAMESPACE + ".insert",vo);
 	}
-	
+	public int insertAuth(HashMap<String, Object> map) {
+		return sqlSession.insert(NAMESPACE + ".insertAuth", map); 
+	}
 	public int delete(int num) {
 		return sqlSession.delete(NAMESPACE + ".delete",num); 
 	}

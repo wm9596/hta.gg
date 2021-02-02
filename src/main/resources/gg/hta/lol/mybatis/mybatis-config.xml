@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-  	<typeAlias type="gg.hta.lol.member.vo.MemberVo" alias="member"/>
+  	<typeAlias type="gg.hta.lol.vo.MemberVo" alias="member"/>
   	<!-- <typeAlias type="com.test.spring13.vo.CommentsVo" alias="comments"/> -->
   </typeAliases>
   <mappers>
