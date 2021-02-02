@@ -3,15 +3,16 @@ package gg.hta.lol.member.dao;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import gg.hta.lol.member.vo.MemberVo;
 
+@Repository
 public class MemberDao {
-	private SqlSessionTemplate sqlSession;
-	public void setSqlSession(SqlSessionTemplate sqlSession) {
-		this.sqlSession = sqlSession;
-	}
-	public final String NAMESPACE = "gg.hta.mybatis.mapper.MemberMapper";
+	@Autowired private SqlSessionTemplate sqlSession;
+	
+	public final String NAMESPACE = "gg.hta.lol.mapper.MemberMapper";
 	
 	public int insert(MemberVo vo) {
 		return sqlSession.insert(NAMESPACE + ".insert",vo);

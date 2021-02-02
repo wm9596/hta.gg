@@ -2,14 +2,16 @@ package gg.hta.lol.member.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import gg.hta.lol.member.dao.MemberDao;
 import gg.hta.lol.member.vo.MemberVo;
 
+@Service
 public class MemberService {
-	private MemberDao dao;
-	public void setDao(MemberDao dao) {
-		this.dao = dao;
-	}
+	@Autowired private MemberDao dao;
+	
 	public int insert(MemberVo vo) {
 		return dao.insert(vo);
 	}
