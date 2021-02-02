@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import gg.hta.lol.community.service.CommunityService;
+import gg.hta.lol.service.CommunityService;
 import gg.hta.lol.util.PageUtil;
 import gg.hta.lol.vo.CommunityVo;
 

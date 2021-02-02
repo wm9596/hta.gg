@@ -1,4 +1,4 @@
-package gg.hta.lol.community.dao;
+package gg.hta.lol.dao;
 
 import java.util.HashMap;
 import java.util.List;
