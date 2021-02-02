@@ -22,15 +22,18 @@
 		margin-right: 15%;
 		background-color: green;
 	}
+	#header {
+		border: 1px solid gray;
+	}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<div id="wrap" class="container">
-		<div id="header">
+		<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top" id="header_wrap">
 			<tiles:insertAttribute name="header"/>
-		</div>
+		</nav>
 		<div id="content">
 			<tiles:insertAttribute name="content"/>
 		</div>
