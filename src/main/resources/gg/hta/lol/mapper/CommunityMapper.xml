@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gg.hta.lol.mapper.CommunityMapper">
+
+	<insert id="insert" parameterType="board">
+		insert into community values(pNum_seq.nextval,#{username},#{cNum},#{title},#{content},0,0,#{commentCount},sysdate)
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from community where pNum=#{pNum}
+	</delete>
+	
+	<sql id="search">
+		<if test="field!=null and field!=''">
+  			where ${field} like '%'||#{keyword}||'%'
+  		</if>
+	</sql>
+	
+	<select id="count" resultType="int" parameterType="hashmap">
+		select NVL(count(*),0) cnt from community
+		<include refid="search"/>
+	</select>
+	
+	<select id="list" resultType="board" parameterType="hashmap">
+		select * from
+		(
+ 			select a.*,rownum rnum from 
+ 			(
+  				select * from community
+  				<include refid="search"/>
+  				order by pNum desc
+  			) a
+  		)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow}  ]]>
+	</select>	
+	
+	<select id="select" resultType="board" parameterType="int">
+		select * from community where pNum=#{pNum}
+	</select>
+	
+	<update id="update" parameterType="board">
+		update community set #{cNum},#{title},#{content}
+		where pNum=#{pNum}
+	</update>
+	
+	<update id="addHit" parameterType="int">
+		update community set hit=hit+1 where pNum=#{pNum}
+	</update>
+	
+	<update id="noHit" parameterType="int">
+		update community set hit=hit-1 where pNum=#{pNum}
+	</update>
+
+	<select id="next" parameterType="int" resultType="board">
+		select * from
+		(
+			select * from community where pNum>#{pNum} order by pNum asc
+		)
+		where rownum=1
+	</select>
+	
+	<select id="prev" parameterType="int" resultType="board">
+		<![CDATA[
+		select * from
+		(
+			select * from community where pNum<#{pNum} order by num desc
+		)
+		where rownum=1
+		 ]]>
+	</select>
+</mapper>
