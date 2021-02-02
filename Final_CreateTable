@@ -1,3 +1,39 @@
+---------- drop sequence -------------
+drop SEQUENCE msgNum_seq;
+drop SEQUENCE tNum_seq;
+drop SEQUENCE mNum_seq;
+drop SEQUENCE bNum_seq; --배팅번호
+drop SEQUENCE sNum_seq;
+drop SEQUENCE fileNum_seq;
+drop SEQUENCE rNum_seq; --신고번호
+drop SEQUENCE reNum_seq; --댓글번호
+drop SEQUENCE pNum_seq;
+drop SEQUENCE tmNum_seq;
+drop SEQUENCE iNum_seq;
+drop SEQUENCE banNum_seq;	--밴 번호
+
+---------- drop table ---------- 
+drop table visitLog;
+drop table authorities;
+drop table message;
+drop table battingTeamInfo;
+drop table battingLog;
+drop table match;
+drop table rating;
+drop table reply;
+drop table Addfile;
+drop table report;
+drop table community;
+drop table auth;
+drop table member;
+drop table banList;
+drop table teamMemberinfo;
+drop table teaminfo;
+drop table matchinfo;
+drop table Summoner;
+drop table champion;
+drop table item;
+
 -- 접속 기록/visitLog
 create table visitLog
 (
@@ -100,7 +136,8 @@ create table community
 	hit number,		--추천수
 	nohit number,	--반대수
 	viewCount number,	--조회수
-	commentCount number	--댓글수
+	commentCount number, --댓글수
+	regdate date -- 등록날짜
 );
 
 -- 신고/report
@@ -248,28 +285,6 @@ CREATE TABLE TEAMMEMBERINFO
     REFERENCES "FINAL"."ITEM" ("INUM") ENABLE
 );
 
----------- drop table ---------- 
-drop table visitLog;
-drop table authorities;
-drop table message;
-drop table battingTeamInfo;
-drop table battingLog;
-drop table match;
-drop table rating;
-drop table reply;
-drop table Addfile;
-drop table report;
-drop table community;
-drop table auth;
-drop table member;
-drop table banList;
-drop table teamMemberinfo;
-drop table teaminfo;
-drop table matchinfo;
-drop table Summoner;
-drop table champion;
-drop table item;
-
 ---------- create sequence -----------
 create SEQUENCE msgNum_seq;
 create SEQUENCE tNum_seq;
@@ -283,18 +298,3 @@ create SEQUENCE pNum_seq;
 create SEQUENCE tmNum_seq;
 create SEQUENCE iNum_seq;
 create SEQUENCE banNum_seq;	--밴 번호
-
-
----------- drop sequence -------------
-drop SEQUENCE msgNum_seq;
-drop SEQUENCE tNum_seq;
-drop SEQUENCE mNum_seq;
-drop SEQUENCE bNum_seq; --배팅번호
-drop SEQUENCE sNum_seq;
-drop SEQUENCE fileNum_seq;
-drop SEQUENCE rNum_seq; --신고번호
-drop SEQUENCE reNum_seq; --댓글번호
-drop SEQUENCE pNum_seq;
-drop SEQUENCE tmNum_seq;
-drop SEQUENCE iNum_seq;
-drop SEQUENCE banNum_seq;	--밴 번호
