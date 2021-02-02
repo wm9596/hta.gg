@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gg.hta.mybatis.mapper.MemberMapper">
+	<insert id="insert" parameterType="gg.hta.lol.member.vo.MemberVo">
+	   insert into member values(#{username},sNum_seq.nextval,'1',#{email},sysdate,#{nickname},0)
+	</insert>
+	<delete id="delete" parameterType="int" >
+		delete from members where num=#{num}
+	</delete>
+	<select id="list" resultType="test.vo.MembersVo">
+		select * from members
+	</select>
+	<update id="update" parameterType="test.vo.MembersVo">
+		update members
+		set name=#{name},phone=#{phone},addr=#{addr},regdate=#{regdate}
+		where num=#{num}
+	</update>
+	<select id="select" parameterType="int" resultType="test.vo.MembersVo">
+		select * from members where num=#{num}
+	</select>
+</mapper>

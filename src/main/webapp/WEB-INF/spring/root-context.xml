@@ -27,4 +27,7 @@
 	
 	<mybatis-spring:scan base-package="gg.hta.lol.mapper"/>
 	
+	<context:component-scan base-package="gg.hta.lol">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
 </beans>
