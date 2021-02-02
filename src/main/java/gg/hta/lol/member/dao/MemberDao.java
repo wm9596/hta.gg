@@ -2,7 +2,7 @@ package gg.hta.lol.member.dao;
 
 import java.util.List;
 
-import org.mybatis.spring.SqlSessionTemplate;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,8 +10,7 @@ import gg.hta.lol.member.vo.MemberVo;
 
 @Repository
 public class MemberDao {
-	@Autowired private SqlSessionTemplate sqlSession;
-	
+	@Autowired private SqlSession sqlSession;
 	public final String NAMESPACE = "gg.hta.lol.mapper.MemberMapper";
 	
 	public int insert(MemberVo vo) {

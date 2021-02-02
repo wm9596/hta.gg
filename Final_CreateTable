@@ -63,7 +63,7 @@ create table rating
 create table member
 (
 	username varchar2(50) primary key ,	--아이디
-	sNum number references Summoner(sNum) not null,	--소환사번호
+	sNum number references Summoner(sNum),	--소환사번호
 	password varchar2(100) not null,	--비밀번호
 	enable char(1) default '1' check(enable in('0', '1')),	--enable(사용가능)
 	email varchar2(50),	-- 이메일

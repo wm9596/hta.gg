@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <typeAliases>
+  	<typeAlias type="gg.hta.lol.member.vo.MemberVo" alias="member"/>
+  	<!-- <typeAlias type="com.test.spring13.vo.CommentsVo" alias="comments"/> -->
+  </typeAliases>
+  <mappers>
+  	<!-- 읽어올 Mapper파일 설정 -->
+    <mapper resource="gg/hta/lol/mapper/MemberMapper.xml"/>
+ 	<!-- <mapper resource="com/test/spring13/mapper/CommentsMapper.xml"/> -->
+  </mappers>
+</configuration>

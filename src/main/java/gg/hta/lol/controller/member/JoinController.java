@@ -18,7 +18,10 @@ public class JoinController {
 	}
 	@RequestMapping(value="/member/join", method = RequestMethod.POST)
 	public String join(MemberVo vo) {
+		System.out.println("=====================================13");
 		int n = service.insert(vo);
+		System.out.println("=====================================");
+		System.out.println(n);
 		if(n>0) {
 			return "member/login";
 		}else {
