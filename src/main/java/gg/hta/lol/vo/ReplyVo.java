@@ -1,4 +1,4 @@
-package lol.gg.vo;
+package gg.hta.lol.vo;
 
 import java.sql.Date;
 

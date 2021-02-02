@@ -1,4 +1,4 @@
-package lol.gg.vo;
+package gg.hta.lol.vo;
 
 import lombok.Getter;
 import lombok.Setter;
