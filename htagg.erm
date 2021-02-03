@@ -23,7 +23,7 @@
 		<g>255</g>
 		<b>255</b>
 	</color>
-	<font_name>맑은 고딕</font_name>
+	<font_name>留묒� 怨좊뵓</font_name>
 	<font_size>9</font_size>
 	<settings>
 		<database>Oracle</database>
@@ -122,7 +122,7 @@
 			<id></id>
 			<height>-1</height>
 			<width>-1</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>50</x>
 			<y>50</y>
@@ -137,23 +137,23 @@
 			<creation_date>2021-01-26 16:17:09</creation_date>
 			<updated_date>2021-02-03 16:21:41</updated_date>
 			<model_property>
-				<name>프로젝트명</name>
+				<name>�봽濡쒖젥�듃紐�</name>
 				<value></value>
 			</model_property>
 			<model_property>
-				<name>모델명</name>
+				<name>紐⑤뜽紐�</name>
 				<value></value>
 			</model_property>
 			<model_property>
-				<name>버전</name>
+				<name>踰꾩쟾</name>
 				<value></value>
 			</model_property>
 			<model_property>
-				<name>회사명</name>
+				<name>�쉶�궗紐�</name>
 				<value></value>
 			</model_property>
 			<model_property>
-				<name>작성자</name>
+				<name>�옉�꽦�옄</name>
 				<value></value>
 			</model_property>
 		</model_properties>
@@ -163,7 +163,7 @@
 		<environment_setting>
 			<environment>
 				<id>0</id>
-				<name>기본</name>
+				<name>湲곕낯</name>
 			</environment>
 		</environment_setting>
 	</settings>
@@ -179,8 +179,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>장신구</description>
-			<logical_name>장신구</logical_name>
+			<description>�옣�떊援�</description>
+			<logical_name>�옣�떊援�</logical_name>
 			<physical_name>accessory</physical_name>
 			<type>decimal</type>
 		</word>
@@ -195,8 +195,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>어시스트</description>
-			<logical_name>어시스트</logical_name>
+			<description>�뼱�떆�뒪�듃</description>
+			<logical_name>�뼱�떆�뒪�듃</logical_name>
 			<physical_name>assist</physical_name>
 			<type>decimal</type>
 		</word>
@@ -227,8 +227,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>밴된 횟수</description>
-			<logical_name>밴된 횟수</logical_name>
+			<description>諛대맂 �슏�닔</description>
+			<logical_name>諛대맂 �슏�닔</logical_name>
 			<physical_name>banCount</physical_name>
 			<type>decimal</type>
 		</word>
@@ -243,8 +243,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>바론 킬</description>
-			<logical_name>바론 킬</logical_name>
+			<description>諛붾줎 �궗</description>
+			<logical_name>諛붾줎 �궗</logical_name>
 			<physical_name>baronKill</physical_name>
 			<type>decimal</type>
 		</word>
@@ -259,8 +259,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>배팅내역 번호</description>
-			<logical_name>배팅내역 번호</logical_name>
+			<description>諛고똿�궡�뿭 踰덊샇</description>
+			<logical_name>諛고똿�궡�뿭 踰덊샇</logical_name>
 			<physical_name>bNum</physical_name>
 			<type>decimal</type>
 		</word>
@@ -275,8 +275,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>밴 번호</description>
-			<logical_name>밴 번호</logical_name>
+			<description>諛� 踰덊샇</description>
+			<logical_name>諛� 踰덊샇</logical_name>
 			<physical_name>bNum</physical_name>
 			<type>decimal</type>
 		</word>
@@ -291,8 +291,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>준 피해량</description>
-			<logical_name>준 피해량</logical_name>
+			<description>以� �뵾�빐�웾</description>
+			<logical_name>以� �뵾�빐�웾</logical_name>
 			<physical_name>championDamage</physical_name>
 			<type>decimal</type>
 		</word>
@@ -308,7 +308,7 @@
 			<args></args>
 			<char_semantics>false</char_semantics>
 			<description>championId</description>
-			<logical_name>챔피언 id</logical_name>
+			<logical_name>梨뷀뵾�뼵 id</logical_name>
 			<physical_name>championId</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -323,8 +323,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>챔피언 레벨</description>
-			<logical_name>챔피언 레벨</logical_name>
+			<description>梨뷀뵾�뼵 �젅踰�</description>
+			<logical_name>梨뷀뵾�뼵 �젅踰�</logical_name>
 			<physical_name>championLevel</physical_name>
 			<type>decimal</type>
 		</word>
@@ -339,8 +339,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>배팅한 팀</description>
-			<logical_name>배팅한 팀</logical_name>
+			<description>諛고똿�븳 ��</description>
+			<logical_name>諛고똿�븳 ��</logical_name>
 			<physical_name>choice</physical_name>
 			<type>decimal</type>
 		</word>
@@ -355,8 +355,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>카테고리</description>
-			<logical_name>카테고리</logical_name>
+			<description>移댄뀒怨좊━</description>
+			<logical_name>移댄뀒怨좊━</logical_name>
 			<physical_name>cNum</physical_name>
 			<type>decimal</type>
 		</word>
@@ -371,8 +371,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>이메일 인증번호</description>
-			<logical_name>이메일 인증번호</logical_name>
+			<description>�씠硫붿씪 �씤利앸쾲�샇</description>
+			<logical_name>�씠硫붿씪 �씤利앸쾲�샇</logical_name>
 			<physical_name>code</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -387,8 +387,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>댓글 수</description>
-			<logical_name>댓글수</logical_name>
+			<description>�뙎湲� �닔</description>
+			<logical_name>�뙎湲��닔</logical_name>
 			<physical_name>commentCount</physical_name>
 			<type>decimal</type>
 		</word>
@@ -404,7 +404,7 @@
 			<args></args>
 			<char_semantics>false</char_semantics>
 			<description></description>
-			<logical_name>글 내용</logical_name>
+			<logical_name>湲� �궡�슜</logical_name>
 			<physical_name>content</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -435,8 +435,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>데스</description>
-			<logical_name>데스</logical_name>
+			<description>�뜲�뒪</description>
+			<logical_name>�뜲�뒪</logical_name>
 			<physical_name>death</physical_name>
 			<type>decimal</type>
 		</word>
@@ -451,8 +451,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>신고 내용</description>
-			<logical_name>신고 내용</logical_name>
+			<description>�떊怨� �궡�슜</description>
+			<logical_name>�떊怨� �궡�슜</logical_name>
 			<physical_name>detail</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -467,8 +467,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>드래곤 킬</description>
-			<logical_name>드래곤 킬</logical_name>
+			<description>�뱶�옒怨� �궗</description>
+			<logical_name>�뱶�옒怨� �궗</logical_name>
 			<physical_name>dragonKill</physical_name>
 			<type>decimal</type>
 		</word>
@@ -483,8 +483,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>아이템 효과</description>
-			<logical_name>아이템 효과</logical_name>
+			<description>�븘�씠�뀥 �슚怨�</description>
+			<logical_name>�븘�씠�뀥 �슚怨�</logical_name>
 			<physical_name>effect</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -499,8 +499,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>이메일</description>
-			<logical_name>이메일</logical_name>
+			<description>�씠硫붿씪</description>
+			<logical_name>�씠硫붿씪</logical_name>
 			<physical_name>email</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -531,8 +531,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>첨부파일 번호</description>
-			<logical_name>첨부파일 번호</logical_name>
+			<description>泥⑤��뙆�씪 踰덊샇</description>
+			<logical_name>泥⑤��뙆�씪 踰덊샇</logical_name>
 			<physical_name>fileNum</physical_name>
 			<type>decimal</type>
 		</word>
@@ -548,7 +548,7 @@
 			<args></args>
 			<char_semantics>false</char_semantics>
 			<description>true or false</description>
-			<logical_name>퍼스트블러드</logical_name>
+			<logical_name>�띁�뒪�듃釉붾윭�뱶</logical_name>
 			<physical_name>firstblood</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -564,7 +564,7 @@
 			<args></args>
 			<char_semantics>false</char_semantics>
 			<description>true false</description>
-			<logical_name>퍼스트 타워</logical_name>
+			<logical_name>�띁�뒪�듃 ���썙</logical_name>
 			<physical_name>firstTower</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -579,8 +579,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>골드 획득량</description>
-			<logical_name>골드 획득량</logical_name>
+			<description>怨⑤뱶 �쉷�뱷�웾</description>
+			<logical_name>怨⑤뱶 �쉷�뱷�웾</logical_name>
 			<physical_name>gold</physical_name>
 			<type>decimal</type>
 		</word>
@@ -595,8 +595,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>추천수</description>
-			<logical_name>추천수</logical_name>
+			<description>異붿쿇�닔</description>
+			<logical_name>異붿쿇�닔</logical_name>
 			<physical_name>hit</physical_name>
 			<type>decimal</type>
 		</word>
@@ -611,8 +611,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>아이템 아이콘</description>
-			<logical_name>아이템 아이콘</logical_name>
+			<description>�븘�씠�뀥 �븘�씠肄�</description>
+			<logical_name>�븘�씠�뀥 �븘�씠肄�</logical_name>
 			<physical_name>icon</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -628,7 +628,7 @@
 			<args></args>
 			<char_semantics>false</char_semantics>
 			<description></description>
-			<logical_name>프로필 아이콘</logical_name>
+			<logical_name>�봽濡쒗븘 �븘�씠肄�</logical_name>
 			<physical_name>icon</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -643,8 +643,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>아이템 번호</description>
-			<logical_name>아이템 번호</logical_name>
+			<description>�븘�씠�뀥 踰덊샇</description>
+			<logical_name>�븘�씠�뀥 踰덊샇</logical_name>
 			<physical_name>iNum</physical_name>
 			<type>decimal</type>
 		</word>
@@ -659,8 +659,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>킬</description>
-			<logical_name>킬</logical_name>
+			<description>�궗</description>
+			<logical_name>�궗</logical_name>
 			<physical_name>kill</physical_name>
 			<type>decimal</type>
 		</word>
@@ -676,7 +676,7 @@
 			<args></args>
 			<char_semantics>false</char_semantics>
 			<description></description>
-			<logical_name>패배</logical_name>
+			<logical_name>�뙣諛�</logical_name>
 			<physical_name>lose</physical_name>
 			<type>decimal</type>
 		</word>
@@ -691,8 +691,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>패배 횟수</description>
-			<logical_name>패배 횟수</logical_name>
+			<description>�뙣諛� �슏�닔</description>
+			<logical_name>�뙣諛� �슏�닔</logical_name>
 			<physical_name>loseCount</physical_name>
 			<type>decimal</type>
 		</word>
@@ -707,8 +707,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>경기 고유 id</description>
-			<logical_name>경기 고유 id</logical_name>
+			<description>寃쎄린 怨좎쑀 id</description>
+			<logical_name>寃쎄린 怨좎쑀 id</logical_name>
 			<physical_name>matchId</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -723,8 +723,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>경기 시간</description>
-			<logical_name>경기 시간</logical_name>
+			<description>寃쎄린 �떆媛�</description>
+			<logical_name>寃쎄린 �떆媛�</logical_name>
 			<physical_name>mDate</physical_name>
 			<type>date</type>
 		</word>
@@ -739,8 +739,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>경기 번호</description>
-			<logical_name>경기 번호</logical_name>
+			<description>寃쎄린 踰덊샇</description>
+			<logical_name>寃쎄린 踰덊샇</logical_name>
 			<physical_name>mNum</physical_name>
 			<type>decimal</type>
 		</word>
@@ -755,8 +755,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>배당율</description>
-			<logical_name>배당율</logical_name>
+			<description>諛곕떦�쑉</description>
+			<logical_name>諛곕떦�쑉</logical_name>
 			<physical_name>mRate</physical_name>
 			<type>decimal</type>
 		</word>
@@ -771,8 +771,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>메세지 내용</description>
-			<logical_name>메세지 내용</logical_name>
+			<description>硫붿꽭吏� �궡�슜</description>
+			<logical_name>硫붿꽭吏� �궡�슜</logical_name>
 			<physical_name>msg</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -787,8 +787,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>쪽지 번호</description>
-			<logical_name>쪽지 번호</logical_name>
+			<description>履쎌� 踰덊샇</description>
+			<logical_name>履쎌� 踰덊샇</logical_name>
 			<physical_name>msgNum</physical_name>
 			<type></type>
 		</word>
@@ -803,8 +803,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>최대 멀티킬</description>
-			<logical_name>최대 멀티킬</logical_name>
+			<description>理쒕� 硫��떚�궗</description>
+			<logical_name>理쒕� 硫��떚�궗</logical_name>
 			<physical_name>multiKill</physical_name>
 			<type>decimal</type>
 		</word>
@@ -819,8 +819,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>승패여부</description>
-			<logical_name>승패여부</logical_name>
+			<description>�듅�뙣�뿬遺�</description>
+			<logical_name>�듅�뙣�뿬遺�</logical_name>
 			<physical_name>mWinlose</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -835,8 +835,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>아이템 이름</description>
-			<logical_name>아이템 이름</logical_name>
+			<description>�븘�씠�뀥 �씠由�</description>
+			<logical_name>�븘�씠�뀥 �씠由�</logical_name>
 			<physical_name>name</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -851,8 +851,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>챔피언 이름</description>
-			<logical_name>챔피언 이름</logical_name>
+			<description>梨뷀뵾�뼵 �씠由�</description>
+			<logical_name>梨뷀뵾�뼵 �씠由�</logical_name>
 			<physical_name>name</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -867,8 +867,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>커뮤니티 닉네임</description>
-			<logical_name>커뮤니티 닉네임</logical_name>
+			<description>而ㅻ�ㅻ땲�떚 �땳�꽕�엫</description>
+			<logical_name>而ㅻ�ㅻ땲�떚 �땳�꽕�엫</logical_name>
 			<physical_name>nickname</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -883,8 +883,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>반대수</description>
-			<logical_name>반대수</logical_name>
+			<description>諛섎��닔</description>
+			<logical_name>諛섎��닔</logical_name>
 			<physical_name>nohit</physical_name>
 			<type>decimal</type>
 		</word>
@@ -899,8 +899,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>확인여부</description>
-			<logical_name>확인여부</logical_name>
+			<description>�솗�씤�뿬遺�</description>
+			<logical_name>�솗�씤�뿬遺�</logical_name>
 			<physical_name>open</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -915,8 +915,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>원본파일경로</description>
-			<logical_name>원본파일경로</logical_name>
+			<description>�썝蹂명뙆�씪寃쎈줈</description>
+			<logical_name>�썝蹂명뙆�씪寃쎈줈</logical_name>
 			<physical_name>orgPath</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -931,8 +931,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>비밀번호</description>
-			<logical_name>비밀번호</logical_name>
+			<description>鍮꾨�踰덊샇</description>
+			<logical_name>鍮꾨�踰덊샇</logical_name>
 			<physical_name>password</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -947,8 +947,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>픽된 횟수</description>
-			<logical_name>픽된 횟수</logical_name>
+			<description>�뵿�맂 �슏�닔</description>
+			<logical_name>�뵿�맂 �슏�닔</logical_name>
 			<physical_name>pickCount</physical_name>
 			<type>decimal</type>
 		</word>
@@ -963,8 +963,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>초상화</description>
-			<logical_name>초상화</logical_name>
+			<description>珥덉긽�솕</description>
+			<logical_name>珥덉긽�솕</logical_name>
 			<physical_name>picture</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -980,7 +980,7 @@
 			<args></args>
 			<char_semantics>false</char_semantics>
 			<description></description>
-			<logical_name>게시글 번호</logical_name>
+			<logical_name>寃뚯떆湲� 踰덊샇</logical_name>
 			<physical_name>pNum</physical_name>
 			<type>decimal</type>
 		</word>
@@ -995,8 +995,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>포인트</description>
-			<logical_name>포인트</logical_name>
+			<description>�룷�씤�듃</description>
+			<logical_name>�룷�씤�듃</logical_name>
 			<physical_name>point</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1011,8 +1011,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>아이템 가격</description>
-			<logical_name>아이템 가격</logical_name>
+			<description>�븘�씠�뀥 媛�寃�</description>
+			<logical_name>�븘�씠�뀥 媛�寃�</logical_name>
 			<physical_name>price</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1028,7 +1028,7 @@
 			<args></args>
 			<char_semantics>false</char_semantics>
 			<description></description>
-			<logical_name>큐타입</logical_name>
+			<logical_name>�걧���엯</logical_name>
 			<physical_name>queueType</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1044,7 +1044,7 @@
 			<args></args>
 			<char_semantics>false</char_semantics>
 			<description></description>
-			<logical_name>평가</logical_name>
+			<logical_name>�룊媛�</logical_name>
 			<physical_name>rate</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1059,8 +1059,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>댓글 내용</description>
-			<logical_name>댓글 내용</logical_name>
+			<description>�뙎湲� �궡�슜</description>
+			<logical_name>�뙎湲� �궡�슜</logical_name>
 			<physical_name>rContent</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1075,8 +1075,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>저장파일명</description>
-			<logical_name>저장파일명</logical_name>
+			<description>���옣�뙆�씪紐�</description>
+			<logical_name>���옣�뙆�씪紐�</logical_name>
 			<physical_name>realPath</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1091,8 +1091,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>가입날짜</description>
-			<logical_name>가입날짜</logical_name>
+			<description>媛��엯�궇吏�</description>
+			<logical_name>媛��엯�궇吏�</logical_name>
 			<physical_name>regdate</physical_name>
 			<type>date</type>
 		</word>
@@ -1107,8 +1107,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>댓글 작성날짜</description>
-			<logical_name>댓글 작성날짜</logical_name>
+			<description>�뙎湲� �옉�꽦�궇吏�</description>
+			<logical_name>�뙎湲� �옉�꽦�궇吏�</logical_name>
 			<physical_name>regdate</physical_name>
 			<type>date</type>
 		</word>
@@ -1123,8 +1123,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>대댓글 번호</description>
-			<logical_name>대댓글 번호</logical_name>
+			<description>���뙎湲� 踰덊샇</description>
+			<logical_name>���뙎湲� 踰덊샇</logical_name>
 			<physical_name>rereNum</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1139,8 +1139,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>댓글번호</description>
-			<logical_name>댓글번호</logical_name>
+			<description>�뙎湲�踰덊샇</description>
+			<logical_name>�뙎湲�踰덊샇</logical_name>
 			<physical_name>rNum</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1155,8 +1155,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>신고번호</description>
-			<logical_name>신고번호</logical_name>
+			<description>�떊怨좊쾲�샇</description>
+			<logical_name>�떊怨좊쾲�샇</logical_name>
 			<physical_name>rNum</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1171,8 +1171,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>주 룬</description>
-			<logical_name>주 룬</logical_name>
+			<description>二� 猷�</description>
+			<logical_name>二� 猷�</logical_name>
 			<physical_name>rune1</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1187,8 +1187,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>보조 룬</description>
-			<logical_name>보조 룬</logical_name>
+			<description>蹂댁“ 猷�</description>
+			<logical_name>蹂댁“ 猷�</logical_name>
 			<physical_name>rune2</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1203,8 +1203,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>게임 진행시간</description>
-			<logical_name>게임 진행시간</logical_name>
+			<description>寃뚯엫 吏꾪뻾�떆媛�</description>
+			<logical_name>寃뚯엫 吏꾪뻾�떆媛�</logical_name>
 			<physical_name>runtime</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1219,8 +1219,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>댓글 작성자</description>
-			<logical_name>댓글 작성자</logical_name>
+			<description>�뙎湲� �옉�꽦�옄</description>
+			<logical_name>�뙎湲� �옉�꽦�옄</logical_name>
 			<physical_name>rWriter</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1235,8 +1235,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>보낸 시간</description>
-			<logical_name>보낸 시간</logical_name>
+			<description>蹂대궦 �떆媛�</description>
+			<logical_name>蹂대궦 �떆媛�</logical_name>
 			<physical_name>sendTime</physical_name>
 			<type>date</type>
 		</word>
@@ -1251,8 +1251,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>e스킬 아이콘</description>
-			<logical_name>e스킬 아이콘</logical_name>
+			<description>e�뒪�궗 �븘�씠肄�</description>
+			<logical_name>e�뒪�궗 �븘�씠肄�</logical_name>
 			<physical_name>skillE_icon</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1267,8 +1267,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>e스킬 설명</description>
-			<logical_name>e스킬 설명</logical_name>
+			<description>e�뒪�궗 �꽕紐�</description>
+			<logical_name>e�뒪�궗 �꽕紐�</logical_name>
 			<physical_name>skillE_info</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1283,8 +1283,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>패시브 스킬 아이콘</description>
-			<logical_name>패시브 스킬 아이콘</logical_name>
+			<description>�뙣�떆釉� �뒪�궗 �븘�씠肄�</description>
+			<logical_name>�뙣�떆釉� �뒪�궗 �븘�씠肄�</logical_name>
 			<physical_name>skillP_icon</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1299,8 +1299,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>패시브 스킬 설명</description>
-			<logical_name>패시브 스킬 설명</logical_name>
+			<description>�뙣�떆釉� �뒪�궗 �꽕紐�</description>
+			<logical_name>�뙣�떆釉� �뒪�궗 �꽕紐�</logical_name>
 			<physical_name>skillP_info</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1315,8 +1315,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>q스킬 아이콘</description>
-			<logical_name>q스킬 아이콘</logical_name>
+			<description>q�뒪�궗 �븘�씠肄�</description>
+			<logical_name>q�뒪�궗 �븘�씠肄�</logical_name>
 			<physical_name>skillQ_icon</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1332,7 +1332,7 @@
 			<args></args>
 			<char_semantics>false</char_semantics>
 			<description>skillQ_info</description>
-			<logical_name>q스킬 설명</logical_name>
+			<logical_name>q�뒪�궗 �꽕紐�</logical_name>
 			<physical_name>skillQ_info</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1347,8 +1347,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>r스킬 아이콘</description>
-			<logical_name>r스킬 아이콘</logical_name>
+			<description>r�뒪�궗 �븘�씠肄�</description>
+			<logical_name>r�뒪�궗 �븘�씠肄�</logical_name>
 			<physical_name>skillR_icon</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1363,8 +1363,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>r스킬 설명</description>
-			<logical_name>r스킬 설명</logical_name>
+			<description>r�뒪�궗 �꽕紐�</description>
+			<logical_name>r�뒪�궗 �꽕紐�</logical_name>
 			<physical_name>skillR_info</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1379,8 +1379,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>w스킬 아이콘</description>
-			<logical_name>w스킬 아이콘</logical_name>
+			<description>w�뒪�궗 �븘�씠肄�</description>
+			<logical_name>w�뒪�궗 �븘�씠肄�</logical_name>
 			<physical_name>skillW_icon</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1395,8 +1395,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>w스킬 설명</description>
-			<logical_name>w스킬 설명</logical_name>
+			<description>w�뒪�궗 �꽕紐�</description>
+			<logical_name>w�뒪�궗 �꽕紐�</logical_name>
 			<physical_name>skillW_info</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1411,8 +1411,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>소환사 레벨</description>
-			<logical_name>소환사 레벨</logical_name>
+			<description>�냼�솚�궗 �젅踰�</description>
+			<logical_name>�냼�솚�궗 �젅踰�</logical_name>
 			<physical_name>sLevel</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1427,8 +1427,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>소환사 이름</description>
-			<logical_name>소환사 이름</logical_name>
+			<description>�냼�솚�궗 �씠由�</description>
+			<logical_name>�냼�솚�궗 �씠由�</logical_name>
 			<physical_name>sNickname</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1443,8 +1443,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>소환사 번호</description>
-			<logical_name>소환사 번호</logical_name>
+			<description>�냼�솚�궗 踰덊샇</description>
+			<logical_name>�냼�솚�궗 踰덊샇</logical_name>
 			<physical_name>sNum</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1459,8 +1459,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>스펠1</description>
-			<logical_name>스펠1</logical_name>
+			<description>�뒪�렆1</description>
+			<logical_name>�뒪�렆1</logical_name>
 			<physical_name>spell1</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1475,8 +1475,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>스펠2</description>
-			<logical_name>스펠2</logical_name>
+			<description>�뒪�렆2</description>
+			<logical_name>�뒪�렆2</logical_name>
 			<physical_name>spell2</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1491,8 +1491,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>게임 시작시간</description>
-			<logical_name>게임 시작시간</logical_name>
+			<description>寃뚯엫 �떆�옉�떆媛�</description>
+			<logical_name>寃뚯엫 �떆�옉�떆媛�</logical_name>
 			<physical_name>startTime</physical_name>
 			<type>date</type>
 		</word>
@@ -1507,8 +1507,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>스토리</description>
-			<logical_name>스토리</logical_name>
+			<description>�뒪�넗由�</description>
+			<logical_name>�뒪�넗由�</logical_name>
 			<physical_name>story</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1524,7 +1524,7 @@
 			<args></args>
 			<char_semantics>false</char_semantics>
 			<description></description>
-			<logical_name>태그명</logical_name>
+			<logical_name>�깭洹몃챸</logical_name>
 			<physical_name>tags</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1539,8 +1539,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>받은 피해량</description>
-			<logical_name>받은 피해량</logical_name>
+			<description>諛쏆� �뵾�빐�웾</description>
+			<logical_name>諛쏆� �뵾�빐�웾</logical_name>
 			<physical_name>takenDamage</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1555,8 +1555,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>팀 id</description>
-			<logical_name>팀 id</logical_name>
+			<description>�� id</description>
+			<logical_name>�� id</logical_name>
 			<physical_name>teamId</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1572,7 +1572,7 @@
 			<args></args>
 			<char_semantics>false</char_semantics>
 			<description></description>
-			<logical_name>티어</logical_name>
+			<logical_name>�떚�뼱</logical_name>
 			<physical_name>tier</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1587,8 +1587,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>티어</description>
-			<logical_name>티어</logical_name>
+			<description>�떚�뼱</description>
+			<logical_name>�떚�뼱</logical_name>
 			<physical_name>tier</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1603,8 +1603,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>팁</description>
-			<logical_name>팁</logical_name>
+			<description>�똻</description>
+			<logical_name>�똻</logical_name>
 			<physical_name>tip</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1619,8 +1619,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>글 제목</description>
-			<logical_name>글 제목</logical_name>
+			<description>湲� �젣紐�</description>
+			<logical_name>湲� �젣紐�</logical_name>
 			<physical_name>title</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1636,7 +1636,7 @@
 			<args></args>
 			<char_semantics>false</char_semantics>
 			<description>tmNum</description>
-			<logical_name>팀 번호</logical_name>
+			<logical_name>�� 踰덊샇</logical_name>
 			<physical_name>tmNum</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1651,8 +1651,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>팀 이름</description>
-			<logical_name>팀 이름</logical_name>
+			<description>�� �씠由�</description>
+			<logical_name>�� �씠由�</logical_name>
 			<physical_name>tName</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1667,8 +1667,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>팀 번호</description>
-			<logical_name>팀 번호</logical_name>
+			<description>�� 踰덊샇</description>
+			<logical_name>�� 踰덊샇</logical_name>
 			<physical_name>tNum</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1683,8 +1683,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>포탑 킬</description>
-			<logical_name>포탑 킬</logical_name>
+			<description>�룷�깙 �궗</description>
+			<logical_name>�룷�깙 �궗</logical_name>
 			<physical_name>towerKill</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1699,8 +1699,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>게임 타입</description>
-			<logical_name>게임 타입</logical_name>
+			<description>寃뚯엫 ���엯</description>
+			<logical_name>寃뚯엫 ���엯</logical_name>
 			<physical_name>type</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1715,8 +1715,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>아이디</description>
-			<logical_name>아이디</logical_name>
+			<description>�븘�씠�뵒</description>
+			<logical_name>�븘�씠�뵒</logical_name>
 			<physical_name>username</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1731,8 +1731,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>접속 날짜</description>
-			<logical_name>접속 날짜</logical_name>
+			<description>�젒�냽 �궇吏�</description>
+			<logical_name>�젒�냽 �궇吏�</logical_name>
 			<physical_name>vDate</physical_name>
 			<type>date</type>
 		</word>
@@ -1747,8 +1747,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>조회수</description>
-			<logical_name>조회수</logical_name>
+			<description>議고쉶�닔</description>
+			<logical_name>議고쉶�닔</logical_name>
 			<physical_name>viewCount</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1763,8 +1763,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>와드 설치</description>
-			<logical_name>와드 설치</logical_name>
+			<description>���뱶 �꽕移�</description>
+			<logical_name>���뱶 �꽕移�</logical_name>
 			<physical_name>wardInstall</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1779,8 +1779,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>와드 제거</description>
-			<logical_name>와드 제거</logical_name>
+			<description>���뱶 �젣嫄�</description>
+			<logical_name>���뱶 �젣嫄�</logical_name>
 			<physical_name>wardRemove</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1796,7 +1796,7 @@
 			<args></args>
 			<char_semantics>false</char_semantics>
 			<description></description>
-			<logical_name>승리</logical_name>
+			<logical_name>�듅由�</logical_name>
 			<physical_name>win</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1811,8 +1811,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>승리 횟수</description>
-			<logical_name>승리 횟수</logical_name>
+			<description>�듅由� �슏�닔</description>
+			<logical_name>�듅由� �슏�닔</logical_name>
 			<physical_name>winCount</physical_name>
 			<type>decimal</type>
 		</word>
@@ -1827,8 +1827,8 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
-			<description>승패여부</description>
-			<logical_name>승패여부</logical_name>
+			<description>�듅�뙣�뿬遺�</description>
+			<logical_name>�듅�뙣�뿬遺�</logical_name>
 			<physical_name>winLose</physical_name>
 			<type>varchar(n)</type>
 		</word>
@@ -1840,7 +1840,7 @@
 			<id>0</id>
 			<height>107</height>
 			<width>189</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>129</x>
 			<y>466</y>
@@ -1852,7 +1852,7 @@
 			<connections>
 			</connections>
 			<physical_name>match</physical_name>
-			<logical_name>경기 일정</logical_name>
+			<logical_name>寃쎄린 �씪�젙</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -2003,7 +2003,7 @@
 			<id>1</id>
 			<height>170</height>
 			<width>204</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>1140</x>
 			<y>358</y>
@@ -2037,7 +2037,7 @@
 				</relation>
 			</connections>
 			<physical_name>reply</physical_name>
-			<logical_name>댓글</logical_name>
+			<logical_name>�뙎湲�</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -2255,7 +2255,7 @@
 			<id>2</id>
 			<height>86</height>
 			<width>189</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>1446</x>
 			<y>400</y>
@@ -2267,7 +2267,7 @@
 			<connections>
 			</connections>
 			<physical_name>visitLog</physical_name>
-			<logical_name>접속 기록</logical_name>
+			<logical_name>�젒�냽 湲곕줉</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -2319,7 +2319,7 @@
 			<id>3</id>
 			<height>170</height>
 			<width>207</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>120</x>
 			<y>96</y>
@@ -2375,7 +2375,7 @@
 				</relation>
 			</connections>
 			<physical_name>message</physical_name>
-			<logical_name>쪽지</logical_name>
+			<logical_name>履쎌�</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -2418,9 +2418,9 @@
 					<id>12</id>
 					<referenced_column>103</referenced_column>
 					<relation>2</relation>
-					<description>보낸 사람</description>
+					<description>蹂대궦 �궗�엺</description>
 					<unique_key_name></unique_key_name>
-					<logical_name>보낸 사람</logical_name>
+					<logical_name>蹂대궦 �궗�엺</logical_name>
 					<physical_name>sender</physical_name>
 					<type>varchar(n)</type>
 					<constraint></constraint>
@@ -2452,9 +2452,9 @@
 					<id>13</id>
 					<referenced_column>103</referenced_column>
 					<relation>1</relation>
-					<description>받는 사람</description>
+					<description>諛쏅뒗 �궗�엺</description>
 					<unique_key_name></unique_key_name>
-					<logical_name>받는 사람</logical_name>
+					<logical_name>諛쏅뒗 �궗�엺</logical_name>
 					<physical_name>receiver</physical_name>
 					<type>varchar(n)</type>
 					<constraint></constraint>
@@ -2594,7 +2594,7 @@
 			<id>4</id>
 			<height>653</height>
 			<width>236</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>942</x>
 			<y>742</y>
@@ -2804,7 +2804,7 @@
 				</relation>
 			</connections>
 			<physical_name>teamMemberinfo</physical_name>
-			<logical_name>팀원 정보</logical_name>
+			<logical_name>���썝 �젙蹂�</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -3757,7 +3757,7 @@
 			<id>5</id>
 			<height>86</height>
 			<width>190</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>1353</x>
 			<y>562</y>
@@ -3791,7 +3791,7 @@
 				</relation>
 			</connections>
 			<physical_name>banList</physical_name>
-			<logical_name>밴픽목록</logical_name>
+			<logical_name>諛댄뵿紐⑸줉</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -3834,7 +3834,7 @@
 					<id>46</id>
 					<referenced_column>72</referenced_column>
 					<relation>12</relation>
-					<description>챔피언 id</description>
+					<description>梨뷀뵾�뼵 id</description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name>champId</physical_name>
@@ -3877,7 +3877,7 @@
 			<id>6</id>
 			<height>107</height>
 			<width>218</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>540</x>
 			<y>96</y>
@@ -3911,7 +3911,7 @@
 				</relation>
 			</connections>
 			<physical_name>authorities</physical_name>
-			<logical_name>권한</logical_name>
+			<logical_name>沅뚰븳</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -3997,7 +3997,7 @@
 			<id>7</id>
 			<height>107</height>
 			<width>189</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>129</x>
 			<y>308</y>
@@ -4031,7 +4031,7 @@
 				</relation>
 			</connections>
 			<physical_name>battingTeamInfo</physical_name>
-			<logical_name>팀 정보</logical_name>
+			<logical_name>�� �젙蹂�</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -4150,7 +4150,7 @@
 			<id>8</id>
 			<height>128</height>
 			<width>264</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>133</x>
 			<y>624</y>
@@ -4206,7 +4206,7 @@
 				</relation>
 			</connections>
 			<physical_name>battingLog</physical_name>
-			<logical_name>배팅 내역</logical_name>
+			<logical_name>諛고똿 �궡�뿭</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -4359,7 +4359,7 @@
 			<id>9</id>
 			<height>86</height>
 			<width>238</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>146</x>
 			<y>780</y>
@@ -4393,7 +4393,7 @@
 				</relation>
 			</connections>
 			<physical_name>rating</physical_name>
-			<logical_name>프로필 평가</logical_name>
+			<logical_name>�봽濡쒗븘 �룊媛�</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -4479,7 +4479,7 @@
 			<id>10</id>
 			<height>86</height>
 			<width>228</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>824</x>
 			<y>550</y>
@@ -4513,7 +4513,7 @@
 				</relation>
 			</connections>
 			<physical_name>auth</physical_name>
-			<logical_name>이메일 인증번호</logical_name>
+			<logical_name>�씠硫붿씪 �씤利앸쾲�샇</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -4599,7 +4599,7 @@
 			<id>11</id>
 			<height>107</height>
 			<width>201</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>837</x>
 			<y>60</y>
@@ -4633,7 +4633,7 @@
 				</relation>
 			</connections>
 			<physical_name>report</physical_name>
-			<logical_name>신고</logical_name>
+			<logical_name>�떊怨�</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -4752,7 +4752,7 @@
 			<id>12</id>
 			<height>233</height>
 			<width>207</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>834</x>
 			<y>226</y>
@@ -4786,7 +4786,7 @@
 				</relation>
 			</connections>
 			<physical_name>community</physical_name>
-			<logical_name>게시판</logical_name>
+			<logical_name>寃뚯떆�뙋</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -5103,7 +5103,7 @@
 			<id>13</id>
 			<height>443</height>
 			<width>244</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>1326</x>
 			<y>720</y>
@@ -5115,7 +5115,7 @@
 			<connections>
 			</connections>
 			<physical_name>champion</physical_name>
-			<logical_name>챔피언</logical_name>
+			<logical_name>梨뷀뵾�뼵</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -5761,7 +5761,7 @@
 			<id>14</id>
 			<height>212</height>
 			<width>285</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>529</x>
 			<y>1162</y>
@@ -5795,7 +5795,7 @@
 				</relation>
 			</connections>
 			<physical_name>teamInfo</physical_name>
-			<logical_name>팀 정보</logical_name>
+			<logical_name>�� �젙蹂�</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -7101,7 +7101,7 @@
 			<id>15</id>
 			<height>107</height>
 			<width>216</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>1134</x>
 			<y>190</y>
@@ -7135,7 +7135,7 @@
 				</relation>
 			</connections>
 			<physical_name>Addfile</physical_name>
-			<logical_name>첨부파일</logical_name>
+			<logical_name>泥⑤��뙆�씪</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -7287,7 +7287,7 @@
 			<id>16</id>
 			<height>212</height>
 			<width>221</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>533</x>
 			<y>286</y>
@@ -7321,7 +7321,7 @@
 				</relation>
 			</connections>
 			<physical_name>Member</physical_name>
-			<logical_name>회원</logical_name>
+			<logical_name>�쉶�썝</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -7364,9 +7364,9 @@
 					<id>104</id>
 					<referenced_column>120</referenced_column>
 					<relation>23</relation>
-					<description>소환사명</description>
+					<description>�냼�솚�궗紐�</description>
 					<unique_key_name></unique_key_name>
-					<logical_name>소환사번호</logical_name>
+					<logical_name>�냼�솚�궗踰덊샇</logical_name>
 					<physical_name></physical_name>
 					<type>decimal</type>
 					<constraint></constraint>
@@ -7605,7 +7605,7 @@
 			<id>17</id>
 			<height>149</height>
 			<width>262</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>146</x>
 			<y>960</y>
@@ -7639,7 +7639,7 @@
 				</relation>
 			</connections>
 			<physical_name>queueinfo</physical_name>
-			<logical_name>소환사 큐타입 별 티어 승패</logical_name>
+			<logical_name>�냼�솚�궗 �걧���엯 蹂� �떚�뼱 �듅�뙣</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -7824,7 +7824,7 @@
 			<id>18</id>
 			<height>149</height>
 			<width>285</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>168</x>
 			<y>1200</y>
@@ -7836,7 +7836,7 @@
 			<connections>
 			</connections>
 			<physical_name>matchInfo</physical_name>
-			<logical_name>전체 게임 정보</logical_name>
+			<logical_name>�쟾泥� 寃뚯엫 �젙蹂�</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -7987,7 +7987,7 @@
 			<id>19</id>
 			<height>191</height>
 			<width>268</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>516</x>
 			<y>696</y>
@@ -7999,7 +7999,7 @@
 			<connections>
 			</connections>
 			<physical_name>Summoner</physical_name>
-			<logical_name>소환사 정보</logical_name>
+			<logical_name>�냼�솚�궗 �젙蹂�</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
@@ -8150,7 +8150,7 @@
 			<id>20</id>
 			<height>149</height>
 			<width>216</width>
-				<font_name>맑은 고딕</font_name>
+				<font_name>留묒� 怨좊뵓</font_name>
 				<font_size>9</font_size>
 			<x>1340</x>
 			<y>1198</y>
@@ -8162,7 +8162,7 @@
 			<connections>
 			</connections>
 			<physical_name>item</physical_name>
-			<logical_name>아이템</logical_name>
+			<logical_name>�븘�씠�뀥</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
