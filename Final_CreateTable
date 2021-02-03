@@ -30,9 +30,11 @@ drop table banList;
 drop table teamMemberinfo;
 drop table teaminfo;
 drop table matchinfo;
+drop table queueinfo;
 drop table Summoner;
 drop table champion;
 drop table item;
+
 
 -- 접속 기록/visitLog
 create table visitLog
@@ -40,23 +42,23 @@ create table visitLog
 	vDate date not null
 );
 
--- 소환사 정보/Summoner
 create table summoner
 (
-	sNum number primary key,	--소환사 번호
+	sNum number  PRIMARY KEY,	--소환사 번호
 	sNickname varchar2(255),	--소환사 이름
 	sLevel number,	--소환사 레벨
-	icon varchar2(255),	--프로필아이콘
-	tier varchar2(255),	--티어
-	win number,	--승리
-	lose number	--패배
+	icon varchar2(255)	--프로필아이콘
 );
 
--- 프로필 평가(rating)
-create table rating
+CREATE TABLE queueinfo
 (
-	sNum number references Summoner(sNum) not null,
-	rate varchar2(100) 
+	-- 소환사 번호
+	snum number,
+	queueType varchar2(30) ,
+	tier varchar2(15),
+	win number,
+	lose number,
+	PRIMARY KEY (snum, queueType)
 );
 
 -- 회원/MEMBER
@@ -70,6 +72,13 @@ create table member
 	regdate date,	--가입날짜
 	nickname varchar2(12),	--커뮤니티 닉네임
 	point number	--포인트
+);
+
+-- 프로필 평가(rating)
+create table rating
+(
+	sNum number references Summoner(sNum) not null,
+	rate varchar2(100) 
 );
 
 -- 이메일 인증번호/auth
@@ -168,30 +177,6 @@ create table reply
 	regdate date --댓글 작성날짜
 );
 
--- 전체 게임정보/matchinfo
-create table matchinfo
-(
-	matchid varchar2(255) primary key,	--경기고유 id
-	type varchar2(255),	--게임 타입
-	runtime varchar2(255),	--게임 진행시간
-	startTime date	--게임 시작시간
-);
-
--- 팀정보/teaminfo
-CREATE TABLE "TEAMINFO" 
-(   
-	"TEAMID" VARCHAR2(255 BYTE) NOT NULL ENABLE, --팀 id
-    "MATCHID" VARCHAR2(255 BYTE) NOT NULL ENABLE, --경기 고유 id
-    "WINLOSE" VARCHAR2(255 BYTE), --승패여부
-    "FIRSTBLOOD" VARCHAR2(255 BYTE), --퍼스트블러드
-    "FIRSTTOWER" VARCHAR2(255 BYTE), --퍼스트타워
-    "BARONKILL" NUMBER, --바론 킬
-    "DRAGONKILL" NUMBER, --드래곤 킬
-    "TOWERKILL" NUMBER, --포탑 킬
-    CONSTRAINT "TEAMINFO_PK" PRIMARY KEY ("TEAMID", "MATCHID"),
-    CONSTRAINT "TEAMINFO_FK1" FOREIGN KEY ("MATCHID") REFERENCES "FINAL"."MATCHINFO" ("MATCHID")
-);
-
 --아이템/item
 create table item
 (
@@ -226,11 +211,28 @@ create table champion
 	tip varchar2(4000)	--팁
 );
 
---밴픽목록/banList
-create table banList
+-- 전체 게임정보/matchinfo
+create table matchinfo
 (
-	bNum number primary key,
-	championid	varchar2(255) references champion(championid)
+	matchid varchar2(255) primary key,	--경기고유 id
+	type varchar2(255),	--게임 타입
+	runtime varchar2(255),	--게임 진행시간
+	startTime date	--게임 시작시간
+);
+
+-- 팀정보/teaminfo
+CREATE TABLE "TEAMINFO" 
+(   
+	"TEAMID" VARCHAR2(255 BYTE) NOT NULL ENABLE, --팀 id
+    "MATCHID" VARCHAR2(255 BYTE) NOT NULL ENABLE, --경기 고유 id
+    "WINLOSE" VARCHAR2(255 BYTE), --승패여부
+    "FIRSTBLOOD" VARCHAR2(255 BYTE), --퍼스트블러드
+    "FIRSTTOWER" VARCHAR2(255 BYTE), --퍼스트타워
+    "BARONKILL" NUMBER, --바론 킬
+    "DRAGONKILL" NUMBER, --드래곤 킬
+    "TOWERKILL" NUMBER, --포탑 킬
+    CONSTRAINT "TEAMINFO_PK" PRIMARY KEY ("TEAMID", "MATCHID"),
+    CONSTRAINT "TEAMINFO_FK1" FOREIGN KEY ("MATCHID") REFERENCES "FINAL"."MATCHINFO" ("MATCHID")
 );
 
 --팀원 정보/teamMemberinfo
@@ -283,6 +285,13 @@ CREATE TABLE TEAMMEMBERINFO
     REFERENCES "FINAL"."ITEM" ("INUM") ENABLE, 
     CONSTRAINT "TEAMMEMBERINFO_FK9" FOREIGN KEY ("ITEM6")
     REFERENCES "FINAL"."ITEM" ("INUM") ENABLE
+);
+
+--밴픽목록/banList
+create table banList
+(
+	bNum number primary key,
+	championid	varchar2(255) references champion(championid)
 );
 
 ---------- create sequence -----------

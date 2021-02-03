@@ -42,8 +42,8 @@ public class MemberService {
 	public int update(MemberVo vo) {
 		return dao.update(vo);
 	}
-	public MemberVo selectOne(int num) {
-		return dao.selectOne(num);
+	public MemberVo selectOne(String username) {
+		return dao.selectOne(username);
 	}
 	public List<MemberVo> list(){
 		return dao.selectList();

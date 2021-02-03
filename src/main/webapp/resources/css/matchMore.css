@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+#mm_home {
+	width: 50%;
+	background-color: blue;
+	float: left;
+}
+#mm_away {
+	width: 50%;
+	background-color: red;
+	float: left;
+}

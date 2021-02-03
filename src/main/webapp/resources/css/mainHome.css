@@ -1,0 +1,125 @@
+@charset "UTF-8";
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+#header {
+	width: 100%;
+	height: 100px;
+}
+
+#content {
+	margin-left: 15%;
+	margin-right: 15%;
+	background-color: green;
+	color: ffffff;
+}
+
+#header_left {
+	background-color: #343a40 !important;
+	display: flex;
+	width: 33.3%;
+	height: 50px;
+	float: left;
+	align-items: center;
+}
+
+#header_center {
+	background-color: #343a40 !important;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 33.3%;
+	height: 50px;
+	float: left;
+}
+
+#header_center .menu {
+	display: flex;
+	width: 33.3%;
+	height: 50px;
+	float: left;
+	justify-content: center;
+	align-items: center;
+}
+
+#header_center a {
+	text-decoration: none;
+}
+
+#header_center form {
+	width: 80%;
+}
+
+#header_right {
+	background-color: #343a40 !important;
+	display: flex;
+	width: 33.3%;
+	height: 50px;
+	float: left;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#header_right #header_msg {
+	display: flex;
+	width: 10%;
+	height: 50px;
+	align-items: center;
+}
+
+#header_right #header_mypage {
+	display: flex;
+	width: 10%;
+	height: 50px;
+	align-items: center;
+}
+
+#header_right #header_none {
+	width: 80%;
+	height: 50px;
+}
+
+#header_right i {
+	font-size: 30px;
+}
+
+#sub_header {
+	display: flex;
+	width: 100%;
+	height: 50px;
+	background-color: orange;
+}
+
+#sub_header div {
+	justify-content: center;
+	align-items: center;
+	width: 33.3%;
+	height: 50px;
+	float: left;
+	background-color: orange;
+}
+
+#sub_header_center .menu {
+	display: flex;
+	width: 33.3%;
+	height: 50px;
+	float: left;
+	justify-content: center;
+	align-items: center;
+}
+
+#main_home {
+	text-align: center;
+}
+
+#main_logo {
+	width: 300px;
+	height: 200px;
+}
+
+#main_home_search {
+	width: 500px;
+}
