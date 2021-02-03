@@ -48,8 +48,8 @@ create table summoner
 	sLevel number,	--소환사 레벨
 	icon varchar2(255),	--프로필아이콘
 	tier varchar2(255),	--티어
-	win varchar2(255),	--승리
-	lose varchar2(255)	--패배
+	win number,	--승리
+	lose number	--패배
 );
 
 -- 프로필 평가(rating)

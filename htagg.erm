@@ -11,8 +11,8 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>0.8</zoom>
-	<x>141</x>
-	<y>234</y>
+	<x>0</x>
+	<y>566</y>
 	<default_color>
 		<r>128</r>
 		<g>128</g>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2021-01-26 16:17:09</creation_date>
-			<updated_date>2021-02-02 15:57:00</updated_date>
+			<updated_date>2021-02-03 12:22:04</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -666,7 +666,7 @@
 		</word>
 		<word>
 			<id>31</id>
-			<length>255</length>
+			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
 			<array_dimension>null</array_dimension>
@@ -678,7 +678,7 @@
 			<description>패배</description>
 			<logical_name>패배</logical_name>
 			<physical_name>lose</physical_name>
-			<type>varchar(n)</type>
+			<type>decimal</type>
 		</word>
 		<word>
 			<id>32</id>
@@ -1754,7 +1754,7 @@
 		</word>
 		<word>
 			<id>99</id>
-			<length>255</length>
+			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
 			<array_dimension>null</array_dimension>
@@ -1766,7 +1766,7 @@
 			<description>승리</description>
 			<logical_name>승리</logical_name>
 			<physical_name>win</physical_name>
-			<type>varchar(n)</type>
+			<type>decimal</type>
 		</word>
 		<word>
 			<id>100</id>
@@ -2581,7 +2581,7 @@
 				<normal_column>
 					<id>17</id>
 					<referenced_column>119</referenced_column>
-					<relation>2</relation>
+					<relation>1</relation>
 					<description>보낸 사람</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>보낸 사람</logical_name>
@@ -2615,7 +2615,7 @@
 				<normal_column>
 					<id>18</id>
 					<referenced_column>119</referenced_column>
-					<relation>1</relation>
+					<relation>2</relation>
 					<description>받는 사람</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>받는 사람</logical_name>
@@ -2792,7 +2792,7 @@
 				</relation>
 				<relation>
 					<id>4</id>
-					<source>16</source>
+					<source>3</source>
 					<target>5</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -2804,7 +2804,7 @@
 							<b>0</b>
 						</color>
 					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
+					<parent_cardinality>0..1</parent_cardinality>
 					<reference_for_pk>true</reference_for_pk>
 					<name></name>
 					<on_delete_action>RESTRICT</on_delete_action>
@@ -2880,28 +2880,6 @@
 				</relation>
 				<relation>
 					<id>8</id>
-					<source>12</source>
-					<target>5</target>
-						<source_xp>-1</source_xp>
-						<source_yp>-1</source_yp>
-						<target_xp>-1</target_xp>
-						<target_yp>-1</target_yp>
-						<color>
-							<r>0</r>
-							<g>0</g>
-							<b>0</b>
-						</color>
-					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
-					<reference_for_pk>true</reference_for_pk>
-					<name></name>
-					<on_delete_action>RESTRICT</on_delete_action>
-					<on_update_action>RESTRICT</on_update_action>
-					<referenced_column>null</referenced_column>
-					<referenced_complex_unique_key>null</referenced_complex_unique_key>
-				</relation>
-				<relation>
-					<id>9</id>
 					<source>3</source>
 					<target>5</target>
 						<source_xp>-1</source_xp>
@@ -2915,6 +2893,28 @@
 						</color>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>0..1</parent_cardinality>
+					<reference_for_pk>true</reference_for_pk>
+					<name></name>
+					<on_delete_action>RESTRICT</on_delete_action>
+					<on_update_action>RESTRICT</on_update_action>
+					<referenced_column>null</referenced_column>
+					<referenced_complex_unique_key>null</referenced_complex_unique_key>
+				</relation>
+				<relation>
+					<id>9</id>
+					<source>12</source>
+					<target>5</target>
+						<source_xp>-1</source_xp>
+						<source_yp>-1</source_yp>
+						<target_xp>-1</target_xp>
+						<target_yp>-1</target_yp>
+						<color>
+							<r>0</r>
+							<g>0</g>
+							<b>0</b>
+						</color>
+					<child_cardinality>1..n</child_cardinality>
+					<parent_cardinality>1</parent_cardinality>
 					<reference_for_pk>true</reference_for_pk>
 					<name></name>
 					<on_delete_action>RESTRICT</on_delete_action>
@@ -2946,7 +2946,7 @@
 				</relation>
 				<relation>
 					<id>11</id>
-					<source>3</source>
+					<source>16</source>
 					<target>5</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -2958,7 +2958,7 @@
 							<b>0</b>
 						</color>
 					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>0..1</parent_cardinality>
+					<parent_cardinality>1</parent_cardinality>
 					<reference_for_pk>true</reference_for_pk>
 					<name></name>
 					<on_delete_action>RESTRICT</on_delete_action>
@@ -3010,7 +3010,7 @@
 				<normal_column>
 					<id>23</id>
 					<referenced_column>67</referenced_column>
-					<relation>8</relation>
+					<relation>9</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -3112,7 +3112,7 @@
 				<normal_column>
 					<id>26</id>
 					<referenced_column>88</referenced_column>
-					<relation>4</relation>
+					<relation>11</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -3641,7 +3641,7 @@
 				<normal_column>
 					<id>42</id>
 					<referenced_column>11</referenced_column>
-					<relation>9</relation>
+					<relation>3</relation>
 					<description>item1</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>item1</logical_name>
@@ -3675,7 +3675,7 @@
 				<normal_column>
 					<id>43</id>
 					<referenced_column>11</referenced_column>
-					<relation>6</relation>
+					<relation>5</relation>
 					<description>item2</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>item2</logical_name>
@@ -3709,7 +3709,7 @@
 				<normal_column>
 					<id>44</id>
 					<referenced_column>11</referenced_column>
-					<relation>11</relation>
+					<relation>4</relation>
 					<description>item3</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>item3</logical_name>
@@ -3743,7 +3743,7 @@
 				<normal_column>
 					<id>45</id>
 					<referenced_column>11</referenced_column>
-					<relation>5</relation>
+					<relation>7</relation>
 					<description>item4</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>item4</logical_name>
@@ -3777,7 +3777,7 @@
 				<normal_column>
 					<id>46</id>
 					<referenced_column>11</referenced_column>
-					<relation>7</relation>
+					<relation>8</relation>
 					<description>item5</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>item5</logical_name>
@@ -3811,7 +3811,7 @@
 				<normal_column>
 					<id>47</id>
 					<referenced_column>11</referenced_column>
-					<relation>3</relation>
+					<relation>6</relation>
 					<description>item6</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>item6</logical_name>
@@ -4996,7 +4996,7 @@
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>varchar(n)</type>
+					<type>decimal</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
@@ -5029,7 +5029,7 @@
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>varchar(n)</type>
+					<type>decimal</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
