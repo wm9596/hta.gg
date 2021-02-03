@@ -4,8 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="gg.hta.lol.mapper.ItemMapper">
   <insert id="item_insert" parameterType="gg.hta.lol.vo.ItemVo">
-  insert into item values(#{iNum},#{icon},#{name},#{price},#{effect})
+  insert into item values(#{iNum},#{icon},#{name},#{price},#{effect},#{tags})
   </insert>
-  
+<select id="item_select" parameterType="int" resultType="gg.hta.lol.vo.ItemVo">
+select * from item where inum=#{inum}
+</select>
+<select id="item_alllist" resultType="gg.hta.lol.vo.ItemVo">
+select * from item
+</select>
   </mapper>
   

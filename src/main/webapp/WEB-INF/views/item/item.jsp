@@ -16,30 +16,47 @@ $(function(){
 		type:'get',
 		dataType:'json',
 		data:{
-			"api_key": "RGAPI-444b7590-2dfd-46af-87c8-f3db9942b2eb",
+			"api_key": "RGAPI-0b2be03b-c5bc-4cbf-a8d6-81e175cb55a3",
 		},
 		success:function(data){
 			console.log(data);
-			console.log(data.data)
+			
 			$.each(data.data,function(key,value){
-				console.log("//////////////////////////")
-		
-				var str="<img src=http://ddragon.leagueoflegends.com/cdn/11.2.1/img/item/"+value.image.full+" style='width:64px; height:64px;'>";
-				$(str).appendTo("#itemlist")
-				$.ajax({
+				console.log(key);
+				var str3="";
+				var str2="<div>"+value.description+"</div><br>";
+				var str4="<div>"+value.name+"</div><br>";
+				console.log(value.tags[0]);
+				 var str="<img src=http://ddragon.leagueoflegends.com/cdn/11.2.1/img/item/"+value.image.full+" style='width:64px; height:64px;'>";
+				 
+				$(str).appendTo("#itemlist").addClass("iteminfo");
+	
+			 	$.ajax({
+					
 					url:"iteminsert",
 					type:'get',
-					data:{iNum:key,icon:value.image.full,name:value.name,price:value.gold.base,effect:value.plaintext},
+					dataType: 'json',
+					data:{iNum:key,icon:value.image.full,name:value.name,price:value.gold.base,effect:value.description,tags:value.tags[0]},
+					success: function(data){
+						console.log(data)
+						alert(data);
+					}
 					
-				})
+					
+				}) 
 			})
 		}
+		
 	})
 })
+
 </script>
 
 <body>
 <h1>ㅎㅇ</h1>
 <div id="itemlist"></div>
+<div id="iteminfo"></div>
+<a href="/lol/itemlist">dd</a>
 </body>
+
 </html>

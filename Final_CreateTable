@@ -184,7 +184,8 @@ create table item
 	icon varchar2(255),	--아이템 아이콘
 	name varchar2(255),	--아이템이름
 	price number,	--아이템 가격
-	effect varchar2(255)	--아이템효과
+	effect varchar2(4000),	--아이템효과
+	tags varchar2(100)
 );
 
 --챔피언/champion
