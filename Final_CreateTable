@@ -44,28 +44,26 @@ create table visitLog
 
 create table summoner
 (
-	sNum number  PRIMARY KEY,	--소환사 번호
-	sNickname varchar2(255),	--소환사 이름
+	sNickname varchar2(255)PRIMARY KEY,	--소환사 이름
 	sLevel number,	--소환사 레벨
 	icon varchar2(255)	--프로필아이콘
 );
 
 CREATE TABLE queueinfo
 (
-	-- 소환사 번호
-	snum number,
+	snickname varchar2(255) references summoner,
 	queueType varchar2(30) ,
 	tier varchar2(15),
 	win number,
 	lose number,
-	PRIMARY KEY (snum, queueType)
+	PRIMARY KEY (snickname, queueType)
 );
 
 -- 회원/MEMBER
 create table member
 (
 	username varchar2(50) primary key ,	--아이디
-	sNum number references Summoner(sNum),	--소환사번호
+	snickname varchar2(255) references summoner,	--소환사번호
 	password varchar2(100) not null,	--비밀번호
 	enable char(1) default '1' check(enable in('0', '1')),	--enable(사용가능)
 	email varchar2(50),	-- 이메일
@@ -77,7 +75,7 @@ create table member
 -- 프로필 평가(rating)
 create table rating
 (
-	sNum number references Summoner(sNum) not null,
+	snickname varchar2(255) references summoner,
 	rate varchar2(100) 
 );
 
@@ -240,7 +238,7 @@ CREATE TABLE "TEAMINFO"
 CREATE TABLE TEAMMEMBERINFO
 (   
 	"TMNUM" NUMBER, 
-    "SNUM" NUMBER, 
+    snickname varchar2(255) references summoner,
     "TEAMID" VARCHAR2(255 BYTE), 
     "MATCHID" VARCHAR2(2555 BYTE), 
     "CHAMPIONID" VARCHAR2(255 BYTE), 
@@ -268,8 +266,6 @@ CREATE TABLE TEAMMEMBERINFO
     "ACCESSORY" NUMBER, 
     "MULTIKILL" NUMBER, 
     PRIMARY KEY ("TMNUM"),
-    CONSTRAINT "TEAMMEMBERINFO_FK1" FOREIGN KEY ("SNUM")
-    REFERENCES "FINAL"."SUMMONER" ("SNUM") ENABLE, 
     CONSTRAINT "TEAMMEMBERINFO_FK2" FOREIGN KEY ("TEAMID", "MATCHID")
     REFERENCES "FINAL"."TEAMINFO" ("TEAMID", "MATCHID") ENABLE, 
     CONSTRAINT "TEAMMEMBERINFO_FK3" FOREIGN KEY ("CHAMPIONID")
