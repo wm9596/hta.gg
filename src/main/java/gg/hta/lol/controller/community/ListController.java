@@ -1,4 +1,4 @@
-package gg.hta.lol.community.controller;
+package gg.hta.lol.controller.community;
 
 import java.util.HashMap;
 import java.util.List;

@@ -8,6 +8,6 @@
 <title>/community/list.jsp</title>
 </head>
 <body>
-
+	<a href="${pageContext.request.contextPath }/views/community/insert">새 글 등록</a>
 </body>
 </html>

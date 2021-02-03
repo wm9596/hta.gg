@@ -5,13 +5,13 @@
 <configuration>
   <typeAliases>
   	<typeAlias type="gg.hta.lol.vo.MemberVo" alias="member"/>
-  	<!-- <typeAlias type="com.test.spring13.vo.CommentsVo" alias="comments"/> -->
+  	<typeAlias type="gg.hta.lol.vo.CommunityVo" alias="community"/>
   </typeAliases>
   <mappers>
   	<!-- 읽어올 Mapper파일 설정 -->
     <mapper resource="gg/hta/lol/mapper/MemberMapper.xml"/>
     <mapper resource="gg/hta/lol/mapper/ItemMapper.xml"/>
- 	<!-- <mapper resource="com/test/spring13/mapper/CommentsMapper.xml"/> -->
+ 	<mapper resource="gg/hta/lol/mapper/CommunityMapper.xml"/>
   </mappers>
   
 </configuration>

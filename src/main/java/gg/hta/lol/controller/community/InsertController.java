@@ -1,4 +1,4 @@
-package gg.hta.lol.community.controller;
+package gg.hta.lol.controller.community;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
