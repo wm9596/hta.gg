@@ -6,6 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import org.springframework.aop.ThrowsAdvice;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.JsonArray;
@@ -31,7 +32,7 @@ public class DataRequester {
 		return getData(url).getAsJsonObject();
 	}
 	
-	public JsonObject getLeagueInfo(String sid){
+	public JsonArray getLeagueInfo(String sid){
 		String url = "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/%s?api_key="+key;
 		
 		try {
@@ -41,7 +42,7 @@ public class DataRequester {
 			e.printStackTrace();
 			return null;
 		}
-		return getData(url).getAsJsonArray().get(0).getAsJsonObject();
+		return getData(url).getAsJsonArray();
 	}
 	
 	public JsonObject getMatchList(String aid){
@@ -78,6 +79,10 @@ public class DataRequester {
 
 			con.setRequestMethod("GET");
 
+			if(con.getResponseCode()!=200) {
+				throw new Exception();
+			}
+			
 			in = new BufferedInputStream(con.getInputStream());
 
 			String str = new String(in.readAllBytes());
