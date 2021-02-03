@@ -3,6 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gg.hta.lol.mapper.MemberMapper">
+	<resultMap type="gg.hta.lol.security.CustomUserDetail" id="userDetail">
+		<id property="username" column="username"/>
+		<result property="password" column="password"/>
+		<result property="enabled" column="enabled"/>
+		
+		<!-- com.test.spring.security ==> CustomUserDetail.java 에서 private List<AuthVo> authoList;(변수명) -->
+		<!-- ofType==> 결과값을 담는 형식 -->
+		<collection property="authoList" ofType="gg.hta.lol.vo.AuthoritiesVo">
+			<result property="username" column="username"/>
+			<result property="authority" column="authority"/>
+		</collection>
+	</resultMap>
+	<select id="getAuths" parameterType="string" resultMap="userDetail">
+		select * from member m, authorities a
+		where m.username=a.username and m.username=#{username}
+	</select>
+	
 	<insert id="insert" parameterType="member">
 	   insert into member values(#{username},null,#{password},'1',#{email},sysdate,#{nickname},0)
 	</insert>
