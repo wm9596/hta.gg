@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import gg.hta.lol.security.CustomUserDetail;
+import gg.hta.lol.vo.AuthoritiesVo;
 import gg.hta.lol.vo.MemberVo;
 
 @Repository
@@ -18,8 +19,8 @@ public class MemberDao {
 	public int insert(MemberVo vo) {
 		return sqlSession.insert(NAMESPACE + ".insert",vo);
 	}
-	public int insertAuth(HashMap<String, Object> map) {
-		return sqlSession.insert(NAMESPACE + ".insertAuth", map); 
+	public int insert(AuthoritiesVo vo) {
+		return sqlSession.insert(NAMESPACE + ".auth_add", vo);
 	}
 	public int delete(int num) {
 		return sqlSession.delete(NAMESPACE + ".delete",num); 

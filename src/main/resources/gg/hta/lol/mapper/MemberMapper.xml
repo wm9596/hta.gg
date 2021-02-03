@@ -19,6 +19,9 @@
 		select * from member m, authorities a
 		where m.username=a.username and m.username=#{username}
 	</select>
+	<insert id="auth_add" parameterType="gg.hta.lol.vo.AuthoritiesVo">
+		insert into authorities values(#{username},#{authority})
+	</insert>
 	
 	<insert id="insert" parameterType="member">
 	   insert into member values(#{username},null,#{password},'1',#{email},sysdate,#{nickname},0)
@@ -27,7 +30,7 @@
 		delete from members where num=#{num}
 	</delete>
 	<select id="list" resultType="member">
-		select * from members
+		select * from member
 	</select>
 	<update id="update" parameterType="member">
 		update members
