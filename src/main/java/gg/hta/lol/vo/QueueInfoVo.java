@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class QueueInfoVo {
-	private long snum;
+	private String snickname;
 	private String queueType;
 	private String tier;
 	private int win;

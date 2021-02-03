@@ -10,7 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SummonerVo {
-	private long snum;
 	private String snickname;
 	private int slevel;
 	private String icon;

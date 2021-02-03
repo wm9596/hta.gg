@@ -4,6 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gg.hta.lol.mapper.QueueInfoMapper">
 	<insert id="addQueueInfo">
-		insert into queuetype values(#{snum},#{queueType},#{tier},#{win},#{lose})
+		insert into queueinfo values(#{snickname},#{queueType},#{tier},#{win},#{lose})
 	</insert>
 </mapper>

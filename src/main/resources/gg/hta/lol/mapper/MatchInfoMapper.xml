@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gg.hta.lol.mapper.SummonerMapper">
-	<insert id="addSummoner">
-		insert into summoner values(#{snickname},#{slevel},#{icon})
+<mapper namespace="gg.hta.lol.mapper.MatchInfoMapper">
+	<insert id="addMatchinfo">
+		insert into matchinfo values(#{matchid},#{type},#{runtime},#{startTime})
 	</insert>
 </mapper>

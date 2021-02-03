@@ -17,9 +17,6 @@ public class SearchServiceTest {
 	
 	@Autowired
 	private SearchService service;
-
-	@Autowired
-	private DataRequester dr;
 	
 	@Test
 	public void getTest() {
