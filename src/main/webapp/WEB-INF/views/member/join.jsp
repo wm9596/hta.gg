@@ -28,21 +28,6 @@
 <script type="text/javascript">
 function checkId(){
 	var id = document.getElementById("id").value;
-	$.ajax({
-		url:"/lol/member/idCheck/"+id,
-		dataType: "xml",
-		success: function(data){
-			var span = document.getElementById("idcheck");
-			var using = xml.getElementsByTagName("using")[0].firstChild.nodeValue;
-			console.log(using);
-			if(eval(using)==true){
-				span.innerHTML="이미 사용중인 아이디입니다.";
-			}else if(using=='false'){
-				span.innerHTML="사용 가능 한 아이디입니다.";
-			}
-		}
-	});
-
 	if(id.trim()==""){
 		document.getElementById("idcheck").innerHTML="아이디를 입력하세요.";
 		return;
@@ -52,6 +37,18 @@ function checkId(){
 		document.getElementById("idcheck").innerHTML="아이디는 4~10자리로 설정해주세요.";
 		return;
 	}else if(id.length>=4 && id.length<=10){
+		$.ajax({
+			url:"/lol/member/idCheck/"+id,
+			success: function(data){
+				var span = document.getElementById("idcheck");
+				var using = $(data).find("using").text();
+				if(eval(using)==true){
+					span.innerHTML="이미 사용중인 아이디입니다.";
+				}else if(using=='false'){
+					span.innerHTML="사용 가능 한 아이디입니다.";
+				}
+			}
+		});
 		document.getElementById("idcheck").innerHTML="";
 	}
 	
