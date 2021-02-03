@@ -33,7 +33,7 @@ public class ListController {
 		
 		List<CommunityVo> list=service.list(map);
 		
-		ModelAndView mv=new ModelAndView("list");
+		ModelAndView mv=new ModelAndView("community/list");
 		mv.addObject("list", list);
 		mv.addObject("pu",pu);
 		mv.addObject("field", field);
