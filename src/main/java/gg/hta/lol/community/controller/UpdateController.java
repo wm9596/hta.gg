@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import gg.hta.lol.community.service.CommunityService;
+import gg.hta.lol.service.CommunityService;
 import gg.hta.lol.vo.CommunityVo;
 
 @Controller

@@ -5,18 +5,21 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 		
-<!-- 	<sec:http> -->
-<!-- 		<sec:intercept-url pattern="/member/**" access="hasRole('ROLE_MEMBER')"/> -->
-<!-- 		<sec:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/> -->
-<!-- 		<sec:intercept-url pattern="/**" access="permitAll"/> -->
-<!-- 		<sec:form-login login-page="/login" authentication-success-handler-ref="loginSuccessHandler"/> -->
-<!-- 		<sec:logout logout-url="/logout" logout-success-url="/"/> -->
-<!-- 	</sec:http>	 -->
-<!-- 	<sec:authentication-manager> -->
-<!-- 		<sec:authentication-provider> -->
-<!-- 			<sec:jdbc-user-service data-source-ref="dataSource"/> -->
-<!-- 			<sec:password-encoder ref="passwordEncoding"/> -->
-<!-- 		</sec:authentication-provider> -->
-<!-- 	</sec:authentication-manager> -->
+	<bean id="loginSuccessHandler" class="gg.hta.lol.security.LoginSuccessHandler"/>
+	<bean id="passwordEncoding" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	<bean id="userDetailService" class="gg.hta.lol.security.CustomUserDetailService"/>
+	<sec:http>
+		<sec:intercept-url pattern="/member/member/**" access="hasRole('ROLE_MEMBER')"/>
+		<sec:intercept-url pattern="/member/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		<sec:intercept-url pattern="/**" access="permitAll"/>
+		<sec:form-login login-page="/member/login" authentication-success-handler-ref="loginSuccessHandler"/>
+		<sec:logout logout-url="/member/logout" invalidate-session="true" logout-success-url="/"/>
+	</sec:http>
+	<sec:authentication-manager>
+		<sec:authentication-provider>
+			<sec:jdbc-user-service data-source-ref="dataSource"/>
+			<sec:password-encoder ref="passwordEncoding"/>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
 	
 </beans>

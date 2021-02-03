@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import gg.hta.lol.security.CustomUserDetail;
 import gg.hta.lol.vo.MemberVo;
 
 @Repository
@@ -34,5 +35,8 @@ public class MemberDao {
 	
 	public List<MemberVo> selectList(){
 		return sqlSession.selectList(NAMESPACE + ".list"); 
+	}
+	public CustomUserDetail getAuthsList(String userid){
+		return sqlSession.selectOne(NAMESPACE + ".getAuths", userid);
 	}
 }

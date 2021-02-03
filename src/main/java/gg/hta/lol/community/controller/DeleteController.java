@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import gg.hta.lol.community.dao.CommunityDao;
+import gg.hta.lol.dao.CommunityDao;
 import gg.hta.lol.vo.CommunityVo;
 
 @Controller
