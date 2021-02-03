@@ -6,7 +6,7 @@
 	<div id="header_center">
 		<div class="menu"><a href="#">챔피언</a></div>
 		<div class="menu"><a href="#">아이템</a></div>
-		<div class="menu"><a href="#">커뮤니티</a></div>
+		<div class="menu"><a href="/lol/community/list">커뮤니티</a></div>
 	</div>
 	<div id="header_right">
 		<div id="header_none">
