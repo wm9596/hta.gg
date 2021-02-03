@@ -1,23 +1,24 @@
 package gg.hta.lol.riotapi;
 
 import java.io.BufferedInputStream;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import org.springframework.stereotype.Component;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+@Component
 public class DataRequester {
 	
-	private final String key = "RGAPI-2682102c-6a74-4c83-abfe-65805489ac64";
+	private final String key = "RGAPI-19840818-756b-4f29-9e24-c2e2cbcd1f4f";
 
-	public HashMap<String, String> getSummonerInfo(String name) {
+	public JsonObject getSummonerInfo(String name) {
 		String url = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/%s?api_key="+key;
 		
 		try {
@@ -27,23 +28,51 @@ public class DataRequester {
 			e.printStackTrace();
 			return null;
 		}
-		return getData(url);
+		return getData(url).getAsJsonObject();
 	}
 	
-	public HashMap<String, String> getLeagueInfo(){
-	
-		return null;
-	}
-	
-	public HashMap<String, String> getMatchInfo(){
+	public JsonObject getLeagueInfo(String sid){
+		String url = "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/%s?api_key="+key;
 		
-		return null;
+		try {
+			sid = URLEncoder.encode(sid,"utf-8");
+			url = String.format(url, sid);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return getData(url).getAsJsonArray().get(0).getAsJsonObject();
+	}
+	
+	public JsonObject getMatchList(String aid){
+		String url = "https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/%s?api_key="+key;
+		
+		try {
+			aid = URLEncoder.encode(aid,"utf-8");
+			url = String.format(url, aid);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return getData(url).getAsJsonObject();
+	}
+	
+	public JsonObject getMatchInfo(String mid){
+		String url = "https://kr.api.riotgames.com/lol/match/v4/matches/%s?api_key="+key;
+		
+		try {
+			mid = URLEncoder.encode(mid,"utf-8");
+			url = String.format(url, mid);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return getData(url).getAsJsonObject();
 	}
 
-	private HashMap<String, String> getData(String url) {
+	private JsonElement getData(String url) {
 		BufferedInputStream in = null;
 		try {
-//			String id = URLEncoder.encode(request.getParameter("id"),"UTF-8");
 			URL obj = new URL(url); // 호출할 url
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -52,11 +81,9 @@ public class DataRequester {
 			in = new BufferedInputStream(con.getInputStream());
 
 			String str = new String(in.readAllBytes());
-
-			Gson gson = new Gson();
-			Type type = new TypeToken<HashMap<String,String>>(){}.getType();
+			JsonParser parser = new JsonParser();
 			
-			return gson.fromJson(str, type);
+			return parser.parse(str);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,4 +98,5 @@ public class DataRequester {
 		}
 	}
 
+	
 }
