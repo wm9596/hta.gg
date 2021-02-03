@@ -8,5 +8,4 @@ public interface SummonerMapper {
 	
 	public int addSummoner(SummonerVo vo);
 	
-	public List<SummonerVo> list();
 }
