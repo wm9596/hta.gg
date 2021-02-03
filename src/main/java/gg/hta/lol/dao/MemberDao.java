@@ -30,8 +30,8 @@ public class MemberDao {
 		return sqlSession.update(NAMESPACE + ".update", vo); 
 	}
 	
-	public MemberVo selectOne(int num) {
-		return sqlSession.selectOne(NAMESPACE + ".select", num); 
+	public MemberVo selectOne(String username) {
+		return sqlSession.selectOne(NAMESPACE + ".select", username); 
 	}
 	
 	public List<MemberVo> selectList(){

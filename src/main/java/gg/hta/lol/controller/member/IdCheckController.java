@@ -20,19 +20,16 @@ public class IdCheckController {
 		//http://localhost:9090/lol/member/idCheck/test11 ==> Å×½ºÆ®
 		boolean using = false;
 		
-		List<MemberVo> list = service.list();
+		MemberVo vo = service.selectOne(id);
 		StringBuffer sb = new StringBuffer();
 		sb.append("<data>");
-		for(MemberVo vo:list) {
-			if(id.equals(vo.getUsername())) {
-				using = true;
-				sb.append("<using>" + using +"</using>");
-				sb.append("</data>");
-				return sb.toString();
-			}
-//			else {
-//				sb.append("<using>" + using +"</using>");		
-//			}
+		
+		if(vo!=null) {
+			using = true;
+			sb.append("<using>" + using +"</using>");
+		}
+		else {
+			sb.append("<using>" + using +"</using>");		
 		}
 		sb.append("</data>");
 		return sb.toString();

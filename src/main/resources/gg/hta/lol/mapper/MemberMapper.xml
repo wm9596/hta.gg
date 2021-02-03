@@ -37,7 +37,7 @@
 		set name=#{name},phone=#{phone},addr=#{addr},regdate=#{regdate}
 		where num=#{num}
 	</update>
-	<select id="select" parameterType="int" resultType="member">
-		select * from members where num=#{num}
+	<select id="select" parameterType="string" resultType="member">
+		select * from member where username=#{username}
 	</select>
 </mapper>
