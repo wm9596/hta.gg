@@ -28,14 +28,11 @@ public class MemberService {
 		}else {
 			avo.setAuthority("ROLE_MEMBER");
 		}
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("username",vo.getUsername());
-		map.put("authority",avo.getAuthority());
-		dao.insertAuth(map);
+		dao.insert(avo);
 		return 1;
 	}
-	public CustomUserDetail userDetail(String userid) {
-		return dao.getAuthsList(userid);
+	public CustomUserDetail userDetail(String username) {
+		return dao.getAuthsList(username);
 	}
 	
 	
@@ -48,7 +45,7 @@ public class MemberService {
 	public MemberVo selectOne(int num) {
 		return dao.selectOne(num);
 	}
-	public List<MemberVo> selectList(){
+	public List<MemberVo> list(){
 		return dao.selectList();
 	}
 }
