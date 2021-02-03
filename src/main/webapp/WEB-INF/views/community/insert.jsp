@@ -20,9 +20,9 @@
 <input type="button" value="임시등록" id="temporary">
 <input type="button" value="등록" id="submit">
 <hr size="2" width="735" color="black" id=line>
-<form method="post" action="board/insert">
+<form method="post" action="community/insert">
 	<select id="select1">
-		<option>게시판을 선택해 주세요.</option>
+		<option>카테고리를 선택해 주세요.</option>
 	</select>
 	<select id="select2">
 		<option>말머리 선택</option>

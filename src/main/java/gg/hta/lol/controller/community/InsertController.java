@@ -15,7 +15,7 @@ public class InsertController {
 	
 	@RequestMapping(value="/community/insert", method=RequestMethod.GET)
 	public String insertForm() {
-		return "insert";
+		return "community/insert";
 	}
 	
 	@RequestMapping(value="/community/insert", method=RequestMethod.POST)
@@ -26,6 +26,6 @@ public class InsertController {
 		}else {
 			model.addAttribute("code","fail");
 		}
-		return "result";
+		return "community/result";
 	}
 }
