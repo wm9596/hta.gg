@@ -22,4 +22,5 @@ public class SearchServiceTest {
 	public void getTest() {
 		service.getSummonerInfo("크림몬");
 	}
+	
 }
