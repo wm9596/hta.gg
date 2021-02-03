@@ -11,8 +11,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SummonerVo {
 	private int sNum;
-	private String sNickname;
-	private int sLevel;
+	private String snickname;
+	private int slevel;
 	private String icon;
 	private String tier;
 	private int win;
