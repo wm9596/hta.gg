@@ -87,9 +87,9 @@
 </head>
 <body>
 <h1>회원가입</h1>
-<form:form method="post" action="<%=request.getContextPath()%>/member/join">
+<form:form method="post" action="<%=request.getContextPath() %>/member/join">
 	아이디<br>
-	<input type="text" name="username" id="id" onkeyup="checkId()">&nbsp;&nbsp;<button>이메일인증</button><span id="idcheck">아이디를 입력하세요.</span><br>
+	<input type="text" name="username" id="id" onkeyup="checkId()">&nbsp;&nbsp;<button>중복확인</button><span id="idcheck">아이디를 입력하세요.</span><br>
 	비밀번호<br>
 	<input type="password" name="password" id="pwd" onkeyup="checkPwd()">&nbsp;&nbsp;<span id="pwdcheck"></span><br>
 	비밀번호확인<br>

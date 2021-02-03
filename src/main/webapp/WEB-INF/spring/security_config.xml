@@ -9,11 +9,11 @@
 	<bean id="passwordEncoding" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	<bean id="userDetailService" class="gg.hta.lol.security.CustomUserDetailService"/>
 	<sec:http>
-		<sec:intercept-url pattern="/member/**" access="hasRole('ROLE_MEMBER')"/>
-		<sec:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		<sec:intercept-url pattern="/member/member/**" access="hasRole('ROLE_MEMBER')"/>
+		<sec:intercept-url pattern="/member/admin/**" access="hasRole('ROLE_ADMIN')"/>
 		<sec:intercept-url pattern="/**" access="permitAll"/>
-		<sec:form-login login-page="/login" authentication-success-handler-ref="loginSuccessHandler"/>
-		<sec:logout logout-url="/logout" invalidate-session="true" logout-success-url="/"/>
+		<sec:form-login login-page="/member/login" authentication-success-handler-ref="loginSuccessHandler"/>
+		<sec:logout logout-url="/member/logout" invalidate-session="true" logout-success-url="/"/>
 	</sec:http>
 	<sec:authentication-manager>
 		<sec:authentication-provider>
