@@ -16,7 +16,6 @@ $(document).ready(function(){
 		$.ajax({
 			url:"/lol/member/email/"+id+"/"+email,
 			success: function(data){
-				console.log(data);
 				document.getElementById("emailcheck").innerHTML="인증번호 전송이 완료되었습니다.";
 			}
 		});

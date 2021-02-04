@@ -8,8 +8,6 @@
 		<result property="password" column="password"/>
 		<result property="enabled" column="enabled"/>
 		
-		<!-- com.test.spring.security ==> CustomUserDetail.java 에서 private List<AuthVo> authoList;(변수명) -->
-		<!-- ofType==> 결과값을 담는 형식 -->
 		<collection property="authoList" ofType="gg.hta.lol.vo.AuthoritiesVo">
 			<result property="username" column="username"/>
 			<result property="authority" column="authority"/>
