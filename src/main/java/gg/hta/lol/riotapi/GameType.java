@@ -9,8 +9,18 @@ public enum GameType {
 	
 	private int code;
 	
-	GameType(int num){
+	private GameType(int num){
 		code = num;
+	}
+	
+	public static String getStringType(int code) {
+		
+		for(GameType gt :GameType.values()) {
+			if(gt.code==code) {
+				return gt.toString();
+			}
+		}
+		return "null";
 	}
 	
 }

@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gg.hta.lol.mapper.TeamMemberInfo">
+<mapper namespace="gg.hta.lol.mapper.TeamInfoMapper">
 	<insert id="addTeaminfo">
-		insert into teaminfo values(#{teamId},#{matchId},#{winlose},#{firstBlood},#{firstTower},#{baronKill},#{)
+		insert into teaminfo values(#{teamId},#{matchId},#{winlose},#{firstBlood},#{firstTower},#{baronKill},#{dragonKill},#{towerKill})
 	</insert>
 </mapper>

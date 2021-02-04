@@ -5,6 +5,6 @@ import gg.hta.lol.vo.TeamInfoVo;
 
 public interface TeamInfoMapper {
 	
-	public int addMatchinfo(TeamInfoVo vo);
+	public int addTeaminfo(TeamInfoVo vo);
 	
 }

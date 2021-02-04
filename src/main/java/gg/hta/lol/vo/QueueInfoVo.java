@@ -13,6 +13,7 @@ public class QueueInfoVo {
 	private String snickname;
 	private String queueType;
 	private String tier;
+	private int leaguePoints;
 	private int win;
 	private int lose;
 }

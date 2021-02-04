@@ -15,8 +15,8 @@ public class TeamInfoVo {
 	private String winlose;
 	private String firstBlood;
 	private String firstTower;
-	private String baronKill;
-	private String dragonKill;
-	private String towerKill;
+	private int baronKill;
+	private int dragonKill;
+	private int towerKill;
 	
 }

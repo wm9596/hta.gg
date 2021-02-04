@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gg.hta.lol.mapper.QueueInfoMapper">
 	<insert id="addQueueInfo">
-		insert into queueinfo values(#{snickname},#{queueType},#{tier},#{win},#{lose})
+		insert into queueinfo values(#{snickname},#{queueType},#{tier},#{leaguePoints},#{win},#{lose})
 	</insert>
 	<select id="getQueueInfo" parameterType="String" resultType="gg.hta.lol.vo.QueueInfoVo">
 		select * from queueinfo where snickname = #{snickname}

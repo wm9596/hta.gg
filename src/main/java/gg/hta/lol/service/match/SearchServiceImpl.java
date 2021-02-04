@@ -1,5 +1,7 @@
 package gg.hta.lol.service.match;
 
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,12 +10,16 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import gg.hta.lol.mapper.MatchInfoMapper;
 import gg.hta.lol.mapper.QueueInfoMapper;
 import gg.hta.lol.mapper.SummonerMapper;
+import gg.hta.lol.mapper.TeamInfoMapper;
 import gg.hta.lol.riotapi.DataRequester;
 import gg.hta.lol.riotapi.GameType;
+import gg.hta.lol.vo.MatchinfoVo;
 import gg.hta.lol.vo.QueueInfoVo;
 import gg.hta.lol.vo.SummonerVo;
+import gg.hta.lol.vo.TeamInfoVo;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -24,9 +30,15 @@ public class SearchServiceImpl implements SearchService {
 	private DataRequester dataRequester;
 	
 	@Autowired
-	private SummonerMapper smapper;
+	private SummonerMapper summonerMapper;
 	@Autowired
-	private QueueInfoMapper qmapper;
+	private QueueInfoMapper queuemapper;
+	
+	@Autowired
+	private MatchInfoMapper matchinfoMapper;
+	
+	@Autowired
+	private TeamInfoMapper teaminfoMapper;
 	
 	@Override
 	@Transactional
@@ -52,7 +64,7 @@ public class SearchServiceImpl implements SearchService {
 					summonerInfo.get("profileIconId").getAsString()
 					);
 		
-		smapper.addSummoner(svo);
+		summonerMapper.addSummoner(svo);
 		
 		for(int i = 0 ; i< leagueInfo.size() ; i++) {
 			JsonObject jo = leagueInfo.get(i).getAsJsonObject();
@@ -61,9 +73,10 @@ public class SearchServiceImpl implements SearchService {
 					name,
 					jo.get("queueType").getAsString() ,
 					jo.get("tier").getAsString()+"_"+jo.get("rank").getAsString(),
+					jo.get("leaguePoints").getAsInt(),
 					jo.get("wins").getAsInt(), 
 					jo.get("losses").getAsInt());
-			qmapper.addQueueInfo(qvo);
+			queuemapper.addQueueInfo(qvo);
 		}
 	}
 	
@@ -72,6 +85,8 @@ public class SearchServiceImpl implements SearchService {
 		
 		JsonArray matchArr = matchInfo.get("matches").getAsJsonArray();
 		
+		//TODO 디비에 있는 값은 제외하기
+		
 		for(int i = 0; i < matchArr.size(); i++) {
 			JsonObject match =matchArr.get(i).getAsJsonObject();
 			//match.get("queue").getAsInt()
@@ -79,15 +94,49 @@ public class SearchServiceImpl implements SearchService {
 			
 			if(gameTypeCode==GameType.RANKED_FLEX_SR.getCode() || gameTypeCode==GameType.RANKED_SOLO_5x5.getCode()) {
 //				System.out.println(match);
-				addMatchInfo(match.get("gameId").getAsString());
+				addMatchInfo(match.get("gameId").getAsString(),gameTypeCode);
 			}
 		}
 	}
 	
-	public void addMatchInfo(String gameId) {
-		
+	public void addMatchInfo(String gameId,int code) {
 		JsonObject matchInfo = dataRequester.getMatchInfo(gameId);
-		System.out.println(matchInfo);
+		matchinfoMapper.addMatchinfo(
+				new MatchinfoVo(
+						matchInfo.get("gameId").getAsString(), 
+						GameType.getStringType(code), 
+						matchInfo.get("gameDuration").getAsLong(), 
+						new Date(matchInfo.get("gameCreation").getAsLong())
+						)
+				);
+		
+		JsonArray teamArr = matchInfo.get("teams").getAsJsonArray();
+		
+		for(int i = 0 ; i < teamArr.size(); i++) {
+			addTeamInfo(gameId,teamArr.get(i).getAsJsonObject());
+		}
+		
+		addTeamMemberInfo(
+				matchInfo.get("participants").getAsJsonArray(),
+				matchInfo.get("participantIdentities").getAsJsonArray()
+				);
+		
+	}
+	
+	public void addTeamInfo(String gameId,JsonObject teamInfo) {
+		teaminfoMapper.addTeaminfo(new TeamInfoVo(
+				teamInfo.get("teamId").getAsString(),
+				gameId,
+				teamInfo.get("win").getAsString(), 
+				teamInfo.get("firstBlood").getAsString(), 
+				teamInfo.get("firstTower").getAsString(), 
+				teamInfo.get("baronKills").getAsInt(),
+				teamInfo.get("dragonKills").getAsInt(),
+				teamInfo.get("towerKills").getAsInt()));
+	}
+	
+	public void addTeamMemberInfo(JsonArray tmInfoArr, JsonArray userInfo) {
+		
 	}
 	
 }
