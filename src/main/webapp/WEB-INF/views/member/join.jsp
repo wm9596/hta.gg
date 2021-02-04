@@ -9,8 +9,37 @@
 <script type="text/javascript" src="/lol/resources/js/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	var span = document.getElementById("idcheck");
 	$("#emailOk").click(function(){
-		var	
+		var id = document.getElementById("id").value;
+		var email = document.getElementById("email").value;
+		$.ajax({
+			url:"/lol/member/email/"+id+"/"+email,
+			success: function(data){
+				console.log(data);
+				document.getElementById("emailcheck").innerHTML="인증번호 전송이 완료되었습니다.";
+			}
+		});
+	});
+	
+	$("#confirmOk").click(function(){
+		var id = document.getElementById("id").value;
+		var email = document.getElementById("email").value;
+		if(document.getElementById("emailcheck").textContent != "인증번호 전송이 완료되었습니다."){
+			alert("이메일 입력 후 이메일 인증 버튼을 클릭해 주세요!!!");
+		}else{
+			$.ajax({
+				url:"/lol/member/email/"+id+"/"+email,
+				success: function(data){
+					var code = $(data).find("code").text();
+					if(code == document.getElementById("confirm").value){
+						document.getElementById("confirmcheck").innerHTML="이메일 인증 완료!!!";
+					}else{
+						document.getElementById("confirmcheck").innerHTML="이메일 인증 실패!!!";
+					}
+				}
+			});
+		}
 	});
 	
 	$("#idOk").click(function(){
@@ -18,7 +47,6 @@ $(document).ready(function(){
 		$.ajax({
 			url:"/lol/member/idCheck/"+id,
 			success: function(data){
-				var span = document.getElementById("idcheck");
 				var using = $(data).find("using").text();
 				if(eval(using)==true){
 					span.innerHTML="이미 사용중인 아이디입니다.";
@@ -32,24 +60,25 @@ $(document).ready(function(){
 
 function checkId(){
 	var id = document.getElementById("id").value;
+	var span = document.getElementById("idcheck");
 	if(id.trim()==""){
-		document.getElementById("idcheck").innerHTML="아이디를 입력하세요.";
+		span.innerHTML="아이디를 입력하세요.";
 		document.getElementById("idOk").disabled = 'true';
 		return;
 	}
 	
 	if(id.length<4 || id.length>10){
-		document.getElementById("idcheck").innerHTML="아이디는 4~10자리로 설정해주세요.";
+		span.innerHTML="아이디는 4~10자리로 설정해주세요.";
 		document.getElementById("idOk").disabled = 'true';
 		return;
 	}else if(id.length>=4 && id.length<=10){
-		document.getElementById("idcheck").innerHTML="";
+		span.innerHTML="";
 		document.getElementById("idOk").disabled = false;
 	}
 	
 	for(let i=0; i<id.length; i++){
 		if(!(('0'<=id.charAt(i) && id.charAt(i)<='9') || ('a'<=id.charAt(i) && id.charAt(i)<='z') || ('A'<=id.charAt(i) && id.charAt(i)<='Z'))){
-			document.getElementById("idcheck").innerHTML="아이디는 영문과 숫자로만 입력해주세요...";
+			span.innerHTML="아이디는 영문과 숫자로만 입력해주세요...";
 			document.getElementById("idOk").disabled = 'true';
 			return;
 		}
@@ -121,11 +150,11 @@ function checkNick(){
 	<span id="pwdOkcheck"></span><br>
 	이메일<br>
 	<input type="email" name="email" id="email">&nbsp;&nbsp;
-	<input type="button" id="emailOk" onclick="emailOk()" value="이메일인증">&nbsp;&nbsp;
+	<input type="button" id="emailOk" value="이메일인증">&nbsp;&nbsp;
 	<span id="emailcheck"></span><br>
 	이메일 인증번호<br>
 	<input type="text" name="confirm" id="confirm">&nbsp;&nbsp;
-	<input type="button" id="confirmOk" onclick="confirmOk()" value="확인">&nbsp;&nbsp;
+	<input type="button" id="confirmOk" value="확인">&nbsp;&nbsp;
 	<span id="confirmcheck"></span><br>
 	커뮤니티 닉네임<br>
 	<input type="text" name="nickname" id="nickname" onkeyup="checkNick()">&nbsp;&nbsp;

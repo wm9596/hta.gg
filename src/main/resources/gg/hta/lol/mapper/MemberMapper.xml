@@ -22,7 +22,9 @@
 	<insert id="auth_add" parameterType="gg.hta.lol.vo.AuthoritiesVo">
 		insert into authorities values(#{username},#{authority})
 	</insert>
-	
+	<insert id="code_add" parameterType="gg.hta.lol.vo.AuthVo">
+		insert into auth values(#{username},#{code})
+	</insert>
 	<insert id="insert" parameterType="member">
 	   insert into member values(#{username},null,#{password},'1',#{email},sysdate,#{nickname},0)
 	</insert>
