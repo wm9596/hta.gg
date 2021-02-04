@@ -21,25 +21,25 @@ public class CommunityService {
 	public List<CommunityVo> list(HashMap<String,Object> map){
 		return dao.list(map);
 	}
-	public CommunityVo select(int num) {
-		return dao.select(num);
+	public CommunityVo select(int pNum) {
+		return dao.select(pNum);
 	}
 	public int update(CommunityVo vo) {
 		return dao.update(vo);
 	}
-	public int delete(int num) {
-		return dao.delete(num);
+	public int delete(int pNum) {
+		return dao.delete(pNum);
 	}
-	public CommunityVo next(int num) {
-		return dao.next(num);
+	public CommunityVo next(int pNum) {
+		return dao.next(pNum);
 	}
-	public CommunityVo prev(int num) {
-		return dao.prev(num);
+	public CommunityVo prev(int pNum) {
+		return dao.prev(pNum);
 	}
-	public int addHit(int num) {
-		return dao.addHit(num);
+	public int hit(int pNum) {
+		return dao.hit(pNum);
 	}
-	public int noHit(int num) {
-		return dao.noHit(num);
+	public int noHit(int pNum) {
+		return dao.noHit(pNum);
 	}
 }

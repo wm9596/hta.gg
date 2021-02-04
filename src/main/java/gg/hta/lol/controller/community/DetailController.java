@@ -13,13 +13,13 @@ public class DetailController {
 	@Autowired private CommunityService service;
 	
 	@GetMapping("/community/detail")
-	public ModelAndView detail(int num) {
-		ModelAndView mv=new ModelAndView("detail");
-		service.addHit(num);
+	public ModelAndView detail(int pNum) {
+		ModelAndView mv=new ModelAndView("community/detail");
+		service.hit(pNum);
 		
-		CommunityVo vo=service.select(num);
-		CommunityVo prev=service.prev(num);
-		CommunityVo next=service.next(num);
+		CommunityVo vo=service.select(pNum);
+		CommunityVo prev=service.prev(pNum);
+		CommunityVo next=service.next(pNum);
 			
 		String content=vo.getContent();
 		content=content.replaceAll("\n","<br>");

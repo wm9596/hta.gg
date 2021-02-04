@@ -22,25 +22,25 @@ public class CommunityDao {
 	public List<CommunityVo> list(HashMap<String, Object> map){
 		return sqlSession.selectList(NAMESPACE+".list",map);
 	}
-	public int delete(int num) {
-		return sqlSession.delete(NAMESPACE+".delete",num);
+	public int delete(int pNum) {
+		return sqlSession.delete(NAMESPACE+".delete",pNum);
 	}
 	public int update(CommunityVo vo) {
 		return sqlSession.update(NAMESPACE+".update",vo);
 	}
-	public CommunityVo select(int num) {
-		return sqlSession.selectOne(NAMESPACE +".select",num);
+	public CommunityVo select(int pNum) {
+		return sqlSession.selectOne(NAMESPACE +".select",pNum);
 	}
-	public CommunityVo next(int num) {
-		return sqlSession.selectOne(NAMESPACE +".next",num);
+	public CommunityVo next(int pNum) {
+		return sqlSession.selectOne(NAMESPACE +".next",pNum);
 	}
-	public CommunityVo prev(int num) {
-		return sqlSession.selectOne(NAMESPACE +".prev",num);
+	public CommunityVo prev(int pNum) {
+		return sqlSession.selectOne(NAMESPACE +".prev",pNum);
 	}
-	public int addHit(int num) {
-		return sqlSession.update(NAMESPACE+".pHit",num);
+	public int hit(int pNum) {
+		return sqlSession.update(NAMESPACE+".hit",pNum);
 	}
-	public int noHit(int num) {
-		return sqlSession.update(NAMESPACE+".noHit",num);
+	public int noHit(int pNum) {
+		return sqlSession.update(NAMESPACE+".noHit",pNum);
 	}
 }

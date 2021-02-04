@@ -26,6 +26,6 @@ public class InsertController {
 		}else {
 			model.addAttribute("code","fail");
 		}
-		return "community/result";
+		return "redirect:/community/list";
 	}
 }

@@ -32,7 +32,7 @@ public class ListController {
 		map.put("endRow",endRow);
 		
 		List<CommunityVo> list=service.list(map);
-		
+		System.out.println(list);
 		ModelAndView mv=new ModelAndView("community/list");
 		mv.addObject("list", list);
 		mv.addObject("pu",pu);

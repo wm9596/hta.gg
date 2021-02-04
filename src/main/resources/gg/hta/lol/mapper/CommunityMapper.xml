@@ -5,7 +5,7 @@
 <mapper namespace="gg.hta.lol.mapper.CommunityMapper">
 
 	<insert id="insert" parameterType="community">
-		insert into community values(pNum_seq.nextval,#{username},#{cNum},#{title},#{content},0,0,#{commentCount},sysdate)
+		insert into community values(pNum_seq.nextval,#{username},#{cNum},#{title},#{content},0,0,0,0,sysdate)
 	</insert>
 	
 	<delete id="delete" parameterType="int">
@@ -45,7 +45,7 @@
 		where pNum=#{pNum}
 	</update>
 	
-	<update id="addHit" parameterType="int">
+	<update id="hit" parameterType="int">
 		update community set hit=hit+1 where pNum=#{pNum}
 	</update>
 	
@@ -65,7 +65,7 @@
 		<![CDATA[
 		select * from
 		(
-			select * from community where pNum<#{pNum} order by num desc
+			select * from community where pNum<#{pNum} order by pNum desc
 		)
 		where rownum=1
 		 ]]>

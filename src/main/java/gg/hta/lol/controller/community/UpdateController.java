@@ -15,8 +15,8 @@ public class UpdateController {
 	@Autowired private CommunityService service;
 	
 	@GetMapping(value="/community/update")
-	public String updateForm(int num,Model model) {
-		CommunityVo vo=service.select(num);
+	public String updateForm(int pNum,Model model) {
+		CommunityVo vo=service.select(pNum);
 		model.addAttribute("vo",vo);
 		return "update";
 	}
@@ -29,6 +29,6 @@ public class UpdateController {
 			e.printStackTrace();
 			model.addAttribute("code","fail");
 		}
-		return "result";
+		return "community/list";
 	}
 }
