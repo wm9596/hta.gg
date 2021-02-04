@@ -24,8 +24,8 @@ drop table reply;
 drop table Addfile;
 drop table report;
 drop table community;
-drop table auth;
 drop table member;
+drop table auth;
 drop table banList;
 drop table teamMemberinfo;
 drop table teaminfo;
@@ -60,17 +60,26 @@ CREATE TABLE queueinfo
 	PRIMARY KEY (snickname, queueType)
 );
 
+-- 이메일 인증번호/auth
+create table auth
+(
+	username varchar2(50) primary key,	--아이디
+	code varchar2(1000)	--이메일 인증번호
+);
+
 -- 회원/MEMBER
 create table member
 (
-	username varchar2(50) primary key ,	--아이디
+	username varchar2(50) NOT NULL enable,	--아이디
 	snickname varchar2(255) references summoner,	--소환사번호
 	password varchar2(100) not null,	--비밀번호
 	enable char(1) default '1' check(enable in('0', '1')),	--enable(사용가능)
 	email varchar2(50),	-- 이메일
 	regdate date,	--가입날짜
 	nickname varchar2(12),	--커뮤니티 닉네임
-	point number	--포인트
+	point number,	--포인트
+    CONSTRAINT "member_PK" PRIMARY KEY ("USERNAME"),
+    CONSTRAINT "member_FK1" FOREIGN KEY ("USERNAME") REFERENCES "FINAL"."AUTH" ("USERNAME")
 );
 
 -- 프로필 평가(rating)
@@ -78,13 +87,6 @@ create table rating
 (
 	snickname varchar2(255) references summoner,
 	rate varchar2(100) 
-);
-
--- 이메일 인증번호/auth
-create table auth
-(
-	username varchar2(50) references member(username) not null,	--아이디
-	code varchar2(1000)	--이메일 인증번호
 );
 
 -- 쪽지/message

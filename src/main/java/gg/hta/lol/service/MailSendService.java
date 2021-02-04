@@ -58,7 +58,7 @@ public class MailSendService {
 	public void mailSendWithUserKey(String email, String id, HttpServletRequest request) {
 		String key = getKey(false, 20);
 		System.out.println("==========================================");
-		System.out.println(key);
+		System.out.println(key+id);
 //		userDao = sqlSession.getMapper(UserDaoInterface.class);
 		AuthVo vo = new AuthVo(id, key);
 		dao.insert(vo);
