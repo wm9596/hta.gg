@@ -17,6 +17,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		// ㅁㄴㅇㄻㄹ
 		return ".header.home";
 	}
 	

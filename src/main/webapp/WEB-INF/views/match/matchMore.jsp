@@ -10,6 +10,10 @@
 			</div>
 			<div id="mm_smNicknameDiv">
 				<h2>${sm.snickname }</h2>
+				</br>
+				<br>
+				<br>
+				<p>레벨 : ${sm.slevel } </p>
 			</div>
 		</div>
 		<div id="mm_smRight">
