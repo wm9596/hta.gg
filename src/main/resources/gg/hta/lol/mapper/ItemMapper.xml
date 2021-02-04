@@ -4,7 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="gg.hta.lol.mapper.ItemMapper">
   <insert id="item_insert" parameterType="gg.hta.lol.vo.ItemVo">
-  insert into item values(#{iNum},#{icon},#{name},#{price},#{effect},#{tags})
+  <choose>
+  <when test="tags!=null">
+merge into item using dual on (iNum=#{iNum}) when matched then update set icon=#{icon},name=#{name},price=#{price},effect=#{effect},tags=#{tags}
+when not matched then insert values(#{iNum},#{icon},#{name},#{price},#{effect},#{tags})
+</when>
+<otherwise>
+merge into item using dual on (iNum=#{iNum}) when matched then update set icon=#{icon},name=#{name},price=#{price},effect=#{effect},tags='null'
+when not matched then insert values(#{iNum},#{icon},#{name},#{price},#{effect},'null')
+</otherwise>
+</choose>
   </insert>
 <select id="item_select" parameterType="int" resultType="gg.hta.lol.vo.ItemVo">
 select * from item where inum=#{inum}

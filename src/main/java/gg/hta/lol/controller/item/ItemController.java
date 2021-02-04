@@ -25,8 +25,10 @@ public class ItemController {
 	public String itemList(ItemVo vo) {
 		System.out.println(vo+"...........");
 		service.item_insert(vo);
-		return "{\"code\":\"success\"}";
+		return "{\"code\":\"/lol/itemlist\"}";
 	}
+	
+	
 	@GetMapping("/itemlist")
 	public String itemlist() {
 		return "item/itemlist";

@@ -26,20 +26,20 @@ $(function(){
 				var str3="";
 				var str2="<div>"+value.description+"</div><br>";
 				var str4="<div>"+value.name+"</div><br>";
-				console.log(value.tags[0]);
-				 var str="<img src=http://ddragon.leagueoflegends.com/cdn/11.2.1/img/item/"+value.image.full+" style='width:64px; height:64px;'>";
-				 
-				$(str).appendTo("#itemlist").addClass("iteminfo");
-	
+				var tags= value.tags[1];
+				if(!tags){
+					tags=value.tags[0];
+				}else{
+					tags=value.tags[1];
+				}
 			 	$.ajax({
 					
 					url:"iteminsert",
 					type:'get',
 					dataType: 'json',
-					data:{iNum:key,icon:value.image.full,name:value.name,price:value.gold.base,effect:value.description,tags:value.tags[0]},
+					data:{iNum:key,icon:value.image.full,name:value.name,price:value.gold.total,effect:value.description,tags:tags},
 					success: function(data){
-						console.log(data)
-						alert(data);
+						 window.location = "/lol/itemlist";
 					}
 					
 					
@@ -53,10 +53,11 @@ $(function(){
 </script>
 
 <body>
-<h1>ㅎㅇ</h1>
+<h1>업데이트중.............................</h1>
+<h1>완료후 리스트로 돌아갑니다....</h1>
 <div id="itemlist"></div>
 <div id="iteminfo"></div>
-<a href="/lol/itemlist">dd</a>
+
 </body>
 
 </html>
