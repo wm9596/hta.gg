@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import gg.hta.lol.riotapi.DataRequester;
 import gg.hta.lol.service.match.SearchService;
 import lombok.Setter;
 
@@ -20,7 +19,7 @@ public class SearchServiceTest {
 	
 	@Test
 	public void getTest() {
-		service.getSummonerInfo("더덕순대국");
+		service.searchSummonerInfo("우리포탑 cs 2개");
 	}
 	
 }

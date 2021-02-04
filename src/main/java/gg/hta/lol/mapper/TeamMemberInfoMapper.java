@@ -4,9 +4,10 @@ import org.springframework.dao.DuplicateKeyException;
 
 import gg.hta.lol.vo.MatchinfoVo;
 import gg.hta.lol.vo.TeamInfoVo;
+import gg.hta.lol.vo.TeamMemberinfoVo;
 
-public interface TeamInfoMapper {
+public interface TeamMemberInfoMapper {
 	
-	public int addTeaminfo(TeamInfoVo vo);
+	public int addTeamMemberInfo(TeamMemberinfoVo vo);
 	
 }

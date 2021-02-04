@@ -21,7 +21,6 @@ public class TeamMemberinfoVo {
 	private int spell2;
 	private int rune1;
 	private int rune2;
-	private String tier;
 	private int championDamage;
 	private int takenDamage;
 	private int cs;

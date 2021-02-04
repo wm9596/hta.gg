@@ -80,6 +80,7 @@ public class DataRequester {
 			con.setRequestMethod("GET");
 
 			if(con.getResponseCode()!=200) {
+				System.out.println("api 연동 실패 에러코드 : "+con.getResponseCode());
 				throw new Exception();
 			}
 			
