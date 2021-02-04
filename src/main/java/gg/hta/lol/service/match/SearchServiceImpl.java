@@ -48,7 +48,7 @@ public class SearchServiceImpl implements SearchService {
 	private TeamMemberInfoMapper tminfoMapper;
 	
 	@Override
-	@Transactional(noRollbackFor=DuplicateKeyException.class)
+//	@Transactional(noRollbackFor=DuplicateKeyException.class)
 	public void searchSummonerInfo(String name) {
 			getSummonerInfo(name);
 	}
