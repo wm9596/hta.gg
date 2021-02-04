@@ -23,7 +23,7 @@ public class ItemController {
 	@GetMapping("/iteminsert")
 	@ResponseBody
 	public String itemList(ItemVo vo) {
-		System.out.println(vo+"...........");
+		System.out.println(vo+".........");
 		service.item_insert(vo);
 		return "{\"code\":\"/lol/itemlist\"}";
 	}

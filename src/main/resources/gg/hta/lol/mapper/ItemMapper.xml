@@ -19,7 +19,7 @@ when not matched then insert values(#{iNum},#{icon},#{name},#{price},#{effect},'
 select * from item where inum=#{inum}
 </select>
 <select id="item_alllist" resultType="gg.hta.lol.vo.ItemVo">
-select * from item
+select *  from item
 </select>
   </mapper>
   

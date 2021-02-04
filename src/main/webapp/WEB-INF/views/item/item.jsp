@@ -39,6 +39,7 @@ $(function(){
 					dataType: 'json',
 					data:{iNum:key,icon:value.image.full,name:value.name,price:value.gold.total,effect:value.description,tags:tags},
 					success: function(data){
+						console.log("dd")
 						 window.location = "/lol/itemlist";
 					}
 					

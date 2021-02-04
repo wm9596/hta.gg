@@ -74,6 +74,7 @@ color: #00ffff ;}
 											}else if(value.tags='null'){
 												$(str2).appendTo('#actives').addClass("iteminfo");
 											}
+											console.log("dd");
 											
 										})
 										
