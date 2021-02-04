@@ -7,36 +7,14 @@
 <meta charset="UTF-8">
 <title>member/join.jsp</title>
 <script type="text/javascript" src="/lol/resources/js/jquery-3.5.1.js"></script>
-</head>
-<body>
-<h1>회원가입</h1>
-<form:form method="post" action="/lol/member/join">
-	아이디<br>
-	<input type="text" name="username" id="id" onkeyup="checkId()">&nbsp;&nbsp;<button>중복확인</button><span id="idcheck">아이디를 입력하세요.</span><br>
-	비밀번호<br>
-	<input type="password" name="password" id="pwd" onkeyup="checkPwd()">&nbsp;&nbsp;<span id="pwdcheck"></span><br>
-	비밀번호확인<br>
-	<input type="password" id="pwdOk" onkeyup="checkPwdOk()">&nbsp;&nbsp;<span id="pwdOkcheck"></span><br>
-	이메일<br>
-	<input type="email" name="email" id="email">&nbsp;&nbsp;<button>이메일인증</button>&nbsp;&nbsp;<span id="emailcheck"></span><br>
-	커뮤니티 닉네임<br>
-	<input type="text" name="nickname" id="nickname" onkeyup="checkNick()">&nbsp;&nbsp;<span id="nicknamecheck">닉네임을 입력하세요</span><br>
-	<input type="submit" value="등록">
-</form:form>
-
-
 <script type="text/javascript">
-function checkId(){
-	var id = document.getElementById("id").value;
-	if(id.trim()==""){
-		document.getElementById("idcheck").innerHTML="아이디를 입력하세요.";
-		return;
-	}
+$(document).ready(function(){
+	$("#emailOk").click(function(){
+		var	
+	});
 	
-	if(id.length<4 || id.length>10){
-		document.getElementById("idcheck").innerHTML="아이디는 4~10자리로 설정해주세요.";
-		return;
-	}else if(id.length>=4 && id.length<=10){
+	$("#idOk").click(function(){
+		var id = document.getElementById("id").value;
 		$.ajax({
 			url:"/lol/member/idCheck/"+id,
 			success: function(data){
@@ -49,12 +27,30 @@ function checkId(){
 				}
 			}
 		});
+	});
+});
+
+function checkId(){
+	var id = document.getElementById("id").value;
+	if(id.trim()==""){
+		document.getElementById("idcheck").innerHTML="아이디를 입력하세요.";
+		document.getElementById("idOk").disabled = 'true';
+		return;
+	}
+	
+	if(id.length<4 || id.length>10){
+		document.getElementById("idcheck").innerHTML="아이디는 4~10자리로 설정해주세요.";
+		document.getElementById("idOk").disabled = 'true';
+		return;
+	}else if(id.length>=4 && id.length<=10){
 		document.getElementById("idcheck").innerHTML="";
+		document.getElementById("idOk").disabled = false;
 	}
 	
 	for(let i=0; i<id.length; i++){
 		if(!(('0'<=id.charAt(i) && id.charAt(i)<='9') || ('a'<=id.charAt(i) && id.charAt(i)<='z') || ('A'<=id.charAt(i) && id.charAt(i)<='Z'))){
 			document.getElementById("idcheck").innerHTML="아이디는 영문과 숫자로만 입력해주세요...";
+			document.getElementById("idOk").disabled = 'true';
 			return;
 		}
 	}
@@ -109,5 +105,32 @@ function checkNick(){
 	}
 }
 </script>
+</head>
+<body>
+<h1>회원가입</h1>
+<form:form method="post" action="/lol/member/join">
+	아이디<br>
+	<input type="text" name="username" id="id" onkeyup="checkId()">&nbsp;&nbsp;
+	<input type="button" id="idOk" value="중복확인" disabled="disabled">
+	<span id="idcheck">아이디를 입력하세요.</span><br>
+	비밀번호<br>
+	<input type="password" name="password" id="pwd" onkeyup="checkPwd()">&nbsp;&nbsp;
+	<span id="pwdcheck"></span><br>
+	비밀번호확인<br>
+	<input type="password" id="pwdOk" onkeyup="checkPwdOk()">&nbsp;&nbsp;
+	<span id="pwdOkcheck"></span><br>
+	이메일<br>
+	<input type="email" name="email" id="email">&nbsp;&nbsp;
+	<input type="button" id="emailOk" onclick="emailOk()" value="이메일인증">&nbsp;&nbsp;
+	<span id="emailcheck"></span><br>
+	이메일 인증번호<br>
+	<input type="text" name="confirm" id="confirm">&nbsp;&nbsp;
+	<input type="button" id="confirmOk" onclick="confirmOk()" value="확인">&nbsp;&nbsp;
+	<span id="confirmcheck"></span><br>
+	커뮤니티 닉네임<br>
+	<input type="text" name="nickname" id="nickname" onkeyup="checkNick()">&nbsp;&nbsp;
+	<span id="nicknamecheck">닉네임을 입력하세요</span><br>
+	<input type="submit" value="등록">
+</form:form>
 </body>
 </html>
