@@ -14,3 +14,5 @@ public class SummonerVo {
 	private int slevel;
 	private String icon;
 }
+
+
