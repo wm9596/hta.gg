@@ -18,10 +18,10 @@ public class ApiTest {
 		System.out.println(info);
 	}
 	
-	//@Test
+	@Test
 	public void getMatchList() {
 		DataRequester dr = new DataRequester();
-		JsonObject info = dr.getMatchList("WZYGQKT-p9O52Zx1RFbOq6NQmACGbiE5kFP0pfiEMcSa1CNvpPYJCAFA");
+		JsonObject info = dr.getMatchList("2g7ie6QT2h7TDT09JXabbJuzPR_YYxIdR1AYeS5qluUszhE3NOQnNSuk");
 		assertNotNull(info);
 		
 		System.out.println(info);

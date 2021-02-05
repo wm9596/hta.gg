@@ -1,6 +1,7 @@
 package gg.hta.lol.controller.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,9 @@ public class MailController {
  
     @Autowired
     private MailService service;
-    @GetMapping(value = "/member/email/{id}/{email}", produces = "application/xml;charset=utf-8")
+    
+    
+    @GetMapping(value = "/member/email/{id}/{email}", produces = {MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
     public String mailSend(@PathVariable("id")String id, @PathVariable("email")String email) {
     	StringBuffer sb = new StringBuffer();
@@ -46,9 +49,9 @@ public class MailController {
 //    @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
 //    public String regist(Member user, RedirectAttributes rttr) throws Exception{
 //    
-//        System.out.println("regesterPost ÁøÀÔ ");
+//        System.out.println("regesterPost ï¿½ï¿½ï¿½ï¿½ ");
 //        memberSvc.regist(user);
-//        rttr.addFlashAttribute("msg" , "°¡ÀÔ½Ã »ç¿ëÇÑ ÀÌ¸ÞÀÏ·Î ÀÎÁõÇØÁÖ¼¼¿ä");
+//        rttr.addFlashAttribute("msg" , "ï¿½ï¿½ï¿½Ô½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½");
 //        return HOME;
 //    }
  
@@ -58,13 +61,13 @@ public class MailController {
 //                                Model model, RedirectAttributes rttr) throws Exception { 
 //        
 //        if(authkey == null) {
-//            rttr.addFlashAttribute("msg", "ÀÎÁõÅ°°¡ Àß¸øµÇ¾ú½À´Ï´Ù. ´Ù½Ã ÀÎÁõÇØ ÁÖ¼¼¿ä");
+//            rttr.addFlashAttribute("msg", "ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ß¸ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ï¿½ï¿½");
 //            return HOME;
 //        }
 //        
 //        Member member = memberSvc.userAuth(authkey);
 //        if(member == null) {
-//            rttr.addFlashAttribute("msg", "Àß¸øµÈ Á¢±Ù ÀÔ´Ï´Ù. ´Ù½Ã ÀÎÁõÇØ ÁÖ¼¼¿ä");
+//            rttr.addFlashAttribute("msg", "ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Ï´ï¿½. ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ï¿½ï¿½");
 //            return HOME;
 //        }
 //        model.addAttribute("user", member.getUser_name());

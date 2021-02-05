@@ -15,7 +15,12 @@ import gg.hta.lol.vo.ChampionVo;
 import lombok.Setter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(value = {"file:src/main/webapp/WEB-INF/spring/root-context.xml","file:src/main/webapp/WEB-INF/spring/security_config.xml"})
+@ContextConfiguration(value = 
+{
+"file:src/main/webapp/WEB-INF/spring/root-context.xml",
+"file:src/main/webapp/WEB-INF/spring/security_config.xml",
+"file:src/main/webapp/WEB-INF/spring/email/email-config.xml"
+})
 @Setter
 public class StaticDataInsert {
 
