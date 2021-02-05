@@ -19,7 +19,7 @@ public class SearchServiceTest {
 	
 	@Test
 	public void getTest() {
-		service.searchSummonerInfo("크림몬");
+		service.searchSummonerInfo("bxbky");
 	}
 	
 }
