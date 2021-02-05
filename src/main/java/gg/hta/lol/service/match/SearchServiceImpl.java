@@ -78,7 +78,8 @@ public class SearchServiceImpl implements SearchService {
 		try {
 			summonerMapper.addSummoner(svo);
 		}catch (DuplicateKeyException e) {
-			System.out.println("소환사정보 중복");
+			System.out.println("소환사정보 중복 정보 수정");
+			summonerMapper.updateSummoner(svo);
 		}
 		
 		for(int i = 0 ; i< leagueInfo.size() ; i++) {
@@ -95,7 +96,8 @@ public class SearchServiceImpl implements SearchService {
 			try {
 				queuemapper.addQueueInfo(qvo);
 			}catch (DuplicateKeyException e) {
-				System.out.println("큐별 티어 정보 중복");
+				System.out.println("큐별 티어 정보 중복 정보 수정");
+				queuemapper.updateQueueInfo(qvo);
 			}
 			
 		}

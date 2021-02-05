@@ -6,5 +6,7 @@ import gg.hta.lol.vo.QueueInfoVo;
 
 public interface QueueInfoMapper {
 	
-	public int addQueueInfo(QueueInfoVo vo) throws DuplicateKeyException;
+	public int addQueueInfo(QueueInfoVo vo) ;
+	
+	public int updateQueueInfo(QueueInfoVo vo);
 }

@@ -6,7 +6,13 @@
 	<insert id="addSummoner">
 		insert into summoner values(#{snickname},#{slevel},#{icon})
 	</insert>
+	
 	<select id="getSummoner" parameterType="String" resultType="gg.hta.lol.vo.SummonerVo">
 		select * from summoner where sNickName =  #{nickname}
 	</select>
+	
+	<update id="updateSummoner">
+		update summoner set slevel = #{slevel},icon=#{icon} where snickname = #{snickname}
+	</update>
+	
 </mapper>

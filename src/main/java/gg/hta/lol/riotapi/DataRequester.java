@@ -71,7 +71,7 @@ public class DataRequester {
 		return getData(url).getAsJsonObject();
 	}
 
-	private JsonElement getData(String url) {
+	public JsonElement getData(String url) {
 		BufferedInputStream in = null;
 		try {
 			URL obj = new URL(url); // 호출할 url

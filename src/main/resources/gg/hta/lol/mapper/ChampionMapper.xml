@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gg.hta.lol.mapper.ChampionMapper">
+	<insert id="addChampion">
+		insert into champion values(
+		#{championid},
+		#{name},
+		#{pickCount},
+		#{banCount},
+		#{winCount},
+		#{loseCount},
+		#{picture},
+		#{skillP_icon},
+		#{skillP_info},
+		#{skillQ_icon},
+		#{skillQ_info},
+		#{skillW_icon},
+		#{skillW_info},
+		#{skillE_icon},
+		#{skillE_info},
+		#{skillR_icon},
+		#{skillR_info},
+		#{story},
+		#{tip}
+		)
+	</insert>
+	
+	<delete id="deleteAllChampion">
+		delete from Champion
+	</delete>
+</mapper>

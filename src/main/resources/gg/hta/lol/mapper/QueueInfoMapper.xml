@@ -6,7 +6,13 @@
 	<insert id="addQueueInfo">
 		insert into queueinfo values(#{snickname},#{queueType},#{tier},#{leaguePoints},#{win},#{lose})
 	</insert>
+	
 	<select id="getQueueInfo" parameterType="String" resultType="gg.hta.lol.vo.QueueInfoVo">
 		select * from queueinfo where snickname = #{snickname}
 	</select>
+	
+	<update id="updateQueueInfo">
+		update queueinfo set queueType=#{queueType},tier=#{tier},leaguePoints=#{leaguePoints},win=#{win},lose=#{lose}
+		where snickname=#{snickname}
+	</update>
 </mapper>
