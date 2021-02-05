@@ -38,7 +38,7 @@ public class StaticDataInsert {
 			ChampionVo vo = new ChampionVo();
 			vo.setName(info.get("name").getAsString());
 			vo.setChampionid(info.get("key").getAsString());
-			vo.setPicture(info.getAsJsonObject("image").get("sprite").getAsString());
+			vo.setPicture(info.getAsJsonObject("image").get("full").getAsString());
 			vo.setStory(info.get("lore").getAsString());
 			
 			StringBuilder sb = new StringBuilder();
@@ -60,23 +60,23 @@ public class StaticDataInsert {
 			
 			JsonObject tempSpell = getSpellsSummary(info.get("spells").getAsJsonArray().get(0).getAsJsonObject());
 			vo.setSkillQ_info(tempSpell.toString());
-			vo.setSkillQ_icon(info.get("spells").getAsJsonArray().get(0).getAsJsonObject().getAsJsonObject("image").get("sprite").getAsString());
+			vo.setSkillQ_icon(info.get("spells").getAsJsonArray().get(0).getAsJsonObject().getAsJsonObject("image").get("full").getAsString());
 			
 			tempSpell = getSpellsSummary(info.get("spells").getAsJsonArray().get(1).getAsJsonObject());
 			vo.setSkillW_info(tempSpell.toString());
-			vo.setSkillW_icon(info.get("spells").getAsJsonArray().get(0).getAsJsonObject().getAsJsonObject("image").get("sprite").getAsString());
+			vo.setSkillW_icon(info.get("spells").getAsJsonArray().get(0).getAsJsonObject().getAsJsonObject("image").get("full").getAsString());
 			
 			tempSpell = getSpellsSummary(info.get("spells").getAsJsonArray().get(2).getAsJsonObject());
 			vo.setSkillE_info(tempSpell.toString());
-			vo.setSkillE_icon(info.get("spells").getAsJsonArray().get(0).getAsJsonObject().getAsJsonObject("image").get("sprite").getAsString());
+			vo.setSkillE_icon(info.get("spells").getAsJsonArray().get(0).getAsJsonObject().getAsJsonObject("image").get("full").getAsString());
 			
 			tempSpell = getSpellsSummary(info.get("spells").getAsJsonArray().get(3).getAsJsonObject());
 			vo.setSkillR_info(tempSpell.toString());
-			vo.setSkillR_icon(info.get("spells").getAsJsonArray().get(0).getAsJsonObject().getAsJsonObject("image").get("sprite").getAsString());
+			vo.setSkillR_icon(info.get("spells").getAsJsonArray().get(0).getAsJsonObject().getAsJsonObject("image").get("full").getAsString());
 			
 			tempSpell = getPassiveSummary(info.get("passive").getAsJsonObject());
 			vo.setSkillP_info(tempSpell.toString());
-			vo.setSkillP_icon(info.get("passive").getAsJsonObject().getAsJsonObject("image").get("sprite").getAsString());
+			vo.setSkillP_icon(info.get("passive").getAsJsonObject().getAsJsonObject("image").get("full").getAsString());
 			
 //			System.out.println(vo);
 			mapper.addChampion(vo);

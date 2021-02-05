@@ -24,12 +24,60 @@
 			#{wardInstall},
 			#{wardRemove},
 			#{gold},
-			#{item1},
-			#{item2},
-			#{item3},
-			#{item4},
-			#{item5},
-			#{item6},
+			<choose>
+				<when test="item1==0">
+					null
+				</when>
+				<otherwise>
+					#{item1}
+				</otherwise>
+			</choose>
+			,
+			<choose>
+				<when test="item2==0">
+					null
+				</when>
+				<otherwise>
+					#{item2}
+				</otherwise>
+			</choose>
+			,
+			<choose>
+				<when test="item3==0">
+					null
+				</when>
+				<otherwise>
+					#{item3}
+				</otherwise>
+			</choose>
+			,
+			<choose>
+				<when test="item4==0">
+					null
+				</when>
+				<otherwise>
+					#{item4}
+				</otherwise>
+			</choose>
+			,
+			<choose>
+				<when test="item5==0">
+					null
+				</when>
+				<otherwise>
+					#{item5}
+				</otherwise>
+			</choose>
+			,
+			<choose>
+				<when test="item6==0">
+					null
+				</when>
+				<otherwise>
+					#{item6}
+				</otherwise>
+			</choose>
+			,
 			#{accessory},
 			#{multiKill}
 		)

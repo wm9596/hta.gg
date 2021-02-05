@@ -12,7 +12,7 @@
 	</select>
 	
 	<update id="updateQueueInfo">
-		update queueinfo set queueType=#{queueType},tier=#{tier},leaguePoints=#{leaguePoints},win=#{win},lose=#{lose}
-		where snickname=#{snickname}
+		update queueinfo set tier=#{tier},leaguePoints=#{leaguePoints},win=#{win},lose=#{lose}
+		where snickname=#{snickname} and  queueType=#{queueType}
 	</update>
 </mapper>
