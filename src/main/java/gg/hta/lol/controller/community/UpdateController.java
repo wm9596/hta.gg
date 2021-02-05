@@ -18,7 +18,8 @@ public class UpdateController {
 	public String updateForm(int pNum,Model model) {
 		CommunityVo vo=service.select(pNum);
 		model.addAttribute("vo",vo);
-		return "update";
+		System.out.println(vo);
+		return "community/update";
 	}
 	@PostMapping(value="/community/update")
 	public String update(CommunityVo vo,Model model) {
@@ -29,6 +30,6 @@ public class UpdateController {
 			e.printStackTrace();
 			model.addAttribute("code","fail");
 		}
-		return "community/list";
+		return "redirect:/community/list";
 	}
 }

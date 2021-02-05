@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -16,6 +17,7 @@
 	<div style="padding-left: 78%"><a href="${pageContext.request.contextPath }/community/insert">새 글 등록</a></div><br>
 <div align="center">
 	<div>
+		<form:form method="post" action="${pageContext.request.contextPath }/community/list">
 		<div style="display: inline-block; font-size: 20px;"><a href="#">인기</a></div>&nbsp;
 		<div style="display: inline-block; font-size: 20px; margin-left: 7%;"><a href="#">최신</a></div>&nbsp;
 		<div style="display: inline-block; font-size: 20px; margin-left: 7%;"><a href="#">TOP</a></div>&nbsp;
@@ -26,6 +28,7 @@
 			</select>
 			<input type="text" name="keyword" value="${keyword }">
 			<input type="submit" value="검색">
+		</form:form>
 	</div>
 	<div>
 		<form method="post"
@@ -37,18 +40,18 @@
 			<th>글번호</th>
 			<th>ID</th>
 			<th>제목</th>
-			<th>등록날짜</th>
 			<th>조회수</th>
 			<th>추천수</th>
+			<th>등록날짜</th>
 		</tr>
 		<c:forEach var="vo" items="${list }">
 			<tr>
 				<td>${vo.pNum }</td>
 				<td>${vo.username }</td>
-				<td>${vo.title }<a href="${pageContext.request.contextPath }/community/detail?pNum=${vo.pNum }">읽기</a></td>
-				<td>${vo.regdate }</td>
+				<td><a href="${pageContext.request.contextPath }/community/detail?pNum=${vo.pNum }">${vo.title }</a></td>
 				<td>${vo.viewCount }</td>
 				<td>${vo.hit }</td>
+				<td>${vo.regdate }</td>
 			</tr>
 		</c:forEach>
 	</table>

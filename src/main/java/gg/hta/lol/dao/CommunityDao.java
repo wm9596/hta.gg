@@ -37,6 +37,9 @@ public class CommunityDao {
 	public CommunityVo prev(int pNum) {
 		return sqlSession.selectOne(NAMESPACE +".prev",pNum);
 	}
+	public int addCount(int pNum) {
+		return sqlSession.update(NAMESPACE+".addCount",pNum);
+	}
 	public int hit(int pNum) {
 		return sqlSession.update(NAMESPACE+".hit",pNum);
 	}

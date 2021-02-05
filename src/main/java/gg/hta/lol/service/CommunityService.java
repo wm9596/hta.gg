@@ -42,4 +42,7 @@ public class CommunityService {
 	public int noHit(int pNum) {
 		return dao.noHit(pNum);
 	}
+	public int addCount(int pNum) {
+		return dao.addCount(pNum);
+	}
 }

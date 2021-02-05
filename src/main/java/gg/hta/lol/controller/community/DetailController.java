@@ -15,11 +15,11 @@ public class DetailController {
 	@GetMapping("/community/detail")
 	public ModelAndView detail(int pNum) {
 		ModelAndView mv=new ModelAndView("community/detail");
-		service.hit(pNum);
 		
 		CommunityVo vo=service.select(pNum);
 		CommunityVo prev=service.prev(pNum);
 		CommunityVo next=service.next(pNum);
+		service.addCount(pNum);
 			
 		String content=vo.getContent();
 		content=content.replaceAll("\n","<br>");

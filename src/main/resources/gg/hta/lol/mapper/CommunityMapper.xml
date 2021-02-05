@@ -41,8 +41,12 @@
 	</select>
 	
 	<update id="update" parameterType="community">
-		update community set #{cNum},#{title},#{content}
+		update community set cNum=#{cNum}, title=#{title}, content=#{content}
 		where pNum=#{pNum}
+	</update>
+	
+	<update id="addCount" parameterType="int">
+		update community set viewCount=viewCount+1 where pNum=#{pNum}
 	</update>
 	
 	<update id="hit" parameterType="int">
