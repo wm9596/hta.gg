@@ -52,7 +52,7 @@
 		<property name="password" value="비밀번호" /> -->
 		<property name="username" value="이메일@gmail.com" />
 		<property name="password" value="비밀번호" />
-	
+		
 		<property name="defaultEncoding" value="utf-8" />
 		<property name="javaMailProperties">
 			<props>
