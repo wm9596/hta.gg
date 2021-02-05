@@ -48,9 +48,8 @@ public class SearchServiceImpl implements SearchService {
 	private TeamMemberInfoMapper tminfoMapper;
 	
 	@Override
-//	@Transactional(noRollbackFor=DuplicateKeyException.class)
 	public void searchSummonerInfo(String name) {
-			getSummonerInfo(name);
+		getSummonerInfo(name);
 	}
 	
 	public void getSummonerInfo(String name) {
@@ -65,6 +64,7 @@ public class SearchServiceImpl implements SearchService {
 		getMatchList(aid);
 	}
 	
+	@Transactional(noRollbackFor = DuplicateKeyException.class)
 	public void addSummoner(String name,String sid,	JsonObject summonerInfo) {
 		
 		JsonArray leagueInfo = dataRequester.getLeagueInfo(sid);
@@ -126,6 +126,7 @@ public class SearchServiceImpl implements SearchService {
 		}
 	}
 	
+	@Transactional(noRollbackFor = DuplicateKeyException.class)
 	public void addMatchInfo(String gameId,int code) {
 		JsonObject matchInfo = dataRequester.getMatchInfo(gameId);
 		
