@@ -13,6 +13,8 @@ $(document).ready(function(){
 	$("#emailOk").click(function(){
 		var id = document.getElementById("id").value;
 		var email = document.getElementById("email").value;
+		email = email.substr(0,email.lastIndexOf("."));
+		//console.log(email);
 		$.ajax({
 			url:"/lol/member/email/"+id+"/"+email,
 			success: function(data){
@@ -24,11 +26,14 @@ $(document).ready(function(){
 	$("#confirmOk").click(function(){
 		var id = document.getElementById("id").value;
 		var email = document.getElementById("email").value;
+		email = email.substr(0,email.lastIndexOf("."));
+		//console.log(email);
 		if(document.getElementById("emailcheck").textContent != "인증번호 전송이 완료되었습니다."){
 			alert("이메일 입력 후 이메일 인증 버튼을 클릭해 주세요!!!");
 		}else{
 			$.ajax({
 				url:"/lol/member/email/"+id+"/"+email,
+				dataType:'xml',
 				success: function(data){
 					var code = $(data).find("code").text();
 					if(code == document.getElementById("confirm").value){
