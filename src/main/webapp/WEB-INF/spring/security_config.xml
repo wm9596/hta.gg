@@ -11,13 +11,13 @@
 	<sec:http>
 		<sec:intercept-url pattern="/member/member/**" access="hasRole('ROLE_MEMBER')"/>
 		<sec:intercept-url pattern="/member/admin/**" access="hasRole('ROLE_ADMIN')"/>
-		<sec:intercept-url pattern="/**" access="permitAll"/>
+		<sec:intercept-url pattern="/member/all/**" access="permitAll"/>
 		<sec:form-login login-page="/member/login" authentication-success-handler-ref="loginSuccessHandler"/>
 		<sec:logout logout-url="/member/logout" invalidate-session="true" logout-success-url="/"/>
 	</sec:http>
+	<!-- 인증매니저 -->
 	<sec:authentication-manager>
-		<sec:authentication-provider>
-			<sec:jdbc-user-service data-source-ref="dataSource"/>
+		<sec:authentication-provider user-service-ref="userDetailService">
 			<sec:password-encoder ref="passwordEncoding"/>
 		</sec:authentication-provider>
 	</sec:authentication-manager>

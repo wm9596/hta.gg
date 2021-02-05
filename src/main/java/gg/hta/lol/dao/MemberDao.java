@@ -39,7 +39,7 @@ public class MemberDao {
 	public List<MemberVo> selectList(){
 		return sqlSession.selectList(NAMESPACE + ".list"); 
 	}
-	public CustomUserDetail getAuthsList(String userid){
-		return sqlSession.selectOne(NAMESPACE + ".getAuths", userid);
+	public CustomUserDetail getAuthsList(String username){
+		return sqlSession.selectOne(NAMESPACE + ".getAuths", username);
 	}
 }

@@ -26,12 +26,16 @@ public class MemberController {
 			return "member/error";
 		}
 	}
+	@GetMapping("/member/all/main")
+	public String all() {
+		return "member/all/main";
+	}
 	@GetMapping("/member/member/main")
-	public String memberMain() {
-		return "member/main";
+	public String member() {
+		return "member/member/main";
 	}
 	@GetMapping("/member/admin/main")
-	public String adminMain() {
-		return "admin/main";
+	public String admin() {
+		return "member/admin/main";
 	}
 }

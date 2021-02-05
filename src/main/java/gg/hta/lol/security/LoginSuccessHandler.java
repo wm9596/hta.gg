@@ -21,11 +21,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 			roleNames.add(auth.getAuthority());
 		}
 		if(roleNames.contains("ROLE_ADMIN")) {
-			response.sendRedirect(request.getContextPath()+"/admin/main");
+			response.sendRedirect(request.getContextPath()+"/member/admin/main");
 		}else if(roleNames.contains("ROLE_MEMBER")) {
-			response.sendRedirect(request.getContextPath()+"/member/main");
+			response.sendRedirect(request.getContextPath()+"/member/member/main");
 		}else {
-			response.sendRedirect(request.getContextPath()+"/");
+			response.sendRedirect(request.getContextPath()+"/member/all.main");
 		}
 	}
 }
