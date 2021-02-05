@@ -200,15 +200,15 @@ create table champion
 	loseCount number,	--패배 횟수
 	picture varchar2(255),	--초상화
 	skillP_icon varchar2(255),	--패시브 스킬 아이콘
-	skillP_info varchar2(255),	--패시브 스킬 설명
+	skillP_info varchar2(4000),	--패시브 스킬 설명
 	skillQ_icon varchar2(255),	--q스킬 아이콘
-	skillQ_info varchar2(255),	--q스킬 설명
+	skillQ_info varchar2(4000),	--q스킬 설명
 	skillW_icon varchar2(255),	--W스킬 아이콘
-	skillW_info varchar2(255),	--W스킬 설명
+	skillW_info varchar2(4000),	--W스킬 설명
 	skillE_icon varchar2(255),	--E스킬 아이콘
-	skillE_info varchar2(255),	--E스킬 설명
+	skillE_info varchar2(4000),	--E스킬 설명
 	skillR_icon varchar2(255),	--r스킬 아이콘
-	skillR_info varchar2(255),	--r스킬 설명
+	skillR_info varchar2(4000),	--r스킬 설명
 	story varchar2(4000),	--스토리
 	tip varchar2(4000)	--팁
 );
