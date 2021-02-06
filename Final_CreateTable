@@ -24,6 +24,7 @@ drop table reply;
 drop table Addfile;
 drop table report;
 drop table community;
+drop table persistent_logins;
 drop table member;
 drop table auth;
 drop table banList;
@@ -80,6 +81,14 @@ create table member
 	point number,	--포인트
     CONSTRAINT "member_PK" PRIMARY KEY ("USERNAME"),
     CONSTRAINT "member_FK1" FOREIGN KEY ("USERNAME") REFERENCES "FINAL"."AUTH" ("USERNAME")
+);
+
+CREATE TABLE persistent_logins 
+(
+  series varchar(64) primary key,
+  username varchar(50) references member(username),
+  token varchar(64) DEFAULT NULL,
+  last_used timestamp not null
 );
 
 -- 프로필 평가(rating)
