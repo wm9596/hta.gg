@@ -6,4 +6,10 @@
 	<insert id="addMatchinfo">
 		insert into matchinfo values(#{matchid},#{type},#{runtime},#{startTime})
 	</insert>
+	
+	<select id="getMatchType" parameterType="String" resultType="String">
+		select type
+		from matchinfo
+		where matchid = #{matchid}
+	</select>
 </mapper>

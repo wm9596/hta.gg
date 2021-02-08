@@ -30,4 +30,10 @@
 	<delete id="deleteAllChampion">
 		delete from Champion
 	</delete>
+	
+	<select id="getChampionPicture" parameterType="String" resultType="String">
+		select picture
+		from champion
+		where championid = #{championid}
+	</select>
 </mapper>

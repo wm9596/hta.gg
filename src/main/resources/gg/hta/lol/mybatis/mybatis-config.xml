@@ -12,6 +12,8 @@
     <mapper resource="gg/hta/lol/mapper/MemberMapper.xml"/>
     <mapper resource="gg/hta/lol/mapper/ItemMapper.xml"/>
  	<mapper resource="gg/hta/lol/mapper/CommunityMapper.xml"/>
+ 	<mapper resource="gg/hta/lol/mapper/RatingMapper.xml"/>
+ 	<mapper resource="gg/hta/lol/mapper/MatchMoreJoinMapper.xml"/>
   </mappers>
   
 </configuration>
