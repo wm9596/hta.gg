@@ -2,11 +2,6 @@ package gg.hta.lol.vo;
 
 import java.sql.Date;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class ReplyVo {
 	private int rNum;
 	private int pNum;
@@ -14,10 +9,7 @@ public class ReplyVo {
 	private String rWriter;
 	private String rContent;
 	private Date regdate;
-
-	public ReplyVo() {
-		super();
-	}
+	public ReplyVo() {}
 
 	public ReplyVo(int rNum, int pNum, int rereNum, String rWriter, String rContent, Date regdate) {
 		super();
@@ -27,6 +19,60 @@ public class ReplyVo {
 		this.rWriter = rWriter;
 		this.rContent = rContent;
 		this.regdate = regdate;
+	}
+
+	public int getrNum() {
+		return rNum;
+	}
+
+	public void setrNum(int rNum) {
+		this.rNum = rNum;
+	}
+
+	public int getpNum() {
+		return pNum;
+	}
+
+	public void setpNum(int pNum) {
+		this.pNum = pNum;
+	}
+
+	public int getRereNum() {
+		return rereNum;
+	}
+
+	public void setRereNum(int rereNum) {
+		this.rereNum = rereNum;
+	}
+
+	public String getrWriter() {
+		return rWriter;
+	}
+
+	public void setrWriter(String rWriter) {
+		this.rWriter = rWriter;
+	}
+
+	public String getrContent() {
+		return rContent;
+	}
+
+	public void setrContent(String rContent) {
+		this.rContent = rContent;
+	}
+
+	public Date getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
+	}
+
+	@Override
+	public String toString() {
+		return "ReplyVo [rNum=" + rNum + ", pNum=" + pNum + ", rereNum=" + rereNum + ", rWriter=" + rWriter
+				+ ", rContent=" + rContent + ", regdate=" + regdate + "]";
 	}
 
 }

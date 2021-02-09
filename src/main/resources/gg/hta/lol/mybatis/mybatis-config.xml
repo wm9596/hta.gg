@@ -6,6 +6,7 @@
   <typeAliases>
   	<typeAlias type="gg.hta.lol.vo.MemberVo" alias="member"/>
   	<typeAlias type="gg.hta.lol.vo.CommunityVo" alias="community"/>
+  	<typeAlias type="gg.hta.lol.vo.ReplyVo" alias="reply"/>
   </typeAliases>
   <mappers>
   	<!-- 읽어올 Mapper파일 설정 -->
@@ -14,6 +15,7 @@
  	<mapper resource="gg/hta/lol/mapper/CommunityMapper.xml"/>
  	<mapper resource="gg/hta/lol/mapper/RatingMapper.xml"/>
  	<mapper resource="gg/hta/lol/mapper/MatchMoreJoinMapper.xml"/>
+ 	<mapper resource="gg/hta/lol/mapper/ReplyMapper.xml"/>
   </mappers>
   
 </configuration>

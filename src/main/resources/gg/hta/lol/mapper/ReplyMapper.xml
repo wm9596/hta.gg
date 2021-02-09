@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gg.hta.lol.mapper.ReplyMapper">
+	<select id="list" parameterType="int" resultType="reply">
+	 	select * from reply where pNum=#{pNum}
+	</select>
+	
+	<insert id="insert" parameterType="reply">
+	 	insert into reply values(reNum_seq.nextval,#{pNum},0,#{rWriter},#{rContent},sysdate)
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from reply where rNum=#{rNum}
+	</delete>
+</mapper>

@@ -18,7 +18,6 @@ public class UpdateController {
 	public String updateForm(int pNum,Model model) {
 		CommunityVo vo=service.select(pNum);
 		model.addAttribute("vo",vo);
-		System.out.println(vo);
 		return "community/update";
 	}
 	@PostMapping(value="/community/update")
