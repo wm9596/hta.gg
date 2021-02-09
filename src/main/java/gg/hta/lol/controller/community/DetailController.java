@@ -20,7 +20,7 @@ public class DetailController {
 	
 	@GetMapping("/community/detail")
 	public ModelAndView detail(int pNum) {
-		ModelAndView mv=new ModelAndView("community/detail");
+		ModelAndView mv=new ModelAndView(".header.community.detail");
 		
 		CommunityVo vo=service.select(pNum);
 		CommunityVo prev=service.prev(pNum);

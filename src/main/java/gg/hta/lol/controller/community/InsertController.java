@@ -15,7 +15,7 @@ public class InsertController {
 	
 	@RequestMapping(value="/community/insert", method=RequestMethod.GET)
 	public String insertForm() {
-		return "community/insert";
+		return ".header.community.insert";
 	}
 	
 	@RequestMapping(value="/community/insert", method=RequestMethod.POST)

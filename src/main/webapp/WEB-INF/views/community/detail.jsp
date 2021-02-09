@@ -53,11 +53,10 @@
 <style type="text/css">
 	a{ text-decoration:none }
 	.insert{margin-top: 5%}
-	.comm{margin-bottom: 20px; margin-left: 30%; width: 600px;}
+	.comm{margin-bottom: 20px; margin-left: 22%; width: 600px; border: 1px solid #aaa;}
 </style>
 </head>
 <body>
-<a href="/lol">홈으로</a><!-- 이미지 클릭시 이동되도록 수정하기 -->
 <form:form method="get" action="${pageContext.request.contextPath }/community/update">
 	<div align="center" class="insert">
 		<h2>게시글 조회하기</h2>
@@ -87,10 +86,13 @@
 	</div>
 		<br><br><br>
 		<!-- 댓글 목록 -->
-		<h3 style="margin-left: 30%">댓글 입력</h3>
-		<hr size="2" width="600" color="black" id=line>
-		<div>
-			<div id="commList"></div><br>
+		<h3 style="margin-left: 22%">댓글 입력</h3>
+		<div align="center">
+			<hr size="2" width="600" color="black" id=line>
+		</div>
+		<div >
+			<div id="commList">
+		</div><br>
 			<div align="center">
 			<div id="commAdd" style="display: inline-block;">
 				아이디 <input type="text" id="rWriter" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" readonly="readonly">
@@ -100,23 +102,23 @@
 			</div>
 		</div>
 
-<script type="text/javascript">
-	$("#btn").click(function(){
-		var rWriter = document.getElementById("rWriter").value;
-		var rContent = document.getElementById("rContent").value;
-		$.ajax({
-			url:"/lol/insert/${vo.pNum}/"+rWriter+"/"+rContent+"/",
-			success: function(data) {
-				var code=$(data).find("code").text();
-				alert("댓글이 등록되었습니다.");
-				if(code=='success'){
-					getList();
-				}else{
-					alert('등록 실패!');
+	<script type="text/javascript">
+		$("#btn").click(function(){
+			var rWriter = document.getElementById("rWriter").value;
+			var rContent = document.getElementById("rContent").value;
+			$.ajax({
+				url:"/lol/insert/${vo.pNum}/"+rWriter+"/"+rContent+"/",
+				success: function(data) {
+					var code=$(data).find("code").text();
+					alert("댓글이 등록되었습니다.");
+					if(code=='success'){
+						getList();
+					}else{
+						alert('등록 실패!');
+					}
 				}
-			}
+			});
 		});
-	});
 	
 	function removeComm(rNum) {
 		console.log("===========================");

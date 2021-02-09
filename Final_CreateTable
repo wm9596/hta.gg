@@ -180,7 +180,7 @@ create table Addfile
 create table reply
 (
 	rNum number primary key,	--댓글 번호
-	pNum number references community(pNum) not null,	--게시글 번호
+	pNum number references community(pNum) on delete cascade not null,	--게시글 번호
 	rereNum number,	--대댓글 번호
 	rWriter varchar2(255),	--댓글작성자
 	rContent varchar2(255),	--댓글내용

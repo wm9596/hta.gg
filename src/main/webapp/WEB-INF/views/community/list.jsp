@@ -9,10 +9,10 @@
 <title>/community/list.jsp</title>
 <style type="text/css">
 	a{ text-decoration:none }
+	th, td{text-align: center; border: 1px solid black;}
 </style>
 </head>
 <body>
-	<a href="../">홈으로</a><!-- 이미지 클릭시 이동되도록 수정하기 -->
 	<h2 style="margin-left: 20%;">전체</h2>
 	<div style="padding-left: 78%"><a href="${pageContext.request.contextPath }/community/insert">새 글 등록</a></div><br>
 <div align="center">

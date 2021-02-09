@@ -19,7 +19,6 @@
 </style>
 </head>
 <body>
-<a href="/lol">홈으로</a><!-- 이미지 클릭시 이동되도록 수정하기 -->
 <form:form method="post" action="${pageContext.request.contextPath }/community/update">
 	<div align="center" class="update">
 		<h2>게시글 수정하기</h2>
