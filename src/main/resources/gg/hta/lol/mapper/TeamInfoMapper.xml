@@ -6,4 +6,9 @@
 	<insert id="addTeaminfo">
 		insert into teaminfo values(#{teamId},#{matchId},#{winlose},#{firstBlood},#{firstTower},#{baronKill},#{dragonKill},#{towerKill})
 	</insert>
+	
+	<insert id="addBanInfo">
+		insert into banlist values(bnum_seq.nextval,${championId})
+	</insert>
+	
 </mapper>

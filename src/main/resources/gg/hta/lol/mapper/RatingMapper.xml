@@ -4,8 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gg.hta.lol.mapper.RatingMapper">
 	<select id="getRatingAvg" parameterType="String" resultType="double">
-		select avg(rate)
+		select nvl(avg(rate),0)
 		from rating
 		where snickname = #{snickname}
 	</select>
+	
+	<insert id="addRating">
+		insert into rating values(#{snickname},#{rate})
+	</insert>
 </mapper>

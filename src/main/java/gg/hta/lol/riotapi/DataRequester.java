@@ -46,7 +46,7 @@ public class DataRequester {
 	}
 	
 	public JsonObject getMatchList(String aid){
-		String url = "https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/%s?endIndex=1&beginIndex=0&api_key="+key;
+		String url = "https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/%s?endIndex=5&beginIndex=0&api_key="+key;
 		
 		try {
 			aid = URLEncoder.encode(aid,"utf-8");

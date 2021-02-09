@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gg.hta.lol.mapper.BanListMapper">
+	
+	<insert id="addBan">
+	insert into banlist(bnum,championid)
+		select bnum_seq.nextval, i.* from(
+			<foreach collection="list" item="id" separator="union all ">
+				 select #{id} as champid
+				 from dual
+			</foreach>
+		)i
+		
+	</insert>
+	
+</mapper>

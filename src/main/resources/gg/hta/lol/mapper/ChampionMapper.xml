@@ -36,4 +36,37 @@
 		from champion
 		where championid = #{championid}
 	</select>
+	
+	<update id="updateWin">
+	    update champion
+	    set wincount = wincount+1, pickcount = pickcount+1
+	    where championid in(
+	    select championid 
+	    from teaminfo ti, teammemberinfo tm
+	    where ti.matchid=tm.matchid
+	    and tm.matchid = #{matchid}
+	    and winlose = 'Win'
+    )
+    </update>
+    
+    <update id="updateLose">
+	    update champion
+	     set losecount = losecount+1, pickcount = pickcount+1
+	    where championid in
+	    (
+		    select championid 
+		    from teaminfo ti, teammemberinfo tm
+		    where ti.matchid=tm.matchid
+		    and tm.matchid = #{matchid}
+		    and winlose = 'Fail'
+  	  	)
+	</update>
+	
+	 <update id="updateBan">
+	 	<foreach collection="list" item="item" index="index" separator=";" open="DECLARE BEGIN" close="; END;">
+	 		update champion
+			set bancount= bancount+1
+			where championid = #{item}
+	 	</foreach>
+	</update>
 </mapper>

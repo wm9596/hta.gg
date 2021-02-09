@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -25,7 +26,12 @@ public class SearchServiceTest {
 	
 	@Test
 	public void getTest() {
-		service.searchSummonerInfo("댕청잇");
+		try {
+			service.searchSummonerInfo("더덕순대국");
+		}catch (DuplicateKeyException e) {
+			System.out.println("중복값있음");
+		}
+		
 	}
 	
 }
