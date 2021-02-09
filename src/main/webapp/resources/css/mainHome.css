@@ -123,3 +123,10 @@
 #main_home_search {
 	width: 500px;
 }
+
+#footer {
+    bottom:0;
+    width:100%;  
+    background:#ccc;
+    text-align: center;
+}

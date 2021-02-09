@@ -70,6 +70,16 @@ public class MatchMoreController {
 		String homeTeamTierAvg = "";
 		String awayTeamTierAvg = "";
 		
+		List<Integer> homeTeamMemberKill = new ArrayList<Integer>();
+		List<Integer> homeTeamMemberAssist = new ArrayList<Integer>();
+		List<Integer> homeTeamMemberDeath = new ArrayList<Integer>();
+		List<Integer> awayTeamMemberKill = new ArrayList<Integer>();
+		List<Integer> awayTeamMemberAssist = new ArrayList<Integer>();
+		List<Integer> awayTeamMemberDeath = new ArrayList<Integer>();
+		
+		List<Double> homeTeamMemberKda = new ArrayList<Double>();
+		List<Double> awayTeamMemberKda = new ArrayList<Double>();
+		
 		int homeTeamKill = 0;
 		int homeTeamAssist = 0;
 		int homeTeamDeath = 0;
@@ -89,31 +99,89 @@ public class MatchMoreController {
 		List<int[]> homeTeamItemList = new ArrayList<int[]>();
 		List<int[]> awayTeamItemList = new ArrayList<int[]>();
 		
+		HashMap<String, String> spell = new HashMap<String, String>();
+		HashMap<String, String> rune = new HashMap<String, String>();
+		
+		spell.put("21", "SummonerBarrier");
+		spell.put("1", "SummonerBoost");
+		spell.put("14", "SummonerDot");
+		spell.put("3", "SummonerExhaust");
+		spell.put("4", "SummonerFlash");
+		spell.put("6", "SummonerHaste");
+		spell.put("7", "SummonerHeal");
+		spell.put("13", "SummonerMana");
+		spell.put("30", "SummonerPoroRecall");
+		spell.put("31", "SummonerPoroThrow");
+		spell.put("11", "SummonerSmite");
+		spell.put("39", "SummonerSnowURFSnowball_Mark");
+		spell.put("32", "SummonerSnowball");
+		spell.put("12", "SummonerTeleport");
+		spell.put("1", "SummonerBoost");
+		
+		rune.put("8100", "7200_Domination");
+		rune.put("8300", "7203_Whimsy");
+		rune.put("8000", "7201_Precision");
+		rune.put("8400", "7204_Resolve");
+		rune.put("8200", "7202_Sorcery");
+		
+		List<HashMap<String, Object>> homeTeamMemberSpellRune = new ArrayList<HashMap<String,Object>>();
+		List<HashMap<String, Object>> awayTeamMemberSpellRune = new ArrayList<HashMap<String,Object>>();
+		
+//		int[] homeTeamKillContribute = new int[5];
+//		int[] awayTeamKillContribute = new int[5];
+		
+		
 		for (MatchMoreJoinVo Vo : matchMoreJoinList) {
 			
 			// 팀원 챔피언 초상화 받아오기
 			String championPicture = championService.getChampionPicture(Vo.getChampionId());
 			// 팀원 아이템 리스트 받아오기
 			int[] itemList = {Vo.getItem1(), Vo.getItem2(), Vo.getItem3(), Vo.getItem4(), Vo.getItem5(), Vo.getItem6(), Vo.getAccessory()};
+			// 팀원 룬, 스펠 받아오기
+			
+			String spell1 = spell.get(Vo.getSpell1() + "");
+			String spell2 = spell.get(Vo.getSpell2() + "");
+			String rune1 = rune.get(Vo.getRune1() + "");
+			String rune2 = rune.get(Vo.getRune2() + "");
 			
 			if (Vo.getTeamId().equals("100")) {
 				// 팀 티어 받아오기
 				homeTeamTierList.add(Vo.getTier());
+				// 팀원 KDA 받아오기
+				homeTeamMemberKill.add(Vo.getKill());
+				homeTeamMemberAssist.add(Vo.getAssist());
+				homeTeamMemberDeath.add(Vo.getDeath());
+				
+				homeTeamMemberKda.add(getKda(Vo.getKill(), Vo.getAssist(), Vo.getDeath()));
 				// 팀 KDA 받아오기
 				homeTeamKill += Vo.getKill();
 				homeTeamAssist += Vo.getAssist();
 				homeTeamDeath += Vo.getDeath();
-				// 팀원 닉네임 받아오기
+				
+				// 팀원 닉네임 리스트
 				homeTeamNicknameList.add(Vo.getSnickname());
 				
-				// 팀원 챔피언 초상화 배열에 추가
+				// 팀원 챔피언 초상화 리스트
 				homeTeamChampIconList.add(championPicture);
+				// 팀원 스펠, 룬 리스트
+				homeTeamMemberSpellRune.add(new HashMap<String, Object>() {{
+					put("spell1", spell1);
+					put("spell2", spell2);
+					put("rune1", rune1);
+					put("rune2", rune2);
+				}});
 				
 				// 팀원 아이템리스트
 				homeTeamItemList.add(itemList);
 			
 			} else {
 				awayTeamTierList.add(Vo.getTier());
+				
+				awayTeamMemberKill.add(Vo.getKill());
+				awayTeamMemberAssist.add(Vo.getAssist());
+				awayTeamMemberDeath.add(Vo.getDeath());
+				
+				awayTeamMemberKda.add(getKda(Vo.getKill(), Vo.getAssist(), Vo.getDeath()));
 				
 				awayTeamKill += Vo.getKill();
 				awayTeamAssist += Vo.getAssist();
@@ -122,6 +190,13 @@ public class MatchMoreController {
 				awayTeamNicknameList.add(Vo.getSnickname());
 				
 				awayTeamChampIconList.add(championPicture);
+				
+				awayTeamMemberSpellRune.add(new HashMap<String, Object>() {{
+					put("spell1", spell1);
+					put("spell2", spell2);
+					put("rune1", rune1);
+					put("rune2", rune2);
+				}});
 				
 				awayTeamItemList.add(itemList);
 			}
@@ -135,12 +210,20 @@ public class MatchMoreController {
 		model.addAttribute("homeTeamTierAvg", homeTeamTierAvg);
 		model.addAttribute("awayTeamTierAvg", awayTeamTierAvg);
 		
-		// 각팀 KDA
+		// 팀원 KDA
+		model.addAttribute("homeTeamMemberKill", homeTeamMemberKill);
+		model.addAttribute("homeTeamMemberAssist", homeTeamMemberAssist);
+		model.addAttribute("homeTeamMemberDeath", homeTeamMemberDeath);
+		model.addAttribute("homeTeamMemberKda", homeTeamMemberKda);
 		
-		homeTeamKdaAvg = (double)(homeTeamKill + homeTeamAssist) / homeTeamDeath * 1.0;
-		awayTeamKdaAvg = (double)(awayTeamKill + awayTeamAssist) / awayTeamDeath * 1.0;
-		homeTeamKdaAvg = (double)Math.round(homeTeamKdaAvg*10)/10;
-		awayTeamKdaAvg = (double)Math.round(awayTeamKdaAvg*10)/10;
+		model.addAttribute("awayTeamMemberKill", awayTeamMemberKill);
+		model.addAttribute("awayTeamMemberAssist", awayTeamMemberAssist);
+		model.addAttribute("awayTeamMemberDeath", awayTeamMemberDeath);
+		model.addAttribute("awayTeamMemberKda", awayTeamMemberKda);
+		
+		// 각팀 KDA
+		homeTeamKdaAvg = getKda(homeTeamKill, homeTeamAssist, homeTeamDeath);
+		awayTeamKdaAvg = getKda(awayTeamKill, awayTeamAssist, homeTeamDeath);
 		
 		model.addAttribute("homeTeamKill", homeTeamKill);
 		model.addAttribute("homeTeamAssist", homeTeamAssist);
@@ -161,9 +244,16 @@ public class MatchMoreController {
 		model.addAttribute("homeTeamChampIconList", homeTeamChampIconList);
 		model.addAttribute("awayTeamChampIconList", awayTeamChampIconList);
 		
+		// 팀원 스펠, 룬
+		model.addAttribute("homeTeamMemberSpellRune", homeTeamMemberSpellRune);
+		model.addAttribute("awayTeamMemberSpellRune", awayTeamMemberSpellRune);
+		
 		// 팀원 아이템 리스트
 		model.addAttribute("homeTeamItemList", homeTeamItemList);
 		model.addAttribute("awayTeamItemList", awayTeamItemList);
+		
+		// 팀원 킬 관여도
+//		model.addAttribute("homeTeamKill")
 		
 		
 		return ".header2.match.matchMore";
@@ -200,5 +290,11 @@ public class MatchMoreController {
 			}
 		}
 		return tierAvg;
+	}
+	
+	public double getKda(int kill, int assist, int death) {
+		double kda = (double)(kill + assist) / death * 1.0;
+		kda = (double)Math.round(kda*10)/10;
+		return kda;
 	}
 }

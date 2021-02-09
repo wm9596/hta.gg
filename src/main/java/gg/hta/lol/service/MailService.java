@@ -14,40 +14,37 @@ import gg.hta.lol.vo.AuthoritiesVo;
 
 @Service
 public class MailService {
-    @Autowired private JavaMailSender mailSender;
-    @Autowired private MemberDao dao;
+	@Autowired
+	private JavaMailSender mailSender;
+	@Autowired
+	private MemberDao dao;
 
-    public void regist(AuthVo vo, String email) throws Exception {
-//    String key = new TempKey().generateKey(30);  // ÀÎÁõÅ° »ı¼º
+	public void regist(AuthVo vo, String email) throws Exception {
+//    String key = new TempKey().generateKey(30);  // ï¿½ï¿½ï¿½ï¿½Å° ï¿½ï¿½ï¿½ï¿½
 		dao.AuthDelte(vo.getUsername());
-		Random random=new Random(); 
+		Random random = new Random();
 		String key = String.format("%04d", random.nextInt(10000));
-	    vo.setCode(key);
-	    dao.insert(vo);
-	
-	    //¸ŞÀÏ Àü¼Û
-	    MailHandler sendMail = new MailHandler(mailSender);
-	    sendMail.setSubject("¾È³çÇÏ¼¼¿ä hta.gg ÀÎÁõ ¸ŞÀÏÀÔ´Ï´Ù.");
-	    sendMail.setText(
-	        new StringBuffer()
-	        	.append("<h1>¸ŞÀÏÀÎÁõ</h1>")
-	        	.append("ÀÎÁõ ¹øÈ£´Â :")
-	        	.append(key)
-	        	.append("ÀÔ´Ï´Ù.<br> È¨ÆäÀÌÁö·Î µ¹¾Æ°¡¼­ ÀÌ¸ŞÀÏ ÀÎÁõ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.")
-	        	.toString());
-	
-    	sendMail.setFrom("hta.gg@gmail.com", "hta.gg");
-    	
-    	if(email.substring(email.lastIndexOf("@")).trim().equals("@daum")) {
-    		sendMail.setTo(email+".net");
-            sendMail.send();
-    	}else {
-    		sendMail.setTo(email+".com");
-            sendMail.send();
-    	}
+		vo.setCode(key);
+		dao.insert(vo);
+
+		// ë©”ì¼ ì „ì†¡
+		MailHandler sendMail = new MailHandler(mailSender);
+		sendMail.setSubject("ì•ˆë…•í•˜ì„¸ìš” hta.gg ì¸ì¦ ë©”ì¼ì…ë‹ˆë‹¤.");
+		sendMail.setText(new StringBuffer().append("<h1>ë©”ì¼ì¸ì¦</h1>").append("ì¸ì¦ ë²ˆí˜¸ëŠ” :").append(key)
+				.append("ì…ë‹ˆë‹¤.<br> í™ˆí˜ì´ì§€ë¡œ ëŒì•„ê°€ì„œ ì´ë©”ì¼ ì¸ì¦ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.").toString());
+
+		sendMail.setFrom("hta.gg@gmail.com", "hta.gg");
+
+		if (email.substring(email.lastIndexOf("@")).trim().equals("@daum")) {
+			sendMail.setTo(email + ".net");
+			sendMail.send();
+		} else {
+			sendMail.setTo(email + ".com");
+			sendMail.send();
+		}
 	}
-    
-    public String check(String username){
-    	return dao.selectAuth(username).getCode();
-    }		
+
+	public String check(String username) {
+		return dao.selectAuth(username).getCode();
+	}
 }

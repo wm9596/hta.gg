@@ -66,7 +66,8 @@
 
 #mm_homeTeam {
 	width: 50%;
-	background-color: #9ac0ff;
+/* 	background-color: #9ac0ff; */
+/* 	background-color: #343a40; */
 	float: left;
 }
 .teamMember {
@@ -74,6 +75,65 @@
 	height: 150px;
 /* 	background-color: cadetblue; */
 	border: 1px solid gray;
+}
+
+.compareArea {
+	width: 50%;
+	float: left;
+	height: 350px;
+	border: 1px solid gray;
+	background-color: #343a40;
+	margin-top: 20px;
+	border-radius: 5%;
+}
+
+/* .compare_infomation { */
+/* 	display: flex; */
+/* 	justify-content: center; */
+/* 	align-items: center; */
+/* 	margin-top: 50px; */
+/* } */
+
+
+.compare_member {
+	width: 100%;
+	height: 16%;
+	border: 1px solid gray;
+}
+
+#compare_title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+}
+
+.compare_barArea {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 40%;
+	height: 100%;
+	border: 1px solid gray;
+	float: left;
+}
+
+.compare_barArea .max_rage {
+	width: 80%;
+	height: 30%;
+	border: 1px solid gray;
+	border-radius: 8%;
+}
+
+.compare_champIconArea{ 
+	width: 10%;
+	height: 100%;
+	border: 1px solid gray;
+	float: left;
+}
+
+.compare_champIconArea img{ 
+	border-radius: 100%;
 }
 
 .teamAvg_child {
@@ -107,6 +167,24 @@
 	font-size: 12px;
 	border: 1px solid gray;
 }
+
+#home_minimal_spellRuneArea {
+	display: inline-grid;
+	grid-template-columns: repeat(2, [col-start] 1fr);
+}
+
+#away_minimal_spellRuneArea {
+	display: inline-grid;
+	grid-template-columns: repeat(2, [col-start] 1fr);
+}
+
+.minimal_spellRune {
+	width: 100%;
+	height: 100%;
+	float: left;
+	overflow: hidden;
+}
+
 
 #mm_awayTeam {
 	width: 50%;

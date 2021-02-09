@@ -25,16 +25,19 @@
 	<definition name=".*.*.*.*" template="/WEB-INF/views/layout.jsp" extends=".home">
 		<put-attribute name="header" value="/WEB-INF/views/{1}.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/{2}/{3}/{4}.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
 	</definition>
 	
 	<definition name=".*.*.*" template="/WEB-INF/views/layout.jsp" extends=".home">
 		<put-attribute name="header" value="/WEB-INF/views/{1}.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/{2}/{3}.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
 	</definition>
 	
 	<definition name=".*.*" template="/WEB-INF/views/layout.jsp" extends=".home">
 		<put-attribute name="header" value="/WEB-INF/views/{1}.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/{2}.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
 	</definition>
 	
 </tiles-definitions>
