@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>views/login.jsp</title>
 <script type="text/javascript" src="/lol/resources/js/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){ 
@@ -59,10 +54,8 @@ function getCookie(cookieName) {
     }
     return unescape(cookieValue);
 }
-
 </script>
-</head>
-<body>
+
 <div id="main_home">
 	<h1>회원로그인</h1>
 	<!-- action="/lol/login" ==> 고정값임!! rootcontext/login -->
@@ -79,5 +72,3 @@ function getCookie(cookieName) {
 		<input type="button" value="회원가입" id="join" onclick="location.href =  '/lol/member/join';">
 	</form:form>
 </div>
-</body>
-</html>

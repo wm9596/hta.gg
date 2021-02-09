@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>member/idSearch.jsp</title>
 <script type="text/javascript" src="/lol/resources/js/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -14,8 +9,7 @@ function backPage(){
 	history.go(-1);
 }
 </script>
-</head>
-<body>
+
 <div id="main_home">
 	<h1>아이디 찾기</h1>
 	이메일<br>

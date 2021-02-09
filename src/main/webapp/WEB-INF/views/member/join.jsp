@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>member/join.jsp</title>
 <script type="text/javascript" src="/lol/resources/js/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -154,8 +149,7 @@ function backPage(){
 	history.go(-1);
 }
 </script>
-</head>
-<body>
+
 <div id="main">
 	<h1 style="text-align: center;">회원가입</h1>
 	<div style="padding-left: 300px;">
@@ -186,5 +180,3 @@ function backPage(){
 		</form:form>
 	</div>
 </div>
-</body>
-</html>

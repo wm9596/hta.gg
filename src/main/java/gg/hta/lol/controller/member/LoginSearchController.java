@@ -7,12 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LoginSearchController {
 	@GetMapping("/member/id")
 	public String id() {
-		//return "member/idSearch";
-		return ".header.member.idSearch";
+		return ".header2.member.idSearch";
 	}
 	@GetMapping("/member/pwd")
 	public String pwd() {
-		//return "member/pwdSearch";
-		return ".header.member.pwdSearch";
+		return ".header2.member.pwdSearch";
 	}
 }

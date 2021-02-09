@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 	<div id="header_left">
 		<img alt="" src="${pageContext.request.contextPath }/resources/images/hta.PNG" width="40" height="40">
 	</div>
@@ -16,12 +17,38 @@
 	<div id="header_right">
 		<div id="header_none">
 		</div>
-		<div id="header_msg">
-			<span style="color:rgba(255, 255, 255, 0.5);"><i class="fa fa-comments-o" aria-hidden="true"></i></span>
-		</div>
-		<div id="header_mypage">
-			<span style="color:rgba(255, 255, 255, 0.5);"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
-		</div>
+		
+		<sec:authorize access="isAnonymous()">
+			<div id="header_msg">
+				<span style="color:rgba(255, 255, 255, 0.5);">
+					<i class="fa fa-comments-o" aria-hidden="true"></i><br>
+					<a href="/lol/member/join" style="color:rgba(255, 255, 255, 0.5);">JOIN</a>
+				</span>
+			</div>
+			<div id="header_mypage">
+				<span style="color:rgba(255, 255, 255, 0.5);">
+					<i class="fa fa-user-circle-o" aria-hidden="true" onclick="location.href='/lol/member/login'"></i><br>
+					<a href="/lol/member/login" style="color:rgba(255, 255, 255, 0.5);">login</a>
+				</span>
+			</div>
+		</sec:authorize>
+		<sec:authorize access="isAuthenticated()">
+			<div id="header_msg">
+				<span style="color:rgba(255, 255, 255, 0.5);">
+					<i class="fa fa-comments-o" aria-hidden="true"></i><br>
+					<sec:authentication property="principal.username"/>님
+				</span>
+			</div>
+			<div id="header_mypage">
+				<form method="post" action="<%=request.getContextPath() %>/member/logout" name="logout">
+					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+					<span style="color:rgba(255, 255, 255, 0.5);">
+						<i class="fa fa-user-circle-o" aria-hidden="true" onclick=""></i><br>
+						<a href="#" onclick="javascript:document.logout.submit();" style="color:rgba(255, 255, 255, 0.5);">logout</a>
+					</span>
+				</form>
+			</div>
+		</sec:authorize>
 	</div>
 	<div id="sub_header">
 		<div></div>

@@ -1,17 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>member/pwdSearch.jsp</title>
 <script type="text/javascript">
 function backPage(){
 	history.go(-1);
 }
 </script>
-</head>
-<body>
+
 <div id="main_home">
 	<h1>비밀번호 찾기/변경</h1>
 	아이디<br>
@@ -25,5 +19,3 @@ function backPage(){
 	<span id="confirmPwd"></span><br>
 	<input type="button" value="뒤로가기" onclick="backPage()" style="width: 300px;">
 </div>
-</body>
-</html>

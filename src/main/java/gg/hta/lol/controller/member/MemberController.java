@@ -15,33 +15,27 @@ public class MemberController {
 
 	@RequestMapping(value="/member/join", method = RequestMethod.GET)
 	public String joinForm() {
-		//return "member/join";
-		return ".header.member.join";
+		return ".header2.member.join";
 	}
 	@RequestMapping(value="/member/join", method = RequestMethod.POST)
 	public String join(MemberVo vo) {
 		int n = service.insert(vo);
 		if(n>0) {
-			//return "member/login";
-			return ".header.member.login";
+			return ".header2.member.login";
 		}else {
-			//return "member/error";
-			return ".header.member.error";
+			return ".header2.member.error";
 		}
 	}
 	@GetMapping("/member/all/main")
 	public String all() {
-		//return "member/all/main";
-		return ".header.member.all.main";
+		return ".header2.member.all.main";
 	}
 	@GetMapping("/member/member/main")
 	public String member() {
-		//return "member/member/main";
-		return ".header.member.member.main";
+		return ".header2.member.member.main";
 	}
 	@GetMapping("/member/admin/main")
 	public String admin() {
-		//return "member/admin/main";
-		return ".header.member.admin.main";
+		return ".header2.member.admin.main";
 	}
 }
