@@ -23,14 +23,14 @@
 		<h2>커뮤니티 글쓰기</h2>
 		<hr size="2" width="600" color="black" id=line>
 		<!-- 작성자 : <input type="text" name="username" value="abcd" style="width:200px" readonly="readonly"> --><!-- DB에 username의 임의의 값 넣음 (추후 회원가입 후 진행) -->
-		작성자 : <input type="text" name="username" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" style="width:200px" readonly="readonly">
+		작성자 <input type="text" name="username" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" style="width:220px" readonly="readonly">
 		&nbsp;&nbsp;&nbsp;&nbsp;
-		카테고리 : <input type="text" name="cNum" value="1" style="width:200px" readonly="readonly"><br><!-- DB에 cNum의 임의의 값 넣음 (추후 회원가입 후 진행) -->
+		카테고리 <input type="text" name="cNum" value="1" style="width:220px" readonly="readonly"><br><br><!-- DB에 cNum의 임의의 값 넣음 (추후 회원가입 후 진행) -->
 		<textarea rows="1" cols="80" placeholder="제목을 입력해 주세요." name="title" required="required"></textarea><br>
 		<textarea rows="25" cols="80" placeholder="내용을 입력하세요." name="content" required="required"></textarea><br>
 		<input type="button" value="이전 페이지로" onclick="beforePage()">
 		<input type="submit" value="등록">
-	</div>
+	</div><br>
 </form:form>
 </body>
 </html>

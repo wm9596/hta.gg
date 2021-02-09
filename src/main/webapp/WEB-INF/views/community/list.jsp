@@ -13,21 +13,21 @@
 </style>
 </head>
 <body>
-	<h2 style="margin-left: 20%;">전체</h2>
-	<div style="padding-left: 78%"><a href="${pageContext.request.contextPath }/community/insert">새 글 등록</a></div><br>
+	<h2 style="padding: 2%;">전체</h2>
 <div align="center">
 	<div>
 		<form:form method="post" action="${pageContext.request.contextPath }/community/list">
-		<div style="display: inline-block; font-size: 20px;"><a href="#">인기</a></div>&nbsp;
-		<div style="display: inline-block; font-size: 20px; margin-left: 7%;"><a href="#">최신</a></div>&nbsp;
-		<div style="display: inline-block; font-size: 20px; margin-left: 7%;"><a href="#">TOP</a></div>&nbsp;
-		<div style="display: inline-block; font-size: 20px; margin-left: 7%;"><a href="#">10주</a></div>&nbsp;
+		<div style="display: inline-block; font-size: 20px;"><a href="#" style="color: black;">인기</a></div>&nbsp;
+		<div style="display: inline-block; font-size: 20px; margin-left: 7%;"><a href="#" style="color: black;">최신</a></div>&nbsp;
+		<div style="display: inline-block; font-size: 20px; margin-left: 7%;"><a href="#" style="color: black;">TOP</a></div>&nbsp;
+		<div style="display: inline-block; font-size: 20px; margin-left: 7%;"><a href="#" style="color: black;">10주</a></div>&nbsp;
 			<select name="field"  style="margin-left: 9%;">
 				<option value="username"<c:if test="${field=='username' }">selected</c:if>>ID</option>
 				<option value="title"<c:if test="${field=='title' }">selected</c:if>>제목</option>
 			</select>
 			<input type="text" name="keyword" value="${keyword }">
 			<input type="submit" value="검색">
+			<div style="float: right; margin-right: 4%;"><a href="${pageContext.request.contextPath }/community/insert" style="color: black;">새 글 등록</a></div><br>
 		</form:form>
 	</div>
 	<div>
@@ -70,6 +70,6 @@
 			</c:choose>
 		</c:forEach>
 	</div>
-</div>
+</div><br>
 </body>
 </html>

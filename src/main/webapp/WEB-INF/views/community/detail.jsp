@@ -56,20 +56,20 @@
 	.comm{margin-bottom: 20px; margin-left: 22%; width: 600px; border: 1px solid #aaa;}
 </style>
 </head>
-<body>
+<body><br>
 <form:form method="get" action="${pageContext.request.contextPath }/community/update">
 	<div align="center" class="insert">
 		<h2>게시글 조회하기</h2>
 		<hr size="2" width="600" color="black" id=line>
 		<input type="hidden" name="pNum" value="${vo.pNum }">
 		<!-- DB에 username의 임의의 값 넣음 (추후 회원가입 후 진행) -->
-		작성자 : <input type="text" name="username" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" style="width:99px" readonly="readonly">
+		작성자 <input type="text" name="username" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" style="width:120px; text-align: center;" readonly="readonly">
 		&nbsp;&nbsp;&nbsp;&nbsp;
 		<!-- DB에 cNum의 임의의 값 넣음 (추후 회원가입 후 진행) -->
-		카테고리 : <input type="text" name="cNum" value="1" style="width:99px" readonly="readonly">
+		카테고리 <input type="text" name="cNum" value="1" style="width:120px; text-align: center;" readonly="readonly" >
 		&nbsp;&nbsp;&nbsp;&nbsp;
-		등록일 : <input type="text" value="${vo.regdate }" style="width:99px" readonly="readonly"><br>
-		<textarea rows="1" cols="80" name="title" readonly="readonly">${vo.title }</textarea><br>
+		등록일 <input type="text" value="${vo.regdate }" style="width:120px; text-align: center;" readonly="readonly"><br><br>
+		<textarea rows="1" cols="80" name="title" readonly="readonly">[제목] ${vo.title }</textarea><br>
 		<textarea rows="25" cols="80" name="content" readonly="readonly">${vo.content }</textarea><br>
 		<input type="button" value="이전 페이지로" onclick="beforePage()">
 		<button>게시글 수정</button>
