@@ -40,4 +40,10 @@
 	<select id="select" parameterType="string" resultType="member">
 		select * from member where username=#{username}
 	</select>
+	<delete id="AuthDelete" parameterType="string">
+		delete from auth where username = #{username}
+	</delete>
+	<select id="AuthSelect" parameterType="string" resultType="gg.hta.lol.vo.AuthVo">
+		select * from auth where username = #{username}
+	</select>
 </mapper>

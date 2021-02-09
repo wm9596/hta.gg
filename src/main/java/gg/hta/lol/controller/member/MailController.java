@@ -3,20 +3,18 @@ package gg.hta.lol.controller.member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import gg.hta.lol.service.MailService;
-import gg.hta.lol.service.MemberService;
 import gg.hta.lol.vo.AuthVo;
 
 @Controller
 public class MailController {
-	private final String HOME = "redirect:/";
-    private final String SIGN_UP_VIEW = "sign/sign-up";
-    private final String EMAIL_CONFIRM_VIEW = "sign/emailConfirm";
+//	private final String HOME = "redirect:/";
+//    private final String SIGN_UP_VIEW = "sign/sign-up";
+//    private final String EMAIL_CONFIRM_VIEW = "sign/emailConfirm";
  
     @Autowired
     private MailService service;
@@ -29,49 +27,36 @@ public class MailController {
     	try {
 			service.regist(new AuthVo(id, null), email);
 			sb.append("<data>");
-			sb.append("<code>success</code>");
+				sb.append("<result>success</result>");
 			sb.append("</data>");
 			return sb.toString();
 		} catch (Exception e) {
 			e.printStackTrace();
 			sb.append("<data>");
-			sb.append("<code>fail</code>");
+				sb.append("<result>fail</code>");
 			sb.append("</data>");
 			return sb.toString();
 		}
     }
- 
-//    @RequestMapping(value = "/sign-up", method = RequestMethod.GET)
-//    public String regist() throws Exception {
-//        return SIGN_UP_VIEW;
-//    }
-// 
-//    @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
-//    public String regist(Member user, RedirectAttributes rttr) throws Exception{
-//    
-//        System.out.println("regesterPost ���� ");
-//        memberSvc.regist(user);
-//        rttr.addFlashAttribute("msg" , "���Խ� ����� �̸��Ϸ� �������ּ���");
-//        return HOME;
-//    }
- 
-//    // confirm email authKey
-//    @RequestMapping(value = "/emailConfirm", method = RequestMethod.GET)
-//    public String emailConfirm(@RequestParam("authKey")String authkey, 
-//                                Model model, RedirectAttributes rttr) throws Exception { 
-//        
-//        if(authkey == null) {
-//            rttr.addFlashAttribute("msg", "����Ű�� �߸��Ǿ����ϴ�. �ٽ� ������ �ּ���");
-//            return HOME;
-//        }
-//        
-//        Member member = memberSvc.userAuth(authkey);
-//        if(member == null) {
-//            rttr.addFlashAttribute("msg", "�߸��� ���� �Դϴ�. �ٽ� ������ �ּ���");
-//            return HOME;
-//        }
-//        model.addAttribute("user", member.getUser_name());
-//        return EMAIL_CONFIRM_VIEW;
-//    }
-//}
+    
+    @GetMapping(value = "/member/code/{id}", produces = {MediaType.APPLICATION_XML_VALUE})
+    @ResponseBody
+    public String code(@PathVariable("id")String id) {
+    	StringBuffer sb = new StringBuffer();
+    	try {
+			String key = service.check(id);
+			sb.append("<data>");
+				sb.append("<code>");
+					sb.append(key);
+				sb.append("</code>");
+			sb.append("</data>");
+			return sb.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			sb.append("<data>");
+				sb.append("<code>fail</code>");
+			sb.append("</data>");
+			return sb.toString();
+		}
+    }
 }

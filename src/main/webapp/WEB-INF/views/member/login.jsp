@@ -63,19 +63,21 @@ function getCookie(cookieName) {
 </script>
 </head>
 <body>
-<h1>회원로그인</h1>
-<!-- action="/lol/login" ==> 고정값임!! rootcontext/login -->
-<form:form method="post" action="/lol/login">
-	아이디<br>
-	<input type="text" name="username" id="userId" style="width: 300px;"><br>
-	비밀번호<br>
-	<input type="password" name="password" style="width: 300px;"><br>
-	<input type="submit" value="로그인" style="width: 308px;"><br>
-	<input type="checkbox" id="idSaveCheck">아이디 저장&nbsp;&nbsp;&nbsp;
-	<input type="checkbox" id="remember-me" name="remember-me">자동 로그인<br>
-	<input type="button" value="아이디 찾기" id="seachId" onclick="location.href =  '/lol/member/id';">&nbsp;
-	<input type="button" value="비밀번호 찾기" id="seachPwd" onclick="location.href =  '/lol/member/pwd';">&nbsp;
-	<input type="button" value="회원가입" id="join" onclick="location.href =  '/lol/member/join';">
-</form:form>
+<div id="main_home">
+	<h1>회원로그인</h1>
+	<!-- action="/lol/login" ==> 고정값임!! rootcontext/login -->
+	<form:form method="post" action="/lol/login">
+		아이디<br>
+		<input type="text" name="username" id="userId" style="width: 300px;"><br>
+		비밀번호<br>
+		<input type="password" name="password" style="width: 300px;"><br>
+		<input type="submit" value="로그인" style="width: 300px;"><br>
+		<input type="checkbox" id="idSaveCheck">아이디 저장&nbsp;&nbsp;&nbsp;
+		<input type="checkbox" id="remember-me" name="remember-me">자동 로그인<br>
+		<input type="button" value="아이디 찾기" id="seachId" onclick="location.href =  '/lol/member/id';">&nbsp;
+		<input type="button" value="비밀번호 찾기" id="seachPwd" onclick="location.href =  '/lol/member/pwd';">&nbsp;
+		<input type="button" value="회원가입" id="join" onclick="location.href =  '/lol/member/join';">
+	</form:form>
+</div>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package gg.hta.lol.service;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -14,29 +16,27 @@ import gg.hta.lol.vo.AuthoritiesVo;
 public class MailService {
     @Autowired private JavaMailSender mailSender;
     @Autowired private MemberDao dao;
-//	    ------------------------------------- Member --------------------------------------
-public void regist(AuthVo vo, String email) throws Exception {
-    String key = new TempKey().generateKey(30);  // 인증키 생성
-    vo.setCode(key);
-    dao.insert(vo);
-//member.setAuthkey(key);
-    System.out.println("key : " + key);
 
-
-    //메일 전송
-    MailHandler sendMail = new MailHandler(mailSender);
-    sendMail.setSubject("서비스 이메일 인증");
-    sendMail.setText(
-        new StringBuffer()
-        	.append("<h1>메일인증</h1>")
-        	.append("<a href='http://localhost:8080/email_test/emailConfirm?authKey=")
-        	.append(key)
-        	.append("' target='_blank'>이메일 인증 확인</a>")
-        	.toString());
-
-    	//밑에 수정하기 (본인걸로)
-//    	sendMail.setFrom("서비스ID@gmail.com", "서비스 이름");
-    	
+    public void regist(AuthVo vo, String email) throws Exception {
+//    String key = new TempKey().generateKey(30);  // 인증키 생성
+		dao.AuthDelte(vo.getUsername());
+		Random random=new Random(); 
+		String key = String.format("%04d", random.nextInt(10000));
+	    vo.setCode(key);
+	    dao.insert(vo);
+	
+	    //메일 전송
+	    MailHandler sendMail = new MailHandler(mailSender);
+	    sendMail.setSubject("안녕하세요 hta.gg 인증 메일입니다.");
+	    sendMail.setText(
+	        new StringBuffer()
+	        	.append("<h1>메일인증</h1>")
+	        	.append("인증 번호는 :")
+	        	.append(key)
+	        	.append("입니다.<br> 홈페이지로 돌아가서 이메일 인증번호를 입력해주세요.")
+	        	.toString());
+	
+    	sendMail.setFrom("hta.gg@gmail.com", "hta.gg");
     	
     	if(email.substring(email.lastIndexOf("@")).trim().equals("@daum")) {
     		sendMail.setTo(email+".net");
@@ -45,21 +45,9 @@ public void regist(AuthVo vo, String email) throws Exception {
     		sendMail.setTo(email+".com");
             sendMail.send();
     	}
-    }
- 
-//    //이메일 인증 키 검증
-//    public Member userAuth(String authkey) throws Exception {
-//        Member member = new Member();
-//        member = dao.chkAuth(authkey);
-//   
-//        if(member!=null){
-//            try{
-//                dao.successAuthkey(member);
-//            }catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return member;
-//    }
-
+	}
+    
+    public String check(String username){
+    	return dao.selectAuth(username).getCode();
+    }		
 }

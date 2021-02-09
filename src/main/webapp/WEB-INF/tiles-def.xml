@@ -22,6 +22,11 @@
 <!-- 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"/> -->
 <!-- 	</definition> -->
 
+	<definition name=".*.*.*.*" template="/WEB-INF/views/layout.jsp" extends=".home">
+		<put-attribute name="header" value="/WEB-INF/views/{1}.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/{2}/{3}/{4}.jsp"/>
+	</definition>
+	
 	<definition name=".*.*.*" template="/WEB-INF/views/layout.jsp" extends=".home">
 		<put-attribute name="header" value="/WEB-INF/views/{1}.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/{2}/{3}.jsp"/>

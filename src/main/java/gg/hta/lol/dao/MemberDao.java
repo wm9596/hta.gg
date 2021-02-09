@@ -42,4 +42,10 @@ public class MemberDao {
 	public CustomUserDetail getAuthsList(String username){
 		return sqlSession.selectOne(NAMESPACE + ".getAuths", username);
 	}
+	public int AuthDelte(String username) {
+		return sqlSession.delete(NAMESPACE + ".AuthDelete",username);
+	}
+	public AuthVo selectAuth(String username) {
+		return sqlSession.selectOne(NAMESPACE + ".AuthSelect", username);
+	}
 }

@@ -15,12 +15,22 @@ $(document).ready(function(){
 		var email = document.getElementById("email").value;
 		email = email.substr(0,email.lastIndexOf("."));
 		//console.log(email);
-		$.ajax({
-			url:"/lol/member/email/"+id+"/"+email,
-			success: function(data){
-				document.getElementById("emailcheck").innerHTML="인증번호 전송이 완료되었습니다.";
-			}
-		});
+		if(document.getElementById("idcheck").textContent != "사용 가능 한 아이디입니다."){
+			alert("아이디 중복 확인을 완료해주세요.");
+		}else{
+			$.ajax({
+				url:"/lol/member/email/"+id+"/"+email,
+				success: function(data){
+					var result = $(data).find("result").text();
+					console.log(result);
+					if(result == 'success'){
+						document.getElementById("emailcheck").innerHTML="인증번호 전송이 완료되었습니다.";
+					}else{
+						document.getElementById("emailcheck").innerHTML="인증번호 전송이 실패되었습니다.";
+					}
+				}
+			});
+		}
 	});
 	
 	$("#confirmOk").click(function(){
@@ -32,7 +42,7 @@ $(document).ready(function(){
 			alert("이메일 입력 후 이메일 인증 버튼을 클릭해 주세요!!!");
 		}else{
 			$.ajax({
-				url:"/lol/member/email/"+id+"/"+email,
+				url:"/lol/member/code/"+id,
 				dataType:'xml',
 				success: function(data){
 					var code = $(data).find("code").text();
@@ -54,8 +64,10 @@ $(document).ready(function(){
 				var using = $(data).find("using").text();
 				if(eval(using)==true){
 					span.innerHTML="이미 사용중인 아이디입니다.";
+					document.getElementById("emailOk").disabled = 'true';
 				}else if(using=='false'){
 					span.innerHTML="사용 가능 한 아이디입니다.";
+					document.getElementById("emailOk").disabled = false;
 				}
 			}
 		});
@@ -137,33 +149,42 @@ function checkNick(){
 		document.getElementById("nicknamecheck").innerHTML="";
 	}
 }
+
+function backPage(){
+	history.go(-1);
+}
 </script>
 </head>
 <body>
-<h1>회원가입</h1>
-<form:form method="post" action="/lol/member/join">
-	아이디<br>
-	<input type="text" name="username" id="id" onkeyup="checkId()">&nbsp;&nbsp;
-	<input type="button" id="idOk" value="중복확인" disabled="disabled">
-	<span id="idcheck">아이디를 입력하세요.</span><br>
-	비밀번호<br>
-	<input type="password" name="password" id="pwd" onkeyup="checkPwd()">&nbsp;&nbsp;
-	<span id="pwdcheck"></span><br>
-	비밀번호확인<br>
-	<input type="password" id="pwdOk" onkeyup="checkPwdOk()">&nbsp;&nbsp;
-	<span id="pwdOkcheck"></span><br>
-	이메일<br>
-	<input type="email" name="email" id="email">&nbsp;&nbsp;
-	<input type="button" id="emailOk" value="이메일인증">&nbsp;&nbsp;
-	<span id="emailcheck"></span><br>
-	이메일 인증번호<br>
-	<input type="text" name="confirm" id="confirm">&nbsp;&nbsp;
-	<input type="button" id="confirmOk" value="확인">&nbsp;&nbsp;
-	<span id="confirmcheck"></span><br>
-	커뮤니티 닉네임<br>
-	<input type="text" name="nickname" id="nickname" onkeyup="checkNick()">&nbsp;&nbsp;
-	<span id="nicknamecheck">닉네임을 입력하세요</span><br>
-	<input type="submit" value="등록">
-</form:form>
+<div id="main">
+	<h1 style="text-align: center;">회원가입</h1>
+	<div style="padding-left: 300px;">
+		<form:form method="post" action="/lol/member/join">
+			<label style="width: 130px;">아이디</label>
+			<input type="text" name="username" id="id" onkeyup="checkId()">&nbsp;&nbsp;
+			<input type="button" id="idOk" value="중복확인" disabled="disabled">
+			<span id="idcheck">아이디를 입력하세요.</span><br>
+			<label style="width: 130px;">비밀번호</label>
+			<input type="password" name="password" id="pwd" onkeyup="checkPwd()">&nbsp;&nbsp;
+			<span id="pwdcheck"></span><br>
+			<label style="width: 130px;">비밀번호확인</label>
+			<input type="password" id="pwdOk" onkeyup="checkPwdOk()">&nbsp;&nbsp;
+			<span id="pwdOkcheck"></span><br>
+			<label style="width: 130px;">이메일</label>
+			<input type="email" name="email" id="email">&nbsp;&nbsp;
+			<input type="button" id="emailOk" value="이메일인증" disabled="disabled">&nbsp;&nbsp;
+			<span id="emailcheck"></span><br>
+			<label style="width: 130px;">이메일 인증번호</label>
+			<input type="text" name="confirm" id="confirm">&nbsp;&nbsp;
+			<input type="button" id="confirmOk" value="확인">&nbsp;&nbsp;
+			<span id="confirmcheck"></span><br>
+			<label style="width: 130px;">커뮤니티 닉네임</label>
+			<input type="text" name="nickname" id="nickname" onkeyup="checkNick()">&nbsp;&nbsp;
+			<span id="nicknamecheck">닉네임을 입력하세요</span><br>
+			<input type="submit" value="등록" style="width: 200px; margin-left: 25px;">
+			<input type="button" value="뒤로가기" onclick="backPage()" style="width: 200px;">
+		</form:form>
+	</div>
+</div>
 </body>
 </html>
