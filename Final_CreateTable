@@ -16,9 +16,10 @@ drop SEQUENCE banNum_seq;	--밴 번호
 drop table visitLog;
 drop table authorities;
 drop table message;
-drop table battingTeamInfo;
+
 drop table battingLog;
 drop table match;
+drop table battingTeamInfo;
 drop table rating;
 drop table reply;
 drop table Addfile;
@@ -118,6 +119,12 @@ create table authorities
 );
 create unique index ix_auth_username on authorities (username,authority);	
 
+-- 팀정보/battingTeamInfo
+create table battingTeamInfo
+(
+	tNum number primary key,	--팀 번호
+	tName varchar2(255)	--팀 이름
+);
 -- 경기 일정/match
 create table match
 (
@@ -125,16 +132,10 @@ create table match
 	mDate date,	--경기 시간
 	mRate number,	--배당율
 	mWinlose number,	--승패여부
-    tNum1 number references battingteaminfo(tnum) not null,
-    tNum2 number references battingteaminfo(tnum) not null
+    tNum1 number references battingTeamInfo(tnum) not null,
+    tNum2 number references battingTeamInfo(tnum) not null
 );
 
--- 팀정보/battingTeamInfo
-create table battingteaminfo
-(
-	tNum number primary key,	--팀 번호
-	tName varchar2(255)	--팀 이름
-);
 
 -- 배팅내역/battingLog
 create table battingLog
