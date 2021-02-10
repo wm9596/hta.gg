@@ -1,5 +1,6 @@
 package gg.hta.lol.service;
 
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,30 +12,31 @@ import gg.hta.lol.util.MailHandler;
 import gg.hta.lol.util.TempKey;
 import gg.hta.lol.vo.AuthVo;
 import gg.hta.lol.vo.AuthoritiesVo;
+import gg.hta.lol.vo.MemberVo;
 
 @Service
 public class MailService {
-	@Autowired
-	private JavaMailSender mailSender;
-	@Autowired
-	private MemberDao dao;
+	@Autowired private JavaMailSender mailSender;
+	@Autowired private MemberDao dao;
 
 	public void regist(AuthVo vo, String email) throws Exception {
-//    String key = new TempKey().generateKey(30);  // ï¿½ï¿½ï¿½ï¿½Å° ï¿½ï¿½ï¿½ï¿½
+//      String key = new TempKey().generateKey(30);  // ¾ÏÈ£È­(ÀÌ¸ŞÀÏÄÚµå)
 		dao.AuthDelte(vo.getUsername());
 		Random random = new Random();
 		String key = String.format("%04d", random.nextInt(10000));
 		vo.setCode(key);
 		dao.insert(vo);
-
-		// ë©”ì¼ ì „ì†¡
-		MailHandler sendMail = new MailHandler(mailSender);
-		sendMail.setSubject("ì•ˆë…•í•˜ì„¸ìš” hta.gg ì¸ì¦ ë©”ì¼ì…ë‹ˆë‹¤.");
-		sendMail.setText(new StringBuffer().append("<h1>ë©”ì¼ì¸ì¦</h1>").append("ì¸ì¦ ë²ˆí˜¸ëŠ” :").append(key)
-				.append("ì…ë‹ˆë‹¤.<br> í™ˆí˜ì´ì§€ë¡œ ëŒì•„ê°€ì„œ ì´ë©”ì¼ ì¸ì¦ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.").toString());
-
-		sendMail.setFrom("hta.gg@gmail.com", "hta.gg");
-
+	    //¸ŞÀÏ Àü¼Û
+        MailHandler sendMail = new MailHandler(mailSender);
+        sendMail.setSubject("¾È³çÇÏ¼¼¿ä hta.gg ÀÎÁõ ¸ŞÀÏÀÔ´Ï´Ù.");
+        sendMail.setText(
+           new StringBuffer()
+              .append("<h1>¸ŞÀÏÀÎÁõ</h1>")
+              .append("ÀÎÁõ ¹øÈ£´Â :")
+              .append(key)
+              .append("ÀÔ´Ï´Ù.<br> È¨ÆäÀÌÁö·Î µ¹¾Æ°¡¼­ ÀÌ¸ŞÀÏ ÀÎÁõ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.")
+              .toString());
+        sendMail.setFrom("hta.gg@gmail.com", "hta.gg");
 		if (email.substring(email.lastIndexOf("@")).trim().equals("@daum")) {
 			sendMail.setTo(email + ".net");
 			sendMail.send();
@@ -46,5 +48,50 @@ public class MailService {
 
 	public String check(String username) {
 		return dao.selectAuth(username).getCode();
+	}
+	
+	public void idSearch(String email) throws Exception {
+		Random random = new Random();
+		String code = String.format("%04d", random.nextInt(10000));
+		List<MemberVo> list = dao.emailList(email);
+		for(MemberVo vo:list) {
+			dao.authUpdate(new AuthVo(vo.getUsername(),code));
+		}
+	    //¸ŞÀÏ Àü¼Û
+        MailHandler sendMail = new MailHandler(mailSender);
+        sendMail.setSubject("¾È³çÇÏ¼¼¿ä hta.gg ÀÎÁõ ¸ŞÀÏÀÔ´Ï´Ù.");
+        sendMail.setText(
+           new StringBuffer()
+              .append("<h1>¾ÆÀÌµğ Ã£±â ¸ŞÀÏÀÎÁõ</h1>")
+              .append("ÀÎÁõ ¹øÈ£´Â :")
+              .append(code)
+              .append("ÀÔ´Ï´Ù.<br> È¨ÆäÀÌÁö·Î µ¹¾Æ°¡¼­ ÀÌ¸ŞÀÏ ÀÎÁõ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.")
+              .toString());
+        sendMail.setFrom("hta.gg@gmail.com", "hta.gg");
+        sendMail.setTo(email);
+		sendMail.send();
+	}
+	
+	public AuthVo idSeachCheck(String email) {
+		return dao.EmailselectAuth(email);
+	}
+	
+	public void pwdSearch(String id, String email) throws Exception {
+		Random random = new Random();
+		String code = String.format("%04d", random.nextInt(10000));
+		dao.authUpdate(new AuthVo(id,code));
+	    //¸ŞÀÏ Àü¼Û
+        MailHandler sendMail = new MailHandler(mailSender);
+        sendMail.setSubject("¾È³çÇÏ¼¼¿ä hta.gg ÀÎÁõ ¸ŞÀÏÀÔ´Ï´Ù.");
+        sendMail.setText(
+           new StringBuffer()
+              .append("<h1>ºñ¹Ğ¹øÈ£Ã£±â/º¯°æ ¸ŞÀÏÀÎÁõ</h1>")
+              .append("ÀÎÁõ ¹øÈ£´Â :")
+              .append(code)
+              .append("ÀÔ´Ï´Ù.<br> È¨ÆäÀÌÁö·Î µ¹¾Æ°¡¼­ ÀÌ¸ŞÀÏ ÀÎÁõ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.")
+              .toString());
+        sendMail.setFrom("hta.gg@gmail.com", "hta.gg");
+        sendMail.setTo(email);
+		sendMail.send();
 	}
 }

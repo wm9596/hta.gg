@@ -77,7 +77,6 @@ function checkId(){
 		document.getElementById("idOk").disabled = 'true';
 		return;
 	}
-	
 	if(id.length<4 || id.length>10){
 		span.innerHTML="아이디는 4~10자리로 설정해주세요.";
 		document.getElementById("idOk").disabled = 'true';
@@ -86,7 +85,6 @@ function checkId(){
 		span.innerHTML="";
 		document.getElementById("idOk").disabled = false;
 	}
-	
 	for(let i=0; i<id.length; i++){
 		if(!(('0'<=id.charAt(i) && id.charAt(i)<='9') || ('a'<=id.charAt(i) && id.charAt(i)<='z') || ('A'<=id.charAt(i) && id.charAt(i)<='Z'))){
 			span.innerHTML="아이디는 영문과 숫자로만 입력해주세요...";
@@ -102,14 +100,12 @@ function checkPwd(){
 		document.getElementById("pwdcheck").innerHTML="비밀번호를 입력하세요.";
 		return;
 	}
-	
 	if(pwd.length<4 || pwd.length>10){
 		document.getElementById("pwdcheck").innerHTML="비밀번호는 4~10자리로 설정해주세요.";
 		return;
 	}else if(pwd.length>=4 && pwd.length<=10){
 		document.getElementById("pwdcheck").innerHTML="";
 	}
-	
 	for(let i=0; i<pwd.length; i++){
 		if(!(('0'<=pwd.charAt(i) && pwd.charAt(i)<='9') || ('a'<=pwd.charAt(i) && pwd.charAt(i)<='z') || ('A'<=pwd.charAt(i) && pwd.charAt(i)<='Z'))){
 			document.getElementById("pwdcheck").innerHTML="아이디는 영문과 숫자로만 입력해주세요...";
@@ -136,7 +132,6 @@ function checkNick(){
 		document.getElementById("nicknamecheck").innerHTML="닉네임을 입력하세요.";
 		return;
 	}
-	
 	if(nickname.length<4 || nickname.length>12){
 		document.getElementById("nicknamecheck").innerHTML="닉네임은 4~12자리로 설정해주세요.";
 		return;
@@ -151,9 +146,10 @@ function backPage(){
 </script>
 
 <div id="main">
+	<img alt="" src="${pageContext.request.contextPath }/resources/images/hta.PNG" width="500" height="70" style="display: block; margin: auto;"><br>
 	<h1 style="text-align: center;">회원가입</h1>
 	<div style="padding-left: 300px;">
-		<form:form method="post" action="/lol/member/join">
+		<form:form method="post" action="/lol/member/join" style="line-height: 200%">
 			<label style="width: 130px;">아이디</label>
 			<input type="text" name="username" id="id" onkeyup="checkId()">&nbsp;&nbsp;
 			<input type="button" id="idOk" value="중복확인" disabled="disabled">

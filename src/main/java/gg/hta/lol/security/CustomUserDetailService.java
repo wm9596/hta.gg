@@ -9,7 +9,6 @@ import gg.hta.lol.service.MemberService;
 
 public class CustomUserDetailService implements UserDetailsService{
 	@Autowired private MemberService service;
-	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		CustomUserDetail userDetail = service.userDetail(username);

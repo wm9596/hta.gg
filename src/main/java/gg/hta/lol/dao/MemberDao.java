@@ -1,5 +1,6 @@
 package gg.hta.lol.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -24,18 +25,21 @@ public class MemberDao {
 	public int insert(AuthoritiesVo vo) {
 		return sqlSession.insert(NAMESPACE + ".auth_add", vo);
 	}
-	public int delete(int num) {
-		return sqlSession.delete(NAMESPACE + ".delete",num); 
+	public int updatePwd(HashMap<String, Object> map) {
+		return sqlSession.update(NAMESPACE + ".updatePwd", map); 
 	}
-	
-	public int update(MemberVo vo) {
-		return sqlSession.update(NAMESPACE + ".update", vo); 
-	}
-	
 	public MemberVo selectOne(String username) {
 		return sqlSession.selectOne(NAMESPACE + ".select", username); 
 	}
-	
+	public MemberVo selectOne(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE + ".PwdEmailselect", map); 
+	}
+	public List<MemberVo> emailList(String email) {
+		return sqlSession.selectList(NAMESPACE + ".Emailselect", email); 
+	}
+	public int authUpdate(AuthVo vo) {
+		return sqlSession.update(NAMESPACE + ".AuthUpdate", vo);
+	}
 	public List<MemberVo> selectList(){
 		return sqlSession.selectList(NAMESPACE + ".list"); 
 	}
@@ -47,5 +51,8 @@ public class MemberDao {
 	}
 	public AuthVo selectAuth(String username) {
 		return sqlSession.selectOne(NAMESPACE + ".AuthSelect", username);
+	}
+	public AuthVo EmailselectAuth(String email) {
+		return sqlSession.selectOne(NAMESPACE + ".EmailAuthSelect", email);
 	}
 }

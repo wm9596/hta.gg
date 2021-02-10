@@ -7,7 +7,6 @@
 		<id property="username" column="username"/>
 		<result property="password" column="password"/>
 		<result property="enabled" column="enabled"/>
-		
 		<collection property="authoList" ofType="gg.hta.lol.vo.AuthoritiesVo">
 			<result property="username" column="username"/>
 			<result property="authority" column="authority"/>
@@ -26,24 +25,36 @@
 	<insert id="insert" parameterType="member">
 	   insert into member values(#{username},null,#{password},'1',#{email},sysdate,#{nickname},0)
 	</insert>
-	<delete id="delete" parameterType="int" >
-		delete from members where num=#{num}
-	</delete>
 	<select id="list" resultType="member">
 		select * from member
 	</select>
-	<update id="update" parameterType="member">
-		update members
-		set name=#{name},phone=#{phone},addr=#{addr},regdate=#{regdate}
-		where num=#{num}
+	<update id="updatePwd" parameterType="hashmap">
+		update member
+		set password=#{password}
+		where username=#{username}
 	</update>
 	<select id="select" parameterType="string" resultType="member">
 		select * from member where username=#{username}
+	</select>
+	<select id="Emailselect" parameterType="string" resultType="member">
+		select * from member where email=#{email}
 	</select>
 	<delete id="AuthDelete" parameterType="string">
 		delete from auth where username = #{username}
 	</delete>
 	<select id="AuthSelect" parameterType="string" resultType="gg.hta.lol.vo.AuthVo">
 		select * from auth where username = #{username}
+	</select>
+	<update id="AuthUpdate" parameterType="gg.hta.lol.vo.AuthVo">
+		update auth
+		set code=#{code}
+		where username=#{username}
+	</update>
+	<select id="EmailAuthSelect" parameterType="string" resultType="gg.hta.lol.vo.AuthVo">
+		select * from auth 
+		where username =  (select username from member where email = #{email})
+	</select>
+	<select id="PwdEmailselect" parameterType="hashmap" resultType="member">
+		select * from member where username=#{username} and email=#{email}
 	</select>
 </mapper>

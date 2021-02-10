@@ -17,11 +17,9 @@ public class IdCheckController {
 	public String select(@PathVariable("id")String id) {
 		//http://localhost:9090/lol/member/idCheck/test11 ==> Å×½ºÆ®
 		boolean using = false;
-		
 		MemberVo vo = service.selectOne(id);
 		StringBuffer sb = new StringBuffer();
 		sb.append("<data>");
-		
 		if(vo!=null) {
 			using = true;
 			sb.append("<using>" + using +"</using>");
