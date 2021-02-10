@@ -17,10 +17,11 @@
 <div align="center">
 	<div>
 		<form:form method="post" action="${pageContext.request.contextPath }/community/list">
-		<div style="display: inline-block; font-size: 20px;"><a href="#" style="color: black;">인기</a></div>&nbsp;
-		<div style="display: inline-block; font-size: 20px; margin-left: 7%;"><a href="#" style="color: black;">최신</a></div>&nbsp;
-		<div style="display: inline-block; font-size: 20px; margin-left: 7%;"><a href="#" style="color: black;">TOP</a></div>&nbsp;
-		<div style="display: inline-block; font-size: 20px; margin-left: 7%;"><a href="#" style="color: black;">10주</a></div>&nbsp;
+		<div style="display: inline-block; font-size: 20px;"><a href="#" style="color: black;">공략</a></div>&nbsp;
+		<div style="display: inline-block; font-size: 20px; margin-left: 3%;"><a href="#" style="color: black;">자유</a></div>&nbsp;
+		<div style="display: inline-block; font-size: 20px; margin-left: 3%;"><a href="#" style="color: black;">팀원모집</a></div>&nbsp;
+		<div style="display: inline-block; font-size: 20px; margin-left: 3%;"><a href="#" style="color: black;">사건사고</a></div>&nbsp;
+		<div style="display: inline-block; font-size: 20px; margin-left: 3%;"><a href="#" style="color: black;">Q&A</a></div>&nbsp;
 			<select name="field"  style="margin-left: 9%;">
 				<option value="username"<c:if test="${field=='username' }">selected</c:if>>ID</option>
 				<option value="title"<c:if test="${field=='title' }">selected</c:if>>제목</option>

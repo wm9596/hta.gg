@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,7 +26,6 @@ public class ListController {
 		
 		int totalRowCount=service.count(map);
 		PageUtil pu=new PageUtil(pageNum, 10, 10, totalRowCount);
-		System.out.println("pu:"+ pu);
 		int startRow=pu.getStartRow();
 		int endRow=pu.getEndRow();
 		map.put("startRow",startRow);

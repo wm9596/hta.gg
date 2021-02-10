@@ -28,6 +28,8 @@ public class CommunityService {
 		return dao.update(vo);
 	}
 	public int delete(int pNum) {
+		
+		System.out.println(pNum);
 		return dao.delete(pNum);
 	}
 	public CommunityVo next(int pNum) {
