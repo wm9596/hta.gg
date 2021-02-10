@@ -17,7 +17,7 @@
 	.insert{margin-top: 5%}
 </style>
 </head>
-<body>
+<body><br>
 <form:form method="post" action="${pageContext.request.contextPath }/community/insert">
 	<div align="center" class="insert">
 		<h2>커뮤니티 글쓰기</h2>
@@ -29,7 +29,7 @@
 		<textarea rows="1" cols="80" placeholder="제목을 입력해 주세요." name="title" required="required"></textarea><br>
 		<textarea rows="25" cols="80" placeholder="내용을 입력하세요." name="content" required="required"></textarea><br>
 		<input type="button" value="이전 페이지로" onclick="beforePage()">
-		<input type="submit" value="등록">
+		<input type="submit" value="새 글 등록">
 	</div><br>
 </form:form>
 </body>

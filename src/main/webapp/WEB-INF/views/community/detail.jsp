@@ -12,15 +12,7 @@
 		history.go(-1);
 		return;
 	}
-	/*
-	function postDelete(){
-		 if (confirm("정말 삭제하시겠습니까??") == true){
-		     document.removefrm.submit();
-		 }else{
-		     return false;
-		 }
-	}
-	*/
+
 	function getList() {
 		$.ajax({
 			url:"/lol/reply/${vo.pNum}",
@@ -63,20 +55,19 @@
 		<hr size="2" width="600" color="black" id=line>
 		<input type="hidden" name="pNum" value="${vo.pNum }">
 		<!-- DB에 username의 임의의 값 넣음 (추후 회원가입 후 진행) -->
-		작성자 <input type="text" name="username" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" style="width:120px; text-align: center;" readonly="readonly">
-		&nbsp;&nbsp;&nbsp;&nbsp;
+		작성자 <input type="text" name="username" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" style="width:87px; text-align: center;" readonly="readonly">
 		<!-- DB에 cNum의 임의의 값 넣음 (추후 회원가입 후 진행) -->
-		카테고리 <input type="text" name="cNum" value="1" style="width:120px; text-align: center;" readonly="readonly" >
-		&nbsp;&nbsp;&nbsp;&nbsp;
-		등록일 <input type="text" value="${vo.regdate }" style="width:120px; text-align: center;" readonly="readonly"><br><br>
+		카테고리 <input type="text" name="cNum" value="1" style="width:87px; text-align: center;" readonly="readonly" >
+		등록일 <input type="text" value="${vo.regdate }" style="width:87px; text-align: center;" readonly="readonly">
+		조회수 <input type="text" value="${vo.viewCount }" style="width:87px; text-align: center;" readonly="readonly"><br><br>
 		<textarea rows="1" cols="80" name="title" readonly="readonly">[제목] ${vo.title }</textarea><br>
 		<textarea rows="25" cols="80" name="content" readonly="readonly">${vo.content }</textarea><br>
 		<input type="button" value="이전 페이지로" onclick="beforePage()">
 		<button>게시글 수정</button>
+		<input type="button" value="게시글 삭제" onclick="postDelete(${vo.pNum})">
 		<!--
-		<input type="button" value="게시글 삭제" onclick="postDelete()">
-		-->
 		<a href="${pageContext.request.contextPath }/community/delete?pNum=${vo.pNum }" style="position: right;">게시글 삭제</a>
+		-->
 	</div><br><br><br>
 </form:form>
 	<div align="center">
@@ -106,6 +97,8 @@
 		$("#btn").click(function(){
 			var rWriter = document.getElementById("rWriter").value;
 			var rContent = document.getElementById("rContent").value;
+			var ask = confirm("댓글을 등록하시겠습니까?");
+			if(ask == true){
 			$.ajax({
 				url:"/lol/insert/${vo.pNum}/"+rWriter+"/"+rContent+"/",
 				success: function(data) {
@@ -118,10 +111,13 @@
 					}
 				}
 			});
+			}
 		});
 	
 	function removeComm(rNum) {
 		console.log("===========================");
+		var ask = confirm("정말로 삭제하시겠습니까?");
+		if(ask == true){
 		$.ajax({
 			url:"/lol/delete/"+rNum,
 			success: function(data) {
@@ -133,7 +129,27 @@
 				}
 			}
 		});
+		}
 	}
+
+	function postDelete(pNum){
+		var ask = confirm("정말로 삭제하시겠습니까?");
+		if(ask == true){
+		$.ajax({
+			url:"/lol/community/delete/"+pNum,
+			success: function(data) {
+				var code=$(data).find("code").text();
+				alert("게시글이 삭제되었습니다.");
+				if(code=='success'){
+					beforePage();
+				}else{
+					alert('삭제 실패!');
+				}
+			}
+		});
+		}
+	}
+
 </script>
 </body>
 </html>
