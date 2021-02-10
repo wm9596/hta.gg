@@ -17,6 +17,7 @@ public class MemberController {
 	public String joinForm() {
 		return ".header2.member.join";
 	}
+	
 	@RequestMapping(value="/member/join", method = RequestMethod.POST)
 	public String join(MemberVo vo) {
 		int n = service.insert(vo);
@@ -26,6 +27,7 @@ public class MemberController {
 			return ".header2.member.error";
 		}
 	}
+	
 	@GetMapping("/member/all/main")
 	public String all() {
 		return ".header2.member.all.main";

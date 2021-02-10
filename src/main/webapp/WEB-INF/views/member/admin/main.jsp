@@ -4,4 +4,3 @@
 <h1>Admin</h1>
 <h2>관리자만이 접근가능한 페이지 입니다.</h2>
 <a href="/lol/">홈</a>
-<a href="<%=request.getContextPath() %>/">홈</a>

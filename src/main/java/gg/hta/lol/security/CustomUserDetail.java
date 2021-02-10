@@ -15,13 +15,10 @@ public class CustomUserDetail implements UserDetails{ //¿Œ¡ı∞¥√º
 	private String password;
 	private String enabled;
 	private List<AuthoritiesVo> authoList;
-	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		ArrayList<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
 		for(AuthoritiesVo vo:authoList) {
-			System.out.println("////////////////////////////////////////");
-			System.out.println(vo.getAuthority()+password+username);
 			auths.add(new SimpleGrantedAuthority(vo.getAuthority()));
 		}
 		return auths;

@@ -40,7 +40,7 @@
 				</span>
 			</div>
 			<div id="header_mypage">
-				<form method="post" action="<%=request.getContextPath() %>/member/logout" name="logout">
+				<form method="post" action="/lol/member/logout" name="logout">
 					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 					<span style="color:rgba(255, 255, 255, 0.5);">
 						<i class="fa fa-user-circle-o" aria-hidden="true" onclick=""></i><br>
