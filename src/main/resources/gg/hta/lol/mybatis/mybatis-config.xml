@@ -16,6 +16,7 @@
  	<mapper resource="gg/hta/lol/mapper/RatingMapper.xml"/>
  	<mapper resource="gg/hta/lol/mapper/MatchMoreJoinMapper.xml"/>
  	<mapper resource="gg/hta/lol/mapper/ReplyMapper.xml"/>
+ 	<mapper resource="gg/hta/lol/mapper/BattingMapper.xml"/>
   </mappers>
   
 </configuration>

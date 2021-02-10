@@ -2,15 +2,15 @@
 drop SEQUENCE msgNum_seq;
 drop SEQUENCE tNum_seq;
 drop SEQUENCE mNum_seq;
-drop SEQUENCE bNum_seq; --¹èÆÃ¹øÈ£
+drop SEQUENCE bNum_seq; --ë°°íŒ…ë²ˆí˜¸
 drop SEQUENCE sNum_seq;
 drop SEQUENCE fileNum_seq;
-drop SEQUENCE rNum_seq; --½Å°í¹øÈ£
-drop SEQUENCE reNum_seq; --´ñ±Û¹øÈ£
+drop SEQUENCE rNum_seq; --ì‹ ê³ ë²ˆí˜¸
+drop SEQUENCE reNum_seq; --ëŒ“ê¸€ë²ˆí˜¸
 drop SEQUENCE pNum_seq;
 drop SEQUENCE tmNum_seq;
 drop SEQUENCE iNum_seq;
-drop SEQUENCE banNum_seq;	--¹ê ¹øÈ£
+drop SEQUENCE banNum_seq;	--ë°´ ë²ˆí˜¸
 
 ---------- drop table ---------- 
 drop table visitLog;
@@ -37,7 +37,7 @@ drop table champion;
 drop table item;
 
 
--- Á¢¼Ó ±â·Ï/visitLog
+-- ì ‘ì† ê¸°ë¡/visitLog
 create table visitLog
 (
 	vDate date not null
@@ -45,9 +45,9 @@ create table visitLog
 
 create table summoner
 (
-	sNickname varchar2(255)PRIMARY KEY,	--¼ÒÈ¯»ç ÀÌ¸§
-	sLevel number,	--¼ÒÈ¯»ç ·¹º§
-	icon varchar2(255)	--ÇÁ·ÎÇÊ¾ÆÀÌÄÜ
+	sNickname varchar2(255)PRIMARY KEY,	--ì†Œí™˜ì‚¬ ì´ë¦„
+	sLevel number,	--ì†Œí™˜ì‚¬ ë ˆë²¨
+	icon varchar2(255)	--í”„ë¡œí•„ì•„ì´ì½˜
 );
 
 CREATE TABLE queueinfo
@@ -61,24 +61,24 @@ CREATE TABLE queueinfo
 	PRIMARY KEY (snickname, queueType)
 );
 
--- ÀÌ¸ŞÀÏ ÀÎÁõ¹øÈ£/auth
+-- ì´ë©”ì¼ ì¸ì¦ë²ˆí˜¸/auth
 create table auth
 (
-	username varchar2(50) primary key,	--¾ÆÀÌµğ
-	code varchar2(1000)	--ÀÌ¸ŞÀÏ ÀÎÁõ¹øÈ£
+	username varchar2(50) primary key,	--ì•„ì´ë””
+	code varchar2(1000)	--ì´ë©”ì¼ ì¸ì¦ë²ˆí˜¸
 );
 
--- È¸¿ø/MEMBER
+-- íšŒì›/MEMBER
 create table member
 (
-	username varchar2(50) NOT NULL enable,	--¾ÆÀÌµğ
-	snickname varchar2(255) references summoner,	--¼ÒÈ¯»ç¹øÈ£
-	password varchar2(100) not null,	--ºñ¹Ğ¹øÈ£
-	enable char(1) default '1' check(enable in('0', '1')),	--enable(»ç¿ë°¡´É)
-	email varchar2(50),	-- ÀÌ¸ŞÀÏ
-	regdate date,	--°¡ÀÔ³¯Â¥
-	nickname varchar2(12),	--Ä¿¹Â´ÏÆ¼ ´Ğ³×ÀÓ
-	point number,	--Æ÷ÀÎÆ®
+	username varchar2(50) NOT NULL enable,	--ì•„ì´ë””
+	snickname varchar2(255) references summoner,	--ì†Œí™˜ì‚¬ë²ˆí˜¸
+	password varchar2(100) not null,	--ë¹„ë°€ë²ˆí˜¸
+	enable char(1) default '1' check(enable in('0', '1')),	--enable(ì‚¬ìš©ê°€ëŠ¥)
+	email varchar2(50),	-- ì´ë©”ì¼
+	regdate date,	--ê°€ì…ë‚ ì§œ
+	nickname varchar2(12),	--ì»¤ë®¤ë‹ˆí‹° ë‹‰ë„¤ì„
+	point number,	--í¬ì¸íŠ¸
     CONSTRAINT "member_PK" PRIMARY KEY ("USERNAME"),
     CONSTRAINT "member_FK1" FOREIGN KEY ("USERNAME") REFERENCES "FINAL"."AUTH" ("USERNAME")
 );
@@ -91,162 +91,163 @@ CREATE TABLE persistent_logins
   last_used timestamp not null
 );
 
--- ÇÁ·ÎÇÊ Æò°¡(rating)
+-- í”„ë¡œí•„ í‰ê°€(rating)
 create table rating
 (
 	snickname varchar2(255) references summoner,
 	rate varchar2(100) 
 );
 
--- ÂÊÁö/message
+-- ìª½ì§€/message
 create table message
 (
-	msgNum number primary key,	--ÂÊÁö ¹øÈ£
-	sender varchar2(50) references member(username),	--º¸³½ »ç¶÷ ¾ÆÀÌµğ
-	receiver varchar2(50) references member(username),	--¹Ş´Â »ç¶÷ ¾ÆÀÌµğ
-	msg varchar2(4000),		--¸Ş¼¼Áö ³»¿ë
-	sendTime date,		--º¸³½ ½Ã°£
-	open varchar2(255) --È®ÀÎ¿©ºÎ
+	msgNum number primary key,	--ìª½ì§€ ë²ˆí˜¸
+	sender varchar2(50) references member(username),	--ë³´ë‚¸ ì‚¬ëŒ ì•„ì´ë””
+	receiver varchar2(50) references member(username),	--ë°›ëŠ” ì‚¬ëŒ ì•„ì´ë””
+	msg varchar2(4000),		--ë©”ì„¸ì§€ ë‚´ìš©
+	sendTime date,		--ë³´ë‚¸ ì‹œê°„
+	open varchar2(255) --í™•ì¸ì—¬ë¶€
 );
 
--- ±ÇÇÑ/authorities
+-- ê¶Œí•œ/authorities
 create table authorities
 (
-	username varchar2(50) not null,	--¾ÆÀÌµğ
-	authority varchar2(100) not null, --±ÇÇÑ
+	username varchar2(50) not null,	--ì•„ì´ë””
+	authority varchar2(100) not null, --ê¶Œí•œ
 	constraint fk_authorities_users  foreign key(username) references member(username)
 );
 create unique index ix_auth_username on authorities (username,authority);	
 
--- °æ±â ÀÏÁ¤/match
+-- ê²½ê¸° ì¼ì •/match
 create table match
 (
-	mNum number primary key,	--°æ±â ¹øÈ£
-	mDate date,	--°æ±â ½Ã°£
-	mRate number,	--¹è´çÀ²
-	mWinlose varchar2(255)	--½ÂÆĞ¿©ºÎ
+	mNum number primary key,	--ê²½ê¸° ë²ˆí˜¸
+	mDate date,	--ê²½ê¸° ì‹œê°„
+	mRate number,	--ë°°ë‹¹ìœ¨
+	mWinlose number,	--ìŠ¹íŒ¨ì—¬ë¶€
+    tNum1 number references battingteaminfo(tnum) not null,
+    tNum2 number references battingteaminfo(tnum) not null
 );
 
--- ÆÀÁ¤º¸/battingTeamInfo
-create table battingTeamInfo
+-- íŒ€ì •ë³´/battingTeamInfo
+create table battingteaminfo
 (
-	tNum number primary key,	--ÆÀ ¹øÈ£
-	mNum number references match(mNum) not null,	--°æ±â ¹øÈ£
-	tName varchar2(255)	--ÆÀ ÀÌ¸§
+	tNum number primary key,	--íŒ€ ë²ˆí˜¸
+	tName varchar2(255)	--íŒ€ ì´ë¦„
 );
 
--- ¹èÆÃ³»¿ª/battingLog
+-- ë°°íŒ…ë‚´ì—­/battingLog
 create table battingLog
 (
-	bNum number primary key,	--¹èÆÃ³»¿ª ¹øÈ£
-	mNum number references match(mNum) not null,	--°æ±â ¹øÈ£
-	username varchar2(50) references member(username) not null,	--¾ÆÀÌµğ
-	choice number	--¹èÆÃÇÑ ÆÀ
+	bNum number primary key,	--ë°°íŒ…ë‚´ì—­ ë²ˆí˜¸
+	mNum number references match(mNum) not null,	--ê²½ê¸° ë²ˆí˜¸
+	username varchar2(50) references member(username) not null,	--ì•„ì´ë””
+	choice number	--ë°°íŒ…í•œ íŒ€
 );
 
--- °Ô½ÃÆÇ/community
+-- ê²Œì‹œíŒ/community
 create table community
 (
-	pNum number primary key,	--°Ô½Ã±Û ¹øÈ£
-	username varchar2(50) references member(username) not null,	--¾ÆÀÌµğ
-	cNum number not null,	--Ä«Å×°í¸®
-	title varchar2(255),	--±Û Á¦¸ñ
-	content varchar2(4000),	--±Û ³»¿ë
-	hit number,		--ÃßÃµ¼ö
-	nohit number,	--¹İ´ë¼ö
-	viewCount number,	--Á¶È¸¼ö
-	commentCount number, --´ñ±Û¼ö
-	regdate date -- µî·Ï³¯Â¥
+	pNum number primary key,	--ê²Œì‹œê¸€ ë²ˆí˜¸
+	username varchar2(50) references member(username) not null,	--ì•„ì´ë””
+	cNum number not null,	--ì¹´í…Œê³ ë¦¬
+	title varchar2(255),	--ê¸€ ì œëª©
+	content varchar2(4000),	--ê¸€ ë‚´ìš©
+	hit number,		--ì¶”ì²œìˆ˜
+	nohit number,	--ë°˜ëŒ€ìˆ˜
+	viewCount number,	--ì¡°íšŒìˆ˜
+	commentCount number, --ëŒ“ê¸€ìˆ˜
+	regdate date -- ë“±ë¡ë‚ ì§œ
 );
 
--- ½Å°í/report
+-- ì‹ ê³ /report
 create table report
 (
-	rNum number primary key, --½Å°í¹øÈ£
-	pNum number references community(pNum) not null,	--°Ô½Ã±Û ¹øÈ£
-	detail varchar2(4000)	--½Å°í³»¿ë
+	rNum number primary key, --ì‹ ê³ ë²ˆí˜¸
+	pNum number references community(pNum) not null,	--ê²Œì‹œê¸€ ë²ˆí˜¸
+	detail varchar2(4000)	--ì‹ ê³ ë‚´ìš©
 );
 
--- Ã·ºÎÆÄÀÏ/Addfile
+-- ì²¨ë¶€íŒŒì¼/Addfile
 create table Addfile
 (
-	fileNum number primary key,	--Ã·ºÎÆÄÀÏ ¹øÈ£
-	pNum number references community(pNum) not null,	--°Ô½Ã±Û ¹øÈ£
-	orgPath varchar2(2000),	--¿øº»ÆÄÀÏ°æ·Î
-	realPath varchar2(1000)	--ÀúÀåÆÄÀÏ¸í
+	fileNum number primary key,	--ì²¨ë¶€íŒŒì¼ ë²ˆí˜¸
+	pNum number references community(pNum) not null,	--ê²Œì‹œê¸€ ë²ˆí˜¸
+	orgPath varchar2(2000),	--ì›ë³¸íŒŒì¼ê²½ë¡œ
+	realPath varchar2(1000)	--ì €ì¥íŒŒì¼ëª…
 );
 
--- ´ñ±Û/reply
+-- ëŒ“ê¸€/reply
 create table reply
 (
-	rNum number primary key,	--´ñ±Û ¹øÈ£
-	pNum number references community(pNum) on delete cascade not null,	--°Ô½Ã±Û ¹øÈ£
-	rereNum number,	--´ë´ñ±Û ¹øÈ£
-	rWriter varchar2(255),	--´ñ±ÛÀÛ¼ºÀÚ
-	rContent varchar2(255),	--´ñ±Û³»¿ë
-	regdate date --´ñ±Û ÀÛ¼º³¯Â¥
+	rNum number primary key,	--ëŒ“ê¸€ ë²ˆí˜¸
+	pNum number references community(pNum) on delete cascade not null,	--ê²Œì‹œê¸€ ë²ˆí˜¸
+	rereNum number,	--ëŒ€ëŒ“ê¸€ ë²ˆí˜¸
+	rWriter varchar2(255),	--ëŒ“ê¸€ì‘ì„±ì
+	rContent varchar2(255),	--ëŒ“ê¸€ë‚´ìš©
+	regdate date --ëŒ“ê¸€ ì‘ì„±ë‚ ì§œ
 );
 
---¾ÆÀÌÅÛ/item
+--ì•„ì´í…œ/item
 create table item
 (
-	iNum number primary key,	--¾ÆÀÌÅÛ ¹øÈ£
-	icon varchar2(255),	--¾ÆÀÌÅÛ ¾ÆÀÌÄÜ
-	name varchar2(255),	--¾ÆÀÌÅÛÀÌ¸§
-	price number,	--¾ÆÀÌÅÛ °¡°İ
-	effect varchar2(4000),	--¾ÆÀÌÅÛÈ¿°ú
+	iNum number primary key,	--ì•„ì´í…œ ë²ˆí˜¸
+	icon varchar2(255),	--ì•„ì´í…œ ì•„ì´ì½˜
+	name varchar2(255),	--ì•„ì´í…œì´ë¦„
+	price number,	--ì•„ì´í…œ ê°€ê²©
+	effect varchar2(4000),	--ì•„ì´í…œíš¨ê³¼
 	tags varchar2(100)
 );
 
---Ã¨ÇÇ¾ğ/champion
+--ì±”í”¼ì–¸/champion
 create table champion
 (
-	championid varchar2(255) primary key,	--Ã¨ÇÇ¾ğid
-	name varchar2(255),	--Ã¨ÇÇ¾ğ ÀÌ¸§
-	pickCount number,	--ÇÈµÈ È½¼ö
-	banCount number,	--¹êµÈ È½¼ö
-	winCount number,	--½Â¸® È½¼ö
-	loseCount number,	--ÆĞ¹è È½¼ö
-	picture varchar2(255),	--ÃÊ»óÈ­
-	skillP_icon varchar2(255),	--ÆĞ½Ãºê ½ºÅ³ ¾ÆÀÌÄÜ
-	skillP_info varchar2(4000),	--ÆĞ½Ãºê ½ºÅ³ ¼³¸í
-	skillQ_icon varchar2(255),	--q½ºÅ³ ¾ÆÀÌÄÜ
-	skillQ_info varchar2(4000),	--q½ºÅ³ ¼³¸í
-	skillW_icon varchar2(255),	--W½ºÅ³ ¾ÆÀÌÄÜ
-	skillW_info varchar2(4000),	--W½ºÅ³ ¼³¸í
-	skillE_icon varchar2(255),	--E½ºÅ³ ¾ÆÀÌÄÜ
-	skillE_info varchar2(4000),	--E½ºÅ³ ¼³¸í
-	skillR_icon varchar2(255),	--r½ºÅ³ ¾ÆÀÌÄÜ
-	skillR_info varchar2(4000),	--r½ºÅ³ ¼³¸í
-	story varchar2(4000),	--½ºÅä¸®
-	tip varchar2(4000)	--ÆÁ
+	championid varchar2(255) primary key,	--ì±”í”¼ì–¸id
+	name varchar2(255),	--ì±”í”¼ì–¸ ì´ë¦„
+	pickCount number,	--í”½ëœ íšŸìˆ˜
+	banCount number,	--ë°´ëœ íšŸìˆ˜
+	winCount number,	--ìŠ¹ë¦¬ íšŸìˆ˜
+	loseCount number,	--íŒ¨ë°° íšŸìˆ˜
+	picture varchar2(255),	--ì´ˆìƒí™”
+	skillP_icon varchar2(255),	--íŒ¨ì‹œë¸Œ ìŠ¤í‚¬ ì•„ì´ì½˜
+	skillP_info varchar2(4000),	--íŒ¨ì‹œë¸Œ ìŠ¤í‚¬ ì„¤ëª…
+	skillQ_icon varchar2(255),	--qìŠ¤í‚¬ ì•„ì´ì½˜
+	skillQ_info varchar2(4000),	--qìŠ¤í‚¬ ì„¤ëª…
+	skillW_icon varchar2(255),	--WìŠ¤í‚¬ ì•„ì´ì½˜
+	skillW_info varchar2(4000),	--WìŠ¤í‚¬ ì„¤ëª…
+	skillE_icon varchar2(255),	--EìŠ¤í‚¬ ì•„ì´ì½˜
+	skillE_info varchar2(4000),	--EìŠ¤í‚¬ ì„¤ëª…
+	skillR_icon varchar2(255),	--rìŠ¤í‚¬ ì•„ì´ì½˜
+	skillR_info varchar2(4000),	--rìŠ¤í‚¬ ì„¤ëª…
+	story varchar2(4000),	--ìŠ¤í† ë¦¬
+	tip varchar2(4000)	--íŒ
 );
 
--- ÀüÃ¼ °ÔÀÓÁ¤º¸/matchinfo
+-- ì „ì²´ ê²Œì„ì •ë³´/matchinfo
 create table matchinfo
 (
-	matchid varchar2(255) primary key,	--°æ±â°íÀ¯ id
-	type varchar2(255),	--°ÔÀÓ Å¸ÀÔ
-	runtime varchar2(255),	--°ÔÀÓ ÁøÇà½Ã°£
-	startTime date	--°ÔÀÓ ½ÃÀÛ½Ã°£
+	matchid varchar2(255) primary key,	--ê²½ê¸°ê³ ìœ  id
+	type varchar2(255),	--ê²Œì„ íƒ€ì…
+	runtime varchar2(255),	--ê²Œì„ ì§„í–‰ì‹œê°„
+	startTime date	--ê²Œì„ ì‹œì‘ì‹œê°„
 );
 
--- ÆÀÁ¤º¸/teaminfo
+-- íŒ€ì •ë³´/teaminfo
 CREATE TABLE "TEAMINFO" 
 (   
-	"TEAMID" VARCHAR2(255 BYTE) NOT NULL ENABLE, --ÆÀ id
-    "MATCHID" VARCHAR2(255 BYTE) NOT NULL ENABLE, --°æ±â °íÀ¯ id
-    "WINLOSE" VARCHAR2(255 BYTE), --½ÂÆĞ¿©ºÎ
-    "FIRSTBLOOD" VARCHAR2(255 BYTE), --ÆÛ½ºÆ®ºí·¯µå
-    "FIRSTTOWER" VARCHAR2(255 BYTE), --ÆÛ½ºÆ®Å¸¿ö
-    "BARONKILL" NUMBER, --¹Ù·Ğ Å³
-    "DRAGONKILL" NUMBER, --µå·¡°ï Å³
-    "TOWERKILL" NUMBER, --Æ÷Å¾ Å³
+	"TEAMID" VARCHAR2(255 BYTE) NOT NULL ENABLE, --íŒ€ id
+    "MATCHID" VARCHAR2(255 BYTE) NOT NULL ENABLE, --ê²½ê¸° ê³ ìœ  id
+    "WINLOSE" VARCHAR2(255 BYTE), --ìŠ¹íŒ¨ì—¬ë¶€
+    "FIRSTBLOOD" VARCHAR2(255 BYTE), --í¼ìŠ¤íŠ¸ë¸”ëŸ¬ë“œ
+    "FIRSTTOWER" VARCHAR2(255 BYTE), --í¼ìŠ¤íŠ¸íƒ€ì›Œ
+    "BARONKILL" NUMBER, --ë°”ë¡  í‚¬
+    "DRAGONKILL" NUMBER, --ë“œë˜ê³¤ í‚¬
+    "TOWERKILL" NUMBER, --í¬íƒ‘ í‚¬
     CONSTRAINT "TEAMINFO_PK" PRIMARY KEY ("TEAMID", "MATCHID"),
     CONSTRAINT "TEAMINFO_FK1" FOREIGN KEY ("MATCHID") REFERENCES "FINAL"."MATCHINFO" ("MATCHID")
 );
 
---ÆÀ¿ø Á¤º¸/teamMemberinfo
+--íŒ€ì› ì •ë³´/teamMemberinfo
 CREATE TABLE TEAMMEMBERINFO
 (   
 	"TMNUM" NUMBER, 
@@ -295,7 +296,7 @@ CREATE TABLE TEAMMEMBERINFO
     REFERENCES "FINAL"."ITEM" ("INUM") ENABLE
 );
 
---¹êÇÈ¸ñ·Ï/banList
+--ë°´í”½ëª©ë¡/banList
 create table banList
 (
 	bNum number primary key,
@@ -306,12 +307,12 @@ create table banList
 create SEQUENCE msgNum_seq;
 create SEQUENCE tNum_seq;
 create SEQUENCE mNum_seq;
-create SEQUENCE bNum_seq; --¹èÆÃ¹øÈ£
+create SEQUENCE bNum_seq; --ë°°íŒ…ë²ˆí˜¸
 create SEQUENCE sNum_seq;
 create SEQUENCE fileNum_seq;
-create SEQUENCE rNum_seq; --½Å°í¹øÈ£
-create SEQUENCE reNum_seq; --´ñ±Û¹øÈ£
+create SEQUENCE rNum_seq; --ì‹ ê³ ë²ˆí˜¸
+create SEQUENCE reNum_seq; --ëŒ“ê¸€ë²ˆí˜¸
 create SEQUENCE pNum_seq;
 create SEQUENCE tmNum_seq;
 create SEQUENCE iNum_seq;
-create SEQUENCE banNum_seq;	--¹ê ¹øÈ£
+create SEQUENCE banNum_seq;	--ë°´ ë²ˆí˜¸

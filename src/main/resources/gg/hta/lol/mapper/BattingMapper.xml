@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="gg.hta.lol.mapper.BattingMapper">
+  <insert id="addTeam" parameterType="string">
+  insert into battingteaminfo values(tnum_seq.nextval,#{tname})
+  </insert>
+  <select id="teamlist" resultType="gg.hta.lol.vo.BattingTeamInfoVo">
+  select * from battingteaminfo
+  </select>
+  <insert id="addMatch" parameterType="gg.hta.lol.vo.MatchVo">
+  insert into match values(mNum_seq.nextval,#{mDate},#{mRate},null,#{tNum1},#{tNum2})
+  </insert>
+  <select id="teaminfo" resultType="string">
+  select tname from battingteaminfo where tnum=#{tnum}
+  </select>
+  <select id="matchinfo" parameterType="string" resultType="hashmap">
+select match.mnum,match.tnum1,match.tnum2,b1.tname b1name,b2.tname b2name,mrate,mwinlose from match inner join battingteaminfo b1 on match.tnum2=b1.tnum   inner join battingteaminfo b2 on match.tnum1=b2.tnum where to_char(mdate,'yyyy/mm/dd')=#{mdate}
+  </select>
+  </mapper>
