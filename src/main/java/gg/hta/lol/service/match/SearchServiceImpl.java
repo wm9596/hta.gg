@@ -81,21 +81,27 @@ public class SearchServiceImpl implements SearchService {
 							name,
 							summonerInfo.get("summonerLevel").getAsInt(), 
 							summonerInfo.get("profileIconId").getAsString()
-							)
+							),
+			true
 				);
 		
 		addQueueInfo(sid);
 		getMatchList(aid);
 	}
 	
+	/**
+	 * isUpdate = 정보가 중복일때 업데이트 시킬지 여부*/
 	@Override
-	public void addSummoner(SummonerVo svo) {
+	public void addSummoner(SummonerVo svo,boolean isUpdate) {
 		try {
 			System.out.println("소환사 추가");
 			summonerMapper.addSummoner(svo);
 		}catch (DuplicateKeyException e) {
-			System.out.println("소환사정보 중복 정보 수정");
-			summonerMapper.updateSummoner(svo);
+			System.out.println("소환사정보 중복 ");
+			if(isUpdate) {
+				System.out.println("소환사 정보 수정");
+				summonerMapper.updateSummoner(svo);
+			}
 		}
 		
 		System.out.println(svo);
@@ -103,7 +109,7 @@ public class SearchServiceImpl implements SearchService {
 	
 	@Override
 	public void addQueueInfo(String sid) {
-JsonArray leagueInfo = dataRequester.getLeagueInfo(sid);
+		JsonArray leagueInfo = dataRequester.getLeagueInfo(sid);
 		
 		for(int i = 0 ; i< leagueInfo.size() ; i++) {
 			JsonObject jo = leagueInfo.get(i).getAsJsonObject();
@@ -225,7 +231,8 @@ JsonArray leagueInfo = dataRequester.getLeagueInfo(sid);
 					userInfo.get("player").getAsJsonObject().get("summonerName").getAsString(),
 					0,
 					userInfo.get("player").getAsJsonObject().get("profileIcon").getAsString()
-					)
+					),
+					false
 				);
 			
 				TeamMemberinfoVo vo = new TeamMemberinfoVo(
