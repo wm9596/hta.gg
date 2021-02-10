@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<div id="header_left">
 		<img alt="" src="${pageContext.request.contextPath }/resources/images/hta.PNG" width="40" height="40">
 	</div>
@@ -43,8 +44,16 @@
 				<form method="post" action="/lol/member/logout" name="logout">
 					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 					<span style="color:rgba(255, 255, 255, 0.5);">
-						<i class="fa fa-user-circle-o" aria-hidden="true" onclick=""></i><br>
-						<a href="#" onclick="javascript:document.logout.submit();" style="color:rgba(255, 255, 255, 0.5);">logout</a>
+						<c:choose>
+							<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == 'admin'}">
+								<i class="fa fa-user-circle-o" aria-hidden="true" onclick="location.href='/lol/member/admin/main'"></i><br>
+								<a href="#" onclick="javascript:document.logout.submit();" style="color:rgba(255, 255, 255, 0.5);">logout</a>		
+							</c:when>
+							<c:otherwise>
+								<i class="fa fa-user-circle-o" aria-hidden="true" onclick="location.href='/lol/member/member/main'"></i><br>
+								<a href="#" onclick="javascript:document.logout.submit();" style="color:rgba(255, 255, 255, 0.5);">logout</a>
+							</c:otherwise>
+						</c:choose>
 					</span>
 				</form>
 			</div>

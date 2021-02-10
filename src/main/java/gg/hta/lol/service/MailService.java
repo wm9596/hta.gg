@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 
 import gg.hta.lol.dao.MemberDao;
 import gg.hta.lol.util.MailHandler;
-import gg.hta.lol.util.TempKey;
 import gg.hta.lol.vo.AuthVo;
-import gg.hta.lol.vo.AuthoritiesVo;
 import gg.hta.lol.vo.MemberVo;
 
 @Service

@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<meta name="viewport" content="width=device-width, initial-scale=1"> 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script> 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script> 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1">  -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">  -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>  -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>  -->
 
 	<div id="header_left">
 		<img alt="" src="${pageContext.request.contextPath }/resources/images/hta.PNG" width="40" height="40">
@@ -44,8 +45,16 @@
 				<form method="post" action="/lol/member/logout" name="logout">
 					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 					<span style="color:rgba(255, 255, 255, 0.5);">
-						<i class="fa fa-user-circle-o" aria-hidden="true" onclick=""></i><br>
-						<a href="#" onclick="javascript:document.logout.submit();" style="color:rgba(255, 255, 255, 0.5);">logout</a>
+						<c:choose>
+							<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == 'admin'}">
+								<i class="fa fa-user-circle-o" aria-hidden="true" onclick="location.href='/lol/member/admin/main'"></i><br>
+								<a href="#" onclick="javascript:document.logout.submit();" style="color:rgba(255, 255, 255, 0.5);">logout</a>		
+							</c:when>
+							<c:otherwise>
+								<i class="fa fa-user-circle-o" aria-hidden="true" onclick="location.href='/lol/member/member/main'"></i><br>
+								<a href="#" onclick="javascript:document.logout.submit();" style="color:rgba(255, 255, 255, 0.5);">logout</a>
+							</c:otherwise>
+						</c:choose>
 					</span>
 				</form>
 			</div>
