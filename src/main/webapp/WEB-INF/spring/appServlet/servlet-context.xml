@@ -15,7 +15,6 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	
-	
 	<beans:bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<beans:property name="definitions">
 			<beans:value>/WEB-INF/tiles-def.xml</beans:value>
@@ -41,4 +40,6 @@
 	
 	<context:component-scan base-package="gg.hta.lol.controller" />
 	
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+	<beans:bean class="gg.hta.lol.util.NaverLoginBO" id="naverLoginBO" />
 </beans:beans>
