@@ -1,6 +1,7 @@
 package gg.hta.lol.controller.member;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -109,5 +110,30 @@ public class LoginController {
 		}else {
 			return ".header2.member.error";
 		}
+	}
+	@GetMapping("/member/all/main")
+	public String all() {
+//		return ".header2.member.all.main";
+		return ".header.home";
+	}
+	@GetMapping("/member/member/main")
+	public String member() {
+//		return ".header2.member.member.main";
+		return ".header.home";
+	}
+	@GetMapping("/member/admin/main")
+	public String admin() {
+//		return ".header2.member.admin.main";
+		return ".header.home";
+	}
+	@GetMapping("/member/member/info")
+	public String myPage(Principal principal, Model m) {
+		MemberVo vo = service.selectOne(principal.getName());
+		m.addAttribute("vo", vo);
+		return ".mypage.info";
+	}
+	@GetMapping("/member/admin/memberList")
+	public String adminPage() {
+		return ".adminpage.memberList";
 	}
 }

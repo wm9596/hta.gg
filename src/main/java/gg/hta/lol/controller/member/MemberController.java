@@ -27,17 +27,4 @@ public class MemberController {
 			return ".header2.member.error";
 		}
 	}
-	
-	@GetMapping("/member/all/main")
-	public String all() {
-		return ".header2.member.all.main";
-	}
-	@GetMapping("/member/member/main")
-	public String member() {
-		return ".header2.member.member.main";
-	}
-	@GetMapping("/member/admin/main")
-	public String admin() {
-		return ".header2.member.admin.main";
-	}
 }

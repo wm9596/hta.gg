@@ -47,11 +47,11 @@
 					<span style="color:rgba(255, 255, 255, 0.5);">
 						<c:choose>
 							<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == 'admin'}">
-								<i class="fa fa-user-circle-o" aria-hidden="true" onclick="location.href='/lol/member/admin/main'"></i><br>
+								<i class="fa fa-user-circle-o" aria-hidden="true" onclick="location.href='/lol/member/admin/memberList'"></i><br>
 								<a href="#" onclick="javascript:document.logout.submit();" style="color:rgba(255, 255, 255, 0.5);">logout</a>		
 							</c:when>
 							<c:otherwise>
-								<i class="fa fa-user-circle-o" aria-hidden="true" onclick="location.href='/lol/member/member/main'"></i><br>
+								<i class="fa fa-user-circle-o" aria-hidden="true" onclick="location.href='/lol/member/member/info'"></i><br>
 								<a href="#" onclick="javascript:document.logout.submit();" style="color:rgba(255, 255, 255, 0.5);">logout</a>
 							</c:otherwise>
 						</c:choose>

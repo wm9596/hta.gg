@@ -3,11 +3,21 @@
 "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 <!-- 	타일즈정의 -->
-		<definition name=".home" template="/WEB-INF/views/layout.jsp">
-			<put-attribute name="header" value="/WEB-INF/views/header.jsp"/>
-			<put-attribute name="content" value="/WEB-INF/views/home.jsp"/>
-			<put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
-		</definition>
+	<definition name=".adminpage.*" template="/WEB-INF/views/member/admin/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/header2.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/member/admin/{1}.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
+	</definition>
+	<definition name=".mypage.*" template="/WEB-INF/views/member/member/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/header2.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/member/member/{1}.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
+	</definition>
+	<definition name=".home" template="/WEB-INF/views/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/header.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/home.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
+	</definition>
 <!-- 	<definition name=".itemlist" template="/WEB-INF/views/layout.jsp"> -->
 <!-- 		<put-attribute name="header" value="/WEB-INF/views/header.jsp"/> -->
 <!-- 		<put-attribute name="content" value="/WEB-INF/views/itemlist.jsp"/> -->
@@ -39,7 +49,6 @@
 		<put-attribute name="content" value="/WEB-INF/views/{2}.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
 	</definition>
-	
 </tiles-definitions>
 
 

@@ -27,7 +27,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 		}else if(roleNames.contains("ROLE_MEMBER")) {
 			response.sendRedirect(request.getContextPath()+"/member/member/main");
 		}else {
-			response.sendRedirect(request.getContextPath()+"/member/all.main");
+			response.sendRedirect(request.getContextPath()+"/member/all/main");
 		}
 		clearAuthenticationAttributes(request);
 	}
