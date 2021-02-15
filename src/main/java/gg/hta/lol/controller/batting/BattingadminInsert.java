@@ -53,12 +53,27 @@ public class BattingadminInsert {
 		return map;
 	}
 
-	@GetMapping(value = "/insertmatch", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@GetMapping(value = "/insertmatch")
 	@ResponseBody
 	public String addbatting(MatchVo vo) { // 매치정보추가(승리팀은 업데이트형식으로)
+		
+		System.out.println(vo.toString()+"////////////////////////");
 		service.addMatch(vo);
-		System.out.println(vo.toString());
 		return "{\"code\":\"" + vo + "\"}";
+	}
+	
+	@GetMapping(value="/winupdate")
+	@ResponseBody
+	public String winUpdate(MatchVo vo) {
+		service.winupdate(vo);
+		
+		return "{\"code\":\"" + vo + "\"}";
+	}
+	@GetMapping(value="/battingdeleteTeam")
+	@ResponseBody
+	public String deleteTeam(int tnum) {
+		service.battingdeleteTeam(tnum);
+		return "{\"code\":\"good \"}";
 	}
 
 }

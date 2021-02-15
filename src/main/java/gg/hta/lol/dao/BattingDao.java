@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import gg.hta.lol.vo.BattingLogVo;
 import gg.hta.lol.vo.BattingTeamInfoVo;
 import gg.hta.lol.vo.MatchVo;
 
@@ -32,5 +33,17 @@ public class BattingDao {
 	}
 	public List<String> teamName2(int mnum3) {
 		return sqlSession.selectList(NAMESPACE+".teamName2",mnum3);
+	}
+	public int winupdate(MatchVo vo) {
+		return sqlSession.update(NAMESPACE+".winupdate",vo);
+	}
+	public int battingdeleteTeam(int tnum) {
+		return sqlSession.delete(NAMESPACE+".battingdeleteTeam",tnum);
+	}
+	public int selectTeam(BattingLogVo vo) {
+		return sqlSession.insert(NAMESPACE+".selectTeam",vo);
+	}
+	public List<BattingLogVo> battingchoice(BattingLogVo vo){
+		return sqlSession.selectList(NAMESPACE+".battingchoice",vo);
 	}
 }

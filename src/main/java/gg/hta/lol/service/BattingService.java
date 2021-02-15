@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import gg.hta.lol.dao.BattingDao;
+import gg.hta.lol.vo.BattingLogVo;
 import gg.hta.lol.vo.BattingTeamInfoVo;
 import gg.hta.lol.vo.MatchVo;
 
@@ -31,5 +32,16 @@ public class BattingService {
 	public List<String> teamName2(int mnum3){
 		return dao.teamName2(mnum3);
 	}
-
+	public int winupdate(MatchVo vo) {
+		return dao.winupdate(vo);
+	}
+	public int battingdeleteTeam(int tnum) {
+		return dao.battingdeleteTeam(tnum);
+	}
+	public int selectTeam(BattingLogVo vo) {
+		return dao.selectTeam(vo);
+	}
+	public List<BattingLogVo> battingchoice(BattingLogVo vo){
+		return dao.battingchoice(vo);
+	}
 }
