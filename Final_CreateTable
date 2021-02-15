@@ -75,7 +75,7 @@ create table member
 	username varchar2(50) NOT NULL enable,	--�븘�씠�뵒
 	snickname varchar2(255) references summoner,	--�냼�솚�궗踰덊샇
 	password varchar2(100) not null,	--鍮꾨�踰덊샇
-	ENABLED NUMBER(1) NOT NULL,	--enable(�궗�슜媛��뒫)
+	ENABLED CHAR(1) DEFAULT 1 CHECK(ENABLED='0' OR ENABLED='1') NOT NULL,	--enable(�궗�슜媛��뒫)
 	email varchar2(50),	-- �씠硫붿씪
 	regdate date,	--媛��엯�궇吏�
 	nickname varchar2(12),	--而ㅻ�ㅻ땲�떚 �땳�꽕�엫
@@ -321,3 +321,4 @@ create SEQUENCE banNum_seq;	--諛� 踰덊샇
 
 ------------컬럼명 바꾸기 --------------------------------
 alter table member rename column enable to enabled;
+alter table member modify ENABLED CHAR(1) DEFAULT 1 CHECK(ENABLED='0' OR ENABLED='1') NOT NULL; 
