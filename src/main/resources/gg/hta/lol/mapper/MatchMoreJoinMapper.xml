@@ -6,9 +6,13 @@
 <mapper namespace="gg.hta.lol.mapper.MatchMoreJoinMapper">
 	<select id="getMatchInfoList" parameterType="hashmap" resultType="gg.hta.lol.joinvo.MatchMoreJoinVo">
 		select *
-		from teaminfo t, teammemberinfo tm, summoner s, queueinfo q
-		where t.teamid = tm.teamid and tm.snickname = s.snickname
-		and t.matchid = tm.matchid and t.matchid= #{matchid}
-		and s.snickname = q.snickname and q.queuetype = #{type}
+		from teaminfo t, teammemberinfo tm
+		where t.teamid = tm.teamid and t.matchid = tm.matchid and tm.matchid= #{matchid}
+<!-- 		select * -->
+<!-- 		from teaminfo t, teammemberinfo tm, summoner s, queueinfo q -->
+<!-- 		where t.teamid = tm.teamid and tm.snickname = s.snickname -->
+<!-- 		and t.matchid = tm.matchid and t.matchid= #{matchid} -->
+<!-- 		and s.snickname = q.snickname  -->
+<!--		and q.queuetype = #{type} -->
 	</select>
 </mapper>

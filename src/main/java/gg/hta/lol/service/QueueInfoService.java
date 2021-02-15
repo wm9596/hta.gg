@@ -1,5 +1,6 @@
 package gg.hta.lol.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,5 +16,9 @@ public class QueueInfoService {
 	
 	public List<QueueInfoVo> getQueueInfo(String nickname) {
 		return qDao.getQueueInfo(nickname);
+	}
+	
+	public String getTier(HashMap<String, String> map) {
+		return qDao.getTier(map);
 	}
 }

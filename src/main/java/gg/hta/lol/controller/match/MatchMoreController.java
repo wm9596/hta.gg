@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import gg.hta.lol.dao.RatingDao;
 import gg.hta.lol.joinvo.MatchMoreJoinVo;
+import gg.hta.lol.mapper.RatingMapper;
 import gg.hta.lol.service.ChampionService;
 import gg.hta.lol.service.MatchInfoService;
 import gg.hta.lol.service.MatchMoreJoinService;
@@ -20,6 +22,9 @@ import gg.hta.lol.vo.QueueInfoVo;
 
 @Controller
 public class MatchMoreController {
+	
+	@Autowired
+	private RatingService rService;
 	
 	@Autowired
 	private SummonerService smService;
@@ -35,8 +40,18 @@ public class MatchMoreController {
 	private ChampionService championService;
 	
 	// test
-	final String NICKNAME = "댕청잇";
-	final String MATCHID = "4973355155";
+	final String NICKNAME = "오리지널찰떡쿠키";
+	final String MATCHID = "4995801953";
+	
+	// 소환사 평가 추가
+	@GetMapping("/insertRating")
+	public String insertRating(Model model, int rating) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("snickname", NICKNAME);
+		map.put("rating", rating);
+		rService.addRating(map);
+		return ".header2.match.matchMore";
+	}
 	
 	@GetMapping("/matchMore")
 	public String matchMore(Model model) {
@@ -127,10 +142,46 @@ public class MatchMoreController {
 		List<HashMap<String, Object>> homeTeamMemberSpellRune = new ArrayList<HashMap<String,Object>>();
 		List<HashMap<String, Object>> awayTeamMemberSpellRune = new ArrayList<HashMap<String,Object>>();
 		
-//		int[] homeTeamKillContribute = new int[5];
-//		int[] awayTeamKillContribute = new int[5];
+		List<Integer> homeTeamMemberCs = new ArrayList<Integer>();
+		List<Integer> awayTeamMemberCs = new ArrayList<Integer>();
+		int homeTeamCs = 0;
+		int awayTeamCs = 0;
 		
+		List<Integer> homeTeamMemberDoDmg = new ArrayList<Integer>();
+		List<Integer> awayTeamMemberDoDmg = new ArrayList<Integer>();
+		int homeTeamDoDmg = 0;
+		int awayTeamDoDmg = 0;
 		
+		List<Integer> homeTeamMemberTakenDmg = new ArrayList<Integer>();
+		List<Integer> awayTeamMemberTakenDmg = new ArrayList<Integer>();
+		int homeTeamTakenDmg = 0;
+		int awayTeamTakenDmg = 0;
+		
+		List<Integer> homeTeamMemberGold = new ArrayList<Integer>();
+		List<Integer> awayTeamMemberGold = new ArrayList<Integer>();
+		int homeTeamGold = 0;
+		int awayTeamGold = 0;
+		
+		List<Integer> homeTeamMemberLevel = new ArrayList<Integer>();
+		List<Integer> awayTeamMemberLevel = new ArrayList<Integer>();
+		
+		List<Integer> homeTeamMemberWardInstall = new ArrayList<Integer>();
+		List<Integer> awayTeamMemberWardInstall = new ArrayList<Integer>();
+		int homeTeamWardInstall = 0;
+		int awayTeamWardInstall = 0;
+		
+		List<Integer> homeTeamMemberWardRemove = new ArrayList<Integer>();
+		List<Integer> awayTeamMemberWardRemove = new ArrayList<Integer>();
+		int homeTeamWardRemove = 0;
+		int awayTeamWardRemove = 0;
+		
+		String homeTeamWinLose = "";
+		String awayTeamWinLose = "";
+		
+		HashMap<String, Object> homeTeamObject = new HashMap<String, Object>();
+		HashMap<String, Object> awayTeamObject = new HashMap<String, Object>();
+		
+		int loopCnt = 0;
 		for (MatchMoreJoinVo Vo : matchMoreJoinList) {
 			
 			// 팀원 챔피언 초상화 받아오기
@@ -138,15 +189,19 @@ public class MatchMoreController {
 			// 팀원 아이템 리스트 받아오기
 			int[] itemList = {Vo.getItem1(), Vo.getItem2(), Vo.getItem3(), Vo.getItem4(), Vo.getItem5(), Vo.getItem6(), Vo.getAccessory()};
 			// 팀원 룬, 스펠 받아오기
-			
 			String spell1 = spell.get(Vo.getSpell1() + "");
 			String spell2 = spell.get(Vo.getSpell2() + "");
 			String rune1 = rune.get(Vo.getRune1() + "");
 			String rune2 = rune.get(Vo.getRune2() + "");
 			
+			// 팀 승패여부 받아오기
+			HashMap<String, String> tierMap = new HashMap<String, String>();
+			tierMap.put("queuetype", matchType);
+			
 			if (Vo.getTeamId().equals("100")) {
 				// 팀 티어 받아오기
-				homeTeamTierList.add(Vo.getTier());
+				tierMap.put("snickname", Vo.getSnickname());
+				homeTeamTierList.add(qiService.getTier(tierMap));
 				// 팀원 KDA 받아오기
 				homeTeamMemberKill.add(Vo.getKill());
 				homeTeamMemberAssist.add(Vo.getAssist());
@@ -173,9 +228,45 @@ public class MatchMoreController {
 				
 				// 팀원 아이템리스트
 				homeTeamItemList.add(itemList);
+				
+				// 팀 CS
+				homeTeamMemberCs.add(Vo.getCs());
+				homeTeamCs += Vo.getCs();
+				
+				// 팀 준 데미지
+				homeTeamMemberDoDmg.add(Vo.getChampionDamage());
+				homeTeamDoDmg += Vo.getChampionDamage();
+				
+				// 받은 데미지
+				homeTeamMemberTakenDmg.add(Vo.getTakenDamage());
+				homeTeamTakenDmg += Vo.getTakenDamage();
+				
+				// 골드
+				homeTeamMemberGold.add(Vo.getGold());
+				homeTeamGold += Vo.getGold();
+				
+				// 레벨
+				homeTeamMemberLevel.add(Vo.getChampionLevel());
+				
+				// 와드설치
+				homeTeamMemberWardInstall.add(Vo.getWardInstall());
+				homeTeamWardInstall += Vo.getWardInstall();
+				
+				// 와드제거
+				homeTeamMemberWardRemove.add(Vo.getWardRemove());
+				homeTeamWardRemove += Vo.getWardRemove();
+				
+				// 승패여부
+				homeTeamWinLose = Vo.getWinlose();
+				
+				// 오브젝트
+				homeTeamObject.put("dragon", Vo.getDragonKill());
+				homeTeamObject.put("baron", Vo.getBaronKill());
+				homeTeamObject.put("tower", Vo.getTowerKill());
 			
 			} else {
-				awayTeamTierList.add(Vo.getTier());
+				tierMap.put("snickname", Vo.getSnickname());
+				awayTeamTierList.add(qiService.getTier(tierMap));
 				
 				awayTeamMemberKill.add(Vo.getKill());
 				awayTeamMemberAssist.add(Vo.getAssist());
@@ -199,10 +290,39 @@ public class MatchMoreController {
 				}});
 				
 				awayTeamItemList.add(itemList);
+				
+				awayTeamMemberCs.add(Vo.getCs());
+				awayTeamCs += Vo.getCs();
+				
+				awayTeamMemberDoDmg.add(Vo.getChampionDamage());
+				awayTeamDoDmg += Vo.getChampionDamage();
+				
+				awayTeamMemberTakenDmg.add(Vo.getChampionDamage());
+				awayTeamTakenDmg += Vo.getChampionDamage();
+				
+				awayTeamMemberGold.add(Vo.getGold());
+				awayTeamGold += Vo.getGold();
+				awayTeamMemberLevel.add(Vo.getChampionLevel());
+				
+				awayTeamMemberWardInstall.add(Vo.getWardInstall());
+				awayTeamWardInstall += Vo.getWardInstall();
+				
+				awayTeamMemberWardRemove.add(Vo.getWardRemove());
+				awayTeamWardRemove += Vo.getWardRemove();
+				
+				awayTeamWinLose = Vo.getWinlose();
+				
+				awayTeamObject.put("dragon", Vo.getDragonKill());
+				awayTeamObject.put("baron", Vo.getBaronKill());
+				awayTeamObject.put("tower", Vo.getTowerKill());
 			}
 			
 			
 		}
+		
+		// 각팀 티어
+		model.addAttribute("homeTeamTierList", homeTeamTierList);
+		model.addAttribute("awayTeamTierList", awayTeamTierList);
 		
 		// 각팀 평균티어
 		homeTeamTierAvg = getTierAvg(homeTeamTierList);
@@ -252,9 +372,62 @@ public class MatchMoreController {
 		model.addAttribute("homeTeamItemList", homeTeamItemList);
 		model.addAttribute("awayTeamItemList", awayTeamItemList);
 		
-		// 팀원 킬 관여도
-//		model.addAttribute("homeTeamKill")
+		// 팀 Cs
+		model.addAttribute("homeTeamCs", homeTeamCs);
+		model.addAttribute("awayTeamCs", awayTeamCs);
+		// 팀원 CS
+		model.addAttribute("homeTeamMemberCs", homeTeamMemberCs);
+		model.addAttribute("awayTeamMemberCs", awayTeamMemberCs);
 		
+		// 팀 가한 데미지
+		model.addAttribute("homeTeamDoDmg", homeTeamDoDmg);
+		model.addAttribute("awayTeamDoDmg", awayTeamDoDmg);
+		// 팀원 가한 데미지
+		model.addAttribute("homeTeamMemberDoDmg", homeTeamMemberDoDmg);
+		model.addAttribute("awayTeamMemberDoDmg", awayTeamMemberDoDmg);
+		
+		// 팀 받은 데미지
+		model.addAttribute("homeTeamTakenDmg", homeTeamTakenDmg);
+		model.addAttribute("awayTeamTakenDmg", awayTeamTakenDmg);
+		// 팀원 받은 데미지
+		model.addAttribute("homeTeamMemberTakenDmg", homeTeamMemberTakenDmg);
+		model.addAttribute("awayTeamMemberTakenDmg", awayTeamMemberTakenDmg);
+		
+		// 팀 골드
+		model.addAttribute("homeTeamGold", homeTeamGold);
+		model.addAttribute("awayTeamGold", awayTeamGold);
+		
+		// 팀원 골드
+		model.addAttribute("homeTeamMemberGold", homeTeamMemberGold);
+		model.addAttribute("awayTeamMemberGold", awayTeamMemberGold);
+		
+		// 팀원 레벨
+		model.addAttribute("homeTeamMemberLevel", homeTeamMemberLevel);
+		model.addAttribute("awayTeamMemberLevel", awayTeamMemberLevel);
+		
+		// 팀 와드설치
+		model.addAttribute("homeTeamWardInstall", homeTeamWardInstall);
+		model.addAttribute("awayTeamWardInstall", awayTeamWardInstall);
+		
+		// 팀원 와드설치
+		model.addAttribute("homeTeamMemberWardInstall", homeTeamMemberWardInstall);
+		model.addAttribute("awayTeamMemberWardInstall", awayTeamMemberWardInstall);
+		
+		// 팀 와드제거
+		model.addAttribute("homeTeamWardRemove", homeTeamWardRemove);
+		model.addAttribute("awayTeamWardRemove", awayTeamWardRemove);
+		
+		// 팀원 와드제거
+		model.addAttribute("homeTeamMemberWardRemove", homeTeamMemberWardRemove);
+		model.addAttribute("awayTeamMemberWardRemove", awayTeamMemberWardRemove);
+		
+		// 팀 승패
+		model.addAttribute("homeTeamWinLose", homeTeamWinLose);
+		model.addAttribute("awayTeamWinLose", awayTeamWinLose);
+		
+		// 오브젝트
+		model.addAttribute("homeTeamObject", homeTeamObject);
+		model.addAttribute("awayTeamObject", awayTeamObject);
 		
 		return ".header2.match.matchMore";
 	}
@@ -275,14 +448,24 @@ public class MatchMoreController {
 		tierMap.put("SILVER", "3");
 		tierMap.put("BRONZE", "2");
 		tierMap.put("IRON", "1");
+		tierMap.put("unranked", "0");
+		
+		int memberCnt = 0;
 		
 		for (String t : tierList) {
-			String tier = t.split("_")[0];
-			String tmp = (String) tierMap.get(tier);
-			tierAvgCnt += Integer.parseInt(tmp);
+			try {
+				String tier = t.split("_")[0];
+				String tmp = (String) tierMap.get(tier);
+				tierAvgCnt += Integer.parseInt(tmp);
+				memberCnt++;
+			} catch (NullPointerException e) {
+				tierAvgCnt += 0;
+			}
 		}
 		
-		tierAvgCnt /= 5;
+		if (memberCnt != 0) {
+			tierAvgCnt /= memberCnt;
+		}
 		
 		for (String o : tierMap.keySet()) {
 			if (tierMap.get(o).equals(Integer.toString(tierAvgCnt))) {	

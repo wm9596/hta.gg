@@ -1,5 +1,7 @@
 package gg.hta.lol.dao;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,5 +15,9 @@ public class RatingDao {
 	
 	public double getRatingAvg(String snickname) {
 		return sqlSession.selectOne(NAMESPACE + ".getRatingAvg", snickname);
+	}
+	
+	public int addRating (HashMap<String, Object> map) {
+		return sqlSession.insert(NAMESPACE + "addRating", map);
 	}
 }

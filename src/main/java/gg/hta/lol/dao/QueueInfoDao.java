@@ -1,5 +1,6 @@
 package gg.hta.lol.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,5 +17,9 @@ public class QueueInfoDao {
 	
 	public List<QueueInfoVo> getQueueInfo(String nickname) {
 		return sqlSession.selectList(NAMESPACE + ".getQueueInfo", nickname);
+	}
+	
+	public String getTier(HashMap<String, String> map) {
+		return sqlSession.selectOne(NAMESPACE + ".getTier", map);
 	}
 }

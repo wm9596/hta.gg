@@ -9,7 +9,7 @@
 		where snickname = #{snickname}
 	</select>
 	
-	<insert id="addRating">
+	<insert id="addRating" parameterType="hashmap">
 		insert into rating values(#{snickname},#{rate})
 	</insert>
 </mapper>

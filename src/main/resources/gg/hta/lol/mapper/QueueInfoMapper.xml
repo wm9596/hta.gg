@@ -15,4 +15,10 @@
 		update queueinfo set tier=#{tier},leaguePoints=#{leaguePoints},win=#{win},lose=#{lose}
 		where snickname=#{snickname} and  queueType=#{queueType}
 	</update>
+	
+	<select id="getTier" parameterType="hashmap" resultType="String">
+		select tier
+		from queueinfo
+		where queuetype = #{queuetype} and snickname = #{snickname}
+	</select>
 </mapper>

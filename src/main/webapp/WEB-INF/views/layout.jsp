@@ -26,4 +26,26 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+$( ".star_rating a" ).click(function() {
+    $(this).parent().children("a").removeClass("on");
+    $(this).addClass("on").prevAll("a").addClass("on");
+    return false;
+});
+
+$(".star_rating_1").click(function(e) {
+	postRating(1);
+})
+
+function postRating(rating) {
+	$.ajax({
+		type: "GET",
+		url: "/lol/insertRating?rating=" + rating,
+		dataType: "text",
+		success: function() {
+			console.log("성공")
+		}
+	})
+}
+</script>
 </html>
