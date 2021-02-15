@@ -2,15 +2,15 @@
 drop SEQUENCE msgNum_seq;
 drop SEQUENCE tNum_seq;
 drop SEQUENCE mNum_seq;
-drop SEQUENCE bNum_seq; --배팅번호
+drop SEQUENCE bNum_seq; --諛고똿踰덊샇
 drop SEQUENCE sNum_seq;
 drop SEQUENCE fileNum_seq;
-drop SEQUENCE rNum_seq; --신고번호
-drop SEQUENCE reNum_seq; --댓글번호
+drop SEQUENCE rNum_seq; --�떊怨좊쾲�샇
+drop SEQUENCE reNum_seq; --�뙎湲�踰덊샇
 drop SEQUENCE pNum_seq;
 drop SEQUENCE tmNum_seq;
 drop SEQUENCE iNum_seq;
-drop SEQUENCE banNum_seq;	--밴 번호
+drop SEQUENCE banNum_seq;	--諛� 踰덊샇
 
 ---------- drop table ---------- 
 drop table visitLog;
@@ -38,7 +38,7 @@ drop table champion;
 drop table item;
 
 
--- 접속 기록/visitLog
+-- �젒�냽 湲곕줉/visitLog
 create table visitLog
 (
 	vDate date not null
@@ -46,9 +46,9 @@ create table visitLog
 
 create table summoner
 (
-	sNickname varchar2(255)PRIMARY KEY,	--소환사 이름
-	sLevel number,	--소환사 레벨
-	icon varchar2(255)	--프로필아이콘
+	sNickname varchar2(255)PRIMARY KEY,	--�냼�솚�궗 �씠由�
+	sLevel number,	--�냼�솚�궗 �젅踰�
+	icon varchar2(255)	--�봽濡쒗븘�븘�씠肄�
 );
 
 CREATE TABLE queueinfo
@@ -62,24 +62,24 @@ CREATE TABLE queueinfo
 	PRIMARY KEY (snickname, queueType)
 );
 
--- 이메일 인증번호/auth
+-- �씠硫붿씪 �씤利앸쾲�샇/auth
 create table auth
 (
-	username varchar2(50) primary key,	--아이디
-	code varchar2(1000)	--이메일 인증번호
+	username varchar2(50) primary key,	--�븘�씠�뵒
+	code varchar2(1000)	--�씠硫붿씪 �씤利앸쾲�샇
 );
 
--- 회원/MEMBER
+-- �쉶�썝/MEMBER
 create table member
 (
-	username varchar2(50) NOT NULL enable,	--아이디
-	snickname varchar2(255) references summoner,	--소환사번호
-	password varchar2(100) not null,	--비밀번호
-	enable char(1) default '1' check(enable in('0', '1')),	--enable(사용가능)
-	email varchar2(50),	-- 이메일
-	regdate date,	--가입날짜
-	nickname varchar2(12),	--커뮤니티 닉네임
-	point number,	--포인트
+	username varchar2(50) NOT NULL enable,	--�븘�씠�뵒
+	snickname varchar2(255) references summoner,	--�냼�솚�궗踰덊샇
+	password varchar2(100) not null,	--鍮꾨�踰덊샇
+	ENABLED NUMBER(1) NOT NULL,	--enable(�궗�슜媛��뒫)
+	email varchar2(50),	-- �씠硫붿씪
+	regdate date,	--媛��엯�궇吏�
+	nickname varchar2(12),	--而ㅻ�ㅻ땲�떚 �땳�꽕�엫
+	point number,	--�룷�씤�듃
     CONSTRAINT "member_PK" PRIMARY KEY ("USERNAME"),
     CONSTRAINT "member_FK1" FOREIGN KEY ("USERNAME") REFERENCES "FINAL"."AUTH" ("USERNAME")
 );
@@ -92,163 +92,163 @@ CREATE TABLE persistent_logins
   last_used timestamp not null
 );
 
--- 프로필 평가(rating)
+-- �봽濡쒗븘 �룊媛�(rating)
 create table rating
 (
 	snickname varchar2(255) references summoner,
 	rate varchar2(100) 
 );
 
--- 쪽지/message
+-- 履쎌�/message
 create table message
 (
-	msgNum number primary key,	--쪽지 번호
-	sender varchar2(50) references member(username),	--보낸 사람 아이디
-	receiver varchar2(50) references member(username),	--받는 사람 아이디
-	msg varchar2(4000),		--메세지 내용
-	sendTime date,		--보낸 시간
-	open varchar2(255) --확인여부
+	msgNum number primary key,	--履쎌� 踰덊샇
+	sender varchar2(50) references member(username),	--蹂대궦 �궗�엺 �븘�씠�뵒
+	receiver varchar2(50) references member(username),	--諛쏅뒗 �궗�엺 �븘�씠�뵒
+	msg varchar2(4000),		--硫붿꽭吏� �궡�슜
+	sendTime date,		--蹂대궦 �떆媛�
+	open varchar2(255) --�솗�씤�뿬遺�
 );
 
--- 권한/authorities
+-- 沅뚰븳/authorities
 create table authorities
 (
-	username varchar2(50) not null,	--아이디
-	authority varchar2(100) not null, --권한
+	username varchar2(50) not null,	--�븘�씠�뵒
+	authority varchar2(100) not null, --沅뚰븳
 	constraint fk_authorities_users  foreign key(username) references member(username)
 );
 create unique index ix_auth_username on authorities (username,authority);	
 
--- 팀정보/battingTeamInfo
+-- ���젙蹂�/battingTeamInfo
 create table battingTeamInfo
 (
-	tNum number primary key,	--팀 번호
-	tName varchar2(255)	--팀 이름
+	tNum number primary key,	--�� 踰덊샇
+	tName varchar2(255)	--�� �씠由�
 );
--- 경기 일정/match
+-- 寃쎄린 �씪�젙/match
 create table match
 (
-	mNum number primary key,	--경기 번호
-	mDate date,	--경기 시간
-	mRate number,	--배당율
-	mWinlose number,	--승패여부
+	mNum number primary key,	--寃쎄린 踰덊샇
+	mDate date,	--寃쎄린 �떆媛�
+	mRate number,	--諛곕떦�쑉
+	mWinlose number,	--�듅�뙣�뿬遺�
     tNum1 number references battingTeamInfo(tnum) not null,
     tNum2 number references battingTeamInfo(tnum) not null
 );
 
 
--- 배팅내역/battingLog
+-- 諛고똿�궡�뿭/battingLog
 create table battingLog
 (
-	bNum number primary key,	--배팅내역 번호
-	mNum number references match(mNum) not null,	--경기 번호
-	username varchar2(50) references member(username) not null,	--아이디
-	choice number	--배팅한 팀
+	bNum number primary key,	--諛고똿�궡�뿭 踰덊샇
+	mNum number references match(mNum) not null,	--寃쎄린 踰덊샇
+	username varchar2(50) references member(username) not null,	--�븘�씠�뵒
+	choice number	--諛고똿�븳 ��
 );
 
--- 게시판/community
+-- 寃뚯떆�뙋/community
 create table community
 (
-	pNum number primary key,	--게시글 번호
-	username varchar2(50) references member(username) not null,	--아이디
-	cNum number not null,	--카테고리
-	title varchar2(255),	--글 제목
-	content varchar2(4000),	--글 내용
-	hit number,		--추천수
-	nohit number,	--반대수
-	viewCount number,	--조회수
-	commentCount number, --댓글수
-	regdate date -- 등록날짜
+	pNum number primary key,	--寃뚯떆湲� 踰덊샇
+	username varchar2(50) references member(username) not null,	--�븘�씠�뵒
+	cNum number not null,	--移댄뀒怨좊━
+	title varchar2(255),	--湲� �젣紐�
+	content varchar2(4000),	--湲� �궡�슜
+	hit number,		--異붿쿇�닔
+	nohit number,	--諛섎��닔
+	viewCount number,	--議고쉶�닔
+	commentCount number, --�뙎湲��닔
+	regdate date -- �벑濡앸궇吏�
 );
 
--- 신고/report
+-- �떊怨�/report
 create table report
 (
-	rNum number primary key, --신고번호
-	pNum number references community(pNum) not null,	--게시글 번호
-	detail varchar2(4000)	--신고내용
+	rNum number primary key, --�떊怨좊쾲�샇
+	pNum number references community(pNum) not null,	--寃뚯떆湲� 踰덊샇
+	detail varchar2(4000)	--�떊怨좊궡�슜
 );
 
--- 첨부파일/Addfile
+-- 泥⑤��뙆�씪/Addfile
 create table Addfile
 (
-	fileNum number primary key,	--첨부파일 번호
-	pNum number references community(pNum) not null,	--게시글 번호
-	orgPath varchar2(2000),	--원본파일경로
-	realPath varchar2(1000)	--저장파일명
+	fileNum number primary key,	--泥⑤��뙆�씪 踰덊샇
+	pNum number references community(pNum) not null,	--寃뚯떆湲� 踰덊샇
+	orgPath varchar2(2000),	--�썝蹂명뙆�씪寃쎈줈
+	realPath varchar2(1000)	--���옣�뙆�씪紐�
 );
 
--- 댓글/reply
+-- �뙎湲�/reply
 create table reply
 (
-	rNum number primary key,	--댓글 번호
-	pNum number references community(pNum) on delete cascade not null,	--게시글 번호
-	rereNum number,	--대댓글 번호
-	rWriter varchar2(255),	--댓글작성자
-	rContent varchar2(255),	--댓글내용
-	regdate date --댓글 작성날짜
+	rNum number primary key,	--�뙎湲� 踰덊샇
+	pNum number references community(pNum) on delete cascade not null,	--寃뚯떆湲� 踰덊샇
+	rereNum number,	--���뙎湲� 踰덊샇
+	rWriter varchar2(255),	--�뙎湲��옉�꽦�옄
+	rContent varchar2(255),	--�뙎湲��궡�슜
+	regdate date --�뙎湲� �옉�꽦�궇吏�
 );
 
---아이템/item
+--�븘�씠�뀥/item
 create table item
 (
-	iNum number primary key,	--아이템 번호
-	icon varchar2(255),	--아이템 아이콘
-	name varchar2(255),	--아이템이름
-	price number,	--아이템 가격
-	effect varchar2(4000),	--아이템효과
+	iNum number primary key,	--�븘�씠�뀥 踰덊샇
+	icon varchar2(255),	--�븘�씠�뀥 �븘�씠肄�
+	name varchar2(255),	--�븘�씠�뀥�씠由�
+	price number,	--�븘�씠�뀥 媛�寃�
+	effect varchar2(4000),	--�븘�씠�뀥�슚怨�
 	tags varchar2(100)
 );
 
---챔피언/champion
+--梨뷀뵾�뼵/champion
 create table champion
 (
-	championid varchar2(255) primary key,	--챔피언id
-	name varchar2(255),	--챔피언 이름
-	pickCount number,	--픽된 횟수
-	banCount number,	--밴된 횟수
-	winCount number,	--승리 횟수
-	loseCount number,	--패배 횟수
-	picture varchar2(255),	--초상화
-	skillP_icon varchar2(255),	--패시브 스킬 아이콘
-	skillP_info varchar2(4000),	--패시브 스킬 설명
-	skillQ_icon varchar2(255),	--q스킬 아이콘
-	skillQ_info varchar2(4000),	--q스킬 설명
-	skillW_icon varchar2(255),	--W스킬 아이콘
-	skillW_info varchar2(4000),	--W스킬 설명
-	skillE_icon varchar2(255),	--E스킬 아이콘
-	skillE_info varchar2(4000),	--E스킬 설명
-	skillR_icon varchar2(255),	--r스킬 아이콘
-	skillR_info varchar2(4000),	--r스킬 설명
-	story varchar2(4000),	--스토리
-	tip varchar2(4000)	--팁
+	championid varchar2(255) primary key,	--梨뷀뵾�뼵id
+	name varchar2(255),	--梨뷀뵾�뼵 �씠由�
+	pickCount number,	--�뵿�맂 �슏�닔
+	banCount number,	--諛대맂 �슏�닔
+	winCount number,	--�듅由� �슏�닔
+	loseCount number,	--�뙣諛� �슏�닔
+	picture varchar2(255),	--珥덉긽�솕
+	skillP_icon varchar2(255),	--�뙣�떆釉� �뒪�궗 �븘�씠肄�
+	skillP_info varchar2(4000),	--�뙣�떆釉� �뒪�궗 �꽕紐�
+	skillQ_icon varchar2(255),	--q�뒪�궗 �븘�씠肄�
+	skillQ_info varchar2(4000),	--q�뒪�궗 �꽕紐�
+	skillW_icon varchar2(255),	--W�뒪�궗 �븘�씠肄�
+	skillW_info varchar2(4000),	--W�뒪�궗 �꽕紐�
+	skillE_icon varchar2(255),	--E�뒪�궗 �븘�씠肄�
+	skillE_info varchar2(4000),	--E�뒪�궗 �꽕紐�
+	skillR_icon varchar2(255),	--r�뒪�궗 �븘�씠肄�
+	skillR_info varchar2(4000),	--r�뒪�궗 �꽕紐�
+	story varchar2(4000),	--�뒪�넗由�
+	tip varchar2(4000)	--�똻
 );
 
--- 전체 게임정보/matchinfo
+-- �쟾泥� 寃뚯엫�젙蹂�/matchinfo
 create table matchinfo
 (
-	matchid varchar2(255) primary key,	--경기고유 id
-	type varchar2(255),	--게임 타입
-	runtime varchar2(255),	--게임 진행시간
-	startTime date	--게임 시작시간
+	matchid varchar2(255) primary key,	--寃쎄린怨좎쑀 id
+	type varchar2(255),	--寃뚯엫 ���엯
+	runtime varchar2(255),	--寃뚯엫 吏꾪뻾�떆媛�
+	startTime date	--寃뚯엫 �떆�옉�떆媛�
 );
 
--- 팀정보/teaminfo
+-- ���젙蹂�/teaminfo
 CREATE TABLE "TEAMINFO" 
 (   
-	"TEAMID" VARCHAR2(255 BYTE) NOT NULL ENABLE, --팀 id
-    "MATCHID" VARCHAR2(255 BYTE) NOT NULL ENABLE, --경기 고유 id
-    "WINLOSE" VARCHAR2(255 BYTE), --승패여부
-    "FIRSTBLOOD" VARCHAR2(255 BYTE), --퍼스트블러드
-    "FIRSTTOWER" VARCHAR2(255 BYTE), --퍼스트타워
-    "BARONKILL" NUMBER, --바론 킬
-    "DRAGONKILL" NUMBER, --드래곤 킬
-    "TOWERKILL" NUMBER, --포탑 킬
+	"TEAMID" VARCHAR2(255 BYTE) NOT NULL ENABLE, --�� id
+    "MATCHID" VARCHAR2(255 BYTE) NOT NULL ENABLE, --寃쎄린 怨좎쑀 id
+    "WINLOSE" VARCHAR2(255 BYTE), --�듅�뙣�뿬遺�
+    "FIRSTBLOOD" VARCHAR2(255 BYTE), --�띁�뒪�듃釉붾윭�뱶
+    "FIRSTTOWER" VARCHAR2(255 BYTE), --�띁�뒪�듃���썙
+    "BARONKILL" NUMBER, --諛붾줎 �궗
+    "DRAGONKILL" NUMBER, --�뱶�옒怨� �궗
+    "TOWERKILL" NUMBER, --�룷�깙 �궗
     CONSTRAINT "TEAMINFO_PK" PRIMARY KEY ("TEAMID", "MATCHID"),
     CONSTRAINT "TEAMINFO_FK1" FOREIGN KEY ("MATCHID") REFERENCES "FINAL"."MATCHINFO" ("MATCHID")
 );
 
---팀원 정보/teamMemberinfo
+--���썝 �젙蹂�/teamMemberinfo
 CREATE TABLE TEAMMEMBERINFO
 (   
 	"TMNUM" NUMBER, 
@@ -297,7 +297,7 @@ CREATE TABLE TEAMMEMBERINFO
     REFERENCES "FINAL"."ITEM" ("INUM") ENABLE
 );
 
---밴픽목록/banList
+--諛댄뵿紐⑸줉/banList
 create table banList
 (
 	bNum number primary key,
@@ -308,12 +308,16 @@ create table banList
 create SEQUENCE msgNum_seq;
 create SEQUENCE tNum_seq;
 create SEQUENCE mNum_seq;
-create SEQUENCE bNum_seq; --배팅번호
+create SEQUENCE bNum_seq; --諛고똿踰덊샇
 create SEQUENCE sNum_seq;
 create SEQUENCE fileNum_seq;
-create SEQUENCE rNum_seq; --신고번호
-create SEQUENCE reNum_seq; --댓글번호
+create SEQUENCE rNum_seq; --�떊怨좊쾲�샇
+create SEQUENCE reNum_seq; --�뙎湲�踰덊샇
 create SEQUENCE pNum_seq;
 create SEQUENCE tmNum_seq;
 create SEQUENCE iNum_seq;
-create SEQUENCE banNum_seq;	--밴 번호
+create SEQUENCE banNum_seq;	--諛� 踰덊샇
+
+
+------------컬럼명 바꾸기 --------------------------------
+alter table member rename column enable to enabled;

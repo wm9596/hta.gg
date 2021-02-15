@@ -113,17 +113,14 @@ public class LoginController {
 	}
 	@GetMapping("/member/all/main")
 	public String all() {
-//		return ".header2.member.all.main";
 		return ".header.home";
 	}
 	@GetMapping("/member/member/main")
 	public String member() {
-//		return ".header2.member.member.main";
 		return ".header.home";
 	}
 	@GetMapping("/member/admin/main")
 	public String admin() {
-//		return ".header2.member.admin.main";
 		return ".header.home";
 	}
 	@GetMapping("/member/member/info")

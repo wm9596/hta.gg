@@ -13,7 +13,7 @@ import gg.hta.lol.vo.AuthoritiesVo;
 public class CustomUserDetail implements UserDetails{ //인증객체
 	private String username;
 	private String password;
-	private String enabled;
+	private boolean ENABLED;
 	private List<AuthoritiesVo> authoList;
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -51,6 +51,6 @@ public class CustomUserDetail implements UserDetails{ //인증객체
 	//사용가능한지
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return ENABLED;
 	}	
 }
