@@ -61,11 +61,11 @@
 				<h5>소환사평가</h5>
 				<fmt:formatNumber value="${rt }" pattern=".0"/>
 				<p class="star_rating">
-				    <a href="#" class="star_rating_value">★</a>
-				    <a href="#" class="star_rating_value">★</a>
-				    <a href="#" class="star_rating_value">★</a>
-				    <a href="#" class="star_rating_value">★</a>
-				    <a href="#" class="star_rating_value">★</a>
+				    <a href="#" class="star_rating_1">★</a>
+				    <a href="#" class="star_rating_2">★</a>
+				    <a href="#" class="star_rating_3">★</a>
+				    <a href="#" class="star_rating_4">★</a>
+				    <a href="#" class="star_rating_5">★</a>
 				</p>
 			</div>
 		</div>
