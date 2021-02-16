@@ -14,7 +14,8 @@ public class InsertController {
 	@Autowired private CommunityService service;
 	
 	@RequestMapping(value="/community/insert", method=RequestMethod.GET)
-	public String insertForm() {
+	public String insertForm(int cNum, Model model) {
+		model.addAttribute("cNum",cNum);
 		return ".header.community.insert";
 	}
 	

@@ -19,10 +19,13 @@ public class ListController {
 	@Autowired private CommunityService service;
 	
 	@RequestMapping("/community/list")
-	public ModelAndView list(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum,String field,String keyword) {
+	public ModelAndView list(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum,@RequestParam(value = "cNum",defaultValue = "1")int cNum, String field,String keyword) {
 		HashMap<String,Object> map=new HashMap<String, Object>();
 		map.put("field", field);
 		map.put("keyword",keyword);
+		
+		map.put("cNum", cNum);
+		
 		
 		int totalRowCount=service.count(map);
 		PageUtil pu=new PageUtil(pageNum, 10, 10, totalRowCount);
@@ -38,6 +41,7 @@ public class ListController {
 		mv.addObject("pu",pu);
 		mv.addObject("field", field);
 		mv.addObject("keyword",keyword);
+		mv.addObject("cNum", cNum);
 		return mv;
 	}
 }

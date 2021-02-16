@@ -19,8 +19,10 @@
 	</sql>
 	
 	<select id="count" resultType="int" parameterType="hashmap">
-		select NVL(count(*),0) cnt from community
-		<include refid="search"/>
+		select NVL(count(*),0) cnt from community where cNum=#{cNum}
+  				<if test="field!=null and field!=''">
+  					and ${field} like '%'||#{keyword}||'%'
+  				</if>
 	</select>
 	
 	<select id="list" resultType="community" parameterType="hashmap">
@@ -28,8 +30,10 @@
 		(
  			select a.*,rownum rnum from 
  			(
-  				select * from community
-  				<include refid="search"/>
+  				select * from community where cNum=#{cNum}
+  				<if test="field!=null and field!=''">
+  					and ${field} like '%'||#{keyword}||'%'
+  				</if>
   				order by pNum desc
   			) a
   		)
@@ -60,7 +64,7 @@
 	<select id="next" parameterType="int" resultType="community">
 		select * from
 		(
-			select * from community where pNum>#{pNum} order by pNum asc
+			select * from community where cNum=#{cNum} and pNum>#{pNum} order by pNum asc
 		)
 		where rownum=1
 	</select>
@@ -69,7 +73,7 @@
 		<![CDATA[
 		select * from
 		(
-			select * from community where pNum<#{pNum} order by pNum desc
+			select * from community where cNum=#{cNum} and pNum<#{pNum} order by pNum desc
 		)
 		where rownum=1
 		 ]]>

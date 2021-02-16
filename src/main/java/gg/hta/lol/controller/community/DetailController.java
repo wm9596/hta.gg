@@ -26,7 +26,7 @@ public class DetailController {
 		CommunityVo prev=service.prev(pNum);
 		CommunityVo next=service.next(pNum);
 		service.addCount(pNum);
-			
+		
 		String content=vo.getContent();
 		content=content.replaceAll("\n","<br>");
 		vo.setContent(content);

@@ -24,9 +24,9 @@
 		<h2>게시글 수정하기</h2>
 		<hr size="2" width="600" color="black" id=line>
 		<input type="hidden" name="pNum" value="${vo.pNum }">
-		작성자 <input type="text" name="username" value="abcd" style="width:87px; text-align: center;" readonly="readonly">
+		작성자 <input type="text" name="username" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" style="width:87px; text-align: center;" readonly="readonly">
 		<!-- DB에 cNum의 임의의 값 넣음 (추후 회원가입 후 진행) -->
-		카테고리 <input type="text" name="cNum" value="1" style="width:87px; text-align: center;" readonly="readonly">
+		카테고리 <input type="text" name="cNum" value="${vo.cNum }" style="width:87px; text-align: center;" readonly="readonly">
 		등록일 <input type="text" value="${vo.regdate }" style="width:87px; text-align: center;" readonly="readonly">
 		조회수 <input type="text" value="${vo.viewCount}" style="width:87px; text-align: center;" readonly="readonly"><br><br>
 		<textarea rows="1" cols="80" name="title">${vo.title }</textarea><br>

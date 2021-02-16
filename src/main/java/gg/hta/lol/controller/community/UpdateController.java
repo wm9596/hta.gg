@@ -15,9 +15,11 @@ public class UpdateController {
 	@Autowired private CommunityService service;
 	
 	@GetMapping(value="/community/update")
-	public String updateForm(int pNum,Model model) {
+	public String updateForm(int pNum,int cNum,Model model) {
 		CommunityVo vo=service.select(pNum);
+		CommunityVo vo1=service.select(cNum);
 		model.addAttribute("vo",vo);
+		model.addAttribute("vo1",vo1);
 		return ".header.community.update";
 	}
 	@PostMapping(value="/community/update")
