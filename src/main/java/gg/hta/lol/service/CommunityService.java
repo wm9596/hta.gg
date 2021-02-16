@@ -32,11 +32,11 @@ public class CommunityService {
 		System.out.println(pNum);
 		return dao.delete(pNum);
 	}
-	public CommunityVo next(int pNum) {
-		return dao.next(pNum);
+	public CommunityVo next(HashMap<String, Object> map) {
+		return dao.next(map);
 	}
-	public CommunityVo prev(int pNum) {
-		return dao.prev(pNum);
+	public CommunityVo prev(HashMap<String, Object> map) {
+		return dao.prev(map);
 	}
 	public int hit(int pNum) {
 		return dao.hit(pNum);

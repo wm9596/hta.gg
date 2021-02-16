@@ -36,7 +36,7 @@ public class ListController {
 		
 		List<CommunityVo> list=service.list(map);
 		System.out.println(list);
-		ModelAndView mv=new ModelAndView(".header.community.list");
+		ModelAndView mv=new ModelAndView(".header2.community.list");
 		mv.addObject("list", list);
 		mv.addObject("pu",pu);
 		mv.addObject("field", field);

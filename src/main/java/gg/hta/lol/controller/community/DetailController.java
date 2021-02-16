@@ -1,5 +1,6 @@
 package gg.hta.lol.controller.community;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,16 @@ public class DetailController {
 	@Autowired private CommunityService service;
 	
 	@GetMapping("/community/detail")
-	public ModelAndView detail(int pNum) {
-		ModelAndView mv=new ModelAndView(".header.community.detail");
+	public ModelAndView detail(int pNum, int cNum) {
+		ModelAndView mv=new ModelAndView(".header2.community.detail");
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("pNum",pNum);
+		map.put("cNum",cNum);
+		
 		
 		CommunityVo vo=service.select(pNum);
-		CommunityVo prev=service.prev(pNum);
-		CommunityVo next=service.next(pNum);
+		CommunityVo prev=service.prev(map);
+		CommunityVo next=service.next(map);
 		service.addCount(pNum);
 		
 		String content=vo.getContent();

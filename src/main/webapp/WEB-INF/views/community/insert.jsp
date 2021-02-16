@@ -28,6 +28,7 @@
 		카테고리 <input type="text" name="cNum" value="${cNum }" style="width:220px" readonly="readonly"><br><br><!-- DB에 cNum의 임의의 값 넣음 (추후 회원가입 후 진행) -->
 		<textarea rows="1" cols="80" placeholder="제목을 입력해 주세요." name="title" required="required"></textarea><br>
 		<textarea rows="25" cols="80" placeholder="내용을 입력하세요." name="content" required="required"></textarea><br>
+		<!-- 첨부파일 <input type="file" name="file1"><br><br><br> -->
 		<input type="button" value="이전 페이지로" onclick="beforePage()">
 		<input type="submit" value="새 글 등록" onclick="insert()">
 	</div><br>
