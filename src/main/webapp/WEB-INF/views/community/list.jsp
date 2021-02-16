@@ -85,7 +85,7 @@
 			<tr>
 				<td>${vo.pNum }</td>
 				<td>${vo.username }</td>
-				<td><a href="${pageContext.request.contextPath }/community/detail?pNum=${vo.pNum }">${vo.title }</a></td>
+				<td><a href="${pageContext.request.contextPath }/community/detail?pNum=${vo.pNum }&cNum=${vo.cNum }">${vo.title }</a></td>
 				<td>${vo.viewCount }</td>
 				<td>${vo.hit }</td>
 				<td>${vo.regdate }</td>

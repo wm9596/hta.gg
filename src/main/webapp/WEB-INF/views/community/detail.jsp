@@ -31,7 +31,7 @@
 					var rContent = $(this).find("rContent").text();
 					var regdate = $(this).find("regdate").text();
 					var div = document.createElement("div");
-					div.innerHTML=rWriter+"&nbsp;"+rContent+"<br>"+"등록날짜 "+regdate+"&nbsp;"+"<a href='javascript:removeComm("+ rNum + ")'>삭제</a>";
+					div.innerHTML=rWriter+"&nbsp;"+rContent+"<br>"+"등록날짜 "+regdate+"&nbsp;"+"<a href='#'>답글</a>"+"&nbsp;"+"<a href='javascript:removeComm("+ rNum + ")'>삭제</a>";
 					div.className="comm";
 					commList.append(div);
 				});
@@ -75,6 +75,17 @@
 		<button style="width: 100px; height: 50px; font-size: 25px;">반대</button>
 		<button style="width: 100px; height: 50px; font-size: 25px;">신고</button>
 	</div>
+		<br><br><br>
+		<div align="center">
+			<div style="display: inline-block;">
+			다음 글<br>
+			이전 글
+			</div>
+			<div  style="display: inline-block;">
+				<a href='${pageContext.request.contextPath }/community/detail?pNum=${next.pNum}&cNum=${vo.cNum}'>${next.title }</a><br>
+				<a href='${pageContext.request.contextPath }/community/detail?pNum=${prev.pNum}&cNum=${vo.cNum}'>${prev.title }</a>
+			</div>
+		</div>
 		<br><br><br>
 		<!-- 댓글 목록 -->
 		<h3 style="margin-left: 22%">댓글 입력</h3>

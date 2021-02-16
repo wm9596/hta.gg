@@ -31,11 +31,11 @@ public class CommunityDao {
 	public CommunityVo select(int pNum) {
 		return sqlSession.selectOne(NAMESPACE +".select",pNum);
 	}
-	public CommunityVo next(int pNum) {
-		return sqlSession.selectOne(NAMESPACE +".next",pNum);
+	public CommunityVo next(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE +".next",map);
 	}
-	public CommunityVo prev(int pNum) {
-		return sqlSession.selectOne(NAMESPACE +".prev",pNum);
+	public CommunityVo prev(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE +".prev",map);
 	}
 	public int addCount(int pNum) {
 		return sqlSession.update(NAMESPACE+".addCount",pNum);

@@ -16,7 +16,7 @@ public class InsertController {
 	@RequestMapping(value="/community/insert", method=RequestMethod.GET)
 	public String insertForm(int cNum, Model model) {
 		model.addAttribute("cNum",cNum);
-		return ".header.community.insert";
+		return ".header2.community.insert";
 	}
 	
 	@RequestMapping(value="/community/insert", method=RequestMethod.POST)
