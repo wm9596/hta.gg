@@ -48,6 +48,8 @@ public class DetailController {
 	@GetMapping(value = "/reply/{pNum}", produces = "application/xml;charset=utf-8")
 	@ResponseBody
 	public String select(@PathVariable("pNum")int pNum) {
+		
+		System.out.println("==========================");
 		List<ReplyVo> list = service1.list(pNum);
 		StringBuffer sb = new StringBuffer();
 		sb.append("<contents>");
@@ -56,6 +58,7 @@ public class DetailController {
 			sb.append("<rNum>"+vo.getrNum()+"</rNum>");
 			sb.append("<pNum>"+vo.getpNum()+"</pNum>");
 			sb.append("<rWriter>"+vo.getrWriter()+"</rWriter>");
+			sb.append("<regdate>"+vo.getRegdate()+"</regdate>");
 			sb.append("<rContent>"+vo.getrContent()+"</rContent>");
 			sb.append("</content>");
 		}

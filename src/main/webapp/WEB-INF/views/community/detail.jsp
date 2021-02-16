@@ -8,6 +8,7 @@
 <title>views/community/detail.jsp</title>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script type="text/javascript">
+
 	function beforePage(){
 		history.go(-1);
 		return;
@@ -30,8 +31,12 @@
 					var rWriter = $(this).find("rWriter").text(); 
 					var rContent = $(this).find("rContent").text();
 					var regdate = $(this).find("regdate").text();
+					console.log(regdate);
 					var div = document.createElement("div");
-					div.innerHTML=rWriter+"&nbsp;"+rContent+"<br>"+"등록날짜 "+regdate+"&nbsp;"+"<a href='#'>답글</a>"+"&nbsp;"+"<a href='javascript:removeComm("+ rNum + ")'>삭제</a>";
+					div.innerHTML=rWriter+"&nbsp;&nbsp;&nbsp;"+rContent+"&nbsp;&nbsp;&nbsp;"
+												+"등록날짜 "+regdate+"&nbsp;&nbsp;&nbsp;"
+												+"<a href='#'>답글</a>"+"&nbsp;&nbsp;&nbsp;"
+												+"<a href='javascript:removeComm("+ rNum + ")'>삭제</a>";
 					div.className="comm";
 					commList.append(div);
 				});
@@ -71,7 +76,7 @@
 	</div><br><br><br>
 </form:form>
 	<div align="center">
-		<button style="width: 100px; height: 50px; font-size: 25px;">추천</button>
+		<button style="width: 100px; height: 50px; font-size: 25px;" onclick="btnRecommend()">추천</button>
 		<button style="width: 100px; height: 50px; font-size: 25px;">반대</button>
 		<button style="width: 100px; height: 50px; font-size: 25px;">신고</button>
 	</div>
@@ -104,26 +109,27 @@
 			</div>
 		</div>
 
-	<script type="text/javascript">
-		$("#btn").click(function(){
-			var rWriter = document.getElementById("rWriter").value;
-			var rContent = document.getElementById("rContent").value;
-			var ask = confirm("댓글을 등록하시겠습니까?");
-			if(ask == true){
-			$.ajax({
-				url:"/lol/insert/${vo.pNum}/"+rWriter+"/"+rContent+"/",
-				success: function(data) {
-					var code=$(data).find("code").text();
-					alert("댓글이 등록되었습니다.");
-					if(code=='success'){
-						getList();
-					}else{
-						alert('등록 실패!');
-					}
+<script type="text/javascript">
+	
+	$("#btn").click(function(){
+		var rWriter = document.getElementById("rWriter").value;
+		var rContent = document.getElementById("rContent").value;
+		var ask = confirm("댓글을 등록하시겠습니까?");
+		if(ask == true){
+		$.ajax({
+			url:"/lol/insert/${vo.pNum}/"+rWriter+"/"+rContent+"/",
+			success: function(data) {
+				var code=$(data).find("code").text();
+				alert("댓글이 등록되었습니다.");
+				if(code=='success'){
+					getList();
+				}else{
+					alert('등록 실패!');
 				}
-			});
 			}
 		});
+		}
+	});
 	
 	function removeComm(rNum) {
 		console.log("===========================");
