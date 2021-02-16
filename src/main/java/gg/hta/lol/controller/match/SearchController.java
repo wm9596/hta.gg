@@ -18,7 +18,6 @@ import lombok.Setter;
 
 
 @Controller
-@RequestMapping("/match/*")
 public class SearchController {
 	
 	@Setter(onMethod_ = @Autowired)
@@ -27,17 +26,16 @@ public class SearchController {
 	@Setter(onMethod_ = @Autowired)
 	private RatingService ratingService;
 	
-	@GetMapping("/search")
+	@GetMapping("/match/search")
 	public String search(String sName,Model model) {
 		
 		SearchVo svo = searchService.getSummoner(sName);
-//		svo.getQiList().sort(Comparator.comparing(QueueInfoVo::getQueueType));
 		
 		model.addAttribute("svo",svo);
 		
 		model.addAttribute("rating", ratingService.getRatingAvg(sName));
 
-//		searchService.readMatchList(svo.getAccountId(), 0, 20);
+		searchService.readMatchList(svo.getAccountId(), 0, 20);
 		
 		List<MostChampVo> mlist = searchService.getMost(sName);
 		
@@ -50,7 +48,7 @@ public class SearchController {
 		
 		model.addAttribute("most", mlist);
 		
-//		model.addAttribute("matchs",searchService.getMatchList(sName));
+//		model.addAttribute("matchs",searchService.getMatchList(sName,null));
 		
 		return ".header2.match.sinfo";
 	}

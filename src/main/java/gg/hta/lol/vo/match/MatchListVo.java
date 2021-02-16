@@ -21,10 +21,10 @@ public class MatchListVo {
 	private int death;
 	private int assist;
 	private String championlevel;
-	private int spell1;
-	private int spell2;
-	private int rune1;
-	private int rune2;
+	private String spell1;
+	private String spell2;
+	private String rune1;
+	private String rune2;
 	private int championDamage;
 	private int takenDamage;
 	private int cs;

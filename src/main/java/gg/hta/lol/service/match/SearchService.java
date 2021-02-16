@@ -34,5 +34,5 @@ public interface SearchService {
 	
 	public List<MostChampVo> getMost(String name);
 	
-	public List<MatchListVo> getMatchList(String name,String type);
+//	public List<MatchListVo> getMatchList(String name,String type);
 }
