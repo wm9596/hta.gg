@@ -46,6 +46,15 @@ public class MemberController {
 			return ".header2.member.error";
 		}
 	}
+	@GetMapping("/member/member/profile")
+	public String myPage() {
+		return ".mypage.profile";
+	}
+	@GetMapping("/member/member/delete")
+	public String delete() {
+		
+		return ".header.home";
+	}
 	@GetMapping("/member/admin/memberList")
 	public String adminPage() {
 		return ".adminpage.memberList";
