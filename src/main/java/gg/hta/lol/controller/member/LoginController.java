@@ -1,7 +1,6 @@
 package gg.hta.lol.controller.member;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;

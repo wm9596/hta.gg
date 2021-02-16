@@ -21,6 +21,16 @@
 	#myPage_Menu a:hover{color:#888888;}
 	#myPage_section{width:960px; padding-top:20px; height:500px;}
 </style>
+<script type="text/javascript">
+	function delchk(){
+		if(confirm("회원탈퇴하시겠습니까?")){
+			location.href="${pageContext.request.contextPath }/member/member/delete";
+			return true;
+		} else{
+			return false;
+		}
+	}	
+</script>
 </head>
 <body>
 	<div id="wrap">
@@ -32,12 +42,12 @@
 				<div id="myPage_Menu">
 					<h2>My Page</h2><br>
 					<h4><a href="${pageContext.request.contextPath }/member/member/info">내 정보</a></h4>
-					<h4><a href="">프로필등록</a></h4>
+					<h4><a href="${pageContext.request.contextPath }/member/member/profile">프로필등록</a></h4>
 					<h4><a href="">포인트 적립<br> 내역 조회</a></h4>
 					<h4><a href="">내가 쓴 글,<br> 댓글 조회</a></h4>
 					<h4><a href="">받은 쪽지 조회</a></h4>
 					<h4><a href="">스크랩 한 게시글 모아보기</a></h4>
-					<h4><a href="">회원탈퇴</a></h4>
+					<h4><a href="#" onclick="delchk();">회원탈퇴</a></h4>
 				</div>
 				<div id="myPage_section">
 					<tiles:insertAttribute name="content"/>
