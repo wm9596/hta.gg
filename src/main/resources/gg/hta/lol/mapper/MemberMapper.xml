@@ -57,4 +57,9 @@
 	<select id="PwdEmailselect" parameterType="hashmap" resultType="member">
 		select * from member where username=#{username} and email=#{email}
 	</select>
+	<update id="update" parameterType="member">
+		update member
+		set nickname=#{nickname}, password=#{password}, email=#{email}
+		where username=#{username}
+	</update>
 </mapper>

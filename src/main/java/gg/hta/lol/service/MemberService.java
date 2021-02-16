@@ -55,4 +55,8 @@ public class MemberService {
 		map.put("email", email);
 		return dao.selectOne(map);
 	}
+	public int update(MemberVo vo) {
+		vo.setPassword(encoder.encode(vo.getPassword()));
+		return dao.update(vo);
+	}
 }

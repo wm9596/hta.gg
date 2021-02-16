@@ -123,14 +123,4 @@ public class LoginController {
 	public String admin() {
 		return ".header.home";
 	}
-	@GetMapping("/member/member/info")
-	public String myPage(Principal principal, Model m) {
-		MemberVo vo = service.selectOne(principal.getName());
-		m.addAttribute("vo", vo);
-		return ".mypage.info";
-	}
-	@GetMapping("/member/admin/memberList")
-	public String adminPage() {
-		return ".adminpage.memberList";
-	}
 }

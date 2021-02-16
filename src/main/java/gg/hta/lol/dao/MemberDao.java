@@ -55,4 +55,7 @@ public class MemberDao {
 	public AuthVo EmailselectAuth(String email) {
 		return sqlSession.selectOne(NAMESPACE + ".EmailAuthSelect", email);
 	}
+	public int update(MemberVo vo) {
+		return sqlSession.update(NAMESPACE + ".update", vo);
+	}
 }
