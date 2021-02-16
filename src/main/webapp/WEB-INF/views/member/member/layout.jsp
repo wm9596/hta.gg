@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,17 @@
 <script type="text/javascript">
 	function delchk(){
 		if(confirm("회원탈퇴하시겠습니까?")){
-			location.href="${pageContext.request.contextPath }/member/member/delete";
+			$.ajax({
+				url:"/lol/member/member/delete",
+				success: function(data){
+					var result = $(data).find("result").text();
+					if(result == 'success'){
+						document.out.submit();
+					}else{
+						alert("회원탈퇴하는데 실패하였습니다.");
+					}
+				}
+			});
 			return true;
 		} else{
 			return false;
@@ -47,7 +58,9 @@
 					<h4><a href="">내가 쓴 글,<br> 댓글 조회</a></h4>
 					<h4><a href="">받은 쪽지 조회</a></h4>
 					<h4><a href="">스크랩 한 게시글 모아보기</a></h4>
-					<h4><a href="#" onclick="delchk();">회원탈퇴</a></h4>
+					<form:form method="post" name="out" action="${pageContext.request.contextPath }/member/logout">
+						<h4><a href="javascript:delchk()" >회원탈퇴</a></h4>
+					</form:form>
 				</div>
 				<div id="myPage_section">
 					<tiles:insertAttribute name="content"/>
