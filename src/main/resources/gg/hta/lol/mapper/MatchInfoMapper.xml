@@ -12,4 +12,49 @@
 		from matchinfo
 		where matchid = #{matchid}
 	</select>
+	
+	<select id="getMatchInfoList" resultType="gg.hta.lol.vo.match.MatchListVo">
+		select *
+		from(
+		    select rownum rn, t.*
+		    from (
+		        SELECT
+		        tm.*,
+		        c.name,
+		        c.picture,
+		        m.type,
+		        m.runtime,
+		        m.starttime,
+                winlose
+		    FROM
+		        teammemberinfo   tm,
+                teaminfo         t,
+		        matchinfo        m,
+		        champion         c
+		    WHERE
+		        tm.matchid = m.matchid
+		        <if test="type!=null">
+		        and m.type = #{type}
+		        </if>
+		        AND tm.championid = c.championid
+                and tm.matchid = t.matchid
+                and tm.teamid = t.teamid
+		        AND tm.snickname = #{snickname}
+		    order by tmnum desc
+		    )t
+		)
+		<![CDATA[where rn<=20]]>
+	</select>
+	
+	<select id="getParticipants" resultType="gg.hta.lol.vo.match.ParticipantsVo">
+		select teamid,matchid,snickname,name,picture
+		from teammemberinfo tm, champion c
+		where tm.championid = c.championid
+		and 
+		<foreach collection="list" open="matchid in(" close=")" index="index" item="item" separator=",">
+			#{item}
+		</foreach>
+		
+	</select>
+	
 </mapper>

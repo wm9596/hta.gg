@@ -15,4 +15,40 @@
 		update summoner set slevel = #{slevel},icon=#{icon} where snickname = #{snickname}
 	</update>
 	
+	<select id="getSummonerInfo" resultMap="SearchMap">
+		select s.snickname,slevel,icon,queuetype,tier,leaguepoints,win,lose
+		from summoner s, queueinfo q
+		where s.snickname = q.snickname
+		and s.snickname = #{name}
+	</select>
+	
+	<resultMap type="gg.hta.lol.vo.match.SearchVo" id="SearchMap">
+		<result property="snickname" column="SNICKNAME"/>
+		<result property="slevel" column="SLEVEL"/>
+		<result property="icon" column="ICON"/>
+		<collection property="qiList" resultMap="queueInfoMap">
+		</collection>
+	</resultMap>
+	
+	<resultMap type="gg.hta.lol.vo.QueueInfoVo" id="queueInfoMap">
+		<result property="queueType" column="QUEUETYPE"/>
+		<result property="tier" column="TIER"/>
+		<result property="win" column="WIN"/>
+		<result property="lose" column="LOSE"/>
+	</resultMap>
+	 
+	<select id="getMostChamp" resultType="gg.hta.lol.vo.match.MostChampVo">
+		select picture,name,"kill","death","assist","cs",cnt,wincnt
+		from(
+		select rownum rn, m.picture,m.name,m."kill",m."death",m."assist",m."cs",m.cnt,co.wincnt
+		from view_mostchampion m, view_summon_champ_odds co
+		where m.snickname = co.snickname
+		and m.name = co.name
+		and m.snickname=#{sname}
+		order by cnt desc
+		)
+		<![CDATA[where rn<=5]]>
+	</select>
+
+	
 </mapper>

@@ -25,7 +25,7 @@
 			#{wardRemove},
 			#{gold},
 			<choose>
-				<when test="item1==0">
+				<when test="item1==0 or item1>6695">
 					null
 				</when>
 				<otherwise>
@@ -34,7 +34,7 @@
 			</choose>
 			,
 			<choose>
-				<when test="item2==0">
+				<when test="item2==0 or item2>6695">
 					null
 				</when>
 				<otherwise>
@@ -43,7 +43,7 @@
 			</choose>
 			,
 			<choose>
-				<when test="item3==0">
+				<when test="item3==0 or item3>6695">
 					null
 				</when>
 				<otherwise>
@@ -52,7 +52,7 @@
 			</choose>
 			,
 			<choose>
-				<when test="item4==0">
+				<when test="item4==0 or item4>6695">
 					null
 				</when>
 				<otherwise>
@@ -61,7 +61,7 @@
 			</choose>
 			,
 			<choose>
-				<when test="item5==0">
+				<when test="item5==0 or item5>6695">
 					null
 				</when>
 				<otherwise>
@@ -70,7 +70,7 @@
 			</choose>
 			,
 			<choose>
-				<when test="item6==0">
+				<when test="item6==0 or item6>=6695">
 					null
 				</when>
 				<otherwise>

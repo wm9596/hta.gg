@@ -3,7 +3,9 @@ package gg.hta.lol.service.match;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.session.ExecutorType;
@@ -31,6 +33,10 @@ import gg.hta.lol.vo.QueueInfoVo;
 import gg.hta.lol.vo.SummonerVo;
 import gg.hta.lol.vo.TeamInfoVo;
 import gg.hta.lol.vo.TeamMemberinfoVo;
+import gg.hta.lol.vo.match.MatchListVo;
+import gg.hta.lol.vo.match.MostChampVo;
+import gg.hta.lol.vo.match.ParticipantsVo;
+import gg.hta.lol.vo.match.SearchVo;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -63,12 +69,7 @@ public class SearchServiceImpl implements SearchService {
 	
 	@Override
 	@Transactional
-	public void searchSummonerInfo(String name) {
-		getSummonerInfo(name);
-	}
-	
-	@Override
-	public void getSummonerInfo(String name) {
+	public void searchSummonerInfo(String name) {//값 넣는 용 임시 메소드
 		String sid;
 		String aid;
 		JsonObject summonerInfo = dataRequester.getSummonerInfo(name);
@@ -86,7 +87,39 @@ public class SearchServiceImpl implements SearchService {
 				);
 		
 		addQueueInfo(sid);
-		getMatchList(aid);
+		readMatchList(aid,0,25);
+		
+	}
+	
+	@Override
+	@Transactional
+	public SearchVo getSummoner(String name) {
+		
+		System.out.println(name);
+		
+		String sid;
+		String aid;
+		JsonObject summonerInfo = dataRequester.getSummonerInfo(name);
+		
+		sid = summonerInfo.get("id").getAsString();
+		aid = summonerInfo.get("accountId").getAsString();
+		addSummoner(
+			new SummonerVo(
+							name,
+							summonerInfo.get("summonerLevel").getAsInt(), 
+							summonerInfo.get("profileIconId").getAsString()
+							),
+			true
+				);
+		
+		addQueueInfo(sid);
+		
+		SearchVo vo = summonerMapper.getSummonerInfo(name);
+		vo.setAccountId(aid);
+
+//		vo.getQiList().sort(Comparator.comparing(QueueInfoVo::getQueueType));
+		
+		return vo;
 	}
 	
 	/**
@@ -94,17 +127,17 @@ public class SearchServiceImpl implements SearchService {
 	@Override
 	public void addSummoner(SummonerVo svo,boolean isUpdate) {
 		try {
-			System.out.println("소환사 추가");
+//			System.out.println("소환사 추가");
 			summonerMapper.addSummoner(svo);
 		}catch (DuplicateKeyException e) {
-			System.out.println("소환사정보 중복 ");
+//			System.out.println("소환사정보 중복 ");
 			if(isUpdate) {
-				System.out.println("소환사 정보 수정");
+//				System.out.println("소환사 정보 수정");
 				summonerMapper.updateSummoner(svo);
 			}
 		}
 		
-		System.out.println(svo);
+//		System.out.println(svo);
 	}
 	
 	@Override
@@ -113,6 +146,8 @@ public class SearchServiceImpl implements SearchService {
 		
 		for(int i = 0 ; i< leagueInfo.size() ; i++) {
 			JsonObject jo = leagueInfo.get(i).getAsJsonObject();
+			
+//			System.out.println("큐정보 "+jo);
 			
 			QueueInfoVo qvo = new QueueInfoVo(
 					jo.get("summonerName").getAsString(),
@@ -123,18 +158,19 @@ public class SearchServiceImpl implements SearchService {
 					jo.get("losses").getAsInt());
 			
 			try {
-				System.out.println(qvo);
+//				System.out.println(qvo);
 				queuemapper.addQueueInfo(qvo);
 			}catch (DuplicateKeyException e) {
-				System.out.println("큐별 티어 정보 중복 정보 수정");
+//				System.out.println("큐별 티어 정보 중복 정보 수정");
 				queuemapper.updateQueueInfo(qvo);
 			}
 		}
 	}
 	
 	@Override
-	public void getMatchList(String aid) {
-		JsonObject matchInfo = dataRequester.getMatchList(aid);
+	@Transactional
+	public void readMatchList(String aid,int start,int end) {
+		JsonObject matchInfo = dataRequester.getMatchList(aid,start,end);
 		
 		JsonArray matchArr = matchInfo.get("matches").getAsJsonArray();
 		
@@ -210,9 +246,7 @@ public class SearchServiceImpl implements SearchService {
 				continue;
 			}
 			list.add(cid);
-//			list.add(cid);
-//			champMapper.updateBan(cid);
-			System.out.println(cid);
+//			System.out.println(cid);
 		}
 		banlistMapper.addBan(list);
 		champMapper.updateBan(list);
@@ -271,4 +305,25 @@ public class SearchServiceImpl implements SearchService {
 		
 	}
 	
+	@Override
+	public List<MostChampVo> getMost(String name) {
+		return summonerMapper.getMostChamp(name);
+	}
+	
+	@Override
+	public List<MatchListVo> getMatchList(String name,String type) {
+		List<MatchListVo> list = matchinfoMapper.getMatchInfoList(name,type);
+		List<ParticipantsVo> plist = matchinfoMapper.getParticipants(list.stream().map(MatchListVo::getMatchid).collect(Collectors.toList()));
+		
+		for (MatchListVo vo : list) {
+			vo.setFriendly(plist.stream().filter(item -> {
+				return item.getMatchid().equals(vo.getMatchid()) && item.getTeamid().equals(vo.getTeamid());
+			}).collect(Collectors.toList()));
+			vo.setEnemy(plist.stream().filter(item -> {
+				return item.getMatchid().equals(vo.getMatchid()) && !item.getTeamid().equals(vo.getTeamid());
+			}).collect(Collectors.toList()));
+		}
+		
+		return list;
+	}
 }
