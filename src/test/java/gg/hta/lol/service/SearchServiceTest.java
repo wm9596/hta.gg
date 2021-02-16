@@ -27,7 +27,7 @@ public class SearchServiceTest {
 	@Test
 	public void getTest() {
 		try {
-			service.searchSummonerInfo("오리지널찰떡쿠키");
+			service.searchSummonerInfo("전설의용사강태원");
 		}catch (DuplicateKeyException e) {
 			System.out.println("중복값있음");
 		}

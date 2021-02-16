@@ -12,4 +12,10 @@
 	<insert id="addRating" parameterType="hashmap">
 		insert into rating values(#{snickname},#{rate})
 	</insert>
+	
+	<select id="getRatingCnt" parameterType="String" resultType="int">
+		select count(*)
+		from rating
+		where snickname = #{snickname}
+	</select>
 </mapper>

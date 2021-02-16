@@ -19,4 +19,8 @@ public class RatingService {
 	public int addRating(HashMap<String, Object> map) {
 		return rDao.addRating(map);
 	}
+	
+	public int getRatingCnt(String snickname) {
+		return rDao.getRatingCnt(snickname);
+	}
 }

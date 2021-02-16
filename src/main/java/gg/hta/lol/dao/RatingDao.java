@@ -18,6 +18,10 @@ public class RatingDao {
 	}
 	
 	public int addRating (HashMap<String, Object> map) {
-		return sqlSession.insert(NAMESPACE + "addRating", map);
+		return sqlSession.insert(NAMESPACE + ".addRating", map);
+	}
+	
+	public int getRatingCnt(String snickname) {
+		return sqlSession.selectOne(NAMESPACE + ".getRatingCnt", snickname);
 	}
 }

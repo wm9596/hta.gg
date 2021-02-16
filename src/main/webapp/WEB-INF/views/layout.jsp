@@ -6,10 +6,16 @@
 <head>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/mainHome.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/matchMore.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/login.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 ﻿<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<link rel="stylesheet" href="/style.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -34,16 +40,52 @@ $( ".star_rating a" ).click(function() {
 });
 
 $(".star_rating_1").click(function(e) {
-	postRating(1);
+	$(".ratingValue").val("1")
 })
 
-function postRating(rating) {
+$(".star_rating_2").click(function(e) {
+	$(".ratingValue").val("2")
+})
+
+$(".star_rating_3").click(function(e) {
+	$(".ratingValue").val("3")
+})
+
+$(".star_rating_4").click(function(e) {
+	$(".ratingValue").val("4")
+})
+
+$(".star_rating_5").click(function(e) {
+	$(".ratingValue").val("5")
+})
+
+$("#ratingSubmit").click(function(e) {
+	let value = $(".star_rating input").val();
+	if (value == '') {
+		alert("평점을 선택해주세요.");
+		return;
+	}
+	postRating(value);
+})
+
+function postRating(rate) {
 	$.ajax({
 		type: "GET",
-		url: "/lol/insertRating?rating=" + rating,
+		url: "/lol/insertRating?rate=" + rate,
 		dataType: "text",
-		success: function() {
-			console.log("성공")
+		success: function(result) {
+			console.log(result);
+			let value = $(result).find("ratingAvg").text();
+			value = Math.round(value * 10)/10;
+			let cnt = $(result).find("ratingCnt").text();
+			$("#rate").text(value);
+			$("#rateCnt").text("(" + cnt + ")");
+			
+			if ($(result).find("msg").text() == "err") {
+				alert("이미 평가를 완료하였습니다.")
+			} else {
+				alert("평가가 완료되었습니다.");	
+			}
 		}
 	})
 }

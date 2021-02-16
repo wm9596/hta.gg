@@ -1,13 +1,22 @@
 package gg.hta.lol.controller.match;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import gg.hta.lol.dao.RatingDao;
 import gg.hta.lol.joinvo.MatchMoreJoinVo;
@@ -40,21 +49,58 @@ public class MatchMoreController {
 	private ChampionService championService;
 	
 	// test
-	final String NICKNAME = "오리지널찰떡쿠키";
+	final String NICKNAME = "GGGori";
 	final String MATCHID = "4995801953";
+	final String cdnVersion = "11.3.1";
 	
 	// 소환사 평가 추가
+	@ResponseBody
 	@GetMapping("/insertRating")
-	public String insertRating(Model model, int rating) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("snickname", NICKNAME);
-		map.put("rating", rating);
-		rService.addRating(map);
-		return ".header2.match.matchMore";
+	public HashMap<String, Object> insertRating(Model model, double rate, HttpServletResponse res, HttpServletRequest req) {
+		
+		rate = Math.round(rate*10)/10.0;
+		
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("ratingAvg", rtService.getRatingAvg(NICKNAME));
+		resultMap.put("ratingCnt", rService.getRatingCnt(NICKNAME));
+		
+		String nick = "";
+		try {
+			nick = URLEncoder.encode(NICKNAME, "utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		Cookie[] cook = req.getCookies();
+		Boolean b = false;
+		
+		for (Cookie c : cook) {
+			if (c.getName().equals(nick)) {
+				b = true;
+			}
+		}
+		
+		if (b) {
+			resultMap.put("msg", "err");
+		} else {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("snickname", NICKNAME);
+			map.put("rate", rate);
+			rService.addRating(map);
+			
+			Cookie cookie = new Cookie(nick, "true");
+			cookie.setMaxAge(60*60*24*30);
+			res.addCookie(cookie);
+		}
+
+		
+		return resultMap;
 	}
 	
 	@GetMapping("/matchMore")
 	public String matchMore(Model model) {
+		
+		model.addAttribute("cdn", cdnVersion);
 		
 		// 소환사 정보
 		model.addAttribute("sm", smService.getSummoner(NICKNAME));
@@ -72,6 +118,7 @@ public class MatchMoreController {
 		
 		//소환사 평가
 		model.addAttribute("rt", rtService.getRatingAvg(NICKNAME));
+		model.addAttribute("ratingCnt", rService.getRatingCnt(NICKNAME));
 		
 		// 해당게임 타입 얻어오기
 		String matchType = matchInfoService.getMatchType(MATCHID);

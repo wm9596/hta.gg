@@ -7,11 +7,11 @@
 	<div id="mm_smCard">
 		<div id="mm_smLeft">
 			<div id="mm_smIconDiv">
-				<img alt="" src="http://ddragon.leagueoflegends.com/cdn/10.11.1/img/profileicon/${sm.icon }.png" id="smIcon">
+				<img alt="" src="http://ddragon.leagueoflegends.com/cdn/${cdn }/img/profileicon/${sm.icon }.png" id="smIcon">
 			</div>
 			<div id="mm_smNicknameDiv">
-				<h2>${sm.snickname }</h2>
-				<p>레벨 : ${sm.slevel } </p>
+				<h2 style="line-height: 100px;">${sm.snickname }</h2>
+				<span>레벨 : ${sm.slevel } </span>
 			</div>
 		</div>
 		<div id="mm_smRight">
@@ -59,14 +59,17 @@
 			</div>
 			<div id="mm_smRatingDiv">
 				<h5>소환사평가</h5>
-				<fmt:formatNumber value="${rt }" pattern=".0"/>
+				<span id="rate"><fmt:formatNumber value="${rt }" pattern=".0"/></span>
+				<span id="rateCnt">(${ratingCnt })</span>
 				<p class="star_rating">
 				    <a href="#" class="star_rating_1">★</a>
 				    <a href="#" class="star_rating_2">★</a>
 				    <a href="#" class="star_rating_3">★</a>
 				    <a href="#" class="star_rating_4">★</a>
 				    <a href="#" class="star_rating_5">★</a>
+				    <input type="hidden" class='ratingValue'>
 				</p>
+				<input type="button" id="ratingSubmit" value="평가하기">
 			</div>
 		</div>
 	</div>
@@ -120,17 +123,17 @@
 							(${homeTeamMemberKill[status.index] }/${homeTeamMemberDeath[status.index] }/${homeTeamMemberAssist[status.index] })
 						</div>
 						<div class="minimal_child" id="home_minimal_championPictureArea" style="width: 10%;">
-							<img alt="" src="https://ddragon.leagueoflegends.com/cdn/11.2.1/img/champion/${homeTeamChampIconList[status.index] }" width="100%" height="100%">
+							<img alt="" src="https://ddragon.leagueoflegends.com/cdn/${cdn }/img/champion/${homeTeamChampIconList[status.index] }" width="100%" height="100%">
 						</div>
 						<div class="minimal_child" id="home_minimal_spellRuneArea" style="width: 10%;">
 							<div class="minimal_spellRune">
-								<img alt="" src="https://ddragon.leagueoflegends.com/cdn/10.6.1/img/spell/${homeTeamMemberSpellRune[status.index]['spell1'] }.png" width="100%" height="100%">
+								<img alt="" src="https://ddragon.leagueoflegends.com/cdn/${cdn }/img/spell/${homeTeamMemberSpellRune[status.index]['spell1'] }.png" width="100%" height="100%">
 							</div>
 							<div class="minimal_spellRune">
 								<img alt="" src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/${homeTeamMemberSpellRune[status.index]['rune1'] }.png" width="100%" height="100%">
 							</div>
 							<div class="minimal_spellRune">
-								<img alt="" src="https://ddragon.leagueoflegends.com/cdn/10.6.1/img/spell/${homeTeamMemberSpellRune[status.index]['spell2'] }.png" width="100%" height="100%">
+								<img alt="" src="https://ddragon.leagueoflegends.com/cdn/${cdn }/img/spell/${homeTeamMemberSpellRune[status.index]['spell2'] }.png" width="100%" height="100%">
 							</div>
 							<div class="minimal_spellRune">
 								<img alt="" src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/${homeTeamMemberSpellRune[status.index]['rune2'] }.png" width="100%" height="100%">
@@ -141,7 +144,7 @@
 								<div id="minimal_item" style="width: 20%; height: 50%; background-color: #9ac0ff;">
 									<c:choose>
 										<c:when test="${item != 0}">
-											<img alt="" src="http://ddragon.leagueoflegends.com/cdn/11.2.1/img/item/${item }.png" width="100%" height="100%">
+											<img alt="" src="http://ddragon.leagueoflegends.com/cdn/${cdn }/img/item/${item }.png" width="100%" height="100%">
 										</c:when>
 										<c:otherwise>
 											<img alt="" src="${pageContext.request.contextPath }/resources/images/noItem.png" width="100%" height="100%">
@@ -206,17 +209,17 @@
 							(${awayTeamMemberKill[status.index] }/${awayTeamMemberDeath[status.index] }/${awayTeamMemberAssist[status.index] })
 						</div>
 						<div class="minimal_child" id="away_minimal_championPictureArea" style="width: 10%;">
-							<img alt="" src="https://ddragon.leagueoflegends.com/cdn/11.2.1/img/champion/${awayTeamChampIconList[status.index] }" width="100%" height="100%">
+							<img alt="" src="https://ddragon.leagueoflegends.com/cdn/${cdn }/img/champion/${awayTeamChampIconList[status.index] }" width="100%" height="100%">
 						</div>
 						<div class="minimal_child" id="away_minimal_spellRuneArea" style="width: 10%;">
 							<div class="minimal_spellRune">
-								<img alt="" src="https://ddragon.leagueoflegends.com/cdn/10.6.1/img/spell/${awayTeamMemberSpellRune[status.index]['spell1'] }.png" width="100%" height="100%">
+								<img alt="" src="https://ddragon.leagueoflegends.com/cdn/${cdn }/img/spell/${awayTeamMemberSpellRune[status.index]['spell1'] }.png" width="100%" height="100%">
 							</div>
 							<div class="minimal_spellRune">
 								<img alt="" src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/${awayTeamMemberSpellRune[status.index]['rune1'] }.png" width="100%" height="100%">
 							</div>
 							<div class="minimal_spellRune">
-								<img alt="" src="https://ddragon.leagueoflegends.com/cdn/10.6.1/img/spell/${awayTeamMemberSpellRune[status.index]['spell2'] }.png" width="100%" height="100%">
+								<img alt="" src="https://ddragon.leagueoflegends.com/cdn/${cdn }/img/spell/${awayTeamMemberSpellRune[status.index]['spell2'] }.png" width="100%" height="100%">
 							</div>
 							<div class="minimal_spellRune">
 								<img alt="" src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/${awayTeamMemberSpellRune[status.index]['rune2'] }.png" width="100%" height="100%">
@@ -227,7 +230,7 @@
 								<div id="minimal_item" style="width: 20%; height: 50%; background-color: #9ac0ff;">
 									<c:choose>
 										<c:when test="${item != 0}">
-											<img alt="" src="http://ddragon.leagueoflegends.com/cdn/11.2.1/img/item/${item }.png" width="100%" height="100%">
+											<img alt="" src="http://ddragon.leagueoflegends.com/cdn/${cdn }/img/item/${item }.png" width="100%" height="100%">
 										</c:when>
 										<c:otherwise>
 											<img alt="" src="${pageContext.request.contextPath }/resources/images/noItem.png" width="100%" height="100%">
@@ -337,10 +340,10 @@
 						</div>
 					</div>
 					<div class="compare_champIconArea">
-						<img alt="" src="https://ddragon.leagueoflegends.com/cdn/11.2.1/img/champion/${homeTeamChampIconList[icon] }" width="100%" height="100%">
+						<img alt="" src="https://ddragon.leagueoflegends.com/cdn/${cdn }/img/champion/${homeTeamChampIconList[icon] }" width="100%" height="100%">
 					</div>
 					<div class="compare_champIconArea">
-						<img alt="" src="https://ddragon.leagueoflegends.com/cdn/11.2.1/img/champion/${awayTeamChampIconList[icon] }" width="100%" height="100%">
+						<img alt="" src="https://ddragon.leagueoflegends.com/cdn/${cdn }/img/champion/${awayTeamChampIconList[icon] }" width="100%" height="100%">
 					</div>
 					<div class="compare_barArea">
 						<div class="max_rage">
