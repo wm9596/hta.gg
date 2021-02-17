@@ -20,4 +20,10 @@ public class ReplyService {
 	public List<ReplyVo> list(int pNum){
 		return dao.list(pNum);
 	}
+	public int update1(int pNum) {
+		return dao.update1(pNum);
+	}
+	public int update2(int pNum) {
+		return dao.update2(pNum);
+	}
 }

@@ -22,7 +22,7 @@
 </style>
 </head>
 <body>
-	<h2 style="padding: 2%;">전체</h2>
+	<h2 style=" width:200px; padding: 2%;">전체</h2>
 <div align="center">
 	<div style="display:inline;">
 		<form:form method="post" action="${pageContext.request.contextPath }/community/list">
@@ -44,7 +44,7 @@
 				<a href="javascript:page(5)">Q&A</a>
 			</div>
 			<div id="g_menu_6">
-				<a href="#">경기일정</a>
+				<a href="javascript:page(5)">경기일정</a>
 			</div>
 		<select name="field"  style="margin-left: 9%;">
 			<option value="username"<c:if test="${field=='username' }">selected</c:if>>ID</option>
@@ -52,7 +52,12 @@
 		</select>
 			<input type="text" name="keyword" value="${keyword }">
 			<input type="submit" value="검색">
-			<div style="float: right; margin-top:1%; margin-right: 4%; font-size: 15px;"><a href="${pageContext.request.contextPath }/community/insert?cNum=${cNum}" style="color: black;">새 글 등록</a></div><br>
+			<div style="float: right; margin-top:1%; margin-right: 4%; font-size: 15px;"><a href="${pageContext.request.contextPath }/community/insert?cNum=${cNum}" style="color: black;">새 글 등록</a></div><br><br>
+			<div style="margin-left: -70%">
+				<a href="javascript:page(1)">인기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="javascript:page(2)">최신</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="javascript:page(3)">TOP</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
 		</div>
 		</form:form>
 		
@@ -85,7 +90,7 @@
 			<tr>
 				<td>${vo.pNum }</td>
 				<td>${vo.username }</td>
-				<td><a href="${pageContext.request.contextPath }/community/detail?pNum=${vo.pNum }&cNum=${vo.cNum }">${vo.title }</a></td>
+				<td><a href="${pageContext.request.contextPath }/community/detail?pNum=${vo.pNum }&cNum=${vo.cNum }">${vo.title }</a>&nbsp;[${vo.commentCount }]</td>
 				<td>${vo.viewCount }</td>
 				<td>${vo.hit }</td>
 				<td>${vo.regdate }</td>

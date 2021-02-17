@@ -27,4 +27,13 @@ public class ReplyDao {
 	public List<ReplyVo> list(int pNum) {
 		return sqlSession.selectList(NAMESPACE + ".list", pNum);
 	}
+	
+	public int update1(int pNum) {
+		int n=sqlSession.update(NAMESPACE + ".pCount", pNum);
+		return n;
+	}
+	
+	public int update2(int pNum) {
+		return sqlSession.update(NAMESPACE + ".mCount", pNum);
+	}
 }

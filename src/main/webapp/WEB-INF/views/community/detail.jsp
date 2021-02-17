@@ -34,9 +34,9 @@
 					console.log(regdate);
 					var div = document.createElement("div");
 					div.innerHTML=rWriter+"&nbsp;&nbsp;&nbsp;"+rContent+"&nbsp;&nbsp;&nbsp;"
-												+"등록날짜 "+regdate+"&nbsp;&nbsp;&nbsp;"
+												+regdate+"&nbsp;&nbsp;&nbsp;"
 												+"<a href='#'>답글</a>"+"&nbsp;&nbsp;&nbsp;"
-												+"<a href='javascript:removeComm("+ rNum + ")'>삭제</a>";
+												+"<a href='javascript:removeComm("+ rNum + "," + pNum + ")'>삭제</a>";
 					div.className="comm";
 					commList.append(div);
 				});
@@ -48,9 +48,9 @@
 	
 </script>
 <style type="text/css">
-	a{ text-decoration:none }
+	a{ text-decoration:none; color: black; }
 	.insert{margin-top: 5%}
-	.comm{margin-bottom: 20px; margin-left: 22%; width: 600px; border: 1px solid #aaa;}
+	.comm{margin-bottom: 20px; margin-left: 22%; width: 600px; border: 1px solid #aaa;position: relative;}
 </style>
 </head>
 <body><br>
@@ -64,7 +64,7 @@
 		<!-- DB에 cNum의 임의의 값 넣음 (추후 회원가입 후 진행) -->
 		카테고리 <input type="text" name="cNum" value="${vo.cNum }" style="width:87px; text-align: center;" readonly="readonly" >
 		등록일 <input type="text" value="${vo.regdate }" style="width:87px; text-align: center;" readonly="readonly">
-		조회수 <input type="text" value="${vo.viewCount }" style="width:87px; text-align: center;" readonly="readonly"><br><br>
+		조회수 <input type="text" value="${vo.viewCount+1}" style="width:87px; text-align: center;" readonly="readonly"><br><br>
 		<textarea rows="1" cols="80" name="title" readonly="readonly">[제목] ${vo.title }</textarea><br>
 		<textarea rows="25" cols="80" name="content" readonly="readonly">${vo.content }</textarea><br>
 		<input type="button" value="이전 페이지로" onclick="beforePage()">
@@ -76,19 +76,20 @@
 	</div><br><br><br>
 </form:form>
 	<div align="center">
-		<button style="width: 100px; height: 50px; font-size: 25px;" onclick="btnRecommend()">추천</button>
-		<button style="width: 100px; height: 50px; font-size: 25px;">반대</button>
-		<button style="width: 100px; height: 50px; font-size: 25px;">신고</button>
+		<button type="button" id="likeBtn" class="btn btn-info likeBtn" style="width: 100px; height: 50px; font-size: 25px;" onclick="hitbtn()">추천</button>
+		<button type="button" id="likeBtn" class="btn btn-info likeBtn" style="width: 100px; height: 50px; font-size: 25px;" onclick="nohitbtn()">반대</button>
+		<button type="button" id="likeBtn" class="btn btn-info likeBtn" style="width: 100px; height: 50px; font-size: 25px;" onclick="report()">신고</button>
 	</div>
 		<br><br><br>
 		<div align="center">
 			<div style="display: inline-block;">
-			다음 글<br>
-			이전 글
+				다음 글&nbsp;&nbsp;&nbsp;<br>
+				이전 글&nbsp;&nbsp;&nbsp;
 			</div>
 			<div  style="display: inline-block;">
 				<a href='${pageContext.request.contextPath }/community/detail?pNum=${next.pNum}&cNum=${vo.cNum}'>${next.title }</a><br>
 				<a href='${pageContext.request.contextPath }/community/detail?pNum=${prev.pNum}&cNum=${vo.cNum}'>${prev.title }</a>
+				<!-- 태그 안에 조건문 -->
 			</div>
 		</div>
 		<br><br><br>
@@ -131,12 +132,12 @@
 		}
 	});
 	
-	function removeComm(rNum) {
+	function removeComm(rNum, pNum) {
 		console.log("===========================");
 		var ask = confirm("정말로 삭제하시겠습니까?");
 		if(ask == true){
 		$.ajax({
-			url:"/lol/delete/"+rNum,
+			url:"/lol/delete/"+rNum+"/"+pNum,
 			success: function(data) {
 				var code=$(data).find("code").text();
 				if(code=='success'){

@@ -71,6 +71,7 @@ public class DetailController {
 	@ResponseBody
 	public String insert(@PathVariable("pNum")int pNum,@PathVariable("rWriter")String rWriter,@PathVariable("rContent")String rContent) {
 		int n = service1.insert(new ReplyVo(0, pNum, 0, rWriter, rContent, null));
+		int n1 = service1.update1(pNum);
 		StringBuffer sb = new StringBuffer();
 		sb.append("<result>");
 		try {
@@ -83,9 +84,10 @@ public class DetailController {
 		return sb.toString();
 	}
 
-	@GetMapping(value = "/delete/{rNum}", produces = "application/xml;charset=utf-8")
+	@GetMapping(value = "/delete/{rNum}/{pNum}", produces = "application/xml;charset=utf-8")
 	@ResponseBody
-	public String delete(@PathVariable("rNum")int rNum) {
+	public String delete(@PathVariable("rNum")int rNum,@PathVariable("pNum")int pNum) {
+		int n1 = service1.update2(pNum);
 		int n = service1.delete(rNum);
 		StringBuffer sb = new StringBuffer();
 		sb.append("<result>");

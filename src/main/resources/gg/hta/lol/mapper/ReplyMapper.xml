@@ -14,4 +14,12 @@
 	<delete id="delete" parameterType="int">
 		delete from reply where rNum=#{rNum}
 	</delete>
+	
+	<update id="pCount" parameterType="int">
+		update community set commentCount=commentCount+1 where pNum=#{pNum}
+	</update>
+	
+	<update id="mCount" parameterType="int">
+		update community set commentCount=commentCount-1 where pNum=#{pNum}
+	</update>
 </mapper>
