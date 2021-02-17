@@ -314,7 +314,8 @@ $(()=>{
             <p style="text-align:center"> OR  </p>
             <input type="text" id="userId" name="username" class="form-control" placeholder="아이디" required="" autofocus="">
             <input type="password" id="userPw" name="password" class="form-control" placeholder="비밀번호" required="">
-            
+            <input type="checkbox" id="idSaveCheck"  style="width:20px;height:20px;vertical-align:-3px;">아이디 저장&nbsp;&nbsp;&nbsp;
+			<input type="checkbox" id="remember-me" name="remember-me" style="width:20px;height:20px; vertical-align:-3px;">자동 로그인<br>
             <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> 로그인</button>
             <a href="#" id="forgot_pswd">비밀번호를 잊으셨나요?</a>
             <hr>
