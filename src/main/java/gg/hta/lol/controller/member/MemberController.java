@@ -17,11 +17,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import gg.hta.lol.service.MemberService;
 import gg.hta.lol.util.PageUtil;
+import gg.hta.lol.service.QueueInfoService;
+import gg.hta.lol.service.match.SearchService;
 import gg.hta.lol.vo.MemberVo;
+import gg.hta.lol.vo.QueueInfoVo;
+import gg.hta.lol.vo.match.MostChampVo;
+import gg.hta.lol.vo.match.SearchVo;
 
 @Controller
 public class MemberController {
 	@Autowired private MemberService service;
+	@Autowired private SearchService searchService;
+	@Autowired private QueueInfoService queueInfoService;
+	
 	@RequestMapping(value="/member/join", method = RequestMethod.GET)
 	public String joinForm() {
 		return ".header2.member.join";
@@ -56,6 +64,36 @@ public class MemberController {
 	public String myPage() {
 		return ".mypage.profile";
 	}
+	
+	@ResponseBody
+	@GetMapping("/member/member/registerProfile")
+	public HashMap<String, Object> registerProfile(String snickname, Model model) {
+		
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		SearchVo searchVo = searchService.getSummoner(snickname);
+		searchService.readMatchList(searchVo.getAccountId(), 1, 3);
+		
+		QueueInfoVo soloVo = searchVo.getSolo();
+		QueueInfoVo flexVo = searchVo.getFlex();
+		
+		List<MostChampVo> mlist = searchService.getMost(snickname);
+		
+		mlist.stream().forEach(item -> {
+			if(item.getName().length()>5) {
+				int diff = item.getName().length()-(item.getName().length()-5);
+				item.setName(item.getName().substring(0, diff).concat("..."));
+			}
+		});
+		
+		resultMap.put("searchVo", searchVo);
+		resultMap.put("soloVo", soloVo);
+		resultMap.put("flexVo", flexVo);
+		resultMap.put("mlist", mlist);
+		
+		return resultMap;
+	}
+	
 	@GetMapping(value = "/member/member/delete", produces = {MediaType.APPLICATION_XML_VALUE})
 	@ResponseBody
 	public String delete(Principal principal) {
