@@ -87,7 +87,7 @@ public class SearchServiceImpl implements SearchService {
 				);
 		
 		addQueueInfo(sid);
-		readMatchList(aid,0,25);
+		readMatchList(aid,0,20);
 		
 	}
 	
@@ -310,20 +310,4 @@ public class SearchServiceImpl implements SearchService {
 		return summonerMapper.getMostChamp(name);
 	}
 	
-	@Override
-	public List<MatchListVo> getMatchList(String name,String type) {
-		List<MatchListVo> list = matchinfoMapper.getMatchInfoList(name,type);
-		List<ParticipantsVo> plist = matchinfoMapper.getParticipants(list.stream().map(MatchListVo::getMatchid).collect(Collectors.toList()));
-		
-		for (MatchListVo vo : list) {
-			vo.setFriendly(plist.stream().filter(item -> {
-				return item.getMatchid().equals(vo.getMatchid()) && item.getTeamid().equals(vo.getTeamid());
-			}).collect(Collectors.toList()));
-			vo.setEnemy(plist.stream().filter(item -> {
-				return item.getMatchid().equals(vo.getMatchid()) && !item.getTeamid().equals(vo.getTeamid());
-			}).collect(Collectors.toList()));
-		}
-		
-		return list;
-	}
 }

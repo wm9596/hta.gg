@@ -1,5 +1,6 @@
 package gg.hta.lol.riotapi;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -82,7 +83,7 @@ public class DataRequester {
 				HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 				con.setRequestMethod("GET");
-
+				
 				if(con.getResponseCode()!=200) {
 					System.out.println("api 연동 실패 에러코드 : "+con.getResponseCode());
 					cnt++;
@@ -115,4 +116,41 @@ public class DataRequester {
 				} 
 			}
 	}
+	
+	public JsonElement getStaticData(String url) {
+		
+		BufferedInputStream bi= null;
+	
+		try {
+			URL obj = new URL(url); // 호출할 url
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+	
+			con.setRequestMethod("GET");
+			
+			if(con.getResponseCode()!=200) {
+				System.out.println("api 연동 실패 에러코드 : "+con.getResponseCode());
+				throw new Exception();
+			}
+			
+			bi = new BufferedInputStream(con.getInputStream());
+			
+			String data = new String( bi.readAllBytes());
+			
+			JsonParser parser = new JsonParser();
+
+			return parser.parse(data);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (bi != null)
+				try {
+					bi.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				} 
+		}
+	}
+	
 }

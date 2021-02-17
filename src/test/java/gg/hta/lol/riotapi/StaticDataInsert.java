@@ -36,10 +36,10 @@ public class StaticDataInsert {
 		String summaryUrl = "http://ddragon.leagueoflegends.com/cdn/11.3.1/data/ko_KR/champion.json";
 		String detailUrl = "http://ddragon.leagueoflegends.com/cdn/11.3.1/data/ko_KR/champion/%s.json";
 		
-		JsonObject obj = dr.getData(summaryUrl).getAsJsonObject().get("data").getAsJsonObject();
+		JsonObject obj = dr.getStaticData(summaryUrl).getAsJsonObject().get("data").getAsJsonObject();
 			
 		for(String name :obj.getAsJsonObject().keySet()) {
-			JsonObject info = dr.getData(String.format(detailUrl, name)).getAsJsonObject().getAsJsonObject("data").getAsJsonObject(name);
+			JsonObject info = dr.getStaticData(String.format(detailUrl, name)).getAsJsonObject().getAsJsonObject("data").getAsJsonObject(name);
 			ChampionVo vo = new ChampionVo();
 			vo.setName(info.get("name").getAsString());
 			vo.setChampionid(info.get("key").getAsString());
