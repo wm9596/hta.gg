@@ -25,9 +25,9 @@ $(document).ready(function(){
 });
 
 $(function(){ 
-	$("#emailOk").click(function () {
-		var id = document.getElementById("id").value;
-		var email = document.getElementById("email").value;
+	$("#pwd_emailOk").click(function () {
+		var id = document.getElementById("pwd_id").value;
+		var email = document.getElementById("pwd_email").value;
 		email = email.substr(0,email.lastIndexOf("."));
 		$.ajax({
 			url:"/lol/member/emailCheck/"+id+"/"+email,
@@ -40,22 +40,22 @@ $(function(){
 							var result = $(data).find("result").text();
 							console.log(result);
 							if(result == 'success'){
-								document.getElementById("emailcheck").innerHTML="인증번호 전송이 완료되었습니다.";
+								document.getElementById("pwd_emailcheck").innerHTML="인증번호 전송이 완료되었습니다.";
 							}else{
-								document.getElementById("emailcheck").innerHTML="인증번호 전송이 실패되었습니다.";
+								document.getElementById("pwd_emailcheck").innerHTML="인증번호 전송이 실패되었습니다.";
 							}
 						}
 					});
 				}else if(using=='false'){
-					document.getElementById("emailcheck").innerHTML="등록되지 않은 이메일입니다. 회원가입 해주세요."
+					document.getElementById("pwd_emailcheck").innerHTML="등록되지 않은 이메일입니다. 회원가입 해주세요."
 				}
 			}
 		});
 	});
 	
 	$("#searchPwd").click(function(){
-		var id = document.getElementById("id").value;
-		if(document.getElementById("emailcheck").textContent != "인증번호 전송이 완료되었습니다."){
+		var id = document.getElementById("pwd_id").value;
+		if(document.getElementById("pwd_emailcheck").textContent != "인증번호 전송이 완료되었습니다."){
 			alert("이메일 입력 후 이메일 인증 버튼을 클릭해 주세요!!!");
 		}else{
 			$.ajax({
@@ -63,7 +63,7 @@ $(function(){
 				dataType:'xml',
 				success: function(data){
 					var code = $(data).find("code").text();
-					if(code == document.getElementById("confirm").value){
+					if(code == document.getElementById("pwd_confirm").value){
 						document.getElementById("confirmPwd").innerHTML="이메일 인증 완료!!!";
 						document.getElementById("pwdChange").disabled = false;
 					}else{
@@ -210,6 +210,26 @@ function checkPwd(){
 	}
 }
 
+function checkChangePwd(){
+	var pwd = document.getElementById("pwd_pwd").value;
+	if(pwd.trim()==""){
+		document.getElementById("pwd_pwdcheck").innerHTML="비밀번호를 입력하세요.";
+		return;
+	}
+	if(pwd.length<4 || pwd.length>10){
+		document.getElementById("pwd_pwdcheck").innerHTML="비밀번호는 4~10자리로 설정해주세요.";
+		return;
+	}else if(pwd.length>=4 && pwd.length<=10){
+		document.getElementById("pwd_pwdcheck").innerHTML="";
+	}
+	for(let i=0; i<pwd.length; i++){
+		if(!(('0'<=pwd.charAt(i) && pwd.charAt(i)<='9') || ('a'<=pwd.charAt(i) && pwd.charAt(i)<='z') || ('A'<=pwd.charAt(i) && pwd.charAt(i)<='Z'))){
+			document.getElementById("pwd_pwdcheck").innerHTML="아이디는 영문과 숫자로만 입력해주세요...";
+			return;
+		}
+	}
+}
+
 function checkPwdOk(){
 	var pwd1 = document.getElementById("pwd").value;
 	var pwd2 = document.getElementById("pwdOk").value;
@@ -303,15 +323,15 @@ $(()=>{
             </form:form>
 			
 			<form:form method="post" action="/lol/member/pwdChange" class="form-reset">
-                <input type="text" id="id" name="username" class="form-control" placeholder="아이디" required="" autofocus="">
-                <input type="email" id="email" class="form-control" placeholder="이메일" required="" autofocus="" style="width: 85%; float: left;">
-                <button class="btn btn-success btn-block" id="emailOk" style="width: 15%; float: left; text-align: left; height: 45px;">인증</button>
-                <span id="emailcheck" style="float: left;"></span><br>
-                <input type="text" id="confirm" class="form-control" placeholder="인증번호" required="" autofocus="" style="width: 85%; float: left;">
+                <input type="text" id="pwd_id" name="username" class="form-control" placeholder="아이디" required="" autofocus="">
+                <input type="email" id="pwd_email" class="form-control" placeholder="이메일" required="" autofocus="" style="width: 85%; float: left;">
+                <button class="btn btn-success btn-block" id="pwd_emailOk" style="width: 15%; float: left; text-align: left; height: 45px;">인증</button>
+                <span id="pwd_emailcheck" style="float: left;"></span><br>
+                <input type="text" id="pwd_confirm" class="form-control" placeholder="인증번호" required="" autofocus="" style="width: 85%; float: left;">
                 <button class="btn btn-success btn-block" id="searchPwd" style="width: 15%; float: left; text-align: left; height: 45px;">확인</button>
                 <span id="confirmPwd" style="float: left;"></span><br>
-                <input type="password" id="pwd" name="password" class="form-control" onkeyup="checkPwd()" placeholder="변경할 비밀번호" required="" autofocus="">
-                <span id="pwdcheck" style="float: left;"></span><br>
+                <input type="password" id="pwd_pwd" name="password" class="form-control" onkeyup="checkChangePwd()" placeholder="변경할 비밀번호" required="" autofocus="">
+                <span id="pwd_pwdcheck" style="float: left;"></span><br>
                 <button class="btn btn-primary btn-block" type="submit" id="pwdChange" disabled="disabled">Reset Password</button>
                 <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
             </form:form>
@@ -325,17 +345,17 @@ $(()=>{
                 
                 <p style="text-align:center">OR</p>
 
-                <input type="text" name="username" class="form-control" onkeyup="checkId()" placeholder="아이디" required="" autofocus="" style="width: 85%; float: left;">
+                <input type="text" name="username" id="id" class="form-control" onkeyup="checkId()" placeholder="아이디" required="" autofocus="" style="width: 85%; float: left;">
                 <button class="btn btn-success btn-block" id="idOk" style="width: 15%; float: left; text-align: left; height: 45px;" disabled="disabled">체크</button>
                 <span id="idcheck" style="float: left;">아이디를 입력하세요.</span><br>
-                <input type="password" name="password" class="form-control" onkeyup="checkPwd()" placeholder="비밀번호" required autofocus="">
+                <input type="password" name="password" id="pwd" class="form-control" onkeyup="checkPwd()" placeholder="비밀번호" required autofocus="">
                 <span id="pwdcheck"></span><br>
                 <input type="password" id="pwdOk" class="form-control" onkeyup="checkPwdOk()" placeholder="비밀번호 확인" required autofocus="">
                 <span id="pwdOkcheck"></span><br>
-                <input type="email" name="email" class="form-control" placeholder="이메일" required="" autofocus="" style="width: 85%; float: left;">
-                <button class="btn btn-success btn-block" id="" style="width: 15%; float: left; text-align: left; height: 45px;">인증</button>
-                <span id="" style="float: left;"></span><br>
-                <input type="text" name="confirm" class="form-control" placeholder="인증번호" required="" autofocus="" style="width: 85%; float: left;">
+                <input type="email" id="email" name="email" class="form-control" placeholder="이메일" required="" autofocus="" style="width: 85%; float: left;">
+                <button class="btn btn-success btn-block" id="emailOk" style="width: 15%; float: left; text-align: left; height: 45px;">인증</button>
+                <span id="emailcheck" style="float: left;"></span><br>
+                <input type="text" id="confirm" name="confirm" class="form-control" placeholder="인증번호" required="" autofocus="" style="width: 85%; float: left;">
                 <button class="btn btn-success btn-block" id="confirmOk" style="width: 15%; float: left; text-align: left; height: 45px;">확인</button>
                 <span id="confirmcheck" style="float: left;"></span><br>
                 <input type="password" id="nickname" name="nickname" class="form-control" onkeyup="checkNick()" placeholder="닉네임" required autofocus="">
@@ -369,7 +389,7 @@ $(()=>{
     </p>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="/script.js"></script>
+<!--     <script src="/script.js"></script> -->
 
 <!-- <div id="main_home"> -->
 <!-- 	<h1>회원로그인</h1> -->
