@@ -23,8 +23,7 @@
 		<sec:authorize access="isAnonymous()">
 			<div id="header_msg">
 				<span style="color:rgba(255, 255, 255, 0.5);">
-					<i class="fa fa-comments-o" aria-hidden="true"></i><br>
-					<a href="/lol/member/join" style="color:rgba(255, 255, 255, 0.5);">JOIN</a>
+					<i class="fa fa-comments-o" aria-hidden="true" onclick="location.href='/lol/member/login'"></i><br>
 				</span>
 			</div>
 			<div id="header_mypage">
