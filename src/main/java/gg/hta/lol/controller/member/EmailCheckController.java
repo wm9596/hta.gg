@@ -14,7 +14,7 @@ import gg.hta.lol.vo.MemberVo;
 @Controller
 public class EmailCheckController {
 	@Autowired MemberService service;
-	//http://localhost:9090/lol/member/emailCheck/test@test ==> Å×½ºÆ®
+	//http://localhost:9090/lol/member/emailCheck/test@test
 	@GetMapping(value = "/member/emailCheck/{email}", produces = "application/xml;charset=utf-8")
 	@ResponseBody
 	public String select(@PathVariable("email")String email) {
@@ -37,7 +37,6 @@ public class EmailCheckController {
 		sb.append("</data>");
 		return sb.toString();
 	}
-	
 	@GetMapping(value = "/member/emailCheck/{id}/{email}", produces = "application/xml;charset=utf-8")
 	@ResponseBody
 	public String select(@PathVariable("id")String id, @PathVariable("email")String email) {

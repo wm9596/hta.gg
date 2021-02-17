@@ -15,7 +15,7 @@ public class IdCheckController {
 	@GetMapping(value = "/member/idCheck/{id}", produces = "application/xml;charset=utf-8")
 	@ResponseBody
 	public String select(@PathVariable("id")String id) {
-		//http://localhost:9090/lol/member/idCheck/test11 ==> Å×½ºÆ®
+		//http://localhost:9090/lol/member/idCheck/test11
 		boolean using = false;
 		MemberVo vo = service.selectOne(id);
 		StringBuffer sb = new StringBuffer();

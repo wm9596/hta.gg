@@ -9,14 +9,11 @@ import lombok.Setter;
 @Setter
 public class VisitLogVo {
 	private Date vDate;
-
 	public VisitLogVo(Date vDate) {
 		super();
 		this.vDate = vDate;
 	}
-
 	public VisitLogVo() {
 		super();
 	}
-	
 }
