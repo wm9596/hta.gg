@@ -31,7 +31,6 @@ public class MailController {
 			return sb.toString();
 		}
     }
-    
     @GetMapping(value = "/member/code/{id}", produces = {MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
     public String code(@PathVariable("id")String id) {
@@ -52,7 +51,6 @@ public class MailController {
 			return sb.toString();
 		}
     }
-    
     @GetMapping(value = "/member/idSearch/{email}", produces = {MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
     public String mailSend(@PathVariable("email")String email) {
@@ -75,7 +73,6 @@ public class MailController {
 			return sb.toString();
 		}
     }
-    
     @GetMapping(value = "/member/idSearchCode/{email}", produces = {MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
     public String SearchCode(@PathVariable("email")String email) {
@@ -86,7 +83,6 @@ public class MailController {
     		}else {
     			email=email+".com";
     		}
-    		
     		String code = service.idSeachCheck(email).getCode();
 			String username = service.idSeachCheck(email).getUsername();
 			sb.append("<data>");
@@ -106,7 +102,6 @@ public class MailController {
 			return sb.toString();
 		}
     }
-    
     @GetMapping(value = "/member/pwdSearch/{id}/{email}", produces = {MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
     public String PwdmailSend(@PathVariable("id")String id, @PathVariable("email")String email) {

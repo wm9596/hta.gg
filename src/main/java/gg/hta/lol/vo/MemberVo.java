@@ -30,5 +30,4 @@ public class MemberVo {
 		this.nickname = nickname;
 		this.point = point;
 	}
-	
 }

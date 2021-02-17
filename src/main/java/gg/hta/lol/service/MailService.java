@@ -16,23 +16,21 @@ import gg.hta.lol.vo.MemberVo;
 public class MailService {
 	@Autowired private JavaMailSender mailSender;
 	@Autowired private MemberDao dao;
-
 	public void regist(AuthVo vo, String email) throws Exception {
-//      String key = new TempKey().generateKey(30);  // 암호화(이메일코드)
+//      String key = new TempKey().generateKey(30);
 		dao.AuthDelte(vo.getUsername());
 		Random random = new Random();
 		String key = String.format("%04d", random.nextInt(10000));
 		vo.setCode(key);
 		dao.insert(vo);
-	    //메일 전송
         MailHandler sendMail = new MailHandler(mailSender);
-        sendMail.setSubject("안녕하세요 hta.gg 인증 메일입니다.");
+        sendMail.setSubject("Hello, This is the 'hta.gg' authentication mail.");
         sendMail.setText(
            new StringBuffer()
-              .append("<h1>메일인증</h1>")
-              .append("인증 번호는 :")
-              .append(key)
-              .append("입니다.<br> 홈페이지로 돌아가서 이메일 인증번호를 입력해주세요.")
+              .append("<h1>Join Membership Mail Authentication</h1>")
+              .append("Authentication number : ")
+              .append("<h3 style='display:inline'>" + key + "</h3>")
+              .append("<br>Please go back to the homepage and enter your email verification number.")
               .toString());
         sendMail.setFrom("hta.gg@gmail.com", "hta.gg");
 		if (email.substring(email.lastIndexOf("@")).trim().equals("@daum")) {
@@ -43,11 +41,9 @@ public class MailService {
 			sendMail.send();
 		}
 	}
-
 	public String check(String username) {
 		return dao.selectAuth(username).getCode();
 	}
-	
 	public void idSearch(String email) throws Exception {
 		Random random = new Random();
 		String code = String.format("%04d", random.nextInt(10000));
@@ -55,38 +51,34 @@ public class MailService {
 		for(MemberVo vo:list) {
 			dao.authUpdate(new AuthVo(vo.getUsername(),code));
 		}
-	    //메일 전송
         MailHandler sendMail = new MailHandler(mailSender);
-        sendMail.setSubject("안녕하세요 hta.gg 인증 메일입니다.");
+        sendMail.setSubject("Hello, This is the 'hta.gg' authentication mail.");
         sendMail.setText(
            new StringBuffer()
-              .append("<h1>아이디 찾기 메일인증</h1>")
-              .append("인증 번호는 :")
-              .append(code)
-              .append("입니다.<br> 홈페이지로 돌아가서 이메일 인증번호를 입력해주세요.")
+              .append("<h1>ID Find Mail Authentication</h1>")
+              .append("Authentication number : ")
+              .append("<h3 style='display:inline'>" + code + "</h3>")
+              .append("<br>Please go back to the homepage and enter your email verification number.")
               .toString());
         sendMail.setFrom("hta.gg@gmail.com", "hta.gg");
         sendMail.setTo(email);
 		sendMail.send();
 	}
-	
 	public AuthVo idSeachCheck(String email) {
 		return dao.EmailselectAuth(email);
 	}
-	
 	public void pwdSearch(String id, String email) throws Exception {
 		Random random = new Random();
 		String code = String.format("%04d", random.nextInt(10000));
 		dao.authUpdate(new AuthVo(id,code));
-	    //메일 전송
         MailHandler sendMail = new MailHandler(mailSender);
-        sendMail.setSubject("안녕하세요 hta.gg 인증 메일입니다.");
+        sendMail.setSubject("Hello, This is the 'hta.gg' authentication mail.");
         sendMail.setText(
            new StringBuffer()
-              .append("<h1>비밀번호찾기/변경 메일인증</h1>")
-              .append("인증 번호는 :")
-              .append(code)
-              .append("입니다.<br> 홈페이지로 돌아가서 이메일 인증번호를 입력해주세요.")
+              .append("<h1>Find/Change Password Authentication</h1>")
+              .append("Authentication number : ")
+              .append("<h3 style='display:inline'>" + code + "</h3>")
+              .append("<br>Please go back to the homepage and enter your email verification number.")
               .toString());
         sendMail.setFrom("hta.gg@gmail.com", "hta.gg");
         sendMail.setTo(email);

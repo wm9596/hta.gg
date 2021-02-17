@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gg.hta.lol.mapper.VisitCountMapper">
+	<insert id="insert">
+		insert into visitlog values(sysdate)
+	</insert>
+	<select id="totalCnt" resultType="int">
+		select count(*) TotalCnt from visitlog
+	</select>
+	<select id="todayCnt" resultType="int">
+		select count(*) TodayCnt from visitlog where to_date(vDate,'yyyy/mm/dd')=to_date(sysdate,'yyyy/mm/dd')
+	</select>
+</mapper>
