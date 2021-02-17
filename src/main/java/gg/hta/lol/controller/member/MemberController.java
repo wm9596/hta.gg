@@ -1,6 +1,8 @@
 package gg.hta.lol.controller.member;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -10,9 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import gg.hta.lol.service.MemberService;
+import gg.hta.lol.util.PageUtil;
 import gg.hta.lol.vo.MemberVo;
 
 @Controller
@@ -70,8 +74,22 @@ public class MemberController {
 			return sb.toString();
 		}
 	}
-	@GetMapping("/member/admin/memberList")
-	public String adminPage() {
+	@RequestMapping("/member/admin/memberList")
+	public String adminPage(@RequestParam(value="pageNum", defaultValue = "1")int pageNum, String field, String keyword, Model m) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("field", field);
+		map.put("keyword", keyword);
+		int totalRowCount = service.count(map); 
+		PageUtil pu = new PageUtil(pageNum, 10,5,totalRowCount);
+		int startRow = pu.getStartRow();
+		int endRow = pu.getEndRow();
+		map.put("startRow",startRow);
+		map.put("endRow",endRow);
+		List<MemberVo> list = service.list(map);
+		m.addAttribute("list", list);
+		m.addAttribute("pu",pu);
+		m.addAttribute("field", field);
+		m.addAttribute("keyword", keyword);
 		return ".adminpage.memberList";
 	}
 }

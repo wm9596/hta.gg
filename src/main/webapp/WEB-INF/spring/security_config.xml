@@ -25,5 +25,4 @@
 			<sec:password-encoder ref="passwordEncoding"/>
 		</sec:authentication-provider>
 	</sec:authentication-manager>
-	
 </beans>

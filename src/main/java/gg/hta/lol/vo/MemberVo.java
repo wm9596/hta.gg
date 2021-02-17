@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class MemberVo {
 	private String username;
-	private int sNum;
+	private String snickname;
 	private String password;
 	private char enable;
 	private String email;
@@ -18,11 +18,11 @@ public class MemberVo {
 	public MemberVo() {
 		super();
 	}
-	public MemberVo(String username, int sNum, String password, char enable, String email, Date regDate,
+	public MemberVo(String username, String snickname, String password, char enable, String email, Date regDate,
 			String nickname, int point) {
 		super();
 		this.username = username;
-		this.sNum = sNum;
+		this.snickname = snickname;
 		this.password = password;
 		this.enable = enable;
 		this.email = email;

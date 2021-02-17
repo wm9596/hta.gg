@@ -20,6 +20,8 @@
 	#adminPage_Menu a{color:black;text-decoration: none; font-weight:bold;color:#CCCCCC;font-family: 'Noto Serif KR', serif;}
 	#adminPage_Menu a:hover{color:#888888;}
 	#adminPage_section{width:960px; padding-top:20px; height:500px;}
+	table{border:1px solid; border-collapse: collapse; text-align: center;}
+	th,td{border: 1px solid;}
 </style>
 </head>
 <body>

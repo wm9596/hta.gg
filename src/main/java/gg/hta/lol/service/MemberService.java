@@ -43,8 +43,8 @@ public class MemberService {
 	public MemberVo selectOne(String username) {
 		return dao.selectOne(username);
 	}
-	public List<MemberVo> list(){
-		return dao.selectList();
+	public List<MemberVo> list(HashMap<String, Object> map){
+		return dao.list(map);
 	}
 	public List<MemberVo> emailList(String email) {
 		return dao.emailList(email);
@@ -61,5 +61,8 @@ public class MemberService {
 	}
 	public int delete(String username) {
 		return dao.delete(username);
+	}
+	public int count(HashMap<String, Object> map) {
+		return dao.count(map);
 	}
 }

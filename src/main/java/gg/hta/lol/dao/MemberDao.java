@@ -40,9 +40,9 @@ public class MemberDao {
 	public int authUpdate(AuthVo vo) {
 		return sqlSession.update(NAMESPACE + ".AuthUpdate", vo);
 	}
-	public List<MemberVo> selectList(){
-		return sqlSession.selectList(NAMESPACE + ".list"); 
-	}
+//	public List<MemberVo> selectList(){
+//		return sqlSession.selectList(NAMESPACE + ".list"); 
+//	}
 	public CustomUserDetail getAuthsList(String username){
 		return sqlSession.selectOne(NAMESPACE + ".getAuths", username);
 	}
@@ -60,5 +60,11 @@ public class MemberDao {
 	}
 	public int delete(String username) {
 		return sqlSession.update(NAMESPACE + ".delete",username); 
+	}
+	public int count(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE + ".count",map);
+	}
+	public List<MemberVo> list(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE + ".list",map);
 	}
 }
