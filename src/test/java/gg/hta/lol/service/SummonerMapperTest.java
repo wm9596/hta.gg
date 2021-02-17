@@ -25,12 +25,12 @@ import lombok.Setter;
 public class SummonerMapperTest {
 
 	@Autowired
-//	private SummonerMapper mapper;
-	private MatchInfoMapper mapper;
+	private SummonerMapper mapper;
+//	private MatchInfoMapper mapper;
 
-//	@Test
+	@Test
 	public void getSummonerTest() {
-//		System.out.println(mapper.getSummonerInfo("더덕순대국"));
+		System.out.println(mapper.getSummonerInfo("더덕순대국"));
 	}
 
 //	@Test

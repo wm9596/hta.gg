@@ -1,13 +1,127 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<h1 style="text-align: center; padding-top: 70px;">프로필 등록</h1><br>
-<form method="post" action="" style="text-align: center;">
-	<label style="width: 150px;">소환사 정보</label>
-	<input type="text" name="nickname" value="" style="width: 300px; padding: 0px; display: inline-block;"><br><br>
-	<label style="width: 150px;">주요 플레이 시간</label>
-	<input type="text" name="password" style="width: 300px; padding: 0px; display: inline-block;"><br><br>
-	<label style="width: 150px;">주 포지션</label>
-	<input type="text" name="email" value="" style="width: 300px; padding: 0px; display: inline-block;">
-	<input type="hidden" name="username" value=""><br><br>
-	<input type="submit" value="등록" style="width: 300px;">
-</form>
+	pageEncoding="UTF-8"%>
+<style>
+
+#profile_wrap {
+	background-color: yellow;
+}
+
+div {
+	border: 1px solid gray;
+}
+
+.search-bar {
+	width: 500px;
+}
+
+#myProfileArea {
+	width: 60%;
+	height: 500px;
+	margin: auto;
+}
+
+#profileIconArea {
+/* 	display: flex; */
+/* 	justify-content: center; */
+/* 	align-items: center; */
+	float: left;
+	width: 20%;
+	height: 100%;
+}
+
+#imageArea {
+	width: 100%;
+	height: 80%;
+}
+
+#nicknameArea {
+	width: 100%;
+	height: 20%;
+}
+
+.profileIcon {
+	border-radius: 100%;
+	width: 100%;
+	height: 100%;
+}
+
+#profile_top {
+	height: 30%;
+}
+
+#profileTierArea{
+	float: left;
+	width: 40%;
+	height: 100%;
+}
+
+.tierArea {
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+
+.tierImageArea {
+	width: 100%;
+	height: 80%;
+}
+</style>
+
+<div id="profile_wrap">
+	<div id="myProfileArea">
+		<div id="profile_top">
+			<div id="profileIconArea">
+				<div id="imageArea">
+				</div>
+				<div id="nicknameArea">
+				</div>
+			</div>
+			<div id="profileTierArea">
+				<div id="soloTier" class="tierArea">
+					<div id="soloTierImageArea" class="tierImageArea">
+					</div>
+				</div>
+				<div id="flexTier" class="tierArea">
+					<div id="flexTierImageArea" class="tierImageArea">
+					</div>
+				</div>
+			</div>
+			<div id="profileMostArea">
+			</div>
+		</div>
+	</div>
+	<div class="mx-auto mt-5 search-bar input-group mb-3">
+		<input id="snickname" type="text" class="form-control rounded-pill" placeholder="LOL 닉네임을 입력해주세요." aria-label="Recipient's username" aria-describedby="button-addon2" value="더덕순대국"> 
+		<input type="button" id="getInfo" value="검색">
+	</div>
+</div>
+
+
+
+<script>
+	$("#getInfo").click(
+			function() {
+				var snickname = $("#snickname").val();
+				console.log(snickname);
+				$.ajax({
+					url : '/lol/member/member/registerProfile?snickname='
+							+ snickname,
+					success : function(result) {
+						console.log(result);
+						var soloTier = $(result).find("soloVo").find("tier").text();
+						soloTier = soloTier.split("_")[0];
+						var soloWin = $(result).find("soloVo").find("win").text();
+						var soloLose = $(result).find("soloVo").find("lose").text();
+						var flexTier = $(result).find("flexVo").find("tier").text();
+						var flexWin = $(result).find("flexVo").find("win").text();
+						var flexLose = $(result).find("flexVo").find("lose").text();
+						var icon = $(result).find("searchVo").find("icon").text();
+						var level = $(result).find("searchVo").find("slevel").text();
+
+						$("#imageArea").append("<img alt='' src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/profileicon/" + icon +".png' class='profileIcon'>")
+						$("#nicknameArea").append("<span>" + snickname + "</span>")
+						$("#soloTierImageArea").append("<img alt='' src='/lol/resources/images/tierEmblem/" + soloTier +".png' class='profileIcon'>")
+					}
+				});
+			});
+</script>
