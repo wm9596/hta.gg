@@ -19,5 +19,6 @@
  	<mapper resource="gg/hta/lol/mapper/BattingMapper.xml"/>
  	<mapper resource="gg/hta/lol/mapper/VisitCountMapper.xml"/>
  		<mapper resource="gg/hta/lol/mapper/ChampMapper.xml"/>
+ 		<mapper resource="gg/hta/lol/mapper/PointMapper.xml"/>
   </mappers>
 </configuration>

@@ -12,13 +12,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import gg.hta.lol.service.BattingService;
+import gg.hta.lol.service.PointService;
 import gg.hta.lol.vo.BattingLogVo;
 
 @Controller
 public class BattingController {
 	@Autowired
 	private BattingService service;
-
+	@Autowired
+	private PointService pointservice;
+	
 	@GetMapping(value="/batting/home")
 	public String battingHome() {
 		return "batting/home";
@@ -27,7 +30,10 @@ public class BattingController {
 	@GetMapping(value="/selectTeam")
 	@ResponseBody
 	public String selectTeam(BattingLogVo vo) {
+		
 		service.selectTeam(vo);
+		String username=vo.getUsername();
+		pointservice.battingInsert(username);
 		System.out.println("성공");
 		return "{\"code\":\"" + vo + "\"}";
 		

@@ -3,11 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     <mapper namespace="gg.hta.lol.mapper.PointMapper">
-    <insert id="battingInsert" parameterType="gg.hta.lol.vo.PointVo">
-    insert into point values(ptNum_seq.nextval,#{username},#{method},#{regdate})
+    <insert id="battingInsert" parameterType="string">
+    insert into point values(ptNum_seq.nextval,#{username},'batting',-50,sysdate)
     </insert>
-    <update id="memberPointUpdate" parameterType="string">
-   update member set point=point+(select sum(score) from point where username=#{username}) where username=#{username})
+     <insert id="battingInsertAdmin" parameterType="gg.hta.lol.vo.PointVo">
+    insert into point values(ptNum_seq.nextval,#{username},'batting',#{score},sysdate)
+    </insert>
+    
+    
+    <update id="memberPointUpdate" parameterType="gg.hta.lol.vo.BattingLogVo">
+update member set point=-50+point+(
+select NVL(sum(match.mrate),0) from match inner join battinglog 
+on match.mnum=battinglog.mnum where mwinlose=choice and match.mnum=#{mNum} and battinglog.username=#{username})
+where username=(select battinglog.username from match inner join battinglog on match.mnum=battinglog.mnum 
+where match.mnum=#{mNum} and battinglog.username=#{username})
     </update>
     
     </mapper>

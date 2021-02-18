@@ -412,7 +412,8 @@ function teamList(){
 	 					str +="<div id='matchList3' style='background-color:DodgerBlue;'>"+team1win+"vs"+team2win+"<br>"+
 	 					"<span>"+data.matchinfo[key].B1NAME+"팀이 승리한 경기입니다 클릭시 승리팀이 변경됩니다.</span><input type='button' onclick='pointgo("+data.matchinfo[key].MNUM+","+data.matchinfo[key].MWINLOSE+")' value='포인트지급'></div> ";
 	 				}else if(data.matchinfo[key].MWINLOSE==data.matchinfo[key].TNUM2){
-	 					str +="<div id='matchList3' style='background-color:Cyan;'>"+team1win+"vs"+team2win+"<br><span>"+data.matchinfo[key].B2NAME+"팀이 승리한 경기입니다 클릭시 승리팀이 변경됩니다.</span><input type='button' onclick='pointgo("+data.matchinfo[key].MNUM+","+data.matchinfo[key].MWINLOSE+")' value='포인트지급'></div> ";
+	 					str +="<div id='matchList3' style='background-color:Cyan;'>"+team1win+"vs"+team2win+"<br>"+
+	 					"<span>"+data.matchinfo[key].B2NAME+"팀이 승리한 경기입니다 클릭시 승리팀이 변경됩니다.</span><input type='button' onclick='pointgo("+data.matchinfo[key].MNUM+","+data.matchinfo[key].MWINLOSE+")' value='포인트지급'></div> ";
 	 				}else{
 	 					var team1win="<a href='javascript:yesorno("+key+","+data.matchinfo[key].MNUM+","+value.TNUM1+")'>"+data.matchinfo[key].B1NAME+"</a>";
 		 				var team2win="<a href='javascript:yesorno2("+key+","+data.matchinfo[key].MNUM+","+value.TNUM2+")'>"+data.matchinfo[key].B2NAME+"</a>";
@@ -447,13 +448,14 @@ function pointgo(mnum,mwinlose){
 		},
 		dataType: 'json',
 		success:function(data){
-			console.log(data);
+		console.log(data);
 		$.each(data.list,function(key,value){
-			console.log(value)
+			
+			
 			$.ajax({
 				url:'/lol/batting/pointInsert',
 				data:{
-					mdate:data.list[key].MDATE,MRATE:data.list[key].MRATE,username:data.list[key].USERNAME
+					score:data.list[key].MRATE,username:data.list[key].USERNAME,mNum:mnum
 				}
 			})
 		})
@@ -482,6 +484,7 @@ function pointgo(mnum,mwinlose){
 <input type="button" id="teamDelete2" value="x"><br>
 
 <input type="button" id="matchinsert" value="경기등록">
+
 </div>
 <div id="d2"></div>
 <div id="matchList" style="width: 100%;"></div>

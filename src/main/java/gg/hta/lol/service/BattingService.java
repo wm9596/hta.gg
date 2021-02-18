@@ -10,6 +10,7 @@ import gg.hta.lol.dao.BattingDao;
 import gg.hta.lol.vo.BattingLogVo;
 import gg.hta.lol.vo.BattingTeamInfoVo;
 import gg.hta.lol.vo.MatchVo;
+import gg.hta.lol.vo.PointVo;
 
 @Service
 public class BattingService {
@@ -47,4 +48,5 @@ public class BattingService {
 	public List<HashMap<String,Object>> pointGo(int mnum){
 		return dao.pointGo(mnum);
 	}
+	
 }
