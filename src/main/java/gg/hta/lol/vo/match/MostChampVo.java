@@ -18,6 +18,6 @@ public class MostChampVo {
 	private int wincnt;
 	
 	public int getRate() {
-		return wincnt*100/(wincnt+cnt);
+		return wincnt*100/cnt;
 	}
 }
