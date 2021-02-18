@@ -71,4 +71,7 @@ public class MemberDao {
 	public int boardCount() {
 		return sqlSession.selectOne(NAMESPACE + ".boardCount");
 	}
+	public int replyCount() {
+		return sqlSession.selectOne(NAMESPACE + ".replyCount");
+	}
 }
