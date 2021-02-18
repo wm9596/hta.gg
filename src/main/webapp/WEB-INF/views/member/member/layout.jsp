@@ -45,7 +45,7 @@
 							<li><a href="#"><i class="fa fa-suitcase"></i>내 활동 </a>
 								<ul class="submenu">
 									<li><a href="${pageContext.request.contextPath }/member/member/boardList">내가 작성한 글 </a></li>
-									<li><a href="#">내가 작성한 댓글 </a></li>
+									<li><a href="${pageContext.request.contextPath }/member/member/replyList">내가 작성한 댓글 </a></li>
 									<li><a href="#">스크랩 한 게시물 </a></li>
 								</ul>
 							</li>

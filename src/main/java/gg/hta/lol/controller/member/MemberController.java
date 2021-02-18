@@ -108,7 +108,20 @@ public class MemberController {
 		m.addAttribute("pu",pu);
 		return ".mypage.boardList";
 	}
-	
+	@GetMapping(value = "/member/member/replyList")
+	public String replyList(@RequestParam(value="pageNum", defaultValue = "1")int pageNum, Principal principal, Model m) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int totalRowCount = service.replyCount();
+		PageUtil pu = new PageUtil(pageNum, 10,5,totalRowCount);
+		int startRow = pu.getStartRow();
+		int endRow = pu.getEndRow();
+		map.put("startRow",startRow);
+		map.put("endRow",endRow);
+		List<CommunityVo> list = service.list(principal.getName());
+		m.addAttribute("list", list);
+		m.addAttribute("pu",pu);
+		return ".mypage.boardList";
+	}
 	@GetMapping(value = "/member/member/delete", produces = {MediaType.APPLICATION_XML_VALUE})
 	@ResponseBody
 	public String delete(Principal principal) {

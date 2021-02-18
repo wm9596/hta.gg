@@ -72,4 +72,7 @@ public class MemberService {
 	public int boardCount() {
 		return dao.boardCount();
 	}
+	public int replyCount() {
+		return dao.replyCount();
+	}
 }
