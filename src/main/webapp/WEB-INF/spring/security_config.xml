@@ -8,6 +8,7 @@
 	<bean id="loginSuccessHandler" class="gg.hta.lol.security.LoginSuccessHandler"/>
 	<bean id="passwordEncoding" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	<bean id="userDetailService" class="gg.hta.lol.security.CustomUserDetailService"/>
+			<sec:http pattern="/champ/ChampInsert2" security="none"/>
 	<sec:http>
 		<sec:intercept-url pattern="/member/member/**" access="hasRole('ROLE_MEMBER')"/>
 		<sec:intercept-url pattern="/member/admin/**" access="hasRole('ROLE_ADMIN')"/>

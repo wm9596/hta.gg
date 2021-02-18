@@ -30,4 +30,7 @@ MERGE INTO battingLog USING DUAL on (mNum=#{mNum} and username=#{username}) WHEN
   <select id="battingchoice" parameterType="gg.hta.lol.vo.BattingLogVo" resultType="gg.hta.lol.vo.BattingLogVo">
   select * from battingLog where mNum=#{mNum} and username=#{username}
   </select>
+  <select id="pointGo" parameterType="int" resultType="hashmap">
+select username,To_Char(mdate,'yyyy/mm/dd') mdate,mrate from match inner join battinglog on match.mnum=battinglog.mnum where mwinlose=choice and match.mnum=#{mnum}
+  </select>
   </mapper>

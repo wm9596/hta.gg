@@ -44,4 +44,7 @@ public class BattingService {
 	public List<BattingLogVo> battingchoice(BattingLogVo vo){
 		return dao.battingchoice(vo);
 	}
+	public List<HashMap<String,Object>> pointGo(int mnum){
+		return dao.pointGo(mnum);
+	}
 }

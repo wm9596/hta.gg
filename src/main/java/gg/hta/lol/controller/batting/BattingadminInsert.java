@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import gg.hta.lol.service.BattingService;
 import gg.hta.lol.vo.MatchVo;
+import gg.hta.lol.vo.PointVo;
 
 @Controller
 public class BattingadminInsert {
@@ -74,6 +75,21 @@ public class BattingadminInsert {
 	public String deleteTeam(int tnum) {
 		service.battingdeleteTeam(tnum);
 		return "{\"code\":\"good \"}";
+	}
+	@GetMapping(value="/batting/pointGo")
+	@ResponseBody
+	public Map<String,Object> pointgo(int mnum) {
+		System.out.println(mnum);
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("list", service.pointGo(mnum));
+		
+		return map;
+	}
+	
+	@GetMapping(value="/batting/pointInsert")
+	@ResponseBody
+	public String pointInsert(PointVo vo) {
+		return "";
 	}
 
 }

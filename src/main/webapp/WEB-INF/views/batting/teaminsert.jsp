@@ -132,6 +132,9 @@ width: 40%; text-align: center; border: 2px solid black; display: inline-block; 
 			})
 
 		});
+		$("#pointgo").click(function(){
+			console.log("ddddddddddd")
+		})
 		$("#teamDelete2").click(function() {
 			let team2 = $("#addmatch2 option:selected").val();
 			$("#addmatch2 option[value='" + team2 + "']").remove();
@@ -300,6 +303,7 @@ function yesorno(aa,bb,cc){
 		console.log("팀번호"+cc);
 		console.log($("#"+aa).parent());
 		$("#"+aa).next().find("span").html("<span style='color:red'>&nbsp;&nbsp;홈팀 승리 입니다</span>")
+		
 		/* $("<span style='color:red'>홈팀 승리 입니다</span>").appendTo("#matchList3"); */
 		$.ajax({
 			url:'/lol/winupdate',
@@ -405,9 +409,10 @@ function teamList(){
 	 				console.log(data.matchinfo[key].MWINLOSE+"아랄랄");
 	 				console.log(data.matchinfo[key].TNUM1+"dddddddddddddddd")
 	 				if(data.matchinfo[key].MWINLOSE==data.matchinfo[key].TNUM1){
-	 					str +="<div id='matchList3' style='background-color:DodgerBlue;'>"+team1win+"vs"+team2win+"<br><span>"+data.matchinfo[key].B1NAME+"팀이 승리한 경기입니다 클릭시 승리팀이 변경됩니다.</span></div> ";
+	 					str +="<div id='matchList3' style='background-color:DodgerBlue;'>"+team1win+"vs"+team2win+"<br>"+
+	 					"<span>"+data.matchinfo[key].B1NAME+"팀이 승리한 경기입니다 클릭시 승리팀이 변경됩니다.</span><input type='button' onclick='pointgo("+data.matchinfo[key].MNUM+","+data.matchinfo[key].MWINLOSE+")' value='포인트지급'></div> ";
 	 				}else if(data.matchinfo[key].MWINLOSE==data.matchinfo[key].TNUM2){
-	 					str +="<div id='matchList3' style='background-color:Cyan;'>"+team1win+"vs"+team2win+"<br><span>"+data.matchinfo[key].B2NAME+"팀이 승리한 경기입니다 클릭시 승리팀이 변경됩니다.</span></div> ";
+	 					str +="<div id='matchList3' style='background-color:Cyan;'>"+team1win+"vs"+team2win+"<br><span>"+data.matchinfo[key].B2NAME+"팀이 승리한 경기입니다 클릭시 승리팀이 변경됩니다.</span><input type='button' onclick='pointgo("+data.matchinfo[key].MNUM+","+data.matchinfo[key].MWINLOSE+")' value='포인트지급'></div> ";
 	 				}else{
 	 					var team1win="<a href='javascript:yesorno("+key+","+data.matchinfo[key].MNUM+","+value.TNUM1+")'>"+data.matchinfo[key].B1NAME+"</a>";
 		 				var team2win="<a href='javascript:yesorno2("+key+","+data.matchinfo[key].MNUM+","+value.TNUM2+")'>"+data.matchinfo[key].B2NAME+"</a>";
@@ -433,7 +438,29 @@ function teamList(){
 			}
 		})
 	}
-
+function pointgo(mnum,mwinlose){
+	console.log(mnum,mwinlose);
+	$.ajax({
+		url:'/lol/batting/pointGo',
+		data:{
+			mnum:mnum
+		},
+		dataType: 'json',
+		success:function(data){
+			console.log(data);
+		$.each(data.list,function(key,value){
+			console.log(value)
+			$.ajax({
+				url:'/lol/batting/pointInsert',
+				data:{
+					mdate:data.list[key].MDATE,MRATE:data.list[key].MRATE,username:data.list[key].USERNAME
+				}
+			})
+		})
+			
+		}
+	})
+}
 </script>
 </head>
 <body>

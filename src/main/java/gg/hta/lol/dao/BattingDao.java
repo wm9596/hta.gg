@@ -46,4 +46,7 @@ public class BattingDao {
 	public List<BattingLogVo> battingchoice(BattingLogVo vo){
 		return sqlSession.selectList(NAMESPACE+".battingchoice",vo);
 	}
+	public List<HashMap<String,Object>> pointGo(int mnum){
+		return sqlSession.selectList(NAMESPACE+".pointGo",mnum);
+	}
 }

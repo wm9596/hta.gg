@@ -71,9 +71,9 @@ $(function(){
 		        				"<div id='vs'>"+data.matchinfo[key].B1NAME+"vs"+data.matchinfo[key].B2NAME+"</div> </div>";
 		        				
 		        				if(data.matchinfo[key].MWINLOSE==data.matchinfo[key].TNUM1){
-		        					str+="<span style='color:blue'>"+data.matchinfo[key].B2NAME+"승리</span><span style='color:red'>"+data.matchinfo[key].MRATE+"포인트 지급</span>";
+		        					str+="<span style='color:blue'>"+data.matchinfo[key].B2NAME+"팀 승리</span><span style='color:red'>"+data.matchinfo[key].MRATE+"포인트 지급</span>";
 		        				}else if(data.matchinfo[key].MWINLOSE==data.matchinfo[key].TNUM2) {
-		        					str+="<span style='color:blue'>"+data.matchinfo[key].B2NAME+"승리</span><span style='color:red'>"+data.matchinfo[key].MRATE+"포인트 지급</span>";
+		        					str+="<span style='color:blue'>"+data.matchinfo[key].B2NAME+"팀 승리</span><span style='color:red'>"+data.matchinfo[key].MRATE+"포인트 지급</span>";
 		        				}else{
 		        					str+="<div id='winlose'><span style='color:blue' id='vs1'>경기 결과가 없습니다.</span><input type='button' value='승리팀예상하기'"+
 		        					"onclick='selectTeam("+targer+")' class='winloseBTN'></div>";
@@ -86,9 +86,10 @@ $(function(){
 		        						},success:function(data){
 		        							console.log(data);
 		        							if(data.battingchoice.length>0){
-		        								
+		        							console.log(	$("#winlose :button").val("승리팀수정하기"));
 		        							$("#winlose").append("<div id='pick' >이미 배팅하셨네요</div>")}
 		        							else{
+		        							
 		        								$("#winlose").append("<div id='pick'> 배팅을 안하셨어요</div>")
 		        							}
 		        						}
@@ -242,10 +243,10 @@ function selectTeam(data) {
 }
 function b1win(data){
 	console.log(data);
-
+	console.log(data.B1NAME)
 	let Username="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}";
 	console.log(Username);
-	
+	var t1=data.B1NAME;
 	$.ajax({
 		url:'/lol/selectTeam',
 		dataType: 'json',
@@ -254,12 +255,13 @@ function b1win(data){
 		},
 		success:function(data){
 			alert("배팅완료");
+			console.log($("#pick").html(t1+"팀을 선택하셨습니다"))
 		}
 	})
 }
 function b2win(data){
 	console.log(data);
-
+	var t2=data.B2NAME;
 	let Username="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}";
 	console.log(Username);
 	
@@ -271,6 +273,7 @@ function b2win(data){
 		},
 		success:function(data){
 			alert("배팅완료");
+			console.log($("#pick").html(t2+"팀을 선택하셨습니다"))
 		}
 	})
 }
