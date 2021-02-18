@@ -3,8 +3,8 @@
 <script type="text/javascript" src="/lol/resources/js/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#emailOk").click(function(){
-		var email = document.getElementById("email").value;
+	$("#id_emailOk").click(function(){
+		var email = document.getElementById("id_email").value;
 		email = email.substr(0,email.lastIndexOf("."));
 		$.ajax({
 			url:"/lol/member/emailCheck/"+email,
@@ -17,23 +17,23 @@ $(document).ready(function() {
 							var result = $(data).find("result").text();
 							console.log(result);
 							if(result == 'success'){
-								document.getElementById("emailcheck").innerHTML="인증번호 전송이 완료되었습니다.";
+								document.getElementById("id_emailcheck").innerHTML="인증번호 전송이 완료되었습니다.";
 							}else{
-								document.getElementById("emailcheck").innerHTML="인증번호 전송이 실패되었습니다.";
+								document.getElementById("id_emailcheck").innerHTML="인증번호 전송이 실패되었습니다.";
 							}
 						}
 					});
 				}else if(using=='false'){
-					document.getElementById("emailcheck").innerHTML="등록되지 않은 이메일입니다. 회원가입 해주세요."
+					document.getElementById("id_emailcheck").innerHTML="등록되지 않은 이메일입니다. 회원가입 해주세요."
 				}
 			}
 		});
 	});
 	
-	$("#searchId").click(function(){
-		var email = document.getElementById("email").value;
+	$("#id_searchId").click(function(){
+		var email = document.getElementById("id_email").value;
 		email = email.substr(0,email.lastIndexOf("."));
-		if(document.getElementById("emailcheck").textContent != "인증번호 전송이 완료되었습니다."){
+		if(document.getElementById("id_emailcheck").textContent != "인증번호 전송이 완료되었습니다."){
 			alert("이메일 입력 후 이메일 인증 버튼을 클릭해 주세요!!!");
 		}else{
 			$.ajax({
@@ -42,10 +42,10 @@ $(document).ready(function() {
 				success: function(data){
 					var code = $(data).find("code").text();
 					var id = $(data).find("id").text();
-					if(code == document.getElementById("confirm").value){
-						document.getElementById("confirmId").innerHTML="이메일 인증 완료!!! 아이디는 <h3>"+ id +"</h3> 입니다.";
+					if(code == document.getElementById("id_confirm").value){
+						document.getElementById("id_confirmId").innerHTML="이메일 인증 완료!!! 아이디는 <h3 style='display:inline'>"+ id +"</h3> 입니다.";
 					}else{
-						document.getElementById("confirmId").innerHTML="이메일 인증 실패!!! 인증번호를 확인해주세요.";
+						document.getElementById("id_confirmId").innerHTML="이메일 인증 실패!!! 인증번호를 확인해주세요.";
 					}
 				}
 			});

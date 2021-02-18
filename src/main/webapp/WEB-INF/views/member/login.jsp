@@ -24,6 +24,74 @@ $(document).ready(function(){
     });
 });
 
+$(function(){
+	$("#id_emailOk").click(function(){
+		var email = document.getElementById("id_email").value;
+		email = email.substr(0,email.lastIndexOf("."));
+		$.ajax({
+			url:"/lol/member/emailCheck/"+email,
+			success: function(data){
+				var using = $(data).find("using").text();
+				if(eval(using)==true){
+					$.ajax({
+						url:"/lol/member/idSearch/"+email,
+						success: function(data){
+							var result = $(data).find("result").text();
+							console.log(result);
+							if(result == 'success'){
+								document.getElementById("id_emailcheck").innerHTML="인증번호 전송이 완료되었습니다.";
+							}else{
+								document.getElementById("id_emailcheck").innerHTML="인증번호 전송이 실패되었습니다.";
+							}
+						}
+					});
+				}else if(using=='false'){
+					document.getElementById("id_emailcheck").innerHTML="등록되지 않은 이메일입니다. 회원가입 해주세요."
+				}
+			}
+		});
+	});
+	$("#id_confirmOk").click(function(e){
+		e.preventDefault();
+		var email = document.getElementById("id_email").value;
+		email = email.substr(0,email.lastIndexOf("."));
+		if(document.getElementById("id_emailcheck").textContent != "인증번호 전송이 완료되었습니다."){
+			alert("이메일 입력 후 이메일 인증 버튼을 클릭해 주세요!!!");
+		}else{
+			$.ajax({
+				url:"/lol/member/idSearchCode/"+email,
+				dataType:'xml',
+				success: function(data){
+					var code = $(data).find("code").text();
+					//var id = $(data).find("id").text();
+					if(code == document.getElementById("id_confirm").value){
+						document.getElementById("id_confirmId").innerHTML="이메일 인증 완료!!!";
+					}else{
+						document.getElementById("id_confirmId").innerHTML="이메일 인증 실패!!!";
+					}
+				}
+			});
+		}
+	});
+	$("#id_searchId").click(function(e){
+		e.preventDefault();
+		var email = document.getElementById("id_email").value;
+		email = email.substr(0,email.lastIndexOf("."));
+		if(document.getElementById("id_confirmId").textContent != "이메일 인증 완료!!!"){
+			alert("이메일 인증을 완료해주세요!!!");
+		}else{
+			$.ajax({
+				url:"/lol/member/idSearchCode/"+email,
+				dataType:'xml',
+				success: function(data){
+					var id = $(data).find("id").text();
+					document.getElementById("searchId").innerHTML="아이디는 <h3 style='display:inline'>"+ id +"</h3> 입니다.";
+				}
+			});
+		}
+	});
+});
+
 $(function(){ 
 	$("#pwd_emailOk").click(function () {
 		var id = document.getElementById("pwd_id").value;
@@ -324,6 +392,7 @@ $(()=>{
             </form:form>
 			
 			<form:form method="post" action="/lol/member/pwdChange" class="form-reset">
+				<h1 style="text-align: center;">비밀번호 찾기/변경</h1>
                 <input type="text" id="pwd_id" name="username" class="form-control" placeholder="아이디" required="" autofocus="">
                 <input type="email" id="pwd_email" class="form-control" placeholder="이메일" required="" autofocus="" style="width: 85%; float: left;">
                 <button class="btn btn-success btn-block" id="pwd_emailOk" style="width: 15%; float: left; text-align: left; height: 45px;">인증</button>
@@ -332,19 +401,23 @@ $(()=>{
                 <button class="btn btn-success btn-block" id="searchPwd" style="width: 15%; float: left; text-align: left; height: 45px;">확인</button>
                 <span id="confirmPwd" style="float: left;"></span><br>
                 <input type="password" id="pwd_pwd" name="password" class="form-control" onkeyup="checkChangePwd()" placeholder="변경할 비밀번호" required="" autofocus="">
-                <span id="pwd_pwdcheck" style="float: left;"></span><br>
+                <span id="pwd_pwdcheck" style="float: left;"></span>
                 <button class="btn btn-primary btn-block" type="submit" id="pwdChange" disabled="disabled" style="top: 0px;">비밀번호 재설정</button>
             </form:form>
             
-            <form:form method="post" action="/lol/member/pwdChange" class="form-reset">
-                <input type="email" class="form-control" placeholder="이메일" required="" autofocus="" style="width: 85%; float: left;">
-                <button class="btn btn-success btn-block" style="width: 15%; float: left; text-align: left; height: 45px;">인증</button>
-                <span style="float: left;"></span><br>
-                <input type="text" class="form-control" placeholder="인증번호" required="" autofocus="" style="width: 85%; float: left;">
-                <button class="btn btn-success btn-block" style="width: 15%; float: left; text-align: left; height: 45px;">확인</button>
-                <span style="float: left;"></span><br>
-                <button class="btn btn-primary btn-block" type="submit" disabled="disabled">아이디 찾기</button>
-                <span id="confirmId"></span><br>
+            <form:form method="post" class="form-reset">
+            	<h1 style="text-align: center;">아이디 찾기</h1>
+                <input type="email" id="id_email" class="form-control" placeholder="이메일" required="" autofocus="" style="width: 85%; float: left;">
+                <button class="btn btn-success btn-block" id="id_emailOk" style="width: 15%; float: left; text-align: left; height: 45px;">인증</button>
+                <span style="float: left;" id="id_emailcheck"></span><br>
+                
+                <input type="text" class="form-control" id="id_confirm" placeholder="인증번호" required="" autofocus="" style="width: 85%; float: left;">
+                <button class="btn btn-success btn-block" id="id_confirmOk" style="width: 15%; float: left; text-align: left; height: 45px;">확인</button>
+                
+                <span style="float: left;" id="id_confirmId"></span><br>
+                
+                <button class="btn btn-primary btn-block" id="id_searchId">아이디 찾기</button>
+                <span id="searchId"></span><br>
                 <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
             </form:form>
             
@@ -370,7 +443,7 @@ $(()=>{
                 <input type="text" id="confirm" name="confirm" class="form-control" placeholder="인증번호" required="" autofocus="" style="width: 85%; float: left;">
                 <button class="btn btn-success btn-block" id="confirmOk" style="width: 15%; float: left; text-align: left; height: 45px;">확인</button>
                 <span id="confirmcheck" style="float: left;"></span><br>
-                <input type="password" id="nickname" name="nickname" class="form-control" onkeyup="checkNick()" placeholder="닉네임" required autofocus="">
+                <input type="text" id="nickname" name="nickname" class="form-control" onkeyup="checkNick()" placeholder="닉네임" required autofocus="">
                 <span id="nicknamecheck">닉네임을 입력하세요</span><br>
                 <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> 회원가입</button>
                 <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>

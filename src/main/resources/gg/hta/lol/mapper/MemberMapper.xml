@@ -88,4 +88,10 @@
 	 )
 	 <![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>	
+	<select id="boardList" parameterType="string" resultType="gg.hta.lol.vo.CommunityVo">
+		select * from community where username=#{username}
+	</select>
+	<select id="boardCount" resultType="int">
+		select NVL(count(*),0) cnt from community
+	</select>
 </mapper>

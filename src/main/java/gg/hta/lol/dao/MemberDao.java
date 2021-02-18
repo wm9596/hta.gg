@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import gg.hta.lol.security.CustomUserDetail;
 import gg.hta.lol.vo.AuthVo;
 import gg.hta.lol.vo.AuthoritiesVo;
+import gg.hta.lol.vo.CommunityVo;
 import gg.hta.lol.vo.MemberVo;
 
 @Repository
@@ -63,5 +64,11 @@ public class MemberDao {
 	}
 	public List<MemberVo> list(HashMap<String, Object> map){
 		return sqlSession.selectList(NAMESPACE + ".list",map);
+	}
+	public List<CommunityVo> boardList(String username){
+		return sqlSession.selectList(NAMESPACE + ".boardList", username);
+	}
+	public int boardCount() {
+		return sqlSession.selectOne(NAMESPACE + ".boardCount");
 	}
 }
