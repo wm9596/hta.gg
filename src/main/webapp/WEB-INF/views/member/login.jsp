@@ -317,7 +317,7 @@ $(()=>{
             <input type="checkbox" id="idSaveCheck"  style="width:20px;height:20px;vertical-align:-3px;">아이디 저장&nbsp;&nbsp;&nbsp;
 			<input type="checkbox" id="remember-me" name="remember-me" style="width:20px;height:20px; vertical-align:-3px;">자동 로그인<br>
             <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> 로그인</button>
-            <a href="#" id="forgot_pswd">비밀번호를 잊으셨나요?</a>
+            <a href="#" id="forgot_pswd">아이디나 비밀번호를 잊으셨나요?</a>
             <hr>
             <!-- <p>Don't have an account!</p>  -->
             <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> 회원가입</button>
@@ -333,12 +333,23 @@ $(()=>{
                 <span id="confirmPwd" style="float: left;"></span><br>
                 <input type="password" id="pwd_pwd" name="password" class="form-control" onkeyup="checkChangePwd()" placeholder="변경할 비밀번호" required="" autofocus="">
                 <span id="pwd_pwdcheck" style="float: left;"></span><br>
-                <button class="btn btn-primary btn-block" type="submit" id="pwdChange" disabled="disabled">Reset Password</button>
+                <button class="btn btn-primary btn-block" type="submit" id="pwdChange" disabled="disabled" style="top: 0px;">비밀번호 재설정</button>
+            </form:form>
+            
+            <form:form method="post" action="/lol/member/pwdChange" class="form-reset">
+                <input type="email" class="form-control" placeholder="이메일" required="" autofocus="" style="width: 85%; float: left;">
+                <button class="btn btn-success btn-block" style="width: 15%; float: left; text-align: left; height: 45px;">인증</button>
+                <span style="float: left;"></span><br>
+                <input type="text" class="form-control" placeholder="인증번호" required="" autofocus="" style="width: 85%; float: left;">
+                <button class="btn btn-success btn-block" style="width: 15%; float: left; text-align: left; height: 45px;">확인</button>
+                <span style="float: left;"></span><br>
+                <button class="btn btn-primary btn-block" type="submit" disabled="disabled">아이디 찾기</button>
+                <span id="confirmId"></span><br>
                 <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
             </form:form>
             
             <form:form method="post" action="/lol/member/join" class="form-signup">
-                <div class="social-login" style="text-align:center">
+                <div class="social-login" style="text-align:center; margin-left: 10%;">
 		            <div id="naver_id_login" style="text-align:center"><a href="${url}">
 					<img width="300" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a>
 					</div>

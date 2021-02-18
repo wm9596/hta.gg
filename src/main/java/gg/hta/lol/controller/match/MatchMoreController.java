@@ -2,7 +2,6 @@ package gg.hta.lol.controller.match;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
