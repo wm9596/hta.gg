@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import gg.hta.lol.vo.BattingLogVo;
 import gg.hta.lol.vo.BattingTeamInfoVo;
 import gg.hta.lol.vo.MatchVo;
+import gg.hta.lol.vo.PointVo;
 
 @Repository
 public class BattingDao {
@@ -49,4 +50,5 @@ public class BattingDao {
 	public List<HashMap<String,Object>> pointGo(int mnum){
 		return sqlSession.selectList(NAMESPACE+".pointGo",mnum);
 	}
+
 }

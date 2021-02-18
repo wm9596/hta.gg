@@ -31,9 +31,9 @@ public class MatchListController {
 	@GetMapping(value = "/match/yesdaylist")
 	@ResponseBody
 	public Map<String, Object> match_list(String mDate) {
-
+		System.out.println("dd");
 		Map<String, Object> matchlist = new HashMap<String, Object>();
-
+		//커밋테스트
 		matchlist.put("matchinfo", service.matchinfo(mDate));
 
 		return matchlist;

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import gg.hta.lol.service.BattingService;
+import gg.hta.lol.service.PointService;
+import gg.hta.lol.vo.BattingLogVo;
 import gg.hta.lol.vo.MatchVo;
 import gg.hta.lol.vo.PointVo;
 
@@ -21,7 +23,8 @@ import gg.hta.lol.vo.PointVo;
 public class BattingadminInsert {
 	@Autowired
 	BattingService service;
-
+	@Autowired
+	PointService Pservice;
 	@GetMapping(value = "/battingTeam/insert")
 	public String adminInsert() {
 		return "batting/teaminsert";
@@ -88,7 +91,13 @@ public class BattingadminInsert {
 	
 	@GetMapping(value="/batting/pointInsert")
 	@ResponseBody
-	public String pointInsert(PointVo vo) {
+	public String pointInsert(int score,String username,int mNum) {
+
+		BattingLogVo vo=new BattingLogVo(0,mNum,username,0);
+		PointVo pVo=new PointVo(0,username,null,score,null);
+		Pservice.battingInsertAdmin(pVo);
+		
+		Pservice.memberPointUpdate(vo);
 		return "";
 	}
 
