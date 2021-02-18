@@ -16,7 +16,7 @@
 	height: 50px;
 }
 
-.mostItem  .face,.name,.kda,.rate{
+.mostItem  .mostFace,.mostName,.mostKda,.mostRate{
 	vertical-align:middle;
 	align-content:center;
 	margin-bottom:10px;
@@ -33,17 +33,208 @@
 }
 
 #matchList{
-	background-color:gray;
 	float: left;
 	width: 1000px;
 }
 
+#summary{
+	margin-bottom : 10px;
+	width: 100%;
+	height: 200px;
+	background-color: maroon;
+
+}
+
+#record{
+	width: 350px;
+	height: 100%;
+	background-color: blue;
+	float: left;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#most3{
+	width: 350px;
+	height: 100%;
+	background-color: green;
+	float: left;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 #gameType{
-	align-content: center;
+	text-align: center;
 	display: flex;
+	border: 1px solid black;
+	margin-bottom: 5px;
+	background-color: white;
 }
 
 #gameType a{
-	margin-left: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+
+.matchItem{
+	height: 120px;
+	background-color: #a3cfec;
+	margin-bottom: 20px;
+	border: 1px solid black;
+}
+
+.matchItem div{
 	margin-right: 10px;
+}
+
+.matchinfo{
+	display:inline-block;
+	border: 1px;
+	width: 80px;
+	height:100%;
+	float: left;
+	vertical-align: middle;
+}
+
+.mostName{
+	width: 60px;
+}
+
+.mostKda{
+	width: 70px;
+}
+
+.mostRate{
+	width: 30px
+}
+
+.matchinfo div{
+	text-align: center;
+	height: 30%;
+	margin-top: 3px;
+}
+.matchItem .face {
+	display:inline-block;
+	height: 100%;
+	float:left;
+	line-height: 100px;
+}
+
+.matchItem .face img{
+	width: 75px;
+	height: 75px;
+	border-radius: 100px;
+	vertical-align: middle;
+}
+
+.spells{
+	display:inline-block;
+	height: 100%;
+	float: left;
+	padding-top: 10px;
+}
+
+.spells img{
+	width: 40px;
+	height: 40px;
+}
+
+.rune{
+	display:inline-block;
+	height: 100%;
+	float: left;
+	padding-top: 10px;
+}
+
+.rune img{
+	width: 40px;
+	height: 40px;
+}
+
+.kda{
+	display:flex;
+	width: 100px;
+	height: 100%;
+	float: left;
+	align-items: center;
+	justify-content: center;
+	font-weight: bolder;
+	size: 20px;
+	flex-wrap: wrap;
+}
+
+.stats{
+	display:inline-block;
+	width: 100px;
+	height: 100%;
+	float: left;
+	font-weight: bolder;
+	padding-top:10px;
+	size: 20px;
+}
+
+.stats div{
+	text-align: center;
+}
+
+.items{
+	float:left;
+	width: 100px;
+	height:100%;
+}
+
+.items table{
+	width: 100%;
+	height:100%;
+	text-align: center;
+}
+
+.items table td{
+	border: 3px;
+}
+
+.items table td img{
+	width: 30px;
+	height: 30px;
+}
+
+.accessory{
+	display:inline-block;
+	height: 100%;
+	float:left;
+	line-height: 100px;
+}
+
+.accessory img{
+	width: 30px;
+	height: 30px;
+	vertical-align: middle;
+}
+
+.team{
+	float: left;
+}
+
+.team img{
+	width: 20px;
+	height: 20px;
+}
+
+.friendly,.enemy{
+	float: left;
+}
+
+.showMore{
+	display:inline-block;
+	height: 100%;
+	float:right;
+	width : 50px;
+	line-height: 100px;
+}
+
+.showMore input{
+	width: 30px;
+	height: 30px;
+	vertical-align: middle;
 }

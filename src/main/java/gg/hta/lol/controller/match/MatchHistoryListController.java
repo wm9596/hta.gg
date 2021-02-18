@@ -1,21 +1,21 @@
 package gg.hta.lol.controller.match;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sun.istack.Nullable;
 
-import gg.hta.lol.riotapi.GameType;
 import gg.hta.lol.riotapi.RuneSpellConverter;
-import gg.hta.lol.service.MatchInfoService;
 import gg.hta.lol.service.match.MatchListService;
 import gg.hta.lol.vo.match.MatchListVo;
+import gg.hta.lol.vo.match.MatchMostVo;
+import gg.hta.lol.vo.match.MostChampVo;
 
 @RestController
 public class MatchHistoryListController {
@@ -26,9 +26,12 @@ public class MatchHistoryListController {
 	private RuneSpellConverter rsConverter;
 
 	@RequestMapping(value = "/match/getList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	private List<MatchListVo> MatchList(String name, @Nullable String type) {
+	private MatchMostVo MatchList(String name, @Nullable String type) {
+		
 		List<MatchListVo> list = null;
 		list = service.getMatchList(name, type);
+		
+		HashMap<String, MostChampVo> cmap = new HashMap<String, MostChampVo>();
 		
 		list.stream().forEach(item->{
 			item.setSpell1(rsConverter.convertSpell(item.getSpell1()));
@@ -36,8 +39,36 @@ public class MatchHistoryListController {
 			item.setRune1(rsConverter.convertRune(item.getRune1()));
 			item.setRune2(rsConverter.convertRune(item.getRune2()));
 			
+			MostChampVo vo = cmap.getOrDefault(item.getName(), new MostChampVo(
+						item.getName(),
+						item.getPicture(),
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					));
+			
+			vo.setKill(vo.getKill()+item.getKill());
+			vo.setAssist(vo.getAssist()+item.getAssist());
+			vo.setDeath(vo.getDeath() + item.getDeath());
+			vo.setCs(vo.getCs()+item.getCs());
+			vo.setCnt(vo.getCnt()+1);
+			
+			if(item.getWinlose().equals("Win")) {
+				vo.setWincnt(vo.getWincnt()+1);
+			}
+			
+			cmap.put(item.getName(),vo);
 		});
 		
-		return list;
+		List<MostChampVo> mlist;
+		
+		mlist = cmap.values().stream().sorted((a,b)->Integer.compare(b.getCnt(), a.getCnt())).limit(3).collect(Collectors.toList());
+		
+		MatchMostVo dto = new MatchMostVo(list,mlist);
+		
+		return dto;
 	}
 }

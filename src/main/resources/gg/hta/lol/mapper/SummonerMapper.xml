@@ -35,6 +35,7 @@
 		<result property="tier" column="TIER"/>
 		<result property="win" column="WIN"/>
 		<result property="lose" column="LOSE"/>
+		<result property="leaguePoints" column="leaguePoints"/>
 	</resultMap>
 	 
 	<select id="getMostChamp" resultType="gg.hta.lol.vo.match.MostChampVo">

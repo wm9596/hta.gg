@@ -76,11 +76,11 @@ public class DataRequester {
 	public JsonElement getData(String url) {
 		int cnt = 0;
 		BufferedReader br = null;
-
+		HttpURLConnection con =null;
 		try {
 			while(true) {
 				URL obj = new URL(url); // 호출할 url
-				HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+				con = (HttpURLConnection) obj.openConnection();
 
 				con.setRequestMethod("GET");
 				
@@ -97,8 +97,10 @@ public class DataRequester {
 				br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
 				
 				StringBuilder sb = new StringBuilder();
-				while(br.ready()) {
-					sb.append(br.readLine());
+				String temp = null;
+				
+				while((temp=br.readLine())!=null) {
+					sb.append(temp);
 				}
 				JsonParser parser = new JsonParser();
 				
@@ -114,7 +116,10 @@ public class DataRequester {
 				} catch (Exception e) {
 					e.printStackTrace();
 				} 
-			}
+			
+			con.disconnect();
+		}
+		
 	}
 	
 	public JsonElement getStaticData(String url) {
@@ -137,7 +142,6 @@ public class DataRequester {
 			String data = new String( bi.readAllBytes());
 			
 			JsonParser parser = new JsonParser();
-
 			return parser.parse(data);
 			
 		} catch (Exception e) {

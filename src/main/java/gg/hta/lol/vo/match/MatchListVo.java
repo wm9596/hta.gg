@@ -41,6 +41,7 @@ public class MatchListVo {
 	private int multiKill;
 	private String runtime;	
 	private Date startTime;
+	private String winlose;
 	private List<ParticipantsVo> friendly;
 	private List<ParticipantsVo> enemy;
 }

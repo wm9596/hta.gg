@@ -26,7 +26,7 @@ public class SearchServiceTest {
 	
 	@Test
 	public void getTest() {
-		System.out.println(service.getSummoner("더덕순대국"));
+		System.out.println(service.getSummoner("dndjdks"));
 		
 	}
 	

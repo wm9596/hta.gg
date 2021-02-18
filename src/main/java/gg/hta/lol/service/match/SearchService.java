@@ -16,7 +16,7 @@ public interface SearchService {
 	
 	public SearchVo getSummoner(String name);
 	
-	public void addSummoner(SummonerVo vo,boolean isUpdate);
+	public SummonerVo addSummoner(SummonerVo vo,boolean isUpdate);
 	
 //	public void addSummoner(String name,String sid);
 	

@@ -47,7 +47,7 @@
 	</select>
 	
 	<select id="getParticipants" resultType="gg.hta.lol.vo.match.ParticipantsVo">
-		select teamid,matchid,snickname,name,picture
+		select teamid,matchid,snickname,name,picture,kill,assist,death
 		from teammemberinfo tm, champion c
 		where tm.championid = c.championid
 		and 

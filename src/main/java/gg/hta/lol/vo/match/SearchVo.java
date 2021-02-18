@@ -4,6 +4,7 @@ import java.util.List;
 
 import gg.hta.lol.riotapi.GameType;
 import gg.hta.lol.vo.QueueInfoVo;
+import gg.hta.lol.vo.SummonerVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,13 @@ public class SearchVo {
 	private int slevel;
 	private String icon;
 	private List<QueueInfoVo> qiList;
+	
+	
+	public void setSummoner(SummonerVo vo) {
+		snickname = vo.getSnickname();
+		slevel = vo.getSlevel();
+		icon = vo.getIcon();
+	}
 	
 	public QueueInfoVo getSolo() {
 		for(QueueInfoVo vo : qiList) {

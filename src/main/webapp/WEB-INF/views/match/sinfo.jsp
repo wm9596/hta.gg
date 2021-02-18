@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/searchInfo.css">
+
 <div id="mm_smCard">
 		<div id="mm_smLeft">
 			<div id="mm_smIconDiv">
@@ -75,18 +76,18 @@
 	<div id="mostList">
 		<c:forEach items="${most }" var="item">
 			<div class="mostItem">
-				<div class="face">
+				<div class="mostFace">
 					<img src="https://ddragon.leagueoflegends.com/cdn/11.2.1/img/champion/${item.picture }">
 				</div>
-				<div class="name" style="width: 60px">
+				<div class="mostName">
 					<b>${item.name }</b><br>
 					<div class="smallTxt">CS:${item.cs }</div>
 				</div>
-				<div class="kda" style="width: 70px">
+				<div class="mostKda">
 					<b>KDA:<fmt:formatNumber value="${(item.kill+item.assist)/item.death } " pattern=".0"/><br></b>
 					<div class="smallTxt">${item.kill }/${item.death }/${item.assist }</div>
 				</div>
-				<div class="rate" style="width: 30px">
+				<div class="mostRate">
 					<b>${item.rate }%</b><br>
 					<div class="smallTxt">${item.cnt }게임</div>
 				</div>
@@ -94,9 +95,119 @@
 		</c:forEach>
 	</div>
 	<div id="matchList">
-		<div id="gameType"><a>전체 보기</a><a>솔로 랭크</a><a>자유 랭크</a></div>
-		<c:forEach items="${matchs}" var="item">
-			${item }<br>
-		</c:forEach>
+		<div id="gameType"><a href="#">전체 보기</a><a href="#">솔로 랭크</a><a href="#">자유 랭크</a></div>
+		<div id="summary">
+			<div id="record">
+			</div>
+			<div id="most3">
+			</div>
+		</div>
+		<div class="matchItem">
+			<div class="matchinfo">
+			
+				<div class="gameMode">
+					솔랭
+				</div>
+				<div class="date">
+					2일전
+				</div>
+				<div class="during">
+					22분
+				</div>
+				
+			</div>
+			
+			<div class="face">
+				<img src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
+			</div>
+			
+			<div class="spells">
+				<img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/spell/SummonerFlash.png"><br>
+				<img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/spell/SummonerFlash.png">
+			</div>
+			<div class="rune">
+				<img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7200_Domination.png"><br>
+				<img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7200_Domination.png">
+			</div>
+			<div class="kda">
+				<div>KDA:4.5</div>
+				<div>15.0/1.0/10.0</div>
+			</div>
+			<div class="stats">
+				<div>레벨</div>
+				<div>cs</div>
+				<div>킬관여율</div>
+			</div>
+			<div class="items">
+				<table>
+					<tr>
+						<td><img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/1001.png"></td>
+						<td><img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/1001.png"></td>
+						<td><img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/1001.png"></td>
+					</tr>
+					<tr>
+						<td><img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/1001.png"></td>
+						<td><img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/1001.png"></td>
+						<td><img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/1001.png"></td>
+					</tr>
+				</table>
+			</div>
+			<div class="accessory">
+				<img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/2055.png">
+			</div>
+			
+			<div class="team">
+				<div class="friendly">
+					<div class="summoner">
+						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
+						<a>소환사이름</a>
+					</div>
+					<div class="summoner">
+						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
+						<a>소환사이름</a>
+					</div>
+					<div class="summoner">
+						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
+						<a>소환사이름</a>
+					</div>
+					<div class="summoner">
+						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
+						<a>소환사이름</a>
+					</div>
+					<div class="summoner">
+						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
+						<a>소환사이름</a>
+					</div>
+				</div>
+				
+				<div class="enemy">
+					<div class="summoner">
+						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
+						<a>소환사이름</a>
+					</div>
+					<div class="summoner">
+						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
+						<a>소환사이름</a>
+					</div>
+					<div class="summoner">
+						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
+						<a>소환사이름</a>
+					</div>
+					<div class="summoner">
+						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
+						<a>소환사이름</a>
+					</div>
+					<div class="summoner">
+						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
+						<a>소환사이름</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="showMore">
+				<input type="image" src="${pageContext.request.contextPath }/resources/images/bar-chart.png">
+			</div>
+			
+		</div>
 	</div>
 </div>

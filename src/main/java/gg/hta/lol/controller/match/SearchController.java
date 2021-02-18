@@ -35,7 +35,7 @@ public class SearchController {
 		
 		model.addAttribute("rating", ratingService.getRatingAvg(sName));
 
-		searchService.readMatchList(svo.getAccountId(), 0, 20);
+		searchService.readMatchList(svo.getAccountId(), 0, 3);
 		
 		List<MostChampVo> mlist = searchService.getMost(sName);
 		

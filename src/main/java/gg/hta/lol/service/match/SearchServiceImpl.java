@@ -1,18 +1,14 @@
 package gg.hta.lol.service.match;
 
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
-import org.apache.ibatis.executor.Executor;
-import org.apache.ibatis.session.ExecutorType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.JsonArray;
@@ -33,9 +29,7 @@ import gg.hta.lol.vo.QueueInfoVo;
 import gg.hta.lol.vo.SummonerVo;
 import gg.hta.lol.vo.TeamInfoVo;
 import gg.hta.lol.vo.TeamMemberinfoVo;
-import gg.hta.lol.vo.match.MatchListVo;
 import gg.hta.lol.vo.match.MostChampVo;
-import gg.hta.lol.vo.match.ParticipantsVo;
 import gg.hta.lol.vo.match.SearchVo;
 import lombok.AllArgsConstructor;
 
@@ -69,7 +63,7 @@ public class SearchServiceImpl implements SearchService {
 	
 	@Override
 	@Transactional
-	public void searchSummonerInfo(String name) {//값 넣는 용 임시 메소드
+	public void searchSummonerInfo(String name) {
 		String sid;
 		String aid;
 		JsonObject summonerInfo = dataRequester.getSummonerInfo(name);
@@ -94,16 +88,13 @@ public class SearchServiceImpl implements SearchService {
 	@Override
 	@Transactional
 	public SearchVo getSummoner(String name) {
-		
-		System.out.println(name);
-		
 		String sid;
 		String aid;
 		JsonObject summonerInfo = dataRequester.getSummonerInfo(name);
 		
 		sid = summonerInfo.get("id").getAsString();
 		aid = summonerInfo.get("accountId").getAsString();
-		addSummoner(
+		SummonerVo summonerVo = addSummoner(
 			new SummonerVo(
 							name,
 							summonerInfo.get("summonerLevel").getAsInt(), 
@@ -114,18 +105,25 @@ public class SearchServiceImpl implements SearchService {
 		
 		addQueueInfo(sid);
 		
-		SearchVo vo = summonerMapper.getSummonerInfo(name);
-		vo.setAccountId(aid);
-
+		SearchVo searchVo = new SearchVo();
+		
+		searchVo.setSummoner(summonerVo);
+		searchVo.setAccountId(aid);
+		
+		searchVo.setQiList(queuemapper.getQueueInfo(name));
+		
+//		SearchVo vo = summonerMapper.getSummonerInfo(name);
+//		vo.setAccountId(aid);
+		
 //		vo.getQiList().sort(Comparator.comparing(QueueInfoVo::getQueueType));
 		
-		return vo;
+		return searchVo;
 	}
 	
 	/**
 	 * isUpdate = 정보가 중복일때 업데이트 시킬지 여부*/
 	@Override
-	public void addSummoner(SummonerVo svo,boolean isUpdate) {
+	public SummonerVo addSummoner(SummonerVo svo,boolean isUpdate) {
 		try {
 //			System.out.println("소환사 추가");
 			summonerMapper.addSummoner(svo);
@@ -137,7 +135,7 @@ public class SearchServiceImpl implements SearchService {
 			}
 		}
 		
-//		System.out.println(svo);
+		return svo;
 	}
 	
 	@Override
@@ -174,14 +172,32 @@ public class SearchServiceImpl implements SearchService {
 		
 		JsonArray matchArr = matchInfo.get("matches").getAsJsonArray();
 		
-		for(int i = 0; i < matchArr.size(); i++) {
-			JsonObject match =matchArr.get(i).getAsJsonObject();
+		Stream<JsonElement> stream = StreamSupport.stream(matchArr.spliterator(), true);
+		stream.filter(item->{
+			
+			JsonObject match =item.getAsJsonObject();
 			int gameTypeCode = match.get("queue").getAsInt();
 			
 			if(gameTypeCode==GameType.RANKED_FLEX_SR.getCode() || gameTypeCode==GameType.RANKED_SOLO_5x5.getCode()) {
-				addMatchInfo(match.get("gameId").getAsString(),gameTypeCode);
+				return true;
 			}
-		}
+			
+			return false;
+		}).forEach(item->{
+			int gameTypeCode = item.getAsJsonObject().get("queue").getAsInt();
+			addMatchInfo(item.getAsJsonObject().get("gameId").getAsString(),gameTypeCode);
+		});
+		
+		
+//		for(int i = 0; i < matchArr.size(); i++) {
+//			JsonObject match =matchArr.get(i).getAsJsonObject();
+//			int gameTypeCode = match.get("queue").getAsInt();
+//			
+//			if(gameTypeCode==GameType.RANKED_FLEX_SR.getCode() || gameTypeCode==GameType.RANKED_SOLO_5x5.getCode()) {
+//				addMatchInfo(match.get("gameId").getAsString(),gameTypeCode);
+//			}
+//		}
+		
 	}
 	
 	@Override

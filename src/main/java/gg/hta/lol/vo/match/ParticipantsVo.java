@@ -13,4 +13,7 @@ public class ParticipantsVo {
 	private String matchid;
 	private String name;
 	private String picture;
+	private int kill;
+	private int death;
+	private int assist;
 }
