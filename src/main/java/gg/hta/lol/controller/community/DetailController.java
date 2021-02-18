@@ -4,11 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import gg.hta.lol.service.CommunityService;
 import gg.hta.lol.service.ReplyService;
@@ -100,4 +103,17 @@ public class DetailController {
 		sb.append("</result>");
 		return sb.toString();
 	}
+	
+	@GetMapping(value = "/update/{pNum}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public int update(@PathVariable("pNum")int pNum) {
+		return service.hit(pNum);
+	}
+	
+	@GetMapping(value = "/update1/{pNum}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public int update1(@PathVariable("pNum")int pNum) {
+		return service.noHit(pNum);
+	}
+	
 }

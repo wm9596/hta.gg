@@ -31,7 +31,6 @@
 					var rWriter = $(this).find("rWriter").text(); 
 					var rContent = $(this).find("rContent").text();
 					var regdate = $(this).find("regdate").text();
-					console.log(regdate);
 					var div = document.createElement("div");
 					div.innerHTML=rWriter+"&nbsp;&nbsp;&nbsp;"+rContent+"&nbsp;&nbsp;&nbsp;"
 												+regdate+"&nbsp;&nbsp;&nbsp;"
@@ -76,9 +75,9 @@
 	</div><br><br><br>
 </form:form>
 	<div align="center">
-		<button type="button" id="likeBtn" class="btn btn-info likeBtn" style="width: 100px; height: 50px; font-size: 25px;" onclick="hitbtn()">추천</button>
-		<button type="button" id="likeBtn" class="btn btn-info likeBtn" style="width: 100px; height: 50px; font-size: 25px;" onclick="nohitbtn()">반대</button>
-		<button type="button" id="likeBtn" class="btn btn-info likeBtn" style="width: 100px; height: 50px; font-size: 25px;" onclick="report()">신고</button>
+		<button type="button" id="hit" class="btn btn-info likeBtn"	style="width: 100px; height: 50px; font-size: 25px;">추천 ${vo.hit }</button>
+		<button type="button" id="nohit" class="btn btn-info likeBtn" style="width: 100px; height: 50px; font-size: 25px;">반대 ${vo.nohit }</button>
+		<button type="button" id="report" class="btn btn-info likeBtn" style="width: 100px; height: 50px; font-size: 25px;" onclick="report()">신고</button>
 	</div>
 		<br><br><br>
 		<div align="center">
@@ -111,6 +110,30 @@
 		</div>
 
 <script type="text/javascript">
+
+	$("#hit").click(function(e){
+		var ask=confirm("해당 게시글을 추천하시겠습니까?");
+		if(ask == true){
+		$.ajax({
+			url:"/lol/update/" + ${vo.pNum },
+			success: function(data){
+				$("#hit").html('추천'+data);
+			}
+		});
+		}
+	});
+	
+	$("#nohit").click(function(e){
+		var ask=confirm("해당 게시글을 반대하시겠습니까?");
+		if(ask == true){
+		$.ajax({
+			url:"/lol/update1/" + ${vo.pNum },
+			success: function(data){
+				$("#nohit").html('반대'+data);
+			}
+		});
+		}
+	});
 	
 	$("#btn").click(function(){
 		var rWriter = document.getElementById("rWriter").value;

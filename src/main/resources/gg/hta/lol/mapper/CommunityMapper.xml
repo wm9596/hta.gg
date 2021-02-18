@@ -57,8 +57,20 @@
 		update community set hit=hit+1 where pNum=#{pNum}
 	</update>
 	
+	<select id="hitCount" resultType="int" parameterType="int">
+		select hit
+		from community
+		where pNum = #{pNum}
+	</select>
+	
+	<select id="nohitCount" resultType="int" parameterType="int">
+		select nohit
+		from community
+		where pNum = #{pNum}
+	</select>
+	
 	<update id="noHit" parameterType="int">
-		update community set hit=hit-1 where pNum=#{pNum}
+		update community set nohit=nohit+1 where pNum=#{pNum}
 	</update>
 
 	<select id="next" parameterType="hashmap" resultType="community">

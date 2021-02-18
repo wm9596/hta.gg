@@ -43,7 +43,13 @@ public class CommunityDao {
 	public int hit(int pNum) {
 		return sqlSession.update(NAMESPACE+".hit",pNum);
 	}
+	public int hitCount(int pNum) {
+		return sqlSession.selectOne(NAMESPACE+".hitCount",pNum);
+	}
 	public int noHit(int pNum) {
 		return sqlSession.update(NAMESPACE+".noHit",pNum);
+	}
+	public int nohitCount(int pNum) {
+		return sqlSession.selectOne(NAMESPACE+".nohitCount",pNum);
 	}
 }

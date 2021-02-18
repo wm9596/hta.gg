@@ -39,10 +39,12 @@ public class CommunityService {
 		return dao.prev(map);
 	}
 	public int hit(int pNum) {
-		return dao.hit(pNum);
+		dao.hit(pNum);
+		return dao.hitCount(pNum);
 	}
 	public int noHit(int pNum) {
-		return dao.noHit(pNum);
+		dao.noHit(pNum);
+		return dao.nohitCount(pNum);
 	}
 	public int addCount(int pNum) {
 		return dao.addCount(pNum);
