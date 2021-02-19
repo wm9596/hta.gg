@@ -34,7 +34,7 @@
   				<if test="field!=null and field!=''">
   					and ${field} like '%'||#{keyword}||'%'
   				</if>
-  				order by ${vic} desc
+  				order by ${vrh} desc
   			) a
   		)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow}  ]]>
