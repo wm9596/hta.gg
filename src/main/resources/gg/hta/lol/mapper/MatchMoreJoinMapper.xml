@@ -15,4 +15,23 @@
 <!-- 		and s.snickname = q.snickname  -->
 <!--		and q.queuetype = #{type} -->
 	</select>
+	
+	<select id="getMatchInfoLastThree" parameterType="String" resultType="gg.hta.lol.joinvo.MatchMoreJoinVo">
+		<![CDATA[
+		select *
+		from 
+		(
+		    select tt.*, rownum rnum
+		    FROM
+		    (
+		        select ti.winlose, tm.*
+		        from teaminfo ti, teammemberinfo tm
+		        where snickname = #{snickname}
+		        and ti.teamid = tm.teamid
+		        and ti.matchid = tm.matchid
+		    ) tt
+		)
+		where rnum <= 3
+		]]>
+	</select>
 </mapper>

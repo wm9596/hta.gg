@@ -123,7 +123,5 @@
 // 		}
 // 		console.log(height);
 // 	})
-
-	setin
 </script>
 </html>

@@ -59,6 +59,9 @@ public class MemberService {
 		vo.setPassword(encoder.encode(vo.getPassword()));
 		return dao.update(vo);
 	}
+	public int updateSnickname(HashMap<String, String> hashmap) {
+		return dao.updateSnickname(hashmap);
+	}
 	public int delete(String username) {
 		return dao.delete(username);
 	}

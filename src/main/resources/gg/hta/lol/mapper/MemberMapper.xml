@@ -59,6 +59,11 @@
 		set nickname=#{nickname}, password=#{password}, email=#{email}
 		where username=#{username}
 	</update>
+	<update id="updateSnickname" parameterType="hashmap">
+		update member
+		set snickname=#{snickname}
+		where username=#{username}
+	</update>
 	<update id="delete" parameterType="string">
 		update member
 		set enabled=0

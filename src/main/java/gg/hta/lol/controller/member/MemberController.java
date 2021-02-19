@@ -1,5 +1,7 @@
 package gg.hta.lol.controller.member;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import gg.hta.lol.joinvo.MatchMoreJoinVo;
+import gg.hta.lol.service.ChampionService;
+import gg.hta.lol.service.MatchMoreJoinService;
 import gg.hta.lol.service.MemberService;
 import gg.hta.lol.util.PageUtil;
 import gg.hta.lol.service.QueueInfoService;
@@ -29,6 +34,8 @@ public class MemberController {
 	@Autowired private MemberService service;
 	@Autowired private SearchService searchService;
 	@Autowired private QueueInfoService queueInfoService;
+	@Autowired private MatchMoreJoinService matchMoreJoinService;
+	@Autowired private ChampionService championService;
 	
 	@RequestMapping(value="/member/join", method = RequestMethod.GET)
 	public String joinForm() {
@@ -64,7 +71,7 @@ public class MemberController {
 	public String myPage() {
 		return ".mypage.profile";
 	}
-	
+	// ****************************************************** profile ******************************************************
 	@ResponseBody
 	@GetMapping("/member/member/registerProfile")
 	public HashMap<String, Object> registerProfile(String snickname, Model model) {
@@ -72,27 +79,49 @@ public class MemberController {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		
 		SearchVo searchVo = searchService.getSummoner(snickname);
-		searchService.readMatchList(searchVo.getAccountId(), 1, 3);
+		searchService.readMatchList(searchVo.getAccountId(), 0, 20);
 		
 		QueueInfoVo soloVo = searchVo.getSolo();
 		QueueInfoVo flexVo = searchVo.getFlex();
 		
 		List<MostChampVo> mlist = searchService.getMost(snickname);
-		
-		mlist.stream().forEach(item -> {
-			if(item.getName().length()>5) {
-				int diff = item.getName().length()-(item.getName().length()-5);
-				item.setName(item.getName().substring(0, diff).concat("..."));
-			}
-		});
+
+		// championId -> championPicture 로 변경
+		List<MatchMoreJoinVo> list =  matchMoreJoinService.getMatchInfoLastThree(snickname);
+		int i = 0;
+		for (MatchMoreJoinVo vo : list) {
+			String championPicture = championService.getChampionPicture(vo.getChampionId());
+			list.get(i).setChampionId(championPicture);
+			i++;
+		}
 		
 		resultMap.put("searchVo", searchVo);
 		resultMap.put("soloVo", soloVo);
 		resultMap.put("flexVo", flexVo);
 		resultMap.put("mlist", mlist);
+		resultMap.put("matchLastThree", list);
 		
 		return resultMap;
 	}
+	
+	@ResponseBody
+	@GetMapping("/member/member/registerProfileOk")
+	public String registerProfileOk(String username, String snickname, Model model) {
+		HashMap<String, String> hashmap = new HashMap<String, String>();
+		hashmap.put("username", username);
+		hashmap.put("snickname", snickname);
+		service.updateSnickname(hashmap);
+		return "";
+	}
+	
+	@ResponseBody
+	@GetMapping(value = "/member/member/checkProfile", produces = "application/text; charset=utf-8")
+	public String registerProfileOk(String username, Model model) {
+		String snickname = service.selectOne(username).getSnickname();
+		
+		return snickname;
+	}
+	// ****************************************************** profile ******************************************************
 	
 	@GetMapping(value = "/member/member/delete", produces = {MediaType.APPLICATION_XML_VALUE})
 	@ResponseBody

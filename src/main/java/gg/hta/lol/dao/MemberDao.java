@@ -55,6 +55,9 @@ public class MemberDao {
 	public int update(MemberVo vo) {
 		return sqlSession.update(NAMESPACE + ".update", vo);
 	}
+	public int updateSnickname(HashMap<String, String> hashmap) {
+		return sqlSession.update(NAMESPACE + ".updateSnickname", hashmap);
+	}
 	public int delete(String username) {
 		return sqlSession.update(NAMESPACE + ".delete",username); 
 	}

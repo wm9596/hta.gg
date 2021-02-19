@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import gg.hta.lol.service.match.SearchService;
+import gg.hta.lol.vo.match.SearchVo;
 import lombok.Setter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -26,7 +27,8 @@ public class SearchServiceTest {
 	
 	@Test
 	public void getTest() {
-		System.out.println(service.getSummoner("dndjdks"));
+		SearchVo vo = service.getSummoner("안녕");
+		service.readMatchList(vo.getAccountId(), 0, 20);
 		
 	}
 	

@@ -4,10 +4,11 @@
 
 #profile_wrap {
 	background-color: yellow;
+ 	font-size: 12px; 
 }
 
-div {
-	border: 1px solid gray;
+#profile_wrap div {
+	border: 0.1px solid gray;
 }
 
 .search-bar {
@@ -15,80 +16,152 @@ div {
 }
 
 #myProfileArea {
-	width: 60%;
-	height: 500px;
+	width: 30%;
+	height: 600px;
 	margin: auto;
 }
 
-#profileIconArea {
-/* 	display: flex; */
-/* 	justify-content: center; */
-/* 	align-items: center; */
-	float: left;
-	width: 20%;
-	height: 100%;
-}
-
-#imageArea {
-	width: 100%;
-	height: 80%;
-}
-
-#nicknameArea {
+#profile_top {
 	width: 100%;
 	height: 20%;
 }
 
-.profileIcon {
-	border-radius: 100%;
+#profile_top_iconArea {
 	width: 100%;
+	height: 80%;
+	text-align: center;
+}
+
+#profile_top_nicknameArea {
+	width: 100%;
+	height: 20%;
+	text-align: center;
+}
+
+.profileIcon {
+	width: 25%;
 	height: 100%;
+	border-radius: 100%;
+	text-align: center;
 }
 
-#profile_top {
-	height: 30%;
+#profile_middle {
+	width: 100%;
+	height: 25%;
 }
 
-#profileTierArea{
-	float: left;
-	width: 40%;
-	height: 100%;
-}
-
-.tierArea {
+.profile_middle_tierArea {
 	width: 50%;
 	height: 100%;
 	float: left;
+	text-align: center;
 }
 
-.tierImageArea {
-	width: 100%;
-	height: 80%;
+.profile_middle_tierArea img {
+	width: 45%;
+	height: 50%;
 }
+
+#profile_middle_2 {
+	width: 100%;
+	height: 25%;
+}
+
+#profile_middle_2_titleArea {
+	width: 100%;
+	height: 15%;
+	text-align: center;
+}
+
+.profile_mostarea {
+	width: 33.3%;
+	height: 85%;
+	float: left;
+}
+
+#profile_bottom {
+	width: 100%;
+	height: 30%;
+}
+
+#profile_bottom_titleArea {
+	width: 100%;
+	height: 15%;
+	text-align: center;
+}
+
+.lastMatch {
+	width: 33.3%;
+	height: 85%;
+	float: left;
+}
+
+.profile_mostarea {
+	text-align: center;
+}
+
+.profile_mostarea img {
+	width: 50%;
+	height: 40%;
+	border-radius: 100%;
+}
+
+.lastMatch {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.lastMatch img {
+	width: 50%;
+	height: 40%;
+	border-radius: 100%;
+}
+
+#profile_registerArea {
+	width: 70px;
+	height: 25px;
+	margin: auto;
+}
+
+
 </style>
 
 <div id="profile_wrap">
 	<div id="myProfileArea">
 		<div id="profile_top">
-			<div id="profileIconArea">
-				<div id="imageArea">
-				</div>
-				<div id="nicknameArea">
-				</div>
+			<div id="profile_top_iconArea"></div>
+			<div id="profile_top_nicknameArea"></div>
+		</div>
+		<div id="profile_middle">
+			<div id="soloTier" class="profile_middle_tierArea">
 			</div>
-			<div id="profileTierArea">
-				<div id="soloTier" class="tierArea">
-					<div id="soloTierImageArea" class="tierImageArea">
-					</div>
-				</div>
-				<div id="flexTier" class="tierArea">
-					<div id="flexTierImageArea" class="tierImageArea">
-					</div>
-				</div>
-			</div>
-			<div id="profileMostArea">
+			<div id="flexTier" class="profile_middle_tierArea">
 			</div>
 		</div>
+		<div id="profile_middle_2">
+			<div id="profile_middle_2_titleArea">
+			</div>
+			<div id="mostOne" class="profile_mostarea">
+			</div>
+			<div id="mostTwo" class="profile_mostarea">
+			</div>
+			<div id="mostThree" class="profile_mostarea">
+			</div>
+		</div>
+		<div id="profile_bottom">
+			<div id="profile_bottom_titleArea">
+			</div>
+			<div class="lastMatch">
+			</div>
+			<div class="lastMatch">
+			</div>
+			<div class="lastMatch">
+			</div>
+		</div>
+	</div>
+	<div id="profile_registerArea">
+		<input type="button" id="profile_register" value="프로필 등록">
+		<input type="hidden" id="user_name" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}">
 	</div>
 	<div class="mx-auto mt-5 search-bar input-group mb-3">
 		<input id="snickname" type="text" class="form-control rounded-pill" placeholder="LOL 닉네임을 입력해주세요." aria-label="Recipient's username" aria-describedby="button-addon2" value="더덕순대국"> 
@@ -99,29 +172,100 @@ div {
 
 
 <script>
-	$("#getInfo").click(
-			function() {
-				var snickname = $("#snickname").val();
-				console.log(snickname);
-				$.ajax({
-					url : '/lol/member/member/registerProfile?snickname='
-							+ snickname,
-					success : function(result) {
-						console.log(result);
-						var soloTier = $(result).find("soloVo").find("tier").text();
-						soloTier = soloTier.split("_")[0];
-						var soloWin = $(result).find("soloVo").find("win").text();
-						var soloLose = $(result).find("soloVo").find("lose").text();
-						var flexTier = $(result).find("flexVo").find("tier").text();
-						var flexWin = $(result).find("flexVo").find("win").text();
-						var flexLose = $(result).find("flexVo").find("lose").text();
-						var icon = $(result).find("searchVo").find("icon").text();
-						var level = $(result).find("searchVo").find("slevel").text();
 
-						$("#imageArea").append("<img alt='' src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/profileicon/" + icon +".png' class='profileIcon'>")
-						$("#nicknameArea").append("<span>" + snickname + "</span>")
-						$("#soloTierImageArea").append("<img alt='' src='/lol/resources/images/tierEmblem/" + soloTier +".png' class='profileIcon'>")
+	function showProfile(snickname) {
+		console.log(snickname);
+		$.ajax({
+			url : '/lol/member/member/registerProfile?snickname=' + snickname,
+			success : function(result) {
+				console.log(result);
+				var soloTier = $(result).find("soloVo").find("tier").text();
+				soloTier = soloTier.split("_")[0];
+				var soloWin = parseInt($(result).find("soloVo").find("win").text());
+				var soloLose = parseInt($(result).find("soloVo").find("lose").text());
+				var flexTier = $(result).find("flexVo").find("tier").text();
+				flexTier = flexTier.split("_")[0];
+				var flexWin = parseInt($(result).find("flexVo").find("win").text());
+				var flexLose = parseInt($(result).find("flexVo").find("lose").text());
+				var icon = $(result).find("searchVo").find("icon").text();
+				var level = $(result).find("searchVo").find("slevel").text();
+				
+				$("#myProfileArea div div").each(function() {
+					$(this).empty();
+				})
+
+				$("#profile_top_iconArea").append("<img alt='' src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/profileicon/" + icon +".png' class='profileIcon'>")
+				$("#profile_top_nicknameArea").append("<span>" + snickname + "</span>")
+				if (soloTier != "") {
+					$("#soloTier").append("<span>솔로랭크</span><br>")
+					$("#soloTier").append("<img alt='' src='/lol/resources/images/tierEmblem/" + soloTier +".png'><br>")
+					$("#soloTier").append("<span>" + soloWin + "W " + soloLose +"L</span><br>")
+					$("#soloTier").append("<span>(" + parseInt(soloWin/(soloWin+soloLose)*100) +"%)</span>")	
+				}
+				if (flexTier != "") {
+					$("#flexTier").append("<span>자유랭크</span><br>")
+					$("#flexTier").append("<img alt='' src='/lol/resources/images/tierEmblem/" + flexTier +".png'><br>")
+					$("#flexTier").append("<span>" + flexWin + "W " + flexLose +"L</span><br>")
+					$("#flexTier").append("<span>(" + parseInt(flexWin/(flexWin+flexLose)*100) +"%)</span>")	
+				}
+				
+				$("#profile_middle_2_titleArea").append("<span>많이 플레이한 챔피언 TOP3</span>");
+				$("#profile_bottom_titleArea").append("<span>최근 3경기 </span>");
+				
+				
+				var mostArea = $(".profile_mostarea").get();
+				for(let i=0; i<3; i++) {
+					let most = $(result).find("mlist")[i];
+					$(mostArea[i]).append(
+							"<img alt='' src='https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/" + $(most).find("picture").text() +"'><br>" +
+							"<span>" + Math.round((parseFloat($(most).find("kill").text()) + parseFloat($(most).find("assist").text()))/parseFloat($(most).find("death").text()) * 100)/100 +"</span><br>" +
+							"<span>(" + $(most).find("kill").text() + "/" + $(most).find("death").text() + "/" + $(most).find("assist").text() +")</span><br>" +
+							"<span>" + $(most).find("wincnt").text() + "W" + (parseInt($(most).find("cnt").text()) - parseInt($(most).find("wincnt").text()))  + "L</span><br>" +
+							"<span>" + $(most).find("rate").text() +"%</span>"
+					)
+				}
+				
+				var lastMatchArea = $(".lastMatch").get();
+				for (let i=0; i<3; i++) {
+					let lastMatch = $(result).find("matchLastThree")[i];
+					if ($(lastMatch).find("winlose").text() == 'Win') {
+						$(lastMatchArea[i]).css("backgroundColor", "#9ac0ff");
+					} else {
+						$(lastMatchArea[i]).css("backgroundColor", "#ffaeae");
 					}
-				});
-			});
+					$(lastMatchArea[i]).append(
+							"<img alt='' src='https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/" + $(lastMatch).find("championId").text() +"'><br>" +
+							"<span>" + Math.round((parseInt($(lastMatch).find("kill").text()) + parseInt($(lastMatch).find("assist").text()))/parseInt($(lastMatch).find("death").text()) * 100)/100 + "</span><br>" +
+							"<span>(" + $(lastMatch).find("kill").text() + "/" + $(lastMatch).find("death").text() + "/" + $(lastMatch).find("assist").text() + ")</span>"
+					)
+				}
+			}
+		});
+	}
+	
+	var username = $("#user_name").val();
+	$.ajax({
+		url : "/lol/member/member/checkProfile?username=" + username,
+		dataType: "text",
+		success: function (result) {
+			if (result != "") {
+				showProfile(result);	
+			}
+		}
+	})
+
+	$("#getInfo").click(function() {
+		var snickname = $("#snickname").val();
+		showProfile(snickname);
+	});
+	
+	$("#profile_register").click(function() {
+		var snickname = $("#snickname").val();
+		$.ajax({
+			url: "/lol/member/member/registerProfileOk?username=" + username + "&snickname=" + snickname,
+			success: function() {
+				alert("프로필 등록이 완료되었습니다.")
+			}
+		})
+	})
 </script>

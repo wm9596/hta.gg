@@ -16,4 +16,8 @@ public class MatchMoreJoinService {
 	public List<MatchMoreJoinVo> getMatchInfoList(HashMap<String, Object> map) {
 		return mDao.getMatchInfoList(map);
 	}
+	
+	public List<MatchMoreJoinVo> getMatchInfoLastThree(String snickname) {
+		return mDao.getMatchInfoLastThree(snickname);
+	}
 }

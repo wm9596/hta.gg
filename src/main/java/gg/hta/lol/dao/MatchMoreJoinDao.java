@@ -19,4 +19,8 @@ public class MatchMoreJoinDao {
 	public List<MatchMoreJoinVo> getMatchInfoList(HashMap<String, Object> map) {
 		return sqlSession.selectList(NAMESPACE + ".getMatchInfoList", map);
 	}
+	
+	public List<MatchMoreJoinVo> getMatchInfoLastThree(String snickname) {
+		return sqlSession.selectList(NAMESPACE + ".getMatchInfoLastThree", snickname);
+	}
 }
