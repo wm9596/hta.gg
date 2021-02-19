@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import gg.hta.lol.dao.MemberDao;
 import gg.hta.lol.security.CustomUserDetail;
 import gg.hta.lol.vo.AuthoritiesVo;
-import gg.hta.lol.vo.CommunityVo;
 import gg.hta.lol.vo.MemberVo;
 
 @Service
@@ -65,14 +64,5 @@ public class MemberService {
 	}
 	public int count(HashMap<String, Object> map) {
 		return dao.count(map);
-	}
-	public List<CommunityVo> list(String username){
-		return dao.boardList(username);
-	}
-	public int boardCount() {
-		return dao.boardCount();
-	}
-	public int replyCount() {
-		return dao.replyCount();
 	}
 }

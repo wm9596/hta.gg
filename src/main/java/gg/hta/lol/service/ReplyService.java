@@ -26,4 +26,13 @@ public class ReplyService {
 	public int update2(int pNum) {
 		return dao.update2(pNum);
 	}
+	
+	
+	
+	public int replyCount(String username) {
+		return dao.replyCount(username);
+	}
+	public List<ReplyVo> replyList(String username){
+		return dao.replyList(username);
+	}
 }

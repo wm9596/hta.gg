@@ -36,4 +36,13 @@ public class ReplyDao {
 	public int update2(int pNum) {
 		return sqlSession.update(NAMESPACE + ".mCount", pNum);
 	}
+	
+	
+	
+	public int replyCount(String username) {
+		return sqlSession.selectOne(NAMESPACE + ".replyCount", username);
+	}
+	public List<ReplyVo> replyList(String username){
+		return sqlSession.selectList(NAMESPACE + ".replyList", username);
+	}
 }

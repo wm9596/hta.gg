@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +22,26 @@ import gg.hta.lol.vo.ReplyVo;
 @Controller
 public class DetailController {
 	@Autowired private CommunityService service;
+	
+	@GetMapping("/community/detailMy")
+	public String detailMy(int pNum, Model m) {
+		CommunityVo vo=service.select(pNum);
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("pNum",pNum);
+		map.put("cNum",vo.getcNum());
+		CommunityVo prev=service.prev(map);
+		CommunityVo next=service.next(map);
+		service.addCount(pNum);
+		String content=vo.getContent();
+		content=content.replaceAll("\n","<br>");
+		vo.setContent(content);
+		m.addAttribute("vo", vo);
+		m.addAttribute("prev",prev);
+		m.addAttribute("next",next);
+		return ".header2.community.detail";
+	}
+	
+	
 	
 	@GetMapping("/community/detail")
 	public ModelAndView detail(int pNum, int cNum) {

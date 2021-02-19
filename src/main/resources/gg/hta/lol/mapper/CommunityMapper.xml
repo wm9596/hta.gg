@@ -90,4 +90,13 @@
 		where rownum=1
 		 ]]>
 	</select>
+	
+	
+	
+	<select id="boardList" parameterType="string" resultType="community">
+		select * from community where username=#{username}
+	</select>
+	<select id="boardCount" resultType="int">
+		select NVL(count(*),0) cnt from community where username=#{username}
+	</select>
 </mapper>
