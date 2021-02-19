@@ -110,11 +110,13 @@
 				</div>
 			</div>
 			<div id="most3">
+				<ul id="most3List">
+				</ul>	
 			</div>
 		</div>
+		
 		<div class="matchItem">
 			<div class="matchinfo">
-			
 				<div class="gameMode">
 					솔랭
 				</div>
@@ -124,11 +126,11 @@
 				<div class="during">
 					22분
 				</div>
-				
 			</div>
 			
 			<div class="face">
 				<img src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
+				<div class="name">야스오</div>
 			</div>
 			
 			<div class="spells">
@@ -142,6 +144,7 @@
 			<div class="kda">
 				<div>KDA:4.5</div>
 				<div>15.0/1.0/10.0</div>
+				<div class="multiKill">트리플킬</div>
 			</div>
 			<div class="stats">
 				<div>레벨</div>
@@ -168,7 +171,7 @@
 			
 			<div class="team">
 				<div class="friendly">
-					<div class="summoner">
+					<div class="summoner mine">
 						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
 						<a>소환사이름</a>
 					</div>
@@ -217,7 +220,6 @@
 			<div class="showMore">
 				<input type="image" src="${pageContext.request.contextPath }/resources/images/bar-chart.png">
 			</div>
-			
 		</div>
 	</div>
 </div>
@@ -227,70 +229,15 @@
 google.charts.load("current", {packages:["corechart"]});
 google.charts.setOnLoadCallback(getMatchList);
 
-function getMatchList() {
-	
-	var matchList;
-	var totalGame;
-	var totalWin;
-	var totalLose;
-	var totalKill;
-	var totalAssist;
-	var totalDeath;
-	var totalCS;
-	var totalKA ;
-	
+function getMatchList(args) {
 	$.ajax({
 		url:'/lol/match/getList',
 		data:{name:'${svo.snickname }'} ,
 		dataType:'json',
 		success: function(data){
-// 			console.log(data.mostList);
-			matchList = data.matchList;
-			totalGame = matchList.length;
-		    totalWin = 0;
-			totalLose = 0;
-		 	totalKill= 0;
-		 	totalAssist= 0;
-	 		totalDeath= 0;
-		  	totalCS= 0;
-		  	totalKA = 0;
-		  	
-			for(sum of matchList){
-// 				console.log(sum);
-				var ka = sum.kill+sum.assist;
-				var tka = 0;
-				for(fre of sum.friendly){
-					tka += fre.kill;
-				}
-				ka = ka*100.0/tka;
-				ka = ka.toFixed(0);
-				console.log("킬관여 "+ka);
+			addMatchList(data.matchList);
 			
-				totalKill += sum.kill;
-				totalAssist += sum.assist;
-				totalDeath += sum.death;
-				totalCS += sum.cs;
-				totalKA += parseInt(ka);
-				
-				if(sum.winlose=='Win'){
-					totalWin++;
-				}
-			}
-			
-			totalLose = totalGame - totalWin;
-			console.log("승률" + totalGame +" "+totalWin +" " +totalLose);
-			drawChart(totalGame,totalWin,totalLose);
-			
-			$("#avgStats").html((totalKill/totalGame).toFixed(1)+"/"+(totalDeath/totalGame).toFixed(1)+"/"+(totalAssist/totalGame).toFixed(1));
-			$("#avgCS").html("CS : "+(totalCS/totalGame).toFixed(1));
-			$("#avgKDA").html("KDA: " +((totalKill+totalAssist)/totalDeath).toFixed(1) + "<br>킬관여율: "+ (totalKA/totalGame).toFixed(0)+"%");
-			
-			
-			
-			
-			
-			
-			
+			addMost3(data.mostList);
 			
 		}
 		
@@ -316,5 +263,137 @@ function drawChart(tot,win,lose){
 		  chart.draw(data, options);
 }
 
+function addMatchList(matchList){
+	let toDay = new Date();
+	
+	let totalGame = matchList.length;
+	let   totalWin = 0;
+    let totalLose = 0;
+	let totalKill= 0;
+ 	let totalAssist= 0;
+ 	let	totalDeath= 0;
+	let totalCS= 0;
+  	let	totalKA = 0;
+  	
+  	let matchListDiv = $("#matchList");
+  	
+	for(sum of matchList){
+		console.log(sum);
+		
+		var ka = sum.kill+sum.assist;
+		var tka = 0;
+		for(fre of sum.friendly){
+			tka += fre.kill;
+		}
+		ka = ka*100.0/tka;
+		ka = ka.toFixed(0);
+	
+		totalKill += sum.kill;
+		totalAssist += sum.assist;
+		totalDeath += sum.death;
+		totalCS += sum.cs;
+		totalKA += parseInt(ka);
+		
+		if(sum.winlose=='Win'){
+			totalWin++;
+		}
+		
+		let matchItem = $("<div>",{class:'matchItem '+(sum.winlose=='Win'?'winItem' : 'loseItem')});
+		let matchinfo = $("<div>",{class:'matchinfo'});
+		
+		let gameMode = $("<div>",{class:'gameMode',text:sum.type=='RANKED_FLEX_SR'?'5:5 자유':'솔로'});
+		
+		matchinfo.append(gameMode);
+		let gameDate = dateDiff(new Date(sum.startTime),toDay);
+		
+		if(gameDate < 1){
+			gameDate *= 24;
+		}else{
+			gameDate = gameDate.toFixed(0) +"일전";
+		}
+	
+		let dateDiv = $("<div>",{class:'date',text:gameDate});
+		matchinfo.append(dateDiv);
+		
+		let during = $("<div>",{class:'during',text:sum.runtime});
+		matchinfo.append(during);
+		
+		matchItem.append(matchinfo);
+		
+		let face =$("<div>",{class:'face',html:"<img src='https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/"+sum.picture+"'>"});
+		face.append(sum.name)
+		matchItem.append(face);
+		
+		let spells = $("<div>",{class:'spells'});
+		spells.append("<img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/spell/"+sum.spell1+"'><br>");
+		spells.append("<img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/spell/"+sum.spell2+"'>");
+		matchItem.append(spells);
+		
+		let rune = $("<div>",{class:'rune'});
+		rune.append("<img src='https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/"+sum.rune1+"'><br>");
+		rune.append("<img src='https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/"+sum.rune2+"'>");
+		matchItem.append(rune);
+		
+		
+		
+		matchListDiv.append(matchItem);
+	}
+	
+	totalLose = totalGame - totalWin;
+	console.log("승률" + totalGame +" "+totalWin +" " +totalLose);
+	drawChart(totalGame,totalWin,totalLose);
+	
+	$("#avgStats").html((totalKill/totalGame).toFixed(1)+"/"+(totalDeath/totalGame).toFixed(1)+"/"+(totalAssist/totalGame).toFixed(1));
+	$("#avgCS").html("CS : "+(totalCS/totalGame).toFixed(1));
+	$("#avgKDA").html("KDA: " +((totalKill+totalAssist)/totalDeath).toFixed(1) + "<br>킬관여율: "+ (totalKA/totalGame).toFixed(0)+"%");
+}
+
+function addMost3(mostList){
+	var most3List =  $("#most3List");
+	
+	//최근 모스트 챔프 3 추가
+	for(most of mostList){
+		let lose = most.cnt - most.wincnt;
+		let kda = (most.kill+most.assist)/most.death;
+		kda = kda.toFixed(1);
+		
+		let li = $("<li>");
+		
+		let most3Face = $("<div>",{
+					class:'most3Face',
+					html:"<img src='https://ddragon.leagueoflegends.com/cdn/11.2.1/img/champion/"+most.picture+"'>"
+				}
+		);
+		
+		let most3Info = $("<div>",{class:'most3Info'});
+		
+		let champName = $("<div>",{class:'champName',text:most.name});
+		
+		most3Info.append(champName);
+		
+		let most3stats = $("<div>",{class:'most3stats'});
+		
+		let most3Odds = $("<div>",{class:'most3Odds',text:"승률 :"+most.rate+" ("+most.wincnt+"승 "+lose+" 패)"});
+		
+		most3stats.append(most3Odds);
+		
+		let most3KDA = $("<div>",{class:'most3KDA',text:"KDA : "+kda});				
+		
+		most3stats.append(most3KDA);
+		
+		most3Info.append(most3stats);
+		
+		li.append(most3Face);
+		li.append(most3Info);
+		
+		most3List.append(li);
+	}
+}
+
+function dateDiff(d1,d2){
+	let dif = d2 - d1;
+	
+	return dif/ 1000 / 60 / 60 / 24;
+}
 
 </script>

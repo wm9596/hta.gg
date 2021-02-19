@@ -96,12 +96,18 @@ public class SearchServiceImpl implements SearchService {
 		aid = summonerInfo.get("accountId").getAsString();
 		SummonerVo summonerVo = addSummoner(
 			new SummonerVo(
-							name,
+							summonerInfo.get("name").getAsString(),
 							summonerInfo.get("summonerLevel").getAsInt(), 
 							summonerInfo.get("profileIconId").getAsString()
 							),
 			true
 				);
+	
+		if(summonerVo==null) {	
+			return null;
+		}
+		
+//		System.out.println(summonerVo);
 		
 		addQueueInfo(sid);
 		
@@ -124,9 +130,10 @@ public class SearchServiceImpl implements SearchService {
 	 * isUpdate = 정보가 중복일때 업데이트 시킬지 여부*/
 	@Override
 	public SummonerVo addSummoner(SummonerVo svo,boolean isUpdate) {
+		int n = 0;
 		try {
 //			System.out.println("소환사 추가");
-			summonerMapper.addSummoner(svo);
+			n = summonerMapper.addSummoner(svo);
 		}catch (DuplicateKeyException e) {
 //			System.out.println("소환사정보 중복 ");
 			if(isUpdate) {
@@ -134,8 +141,7 @@ public class SearchServiceImpl implements SearchService {
 				summonerMapper.updateSummoner(svo);
 			}
 		}
-		
-		return svo;
+		return n>0?svo:null;
 	}
 	
 	@Override
@@ -154,6 +160,7 @@ public class SearchServiceImpl implements SearchService {
 					jo.get("leaguePoints").getAsInt(),
 					jo.get("wins").getAsInt(), 
 					jo.get("losses").getAsInt());
+			
 			
 			try {
 //				System.out.println(qvo);

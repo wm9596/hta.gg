@@ -1,23 +1,29 @@
 @charset "UTF-8";
 
 #listWrapper{
+	background-color : white;
+	height: 100%;
+	padding-top: 10px;
 }
 
 #mostList{
-	background-color: silver;
+	background-color: #ededed;
 	float: left;
 	width: 260px;
 	margin-right: 5.5px;
 }
 
 .mostItem{
-	border: 1px solid black;
+	border: 1px solid gray;
+	border-radius: 10px;
 }
 
 .mostItem div img{
 	border-radius: 100px;
 	width: 50px;
 	height: 50px;
+	margin-top: 5px;
+	margin-left: 5px;
 }
 
 .mostItem  .mostFace,.mostName,.mostKda,.mostRate{
@@ -26,6 +32,11 @@
 	margin-bottom:10px;
 	display: inline-block;
 /* 	margin-right: 10px; */
+}
+
+.name{
+	position: absolute;
+	bottom: 10px;
 }
 
 #mostList b{
@@ -47,13 +58,15 @@
 	height: 200px;
 	text-align: center;
 	border: 1px solid black;
+	border-radius: 10px;
 }
 
 #record{
 	display:inline-block;
 	width: 350px;
 	height: 100%;
-	border: 1px solid black;
+/* 	border: 1px solid black; */
+	border-radius: 10px;
 }
 
 #chart{
@@ -79,7 +92,54 @@
 	display:inline-block;
 	width: 350px;
 	height: 100%;
-	border: 1px solid black;
+/* 	border: 1px solid black; */
+	padding-top: 10px;
+	border-radius: 10px;
+}
+
+#most3 ul{
+	width: 100%;
+	height: 100%;
+}
+
+
+#most3 li{
+	list-style: none;
+	width: 100%;
+	height: 33%;
+}
+
+.champName{
+	text-align: left;
+}
+
+#most3stats{
+	height: 100%;
+}
+
+.most3Face{
+	float: left;
+}
+
+.most3Info{
+	float: left;
+	width: 80%;
+	margin-left: 5px
+}
+
+
+.most3Face img{
+	width: 45px;
+	height: 45px;
+	border-radius: 100px;
+	vertical-align: middle;
+}
+
+.most3Odds{
+	float: left;
+}
+ .most3KDA{
+ 	float: right;
 }
 
 #gameType{
@@ -88,6 +148,7 @@
 	border: 1px solid black;
 	margin-bottom: 5px;
 	background-color: white;
+	border-radius: 10px;
 }
 
 #gameType a{
@@ -97,10 +158,18 @@
 }
 
 .matchItem{
-	height: 120px;
-	background-color: #a3cfec;
+	height: 130px;
 	margin-bottom: 20px;
 	border: 1px solid black;
+	border-radius: 10px;
+}
+
+.winItem{
+	background-color: #a3cfec;
+}
+
+.loseItem{
+	background-color: #e2b6b3;
 }
 
 .matchItem div{
@@ -141,10 +210,16 @@
 }
 
 .matchItem .face img{
-	width: 75px;
-	height: 75px;
+	width: 70px;
+	height: 70px;
 	border-radius: 100px;
 	vertical-align: middle;
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+.during{
+	font-size: 12px;
 }
 
 .spells{
@@ -181,6 +256,11 @@
 	font-weight: bolder;
 	size: 20px;
 	flex-wrap: wrap;
+}
+
+.multiKill{
+	background-color: orange;
+	border-radius: 40px;
 }
 
 .stats{
@@ -257,3 +337,13 @@
 	height: 30px;
 	vertical-align: middle;
 }
+
+.mine{
+	font-weight: bolder;
+}
+
+.mine img{
+	border-radius: 100px;
+}
+
+
