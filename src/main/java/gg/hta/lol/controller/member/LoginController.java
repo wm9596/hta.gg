@@ -110,4 +110,9 @@ public class LoginController {
 	public String admin() {
 		return ".header.home";
 	}
+	@GetMapping("/member/admin/connection")
+	public String connection() {
+//		service.
+		return ".adminpage.connection";
+	}
 }

@@ -59,11 +59,6 @@
 		set nickname=#{nickname}, password=#{password}, email=#{email}
 		where username=#{username}
 	</update>
-	<update id="updateSnickname" parameterType="hashmap">
-		update member
-		set snickname=#{snickname}
-		where username=#{username}
-	</update>
 	<update id="delete" parameterType="string">
 		update member
 		set enabled=0
@@ -93,4 +88,30 @@
 	 )
 	 <![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>	
+	<select id="pointListCount" parameterType="string" resultType="int">
+		select NVL(count(*),0) cnt from point where username=#{username}
+	</select>
+	<select id="pointPlusListCount" parameterType="string" resultType="int">
+		select NVL(count(*),0) cnt from point where username=#{username} and  <![CDATA[ score > 0 ]]>
+	</select>
+	<select id="pointMinusListCount" parameterType="string" resultType="int">
+		select NVL(count(*),0) cnt from point where username=#{username} and <![CDATA[ score < 0 ]]>
+	</select>
+	<select id="pointList" parameterType="hashmap" resultType="gg.hta.lol.vo.PointVo">
+		select * from
+	 	(
+			select a.*,rownum rnum from
+		    (
+				select * from point where username=#{username}
+				<if test="score == 1">
+					and <![CDATA[ score > 0 ]]>
+				</if>
+				<if test="score == -1">
+					and <![CDATA[ score < 0 ]]>
+				</if>
+				order by regdate desc
+			)a
+		)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	</select>
 </mapper>

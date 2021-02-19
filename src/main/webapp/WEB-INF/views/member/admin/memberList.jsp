@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<h1 style="margin-left: 600px;">회원 정보 목록</h1>
-<div style="margin-left: 270px;">
-	<table style="height: 330px; width: 950px; font-size: 18px;">
+<h1 style="text-align: center; margin-top: 30px;">회원 정보 목록</h1>
+<div style="margin: 70px;">
+	<table style="width: 1100px; font-size: 18px;">
 		<tr>
 			<th>아이디</th>
 			<th>소환사 이름</th>

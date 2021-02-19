@@ -11,6 +11,7 @@ import gg.hta.lol.security.CustomUserDetail;
 import gg.hta.lol.vo.AuthVo;
 import gg.hta.lol.vo.AuthoritiesVo;
 import gg.hta.lol.vo.MemberVo;
+import gg.hta.lol.vo.PointVo;
 
 @Repository
 public class MemberDao {
@@ -66,5 +67,17 @@ public class MemberDao {
 	}
 	public List<MemberVo> list(HashMap<String, Object> map){
 		return sqlSession.selectList(NAMESPACE + ".list",map);
+	}
+	public int pointListCount(String username) {
+		return sqlSession.selectOne(NAMESPACE + ".pointListCount", username);
+	}
+	public int pointPlusListCount(String username) {
+		return sqlSession.selectOne(NAMESPACE + ".pointPlusListCount", username);
+	}
+	public int pointMinusListCount(String username) {
+		return sqlSession.selectOne(NAMESPACE + ".pointMinusListCount", username);
+	}
+	public List<PointVo> pointList(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE + ".pointList",map);
 	}
 }

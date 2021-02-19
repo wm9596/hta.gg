@@ -25,6 +25,7 @@ import gg.hta.lol.util.PageUtil;
 import gg.hta.lol.service.QueueInfoService;
 import gg.hta.lol.service.match.SearchService;
 import gg.hta.lol.vo.MemberVo;
+import gg.hta.lol.vo.PointVo;
 import gg.hta.lol.vo.QueueInfoVo;
 import gg.hta.lol.vo.match.MostChampVo;
 import gg.hta.lol.vo.match.SearchVo;
@@ -140,6 +141,31 @@ public class MemberController {
 			sb.append("</data>");
 			return sb.toString();
 		}
+	}
+	@GetMapping("/member/member/pointList")
+	public String pointList(@RequestParam(value = "score", defaultValue = "0")int score, @RequestParam(value="pageNum", defaultValue = "1")int pageNum, Principal principal, Model m) {
+		int totalRowCount = 0;
+		if(score == 1) {
+			totalRowCount = service.pointPlusListCount(principal.getName());
+		}else if(score == -1) {
+			totalRowCount = service.pointMinusListCount(principal.getName());
+		}else{
+			totalRowCount = service.pointListCount(principal.getName());
+		}
+		PageUtil pu = new PageUtil(pageNum, 10,5,totalRowCount);
+		int startRow = pu.getStartRow();
+		int endRow = pu.getEndRow();
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("startRow",startRow);
+		map.put("endRow",endRow);
+		map.put("score",score);
+		map.put("username",principal.getName());
+		List<PointVo> list = service.pointList(map);
+		m.addAttribute("score", score);
+		m.addAttribute("list", list);
+		m.addAttribute("pu",pu);
+		return ".mypage.pointList";
 	}
 	@RequestMapping("/member/admin/memberList")
 	public String adminPage(@RequestParam(value="pageNum", defaultValue = "1")int pageNum, String field, String keyword, Model m) {

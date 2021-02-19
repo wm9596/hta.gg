@@ -11,6 +11,7 @@ import gg.hta.lol.dao.MemberDao;
 import gg.hta.lol.security.CustomUserDetail;
 import gg.hta.lol.vo.AuthoritiesVo;
 import gg.hta.lol.vo.MemberVo;
+import gg.hta.lol.vo.PointVo;
 
 @Service
 public class MemberService {
@@ -67,5 +68,17 @@ public class MemberService {
 	}
 	public int count(HashMap<String, Object> map) {
 		return dao.count(map);
+	}
+	public int pointListCount(String username){
+		return dao.pointListCount(username);
+	}
+	public int pointPlusListCount(String username){
+		return dao.pointPlusListCount(username);
+	}
+	public int pointMinusListCount(String username){
+		return dao.pointMinusListCount(username);
+	}
+	public List<PointVo> pointList(HashMap<String, Object> map){
+		return dao.pointList(map);
 	}
 }

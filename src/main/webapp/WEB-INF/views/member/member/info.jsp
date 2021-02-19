@@ -7,7 +7,9 @@
 	<label style="width: 100px;">비밀번호 </label>
 	<input type="password" name="password" style="width: 300px; padding: 0px; display: inline-block;"><br><br>
 	<label style="width: 100px;">이메일 </label>
-	<input type="email" name="email" value="${vo.email}" style="width: 300px; padding: 0px; display: inline-block;">
+	<input type="email" name="email" value="${vo.email}" style="width: 300px; padding: 0px; display: inline-block;"><br><br>
+	<label style="width: 100px;">누적 포인트</label>
+	<input type="text" style="width: 300px; padding: 0px; display: inline-block;" value="${vo.point }" disabled="disabled">
 	<input type="hidden" name="username" value="${vo.username}">
 	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><br><br>
 	<input type="submit" value="수정" style="width: 200px;">

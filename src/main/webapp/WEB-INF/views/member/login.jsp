@@ -63,7 +63,6 @@ $(function(){
 				dataType:'xml',
 				success: function(data){
 					var code = $(data).find("code").text();
-					//var id = $(data).find("id").text();
 					if(code == document.getElementById("id_confirm").value){
 						document.getElementById("id_confirmId").innerHTML="이메일 인증 완료!!!";
 					}else{
@@ -173,7 +172,6 @@ $(document).ready(function(){
 		var id = document.getElementById("id").value;
 		var email = document.getElementById("email").value;
 		email = email.substr(0,email.lastIndexOf("."));
-		//console.log(email);
 		if(document.getElementById("idcheck").textContent != "사용 가능 한 아이디입니다."){
 			alert("아이디 중복 확인을 완료해주세요.");
 		}else{
@@ -196,7 +194,6 @@ $(document).ready(function(){
 		var id = document.getElementById("id").value;
 		var email = document.getElementById("email").value;
 		email = email.substr(0,email.lastIndexOf("."));
-		//console.log(email);
 		if(document.getElementById("emailcheck").textContent != "인증번호 전송이 완료되었습니다."){
 			alert("이메일 입력 후 이메일 인증 버튼을 클릭해 주세요!!!");
 		}else{
