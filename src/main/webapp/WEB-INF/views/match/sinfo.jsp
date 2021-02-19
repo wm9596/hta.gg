@@ -321,7 +321,7 @@ function addMatchList(matchList){
 		matchItem.append(matchinfo);
 		
 		let face =$("<div>",{class:'face',html:"<img src='https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/"+sum.picture+"'>"});
-		face.append(sum.name)
+		face.append("<div class='name'>"+sum.name+"</div>")
 		matchItem.append(face);
 		
 		let spells = $("<div>",{class:'spells'});
@@ -334,7 +334,9 @@ function addMatchList(matchList){
 		rune.append("<img src='https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/"+sum.rune2+"'>");
 		matchItem.append(rune);
 		
+		let kdaDiv = $("<div>",{class:'kda'});
 		
+		matchItem.append(kdaDiv);
 		
 		matchListDiv.append(matchItem);
 	}

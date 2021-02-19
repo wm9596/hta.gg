@@ -115,7 +115,6 @@ public class SearchServiceImpl implements SearchService {
 		searchVo.setQiList(queuemapper.getQueueInfo(name));
 		
 //		SearchVo vo = summonerMapper.getSummonerInfo(name);
-//		vo.setAccountId(aid);
 		
 //		vo.getQiList().sort(Comparator.comparing(QueueInfoVo::getQueueType));
 		
@@ -128,12 +127,12 @@ public class SearchServiceImpl implements SearchService {
 	public SummonerVo addSummoner(SummonerVo svo,boolean isUpdate) {
 		
 		try {
-//			System.out.println("소환사 추가");
+			System.out.println("소환사 추가");
 			summonerMapper.addSummoner(svo);
 		}catch (DuplicateKeyException e) {
-//			System.out.println("소환사정보 중복 ");
+			System.out.println("소환사정보 중복 ");
 			if(isUpdate) {
-//				System.out.println("소환사 정보 수정");
+				System.out.println("소환사 정보 수정");
 				summonerMapper.updateSummoner(svo);
 			}
 		}
@@ -147,7 +146,7 @@ public class SearchServiceImpl implements SearchService {
 		for(int i = 0 ; i< leagueInfo.size() ; i++) {
 			JsonObject jo = leagueInfo.get(i).getAsJsonObject();
 			
-//			System.out.println("큐정보 "+jo);
+//			System.out.println(jo);
 			
 			QueueInfoVo qvo = new QueueInfoVo(
 					jo.get("summonerName").getAsString().replaceAll(" ", ""),
@@ -281,7 +280,7 @@ public class SearchServiceImpl implements SearchService {
 			
 			addSummoner(
 					new SummonerVo(
-					userInfo.get("player").getAsJsonObject().get("summonerName").getAsString(),
+					userInfo.get("player").getAsJsonObject().get("summonerName").getAsString().replaceAll(" ", ""),
 					0,
 					userInfo.get("player").getAsJsonObject().get("profileIcon").getAsString()
 					),
@@ -318,7 +317,7 @@ public class SearchServiceImpl implements SearchService {
 						stats.get("largestMultiKill").getAsInt()
 						);
 			
-//				System.out.println(vo);
+				System.out.println(vo);
 				tminfoMapper.addTeamMemberInfo(vo);
 		}
 		

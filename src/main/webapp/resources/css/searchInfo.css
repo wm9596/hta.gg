@@ -34,11 +34,6 @@
 /* 	margin-right: 10px; */
 }
 
-.name{
-	position: absolute;
-	bottom: 10px;
-}
-
 #mostList b{
 	font-size: 12px
 }
@@ -203,11 +198,22 @@
 	margin-top: 3px;
 }
 .matchItem .face {
+	padding-top : 12px;
 	display:inline-block;
 	height: 100%;
 	float:left;
-	line-height: 100px;
+/* 	line-height: 100px; */
+	position: relative;
 }
+
+
+.name{
+	width: 70px;
+	height: 10px;
+	text-align: center;
+	margin-top: 7px;
+}
+
 
 .matchItem .face img{
 	width: 70px;
