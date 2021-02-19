@@ -5,6 +5,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/searchInfo.css">
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <div id="mm_smCard">
 		<div id="mm_smLeft">
 			<div id="mm_smIconDiv">
@@ -98,6 +100,14 @@
 		<div id="gameType"><a href="#">전체 보기</a><a href="#">솔로 랭크</a><a href="#">자유 랭크</a></div>
 		<div id="summary">
 			<div id="record">
+				<div id="chart">
+				</div>
+				<div  id="avg">
+					기록 평균
+					<div id="avgStats">7.8/4.3/5.5</div>
+					<div id=avgCS>cs 150</div>
+					<div id=avgKDA>3.1</div>
+				</div>
 			</div>
 			<div id="most3">
 			</div>
@@ -211,3 +221,100 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+
+google.charts.load("current", {packages:["corechart"]});
+google.charts.setOnLoadCallback(getMatchList);
+
+function getMatchList() {
+	
+	var matchList;
+	var totalGame;
+	var totalWin;
+	var totalLose;
+	var totalKill;
+	var totalAssist;
+	var totalDeath;
+	var totalCS;
+	var totalKA ;
+	
+	$.ajax({
+		url:'/lol/match/getList',
+		data:{name:'${svo.snickname }'} ,
+		dataType:'json',
+		success: function(data){
+// 			console.log(data.mostList);
+			matchList = data.matchList;
+			totalGame = matchList.length;
+		    totalWin = 0;
+			totalLose = 0;
+		 	totalKill= 0;
+		 	totalAssist= 0;
+	 		totalDeath= 0;
+		  	totalCS= 0;
+		  	totalKA = 0;
+		  	
+			for(sum of matchList){
+// 				console.log(sum);
+				var ka = sum.kill+sum.assist;
+				var tka = 0;
+				for(fre of sum.friendly){
+					tka += fre.kill;
+				}
+				ka = ka*100.0/tka;
+				ka = ka.toFixed(0);
+				console.log("킬관여 "+ka);
+			
+				totalKill += sum.kill;
+				totalAssist += sum.assist;
+				totalDeath += sum.death;
+				totalCS += sum.cs;
+				totalKA += parseInt(ka);
+				
+				if(sum.winlose=='Win'){
+					totalWin++;
+				}
+			}
+			
+			totalLose = totalGame - totalWin;
+			console.log("승률" + totalGame +" "+totalWin +" " +totalLose);
+			drawChart(totalGame,totalWin,totalLose);
+			
+			$("#avgStats").html((totalKill/totalGame).toFixed(1)+"/"+(totalDeath/totalGame).toFixed(1)+"/"+(totalAssist/totalGame).toFixed(1));
+			$("#avgCS").html("CS : "+(totalCS/totalGame).toFixed(1));
+			$("#avgKDA").html("KDA: " +((totalKill+totalAssist)/totalDeath).toFixed(1) + "<br>킬관여율: "+ (totalKA/totalGame).toFixed(0)+"%");
+			
+			
+			
+			
+			
+			
+			
+			
+		}
+		
+	});
+}
+
+function drawChart(tot,win,lose){
+	  var data = google.visualization.arrayToDataTable([
+		    ['winlose', 'cnt'],
+		    ["승",    win],
+		    ["패",      lose]
+		  ]);
+
+		  var options = {
+		    title: tot+'전 '+ win + '승 '+lose+'패',
+		    pieHole: 0.4,
+		    legend : 'none',
+		    chartArea:{width:'80%',height:'80%'},
+		    fontSize : '12'
+		  };
+
+		  var chart = new google.visualization.PieChart(document.getElementById('chart'));
+		  chart.draw(data, options);
+}
+
+
+</script>
