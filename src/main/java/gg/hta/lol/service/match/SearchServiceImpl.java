@@ -96,7 +96,7 @@ public class SearchServiceImpl implements SearchService {
 		aid = summonerInfo.get("accountId").getAsString();
 		SummonerVo summonerVo = addSummoner(
 			new SummonerVo(
-							summonerInfo.get("name").getAsString(),
+							summonerInfo.get("name").getAsString().replaceAll(" ", ""),
 							summonerInfo.get("summonerLevel").getAsInt(), 
 							summonerInfo.get("profileIconId").getAsString()
 							),
@@ -150,7 +150,7 @@ public class SearchServiceImpl implements SearchService {
 //			System.out.println("큐정보 "+jo);
 			
 			QueueInfoVo qvo = new QueueInfoVo(
-					jo.get("summonerName").getAsString(),
+					jo.get("summonerName").getAsString().replaceAll(" ", ""),
 					jo.get("queueType").getAsString() ,
 					jo.get("tier").getAsString()+"_"+jo.get("rank").getAsString(),
 					jo.get("leaguePoints").getAsInt(),
@@ -290,7 +290,7 @@ public class SearchServiceImpl implements SearchService {
 			
 				TeamMemberinfoVo vo = new TeamMemberinfoVo(
 						0, 
-						userInfo.get("player").getAsJsonObject().get("summonerName").getAsString(), 
+						userInfo.get("player").getAsJsonObject().get("summonerName").getAsString().replaceAll(" ", ""), 
 						tmInfo.get("teamId").getAsString(),
 						gameId,
 						tmInfo.get("championId").getAsString(),
