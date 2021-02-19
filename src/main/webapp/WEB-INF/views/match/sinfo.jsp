@@ -115,112 +115,7 @@
 			</div>
 		</div>
 		
-		<div class="matchItem">
-			<div class="matchinfo">
-				<div class="gameMode">
-					솔랭
-				</div>
-				<div class="date">
-					2일전
-				</div>
-				<div class="during">
-					22분
-				</div>
-			</div>
-			
-			<div class="face">
-				<img src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
-				<div class="name">야스오</div>
-			</div>
-			
-			<div class="spells">
-				<img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/spell/SummonerFlash.png"><br>
-				<img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/spell/SummonerFlash.png">
-			</div>
-			<div class="rune">
-				<img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7200_Domination.png"><br>
-				<img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7200_Domination.png">
-			</div>
-			<div class="kda">
-				<div>KDA:4.5</div>
-				<div>15.0/1.0/10.0</div>
-				<div class="multiKill">트리플킬</div>
-			</div>
-			<div class="stats">
-				<div>레벨</div>
-				<div>cs</div>
-				<div>킬관여율</div>
-			</div>
-			<div class="items">
-				<table>
-					<tr>
-						<td><img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/1001.png"></td>
-						<td><img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/1001.png"></td>
-						<td><img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/1001.png"></td>
-					</tr>
-					<tr>
-						<td><img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/1001.png"></td>
-						<td><img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/1001.png"></td>
-						<td><img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/1001.png"></td>
-					</tr>
-				</table>
-			</div>
-			<div class="accessory">
-				<img src="http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/2055.png">
-			</div>
-			
-			<div class="team">
-				<div class="friendly">
-					<div class="summoner mine">
-						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
-						<a>소환사이름</a>
-					</div>
-					<div class="summoner">
-						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
-						<a>소환사이름</a>
-					</div>
-					<div class="summoner">
-						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
-						<a>소환사이름</a>
-					</div>
-					<div class="summoner">
-						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
-						<a>소환사이름</a>
-					</div>
-					<div class="summoner">
-						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
-						<a>소환사이름</a>
-					</div>
-				</div>
-				
-				<div class="enemy">
-					<div class="summoner">
-						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
-						<a>소환사이름</a>
-					</div>
-					<div class="summoner">
-						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
-						<a>소환사이름</a>
-					</div>
-					<div class="summoner">
-						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
-						<a>소환사이름</a>
-					</div>
-					<div class="summoner">
-						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
-						<a>소환사이름</a>
-					</div>
-					<div class="summoner">
-						<img  src="https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/Urgot.png">
-						<a>소환사이름</a>
-					</div>
-				</div>
-			</div>
-			
-			<div class="showMore">
-				<input type="image" src="${pageContext.request.contextPath }/resources/images/bar-chart.png">
-			</div>
-		</div>
+		
 	</div>
 </div>
 
@@ -264,10 +159,11 @@ function drawChart(tot,win,lose){
 }
 
 function addMatchList(matchList){
+	var MULTI_KILL = ['더블킬','트리플킬','쿼드라킬','펜타킬'];
 	let toDay = new Date();
 	
 	let totalGame = matchList.length;
-	let   totalWin = 0;
+	let totalWin = 0;
     let totalLose = 0;
 	let totalKill= 0;
  	let totalAssist= 0;
@@ -278,10 +174,10 @@ function addMatchList(matchList){
   	let matchListDiv = $("#matchList");
   	
 	for(sum of matchList){
-		console.log(sum);
-		
-		var ka = sum.kill+sum.assist;
-		var tka = 0;
+// 		console.log(sum);
+		let ka = sum.kill+sum.assist;
+		let kda = ka / sum.death;
+		let tka = 0;
 		for(fre of sum.friendly){
 			tka += fre.kill;
 		}
@@ -335,8 +231,151 @@ function addMatchList(matchList){
 		matchItem.append(rune);
 		
 		let kdaDiv = $("<div>",{class:'kda'});
+		kdaDiv.append("<div>KDA:"+kda.toFixed(1)+"</div>");
+		kdaDiv.append("<div>"+sum.kill+"/"+sum.death+"/"+sum.assist+"</div>");
 		
+		let killName;
+		if(sum.multiKill >=2){
+			killName = MULTI_KILL[sum.multiKill-2];
+			kdaDiv.append("<div class='multiKill'>"+killName+"</div>");
+		}
 		matchItem.append(kdaDiv);
+		
+		let statsDiv = $("<div>",{class:'stats'});
+		statsDiv.append("<div>레벨 "+sum.championlevel+"</div>");
+		statsDiv.append("<div> "+sum.cs+" CS</div>");
+		statsDiv.append("<div>킬관여"+ka+"%</div>");
+		matchItem.append(statsDiv);
+		
+		let items = $("<div>",{class:'items'});
+		let table = $("<table>");
+		
+		let tr1 = $("<tr>");
+		let tr2 = $("<tr>");
+		
+		if(sum.item1!=0){
+			tr1.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/"+sum.item1+".png'></td>");
+		}else{
+			tr1.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
+		}
+
+		if(sum.item2!=0){
+			tr1.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/"+sum.item2+".png'></td>");
+		}else{
+			tr1.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
+		}
+		
+		if(sum.item3!=0){
+			tr1.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/"+sum.item3+".png'></td>");
+		}else{
+			tr1.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
+		}
+		
+		if(sum.item4!=0){
+			tr2.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/"+sum.item4+".png'></td>");
+		}else{
+			tr2.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
+		}
+		
+		if(sum.item5!=0){
+			tr2.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/"+sum.item5+".png'></td>");
+		}else{
+			tr2.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
+		}
+		
+		if(sum.item6!=0){
+			tr2.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/"+sum.item6+".png'></td>");
+		}else{
+			tr2.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
+		}
+		
+		table.append(tr1);
+		table.append(tr2);
+		items.append(table);	
+		matchItem.append(items);
+		
+		let accessory = $("<div>",{class:'accessory'})
+		
+		if(sum.accessory==0){
+			accessory.append("<img src='${pageContext.request.contextPath }/resources/images/noneImg.png'>");
+		}else{
+			accessory.append("<img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/"+sum.accessory+".png'>");
+		}
+		
+		matchItem.append(accessory);
+		
+		
+		let team = $("<div>",{class:'team'});
+		
+		let friendly =$("<div>",{class:'friendly'});
+		let enemy =$("<div>",{class:'enemy'});
+		
+		for(t of sum.friendly){
+			let className = 'summoner';
+			let player = t.snickname;
+			
+			if(t.snickname==sum.snickname){
+				className +=' mine';
+			}
+			
+			if(player.length >5){
+				player = player.substr(0, 4);
+				player +='...';
+			}
+			
+			
+			summoner=$("<div>",{class:className});
+			summoner.append("<img  src='https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/"+t.picture+"'>")
+			
+			let asncik = $("<a>",{
+				href:'${pageContext.request.contextPath }/match/search?sName='+t.snickname,
+				text:player
+				});
+			
+			summoner.append(asncik);
+			
+			friendly.append(summoner);
+			
+		}
+		
+		for(t of sum.enemy){
+			let className = 'summoner';
+			let player = t.snickname;
+			
+			if(player.length >5){
+				player = player.substr(0, 4);
+				player +='...';
+			}
+			
+			
+			summoner=$("<div>",{class:className});
+			summoner.append("<img  src='https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/"+t.picture+"'>");
+			
+			let asncik = $("<a>",{
+				href:'${pageContext.request.contextPath }/match/search?sName='+t.snickname,
+				text:player
+				});
+			
+			summoner.append(asncik);
+			enemy.append(summoner);
+			
+		}
+		
+		team.append(friendly);
+		team.append(enemy);
+		
+		matchItem.append(team);
+		
+		let showMore = $("<div>",{class:'showMore'});
+		let imgBtn = $("<input>",{type:"image",src:"${pageContext.request.contextPath }/resources/images/bar-chart.png",value:sum.matchid});
+		
+		console.log(sum.matchid);
+		imgBtn.click(function(e) {
+			console.log(e.target.value);
+		})
+		
+		showMore.append(imgBtn);
+		matchItem.append(showMore);
 		
 		matchListDiv.append(matchItem);
 	}
@@ -397,5 +436,6 @@ function dateDiff(d1,d2){
 	
 	return dif/ 1000 / 60 / 60 / 24;
 }
+
 
 </script>
