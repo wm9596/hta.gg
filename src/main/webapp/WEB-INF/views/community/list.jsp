@@ -54,9 +54,9 @@
 			<input type="submit" value="검색">
 			<div style="float: right; margin-top:1%; margin-right: 4%; font-size: 15px;"><a href="${pageContext.request.contextPath }/community/insert?cNum=${cNum}" style="color: black;">새 글 등록</a></div><br><br>
 			<div style="margin-left: -70%">
-				<a href="javascript:page(1)">인기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="javascript:page(2)">최신</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="javascript:page(3)">TOP</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="javascript:array1('viewCount')">인기 (조회수)</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="javascript:array1('regdate')">최신 (등록날짜)</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="javascript:array1('hit')">TOP (추천수)</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</div>
 		</div>
 		</form:form>
@@ -64,10 +64,14 @@
 	<script type="text/javascript">
 		function page(n){
 			console.log(n);
-			//
 			location.href="${pageContext.request.contextPath }/community/list?cNum="+n;
 		}
+		
 		// $("input[name='cNum']").val(n);
+		
+		function array1(vic){
+			location.href="${pageContext.request.contextPath }/community/list?cNum=${cNum}&"+"vic="+vic;
+		}
 		
 	</script>
 		

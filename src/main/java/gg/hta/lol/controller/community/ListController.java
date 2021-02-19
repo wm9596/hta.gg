@@ -24,11 +24,12 @@ public class ListController {
 	@Autowired private ReplyService reservice;
 	
 	@RequestMapping("/community/list")
-	public ModelAndView list(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum,@RequestParam(value = "cNum",defaultValue = "1")int cNum, @RequestParam(value = "commentCount",defaultValue = "1")int commentCount,String field,String keyword) {
+	public ModelAndView list(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum,@RequestParam(value = "cNum",defaultValue = "1")int cNum,@RequestParam(value = "vic",defaultValue = "pNum")String vic,@RequestParam(value = "commentCount",defaultValue = "1")int commentCount,String field,String keyword) {
 		HashMap<String,Object> map=new HashMap<String, Object>();
 		map.put("field", field);
 		map.put("keyword",keyword);
 		
+		map.put("vic", vic);
 		map.put("cNum", cNum);
 		map.put("commentCount", commentCount);
 		
@@ -47,6 +48,7 @@ public class ListController {
 		mv.addObject("field", field);
 		mv.addObject("keyword",keyword);
 		mv.addObject("cNum", cNum);
+		mv.addObject("vic", vic);
 		mv.addObject("commentCount",commentCount);
 		return mv;
 	}

@@ -34,7 +34,7 @@
   				<if test="field!=null and field!=''">
   					and ${field} like '%'||#{keyword}||'%'
   				</if>
-  				order by pNum desc
+  				order by ${vic} desc
   			) a
   		)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow}  ]]>
@@ -91,12 +91,19 @@
 		 ]]>
 	</select>
 	
-	
-	
 	<select id="boardList" parameterType="string" resultType="community">
 		select * from community where username=#{username}
 	</select>
+	
 	<select id="boardCount" resultType="int">
 		select NVL(count(*),0) cnt from community where username=#{username}
 	</select>
+	
+	<select id="popularityArray" resultType="int" parameterType="int">
+		select viewCount
+		from community
+		where cNum = #{cNum}
+		order by viewCount desc
+	</select>
+	
 </mapper>
