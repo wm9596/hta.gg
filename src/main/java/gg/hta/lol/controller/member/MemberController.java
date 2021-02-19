@@ -1,7 +1,5 @@
 package gg.hta.lol.controller.member;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +20,6 @@ import gg.hta.lol.service.ChampionService;
 import gg.hta.lol.service.MatchMoreJoinService;
 import gg.hta.lol.service.MemberService;
 import gg.hta.lol.util.PageUtil;
-import gg.hta.lol.service.QueueInfoService;
 import gg.hta.lol.service.match.SearchService;
 import gg.hta.lol.vo.MemberVo;
 import gg.hta.lol.vo.PointVo;
@@ -34,7 +31,6 @@ import gg.hta.lol.vo.match.SearchVo;
 public class MemberController {
 	@Autowired private MemberService service;
 	@Autowired private SearchService searchService;
-	@Autowired private QueueInfoService queueInfoService;
 	@Autowired private MatchMoreJoinService matchMoreJoinService;
 	@Autowired private ChampionService championService;
 	

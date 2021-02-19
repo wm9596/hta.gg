@@ -179,7 +179,6 @@ $(document).ready(function(){
 				url:"/lol/member/email/"+id+"/"+email,
 				success: function(data){
 					var result = $(data).find("result").text();
-					console.log(result);
 					if(result == 'success'){
 						document.getElementById("emailcheck").innerHTML="인증번호 전송이 완료되었습니다.";
 					}else{
@@ -321,6 +320,25 @@ function checkNick(){
 	}
 }
 
+$(document).ready(function(){
+	$("#join").click(function (e) {
+		if(document.getElementById("idcheck").textContent != "사용 가능 한 아이디입니다."){
+			alert("아이디 중복 확인을 완료해주세요.");
+		}else if(document.getElementById("pwdcheck").textContent != ""){
+			alert("비밀번호 설정 조건에 맞게 다시 입력해 주세요.(영문/숫자 4~10자리)");
+		}else if(document.getElementById("pwdOkcheck").textContent != "비밀번호가 일치해요"){
+			alert("비밀번호가 일치하지 않습니다. 다시 입력해 주세요.");
+		}else if(document.getElementById("emailcheck").textContent != "인증번호 전송이 완료되었습니다."){
+			alert("이메일 입력 후 이메일 인증 버튼을 클릭해 주세요.");
+		}else if(document.getElementById("confirmcheck").textContent != "이메일 인증 완료!!!"){
+			alert("이메일 인증번호를 다시 확인 후 입력해주세요.");
+		}else if(document.getElementById("nicknamecheck").textContent != ""){
+			alert("닉네임 설정 조건에 맞게 다시 입력해 주세요.(4~12자리)");
+			e.preventDefault();
+		}
+	});
+});
+	
 function setCookie(cookieName, value, exdays){
     var exdate = new Date();
     exdate.setDate(exdate.getDate() + exdays);
@@ -431,7 +449,7 @@ $(()=>{
                 <button class="btn btn-success btn-block" id="idOk" style="width: 15%; float: left; text-align: left; height: 45px;" disabled="disabled">체크</button>
                 <span id="idcheck" style="float: left;">아이디를 입력하세요.</span><br>
                 <input type="password" name="password" id="pwd" class="form-control" onkeyup="checkPwd()" placeholder="비밀번호" required autofocus="">
-                <span id="pwdcheck"></span><br>
+                <span id="pwdcheck">비밀번호를 입력하세요.</span><br>
                 <input type="password" id="pwdOk" class="form-control" onkeyup="checkPwdOk()" placeholder="비밀번호 확인" required autofocus="">
                 <span id="pwdOkcheck"></span><br>
                 <input type="email" id="email" name="email" class="form-control" placeholder="이메일" required="" autofocus="" style="width: 85%; float: left;">
@@ -442,7 +460,7 @@ $(()=>{
                 <span id="confirmcheck" style="float: left;"></span><br>
                 <input type="text" id="nickname" name="nickname" class="form-control" onkeyup="checkNick()" placeholder="닉네임" required autofocus="">
                 <span id="nicknamecheck">닉네임을 입력하세요</span><br>
-                <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> 회원가입</button>
+                <button type="submit" class="btn btn-primary btn-block" id="join"><i class="fas fa-user-plus"></i> 회원가입</button>
                 <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
             </form:form>
             <br>
@@ -471,25 +489,4 @@ $(()=>{
     </p>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<!--     <script src="/script.js"></script> -->
-
-<!-- <div id="main_home"> -->
-<!-- 	<h1>회원로그인</h1> -->
-<!-- 	<!-- action="/lol/login" ==> 고정값임!! rootcontext/login --> -->
-<%-- 	<form:form method="post" action="/lol/login"> --%>
-<!-- 		아이디<br> -->
-<!-- 		<input type="text" name="username" id="userId" style="width: 300px;"><br> -->
-<!-- 		비밀번호<br> -->
-<!-- 		<input type="password" name="password" style="width: 300px;"><br> -->
-<!-- 		<input type="submit" value="로그인" style="width: 300px;"><br> -->
-<!-- 		<input type="checkbox" id="idSaveCheck">아이디 저장&nbsp;&nbsp;&nbsp; -->
-<!-- 		<input type="checkbox" id="remember-me" name="remember-me">자동 로그인<br> -->
-<!-- 		<input type="button" value="아이디 찾기" id="seachId" onclick="location.href = '/lol/member/id';">&nbsp; -->
-<!-- 		<input type="button" value="비밀번호 찾기" id="seachPwd" onclick="location.href = '/lol/member/pwd';">&nbsp; -->
-<!-- 		<input type="button" value="회원가입" id="join" onclick="location.href = '/lol/member/join';"> -->
-<%-- 	</form:form> --%>
-<!-- 	<h1>간편로그인</h1> -->
-<!-- 	<!-- 네이버 로그인 창으로 이동 --> -->
-<%-- 	<div id="naver_id_login" style="text-align:center"><a href="${url}"> --%>
-<!-- 	<img width="300" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div> -->
-<!-- </div> -->
+    

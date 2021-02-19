@@ -76,7 +76,7 @@ create table member
 	ENABLED CHAR(1) DEFAULT 1 CHECK(ENABLED='0' OR ENABLED='1') NOT NULL,
 	email varchar2(50),	
 	regdate date,	
-	nickname varchar2(12),	
+	nickname varchar2(50),	
 	point number,
     CONSTRAINT "member_PK" PRIMARY KEY ("USERNAME"),
     CONSTRAINT "member_FK1" FOREIGN KEY ("USERNAME") REFERENCES "FINAL"."AUTH" ("USERNAME")
