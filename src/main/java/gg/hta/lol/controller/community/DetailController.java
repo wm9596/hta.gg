@@ -81,6 +81,8 @@ public class DetailController {
 			sb.append("<content>");
 			sb.append("<rNum>"+vo.getrNum()+"</rNum>");
 			sb.append("<pNum>"+vo.getpNum()+"</pNum>");
+			sb.append("<rHit>"+vo.getrHit()+"</rHit>");
+			sb.append("<rNohit>"+vo.getrNohit()+"</rNohit>");
 			sb.append("<rWriter>"+vo.getrWriter()+"</rWriter>");
 			sb.append("<regdate>"+vo.getRegdate()+"</regdate>");
 			sb.append("<rContent>"+vo.getrContent()+"</rContent>");
@@ -137,4 +139,17 @@ public class DetailController {
 		return service.noHit(pNum);
 	}
 	
+	@GetMapping(value = "/reHitUpdate/{rNum}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public int update3(@PathVariable("rNum")int rNum) {
+		System.out.println("�ѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤ�");
+		return service1.rHit(rNum);
+	}
+	
+	@GetMapping(value = "/reNohitUpdate/{rNum}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public int update4(@PathVariable("rNum")int rNum) {
+		System.out.println("�ѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤ�");
+		return service1.rNohit(rNum);
+	}
 }

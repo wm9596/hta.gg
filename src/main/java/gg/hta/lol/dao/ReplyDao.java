@@ -37,6 +37,23 @@ public class ReplyDao {
 		return sqlSession.update(NAMESPACE + ".mCount", pNum);
 	}
 	
+	public int rHit(int rNum) {
+		int n=sqlSession.update(NAMESPACE + ".rpCount", rNum);
+		return n;
+	}
+	
+	public int rHitCount(int rNum) {
+		return sqlSession.selectOne(NAMESPACE+".rHitCount",rNum);
+	}
+	
+	public int rNohit(int rNum) {
+		int n=sqlSession.update(NAMESPACE + ".rnpCount", rNum);
+		return n;
+	}
+	
+	public int rNohitCount(int rNum) {
+		return sqlSession.selectOne(NAMESPACE+".rNohitCount",rNum);
+	}
 	
 	
 	public int replyCount(String username) {

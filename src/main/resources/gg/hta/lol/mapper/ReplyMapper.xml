@@ -8,7 +8,7 @@
 	</select>
 	
 	<insert id="insert" parameterType="reply">
-	 	insert into reply values(reNum_seq.nextval,#{pNum},0,#{rWriter},#{rContent},sysdate)
+	 	insert into reply values(reNum_seq.nextval,#{pNum},0,#{rWriter},#{rContent},sysdate,0,0)
 	</insert>
 	
 	<delete id="delete" parameterType="int">
@@ -23,6 +23,25 @@
 		update community set commentCount=commentCount-1 where pNum=#{pNum}
 	</update>
 	
+	<update id="rpCount" parameterType="int">
+		update reply set rHit=rHit+1 where rNum=#{rNum}
+	</update>
+	
+	<select id="rHitCount" resultType="int" parameterType="int">
+		select count(rhit)
+		from reply
+		where rNum = #{rNum}
+	</select>
+	
+	<update id="rnpCount" parameterType="int">
+		update reply set rNohit=rNohit+1 where rNum=#{rNum}
+	</update>
+	
+	<select id="rNohitCount" resultType="int" parameterType="int">
+		select count(rNohit)
+		from reply
+		where rNum = #{rNum}
+	</select>
 	
 	
 	<select id="replyCount" resultType="int" parameterType="string">

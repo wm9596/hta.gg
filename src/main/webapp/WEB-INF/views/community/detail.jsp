@@ -31,10 +31,14 @@
 					var rWriter = $(this).find("rWriter").text(); 
 					var rContent = $(this).find("rContent").text();
 					var regdate = $(this).find("regdate").text();
+					var rHit = $(this).find("rHit").text();
+					var rNohit = $(this).find("rNohit").text();
 					var div = document.createElement("div");
-					div.innerHTML=rWriter+"&nbsp;&nbsp;&nbsp;"+rContent+"&nbsp;&nbsp;&nbsp;"
+					div.innerHTML=rWriter+"&nbsp;&nbsp;&nbsp;"+rContent+"<br>"
 												+regdate+"&nbsp;&nbsp;&nbsp;"
-												+"<a href='#'>답글</a>"+"&nbsp;&nbsp;&nbsp;"
+												+"<a href='javascript:replyHit("+ rNum + ")'>추천</a>[" + rHit +"]&nbsp;&nbsp;"
+												+"<a href='javascript:replyNohit("+ rNum + ")'>반대</a>[" + rNohit +"]&nbsp;&nbsp;"
+												+"<a href='#'>답글</a>"+"&nbsp;&nbsp;"
 												+"<a href='javascript:removeComm("+ rNum + "," + pNum + ")'>삭제</a>";
 					div.className="comm";
 					commList.append(div);
@@ -186,6 +190,30 @@
 				}else{
 					alert('삭제 실패!');
 				}
+			}
+		});
+		}
+	}
+	
+	function replyHit(rNum) {
+		var ask = confirm("해당 댓글을 추천하시겠습니까?");
+		if(ask == true){
+		$.ajax({
+			url:"/lol/reHitUpdate/"+rNum,
+			success: function(data) {
+					alert('추천 성공');
+			}
+		});
+		}
+	}
+
+	function replyNohit(rNum) {
+		var ask = confirm("해당 댓글을 반대하시겠습니까?");
+		if(ask == true){
+		$.ajax({
+			url:"/lol/reNohitUpdate/"+rNum,
+			success: function(data) {
+					alert('반대 성공');
 			}
 		});
 		}

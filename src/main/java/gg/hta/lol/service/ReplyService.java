@@ -26,7 +26,14 @@ public class ReplyService {
 	public int update2(int pNum) {
 		return dao.update2(pNum);
 	}
-	
+	public int rHit(int rNum) {
+		dao.rHit(rNum);
+		return dao.rHitCount(rNum);
+	}
+	public int rNohit(int rNum) {
+		dao.rNohit(rNum);
+		return dao.rNohitCount(rNum);
+	}
 	
 	
 	public int replyCount(String username) {
