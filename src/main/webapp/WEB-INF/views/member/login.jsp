@@ -37,7 +37,6 @@ $(function(){
 						url:"/lol/member/idSearch/"+email,
 						success: function(data){
 							var result = $(data).find("result").text();
-							console.log(result);
 							if(result == 'success'){
 								document.getElementById("id_emailcheck").innerHTML="인증번호 전송이 완료되었습니다.";
 							}else{
@@ -105,7 +104,6 @@ $(function(){
 						url:"/lol/member/pwdSearch/"+id+"/"+email,
 						success: function(data){
 							var result = $(data).find("result").text();
-							console.log(result);
 							if(result == 'success'){
 								document.getElementById("pwd_emailcheck").innerHTML="인증번호 전송이 완료되었습니다.";
 							}else{
@@ -189,7 +187,7 @@ $(document).ready(function(){
 		}
 	});
 	
-	$("#confirmOk").click(function(){
+	$("#confirmOk").click(function(e){
 		var id = document.getElementById("id").value;
 		var email = document.getElementById("email").value;
 		email = email.substr(0,email.lastIndexOf("."));
@@ -209,6 +207,7 @@ $(document).ready(function(){
 				}
 			});
 		}
+		e.preventDefault();
 	});
 	
 	$("#idOk").click(function(){
@@ -219,10 +218,8 @@ $(document).ready(function(){
 				var using = $(data).find("using").text();
 				if(eval(using)==true){
 					span.innerHTML="이미 사용중인 아이디입니다.";
-					document.getElementById("emailOk").disabled = 'true';
 				}else if(using=='false'){
 					span.innerHTML="사용 가능 한 아이디입니다.";
-					document.getElementById("emailOk").disabled = false;
 				}
 			}
 		});
@@ -234,21 +231,17 @@ function checkId(){
 	var span = document.getElementById("idcheck");
 	if(id.trim()==""){
 		span.innerHTML="아이디를 입력하세요.";
-		document.getElementById("idOk").disabled = 'true';
 		return;
 	}
 	if(id.length<4 || id.length>10){
 		span.innerHTML="아이디는 4~10자리로 설정해주세요.";
-		document.getElementById("idOk").disabled = 'true';
 		return;
 	}else if(id.length>=4 && id.length<=10){
 		span.innerHTML="";
-		document.getElementById("idOk").disabled = false;
 	}
 	for(let i=0; i<id.length; i++){
 		if(!(('0'<=id.charAt(i) && id.charAt(i)<='9') || ('a'<=id.charAt(i) && id.charAt(i)<='z') || ('A'<=id.charAt(i) && id.charAt(i)<='Z'))){
 			span.innerHTML="아이디는 영문과 숫자로만 입력해주세요...";
-			document.getElementById("idOk").disabled = 'true';
 			return;
 		}
 	}
@@ -302,7 +295,7 @@ function checkPwdOk(){
 		return;
 	}else{
 		document.getElementById("pwdOkcheck").innerHTML="비밀번호가 일치해요"
-			return;
+		return;
 	}
 }
 
@@ -324,14 +317,19 @@ $(document).ready(function(){
 	$("#join").click(function (e) {
 		if(document.getElementById("idcheck").textContent != "사용 가능 한 아이디입니다."){
 			alert("아이디 중복 확인을 완료해주세요.");
+			e.preventDefault();
 		}else if(document.getElementById("pwdcheck").textContent != ""){
 			alert("비밀번호 설정 조건에 맞게 다시 입력해 주세요.(영문/숫자 4~10자리)");
+			e.preventDefault();
 		}else if(document.getElementById("pwdOkcheck").textContent != "비밀번호가 일치해요"){
 			alert("비밀번호가 일치하지 않습니다. 다시 입력해 주세요.");
+			e.preventDefault();
 		}else if(document.getElementById("emailcheck").textContent != "인증번호 전송이 완료되었습니다."){
 			alert("이메일 입력 후 이메일 인증 버튼을 클릭해 주세요.");
+			e.preventDefault();
 		}else if(document.getElementById("confirmcheck").textContent != "이메일 인증 완료!!!"){
 			alert("이메일 인증번호를 다시 확인 후 입력해주세요.");
+			e.preventDefault();
 		}else if(document.getElementById("nicknamecheck").textContent != ""){
 			alert("닉네임 설정 조건에 맞게 다시 입력해 주세요.(4~12자리)");
 			e.preventDefault();
@@ -446,7 +444,7 @@ $(()=>{
                 <p style="text-align:center">OR</p>
 
                 <input type="text" name="username" id="id" class="form-control" onkeyup="checkId()" placeholder="아이디" required="" autofocus="" style="width: 85%; float: left;">
-                <button class="btn btn-success btn-block" id="idOk" style="width: 15%; float: left; text-align: left; height: 45px;" disabled="disabled">체크</button>
+                <button class="btn btn-success btn-block" id="idOk" style="width: 15%; float: left; text-align: left; height: 45px;">체크</button>
                 <span id="idcheck" style="float: left;">아이디를 입력하세요.</span><br>
                 <input type="password" name="password" id="pwd" class="form-control" onkeyup="checkPwd()" placeholder="비밀번호" required autofocus="">
                 <span id="pwdcheck">비밀번호를 입력하세요.</span><br>

@@ -1,6 +1,8 @@
 package gg.hta.lol.controller.member;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,8 +31,10 @@ import gg.hta.lol.dao.MemberDao;
 import gg.hta.lol.security.CustomUserDetailService;
 import gg.hta.lol.service.MemberService;
 import gg.hta.lol.util.NaverLoginBO;
+import gg.hta.lol.util.PageUtil;
 import gg.hta.lol.vo.AuthVo;
 import gg.hta.lol.vo.MemberVo;
+import gg.hta.lol.vo.VisitVo;
 
 @Controller
 public class LoginController {
@@ -111,8 +115,17 @@ public class LoginController {
 		return ".header.home";
 	}
 	@GetMapping("/member/admin/connection")
-	public String connection() {
-//		service.
+	public String connection(@RequestParam(value="pageNum", defaultValue = "1")int pageNum, Model m) {
+		int totalRowCount = service.visitListCount(); 
+		PageUtil pu = new PageUtil(pageNum, 10,5,totalRowCount);
+		int startRow = pu.getStartRow();
+		int endRow = pu.getEndRow();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("startRow",startRow);
+		map.put("endRow",endRow);
+		List<VisitVo> list = service.visitList(map);
+		m.addAttribute("list", list);
+		m.addAttribute("pu",pu);
 		return ".adminpage.connection";
 	}
 }

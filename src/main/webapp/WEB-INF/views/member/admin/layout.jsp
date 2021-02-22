@@ -47,6 +47,7 @@
 									<li><a href="">게시글 관리</a></li>
 								</ul>
 							</li>
+							<li><a href=""><i class="fa fa-glass"></i>신고 접수 내역</a></li>
 							<li><a href="${pageContext.request.contextPath }/member/admin/connection"><i class="fa fa-glass"></i>접속자 수 통계</a></li>
 						</ul>
 					</div>

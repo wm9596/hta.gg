@@ -8,15 +8,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import gg.hta.lol.dao.MemberDao;
+import gg.hta.lol.dao.VisitCountDao;
 import gg.hta.lol.security.CustomUserDetail;
 import gg.hta.lol.vo.AuthoritiesVo;
 import gg.hta.lol.vo.MemberVo;
 import gg.hta.lol.vo.PointVo;
+import gg.hta.lol.vo.VisitVo;
 
 @Service
 public class MemberService {
 	@Autowired private PasswordEncoder encoder;
 	@Autowired private MemberDao dao;
+	@Autowired private VisitCountDao vdao;
 	public int insert(MemberVo vo) {
 		String password = vo.getPassword();
 		vo.setPassword(encoder.encode(password));
@@ -80,5 +83,11 @@ public class MemberService {
 	}
 	public List<PointVo> pointList(HashMap<String, Object> map){
 		return dao.pointList(map);
+	}
+	public List<VisitVo> visitList(HashMap<String, Object> map){
+		return vdao.visitList(map);
+	}
+	public int visitListCount() {
+		return vdao.visitListCount();
 	}
 }

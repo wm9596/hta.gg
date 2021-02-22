@@ -12,4 +12,21 @@
 	<select id="todayCnt" resultType="int">
 		select count(*) TodayCnt from visitlog where to_date(vDate,'yyyy/mm/dd')=to_date(sysdate,'yyyy/mm/dd')
 	</select>
+	<select id="list" resultType="gg.hta.lol.vo.VisitVo" parameterType="hashmap">
+	select * from
+	(
+		select a.*,rownum rnum from
+	    (
+	   		select to_date(vdate,'YYYY-MM-DD') regdate, NVL(count(*),0) cnt 
+	   	   	from visitLog 
+		   	group by to_date(vdate,'YYYY-MM-DD')
+		   	order by regdate desc
+	   	)a
+	)
+	<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	</select>
+	<select id="count" resultType="int">
+		select NVL(count(*),0) datecnt from
+		(select NVL(count(*),0) cnt from visitLog group by to_date(vdate,'YYYY-MM-DD'))
+	</select>	
 </mapper>
