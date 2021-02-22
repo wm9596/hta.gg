@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,8 +26,8 @@ public class MatchHistoryListController {
 	@Autowired
 	private RuneSpellConverter rsConverter;
 
-	@RequestMapping(value = "/match/getList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	private MatchMostVo MatchList(String name, @Nullable String type) {
+	@RequestMapping(value = {"/match/getList/{name}/{type}","/match/getList/{name}"}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	private MatchMostVo MatchList(@PathVariable("name")String name, @PathVariable(name = "type",required = false) String type) {
 		
 		List<MatchListVo> list = null;
 		list = service.getMatchList(name, type);

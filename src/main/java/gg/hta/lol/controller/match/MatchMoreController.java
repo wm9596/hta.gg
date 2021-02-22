@@ -97,15 +97,15 @@ public class MatchMoreController {
 	}
 	
 	@GetMapping("/matchMore")
-	public String matchMore(Model model) {
+	public String matchMore(String nickname,String matchId,Model model) {
 		
 		model.addAttribute("cdn", cdnVersion);
 		
 		// 소환사 정보
-		model.addAttribute("sm", smService.getSummoner(NICKNAME));
+		model.addAttribute("sm", smService.getSummoner(nickname));
 		
 		// 타입별 티어
-		List<QueueInfoVo> vo = qiService.getQueueInfo(NICKNAME);
+		List<QueueInfoVo> vo = qiService.getQueueInfo(nickname);
 		
 		for (QueueInfoVo v : vo) {
 			if (v.getQueueType().equals("RANKED_SOLO_5x5")) {
@@ -116,15 +116,15 @@ public class MatchMoreController {
 		}
 		
 		//소환사 평가
-		model.addAttribute("rt", rtService.getRatingAvg(NICKNAME));
-		model.addAttribute("ratingCnt", rService.getRatingCnt(NICKNAME));
+		model.addAttribute("rt", rtService.getRatingAvg(nickname));
+		model.addAttribute("ratingCnt", rService.getRatingCnt(nickname));
 		
 		// 해당게임 타입 얻어오기
-		String matchType = matchInfoService.getMatchType(MATCHID);
+		String matchType = matchInfoService.getMatchType(matchId);
 		
 		// 해당게임 모든정보 얻어오기
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("matchid", MATCHID);
+		map.put("matchid", matchId);
 		map.put("type", matchType);
 		List<MatchMoreJoinVo> matchMoreJoinList = matchMoreJoinService.getMatchInfoList(map);
 		

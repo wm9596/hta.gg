@@ -62,14 +62,17 @@
 			</div>
 			<div id="mm_smRatingDiv">
 				<h5>소환사평가</h5>
-				<fmt:formatNumber value="${rt }" pattern=".0"/>
+				<span id="rate"><fmt:formatNumber value="${rt }" pattern=".0"/></span>
+				<span id="rateCnt">(${rating })</span>
 				<p class="star_rating">
 				    <a href="#" class="star_rating_1">★</a>
 				    <a href="#" class="star_rating_2">★</a>
 				    <a href="#" class="star_rating_3">★</a>
 				    <a href="#" class="star_rating_4">★</a>
 				    <a href="#" class="star_rating_5">★</a>
+				    <input type="hidden" class='ratingValue'>
 				</p>
+				<input type="button" id="ratingSubmit" value="평가하기">
 			</div>
 		</div>
 </div>
@@ -97,16 +100,16 @@
 		</c:forEach>
 	</div>
 	<div id="matchList">
-		<div id="gameType"><a href="#">전체 보기</a><a href="#">솔로 랭크</a><a href="#">자유 랭크</a></div>
+		<div id="gameType"><a href="">전체 보기</a><a href="RANKED_SOLO_5x5">솔로 랭크</a><a href="RANKED_FLEX_SR">자유 랭크</a></div>
 		<div id="summary">
 			<div id="record">
 				<div id="chart">
 				</div>
 				<div  id="avg">
 					기록 평균
-					<div id="avgStats">7.8/4.3/5.5</div>
-					<div id=avgCS>cs 150</div>
-					<div id=avgKDA>3.1</div>
+					<div id="avgStats"></div>
+					<div id=avgCS></div>
+					<div id=avgKDA></div>
 				</div>
 			</div>
 			<div id="most3">
@@ -114,26 +117,42 @@
 				</ul>	
 			</div>
 		</div>
-		
+		<div id="listHolder">
+		</div>
 		
 	</div>
 </div>
 
 <script type="text/javascript">
-
+var isRunning = false;
 google.charts.load("current", {packages:["corechart"]});
 google.charts.setOnLoadCallback(getMatchList);
 
+$(function(){
+	$("#gameType a").click(function(e){
+		e.preventDefault();
+		let type = e.target.getAttribute('href');
+
+		if(!isRunning){
+			getMatchList(type);
+		}
+	})
+})
+
 function getMatchList(args) {
+	
+	if(args==null){
+		args = "";
+	}
+	
+	isRunning = true;
 	$.ajax({
-		url:'/lol/match/getList',
-		data:{name:'${svo.snickname }'} ,
+		url:'/lol/match/getList/${svo.snickname }/'+args,
 		dataType:'json',
 		success: function(data){
 			addMatchList(data.matchList);
-			
 			addMost3(data.mostList);
-			
+			isRunning = false;
 		}
 		
 	});
@@ -171,7 +190,9 @@ function addMatchList(matchList){
 	let totalCS= 0;
   	let	totalKA = 0;
   	
-  	let matchListDiv = $("#matchList");
+  	let matchListDiv = $("#listHolder");
+  	
+  	matchListDiv.empty();
   	
 	for(sum of matchList){
 // 		console.log(sum);
@@ -369,9 +390,19 @@ function addMatchList(matchList){
 		let showMore = $("<div>",{class:'showMore'});
 		let imgBtn = $("<input>",{type:"image",src:"${pageContext.request.contextPath }/resources/images/bar-chart.png",value:sum.matchid});
 		
-		console.log(sum.matchid);
+// 		console.log(sum.matchid);
 		imgBtn.click(function(e) {
-			console.log(e.target.value);
+			e.preventDefault();
+// 			console.log(e.target.value);
+			let form = $("<form>");
+			form.attr("method","get");
+			form.attr("action","/lol/matchMore");
+			
+			form.append($("<input>",{type:'hidden',name:'nickname',value:sum.snickname}));
+			form.append($("<input>",{type:'hidden',name:'matchId',value:e.target.value}));
+			
+			form.appendTo('body');
+			form.submit();
 		})
 		
 		showMore.append(imgBtn);
@@ -391,7 +422,7 @@ function addMatchList(matchList){
 
 function addMost3(mostList){
 	var most3List =  $("#most3List");
-	
+	most3List.empty();
 	//최근 모스트 챔프 3 추가
 	for(most of mostList){
 		let lose = most.cnt - most.wincnt;

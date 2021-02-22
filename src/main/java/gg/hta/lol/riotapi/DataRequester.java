@@ -31,7 +31,14 @@ public class DataRequester {
 			e.printStackTrace();
 			return null;
 		}
-		return getData(url).getAsJsonObject();
+		
+		JsonElement element = getData(url);
+		
+		if(element==null) {
+			return null;
+		}else {
+			return element.getAsJsonObject();
+		}
 	}
 	
 	public JsonArray getLeagueInfo(String sid){
@@ -107,7 +114,7 @@ public class DataRequester {
 				return parser.parse(sb.toString());
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			return null;
 		} finally {
 			if (br != null)
@@ -145,7 +152,8 @@ public class DataRequester {
 			return parser.parse(data);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println("api 연동 에러");
 			return null;
 		} finally {
 			if (bi != null)

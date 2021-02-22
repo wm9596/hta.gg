@@ -1,17 +1,17 @@
 package gg.hta.lol.controller.match;
 
-import java.util.Comparator;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import gg.hta.lol.service.RatingService;
 import gg.hta.lol.service.match.SearchService;
-import gg.hta.lol.vo.QueueInfoVo;
 import gg.hta.lol.vo.match.MostChampVo;
 import gg.hta.lol.vo.match.SearchVo;
 import lombok.Setter;
@@ -27,29 +27,33 @@ public class SearchController {
 	private RatingService ratingService;
 	
 	@GetMapping("/match/search")
-	public String search(String sName,Model model) {
-		
+	public String search(String sName,Model model,HttpServletRequest request ,RedirectAttributes redirectAttributes) {
+
 		SearchVo svo = searchService.getSummoner(sName);
 		
-		model.addAttribute("svo",svo);
-		
-		model.addAttribute("rating", ratingService.getRatingAvg(sName));
+		if(svo == null) {
+			System.out.println("소환사 정보 없음");
+			redirectAttributes.addFlashAttribute("isError",true);
+		    return "redirect:"+request.getHeader("Referer");
+		}else {
+			model.addAttribute("svo",svo);
+			
+			model.addAttribute("rating", ratingService.getRatingAvg(sName));
 
-		searchService.readMatchList(svo.getAccountId(), 0, 3);
-		
-		List<MostChampVo> mlist = searchService.getMost(sName);
-		
-		mlist.stream().forEach(item -> {
-			if(item.getName().length()>5) {
-				int diff = item.getName().length()-(item.getName().length()-5);
-				item.setName(item.getName().substring(0, diff).concat("..."));
-			}
-		});
-		
-		model.addAttribute("most", mlist);
-		
-//		model.addAttribute("matchs",searchService.getMatchList(sName,null));
-		
-		return ".header2.match.sinfo";
+			searchService.readMatchList(svo.getAccountId(), 0, 3);
+			
+			List<MostChampVo> mlist = searchService.getMost(sName);
+			
+			mlist.stream().forEach(item -> {
+				if(item.getName().length()>5) {
+					int diff = item.getName().length()-(item.getName().length()-5);
+					item.setName(item.getName().substring(0, diff).concat("..."));
+				}
+			});
+			
+			model.addAttribute("most", mlist);
+			
+			return ".header2.match.sinfo";
+		}
 	}
 }

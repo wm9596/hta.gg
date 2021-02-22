@@ -92,6 +92,10 @@ public class SearchServiceImpl implements SearchService {
 		String aid;
 		JsonObject summonerInfo = dataRequester.getSummonerInfo(name);
 		
+		if(summonerInfo==null) {
+			return null;
+		}
+		
 		sid = summonerInfo.get("id").getAsString();
 		aid = summonerInfo.get("accountId").getAsString();
 		SummonerVo summonerVo = addSummoner(
@@ -127,12 +131,12 @@ public class SearchServiceImpl implements SearchService {
 	public SummonerVo addSummoner(SummonerVo svo,boolean isUpdate) {
 		
 		try {
-			System.out.println("소환사 추가");
+//			System.out.println("소환사 추가");
 			summonerMapper.addSummoner(svo);
 		}catch (DuplicateKeyException e) {
-			System.out.println("소환사정보 중복 ");
+//			System.out.println("소환사정보 중복 ");
 			if(isUpdate) {
-				System.out.println("소환사 정보 수정");
+//				System.out.println("소환사 정보 수정");
 				summonerMapper.updateSummoner(svo);
 			}
 		}
@@ -216,7 +220,7 @@ public class SearchServiceImpl implements SearchService {
 							)
 					);
 		}catch (DuplicateKeyException e) {
-			System.out.println("경기 정보 중복");
+//			System.out.println("경기 정보 중복");
 			return;
 		}
 		
@@ -317,7 +321,7 @@ public class SearchServiceImpl implements SearchService {
 						stats.get("largestMultiKill").getAsInt()
 						);
 			
-				System.out.println(vo);
+//				System.out.println(vo);
 				tminfoMapper.addTeamMemberInfo(vo);
 		}
 		
