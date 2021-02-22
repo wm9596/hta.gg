@@ -2,7 +2,10 @@ package gg.hta.lol.service.match;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -14,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.sun.mail.imap.protocol.Item;
 
 import gg.hta.lol.mapper.BanListMapper;
 import gg.hta.lol.mapper.ChampionMapper;
@@ -31,6 +35,7 @@ import gg.hta.lol.vo.TeamInfoVo;
 import gg.hta.lol.vo.TeamMemberinfoVo;
 import gg.hta.lol.vo.match.MostChampVo;
 import gg.hta.lol.vo.match.SearchVo;
+import gg.hta.lol.vo.match.WinCountVo;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -329,7 +334,21 @@ public class SearchServiceImpl implements SearchService {
 	
 	@Override
 	public List<MostChampVo> getMost(String name) {
-		return summonerMapper.getMostChamp(name);
+		List<MostChampVo> mlist = summonerMapper.getChampLog(name);
+		List<WinCountVo> wList = summonerMapper.getChampWinCnt(name, mlist);
+		
+		
+		for(MostChampVo mvo : mlist) {
+			for(WinCountVo wvo: wList) {
+				if(mvo.getName().equals(wvo.getName())) {
+					mvo.setWincnt(wvo.getWincnt());
+					wList.remove(wvo);
+					break;
+				}
+			}
+		}
+		
+		return mlist;
 	}
 	
 }

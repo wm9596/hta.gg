@@ -6,7 +6,7 @@
 		<img alt="" src="${pageContext.request.contextPath }/resources/images/hta.PNG" width="40" height="40">
 	</div>
 	<div id="header_center">
-		<form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+		<form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" id ="searchForm" >
 			<div class="input-group">
 				<input class="form-control" type="text" placeholder="Search for..." name='sName' aria-label="Search" aria-describedby="basic-addon2" />
 				<div class="input-group-append">
@@ -73,8 +73,8 @@
 var isError = <c:out value="${not empty isError}"/>;
 
 $(function(){
-	var input = $(".form-control");
-	var form = $(".form-inline");
+	var form = $("#searchForm");
+	var input = form.find(".form-control");
 	
 	if(isError){
 		alert("존재하지 않는 아이디 입니다");
@@ -111,5 +111,4 @@ function search(form,input){
 	form.submit();
 }
 </script>
-	
 	

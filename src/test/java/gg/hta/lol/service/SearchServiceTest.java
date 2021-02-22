@@ -1,5 +1,7 @@
 package gg.hta.lol.service;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import gg.hta.lol.service.match.SearchService;
+import gg.hta.lol.vo.match.MostChampVo;
 import gg.hta.lol.vo.match.SearchVo;
 import lombok.Setter;
 
@@ -25,11 +28,17 @@ public class SearchServiceTest {
 	@Autowired
 	private SearchService service;
 	
+//	@Test
+//	public void getTest() {
+//		SearchVo vo = service.getSummoner("안녕");
+//		service.readMatchList(vo.getAccountId(), 0, 20);
+//		
+//	}
+	
 	@Test
-	public void getTest() {
-		SearchVo vo = service.getSummoner("안녕");
-		service.readMatchList(vo.getAccountId(), 0, 20);
-		
+	public void getMost() {
+		List<MostChampVo> list = service.getMost("더덕순대국");
+//		System.out.println(list);
 	}
 	
 }

@@ -38,18 +38,27 @@
 		<result property="leaguePoints" column="leaguePoints"/>
 	</resultMap>
 	 
-	<select id="getMostChamp" resultType="gg.hta.lol.vo.match.MostChampVo">
-		select picture,name,"kill","death","assist","cs",cnt,wincnt
+	<select id="getChampLog" resultType="gg.hta.lol.vo.match.MostChampVo">
+		select picture,name,"kill","death","assist","cs",cnt
 		from(
-		select rownum rn, m.picture,m.name,m."kill",m."death",m."assist",m."cs",m.cnt,co.wincnt
-		from view_mostchampion m, view_summon_champ_odds co
-		where m.snickname = co.snickname
-		and m.name = co.name
-		and m.snickname=#{sname}
+		select rownum rn, m.picture,m.name,m."kill",m."death",m."assist",m."cs",m.cnt
+		from view_mostchampion m
+		where m.snickname='더덕순대국'
 		order by cnt desc
 		)
 		<![CDATA[where rn<=5]]>
 	</select>
-
+	
+	<select id="getChampWinCnt" resultType="gg.hta.lol.vo.match.WinCountVo" >
+		
+		select name,wincnt
+		from view_summon_champ_odds 
+		where snickname = #{snickname}
+		and
+		<foreach collection="list" index="index" open="name in (" close=")" item="item" separator=",">
+			#{item.name}
+		</foreach>
+	</select>
+	
 	
 </mapper>
