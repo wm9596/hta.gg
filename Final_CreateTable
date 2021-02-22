@@ -165,6 +165,7 @@ create table report
 (
 	rNum number primary key,
 	pNum number references community(pNum) not null,
+	username varchar(50) references member(username) not null,
 	detail varchar2(4000)
 );
 
@@ -310,7 +311,7 @@ create SEQUENCE iNum_seq;
 create SEQUENCE banNum_seq;
 create SEQUENCE ptNum_seq;
 
-------------而щ읆紐� 諛붽씀湲� --------------------------------
+------------�뚎됱쓥筌륅옙 獄쏅떽��疫뀐옙 --------------------------------
 alter table member rename column enable to enabled;
 alter table member modify ENABLED CHAR(1) DEFAULT 1 CHECK(ENABLED='0' OR ENABLED='1') NOT NULL;
 

@@ -61,7 +61,7 @@
 	<div align="center" class="insert">
 		<h2>게시글 조회하기</h2>
 		<hr size="2" width="600" color="black" id=line>
-		<input type="hidden" name="pNum" value="${vo.pNum }">
+		<input type="hidden" id="pNum" name="pNum" value="${vo.pNum }">
 		<!-- DB에 username의 임의의 값 넣음 (추후 회원가입 후 진행) -->
 		작성자 <input type="text" name="username" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" style="width:87px; text-align: center;" readonly="readonly">
 		<!-- DB에 cNum의 임의의 값 넣음 (추후 회원가입 후 진행) -->
@@ -81,7 +81,7 @@
 	<div align="center">
 		<button type="button" id="hit" class="btn btn-info likeBtn"	style="width: 100px; height: 50px; font-size: 25px;">추천 ${vo.hit }</button>
 		<button type="button" id="nohit" class="btn btn-info likeBtn" style="width: 100px; height: 50px; font-size: 25px;">반대 ${vo.nohit }</button>
-		<button type="button" id="report" class="btn btn-info likeBtn" style="width: 100px; height: 50px; font-size: 25px;" onclick="report()">신고</button>
+		<button type="button" id="report" class="btn btn-info likeBtn" onclick="" style="width: 100px; height: 50px; font-size: 25px;">신고</button>
 	</div>
 		<br><br><br>
 		<div align="center">
@@ -218,6 +218,26 @@
 		});
 		}
 	}
+	
+	$("#report").click(function() {
+		var username = $("#rWriter").val();
+		var pNum = $("#pNum").val();
+		if (username == "") {
+			alert("로그인이 필요한 페이지입니다.");
+		} else {
+			$.ajax({
+				url: "/lol/reportCheck?pNum=" + pNum + "&username=" + username,
+				success: function(result) {
+					console.log(result);
+					if (result == true) {
+						alert("이미 신고한 게시물입니다.")
+					} else {
+						window.open('/lol/reportPage?pNum=' + pNum + '&username=' + username,'신고하기','width=500px, height=300px')
+					}
+				}
+			})	
+		}
+	})
 
 </script>
 </body>

@@ -3,12 +3,16 @@ package gg.hta.lol.controller.community;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,12 +20,16 @@ import com.google.gson.Gson;
 
 import gg.hta.lol.service.CommunityService;
 import gg.hta.lol.service.ReplyService;
+import gg.hta.lol.service.ReportService;
 import gg.hta.lol.vo.CommunityVo;
 import gg.hta.lol.vo.ReplyVo;
+import gg.hta.lol.vo.ReportVo;
+import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 public class DetailController {
 	@Autowired private CommunityService service;
+	@Autowired private ReportService reportService;
 	
 	@GetMapping("/community/detailMy")
 	public String detailMy(int pNum, Model m) {
@@ -142,14 +150,50 @@ public class DetailController {
 	@GetMapping(value = "/reHitUpdate/{rNum}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public int update3(@PathVariable("rNum")int rNum) {
-		System.out.println("�ѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤ�");
+		System.out.println("�ѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤ�");
 		return service1.rHit(rNum);
 	}
 	
 	@GetMapping(value = "/reNohitUpdate/{rNum}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public int update4(@PathVariable("rNum")int rNum) {
-		System.out.println("�ѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤ�");
+		System.out.println("�ѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤ�");
 		return service1.rNohit(rNum);
+	}
+	
+	@GetMapping(value = "/reportPage")
+	public String reportPage(int pNum, String username, Model model) {
+		model.addAttribute("pNum", pNum);
+		model.addAttribute("username", username);
+		return "/community/reportPage";
+	}
+	
+	@GetMapping(value = "/reportCheck", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public Boolean reportCheck(int pNum, String username) {
+		HashMap<String, Object> reportMap = new HashMap<String, Object>();
+		reportMap.put("pNum", pNum);
+		reportMap.put("username", username);
+		ReportVo checkVo = reportService.checkReport(reportMap);
+		if (checkVo == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	@PostMapping(value = "/report", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public Boolean report(HttpServletRequest req) { // int pNum, String username, String detail
+		HashMap<String, Object> reportMap = new HashMap<String, Object>();
+		reportMap.put("pNum", req.getParameter("pNum"));
+		reportMap.put("username", req.getParameter("username"));
+		reportMap.put("detail", req.getParameter("detail"));
+		int result = reportService.report(reportMap);
+		if (result > 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
