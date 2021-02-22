@@ -47,7 +47,15 @@
 	<select id="replyCount" resultType="int" parameterType="string">
 		select NVL(count(*),0) cnt from reply where rwriter=#{username}
 	</select>
-	<select id="replyList" parameterType="string" resultType="reply">
-		select * from reply where rwriter=#{username}
+	<select id="replyList" parameterType="hashmap" resultType="reply">
+		select * from
+		 (
+		   select a.*,rownum rwnum from
+		   (
+			  select * from reply where rwriter=#{username}
+			   order by regdate desc
+		   )a
+		 )
+		<![CDATA[ where rwnum>=#{startRow} and rwnum<=#{endRow}  ]]>
 	</select>
 </mapper>

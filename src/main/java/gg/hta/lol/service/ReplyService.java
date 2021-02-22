@@ -1,5 +1,6 @@
 package gg.hta.lol.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class ReplyService {
 	public int replyCount(String username) {
 		return dao.replyCount(username);
 	}
-	public List<ReplyVo> replyList(String username){
-		return dao.replyList(username);
+	public List<ReplyVo> replyList(HashMap<String, Object> map){
+		return dao.replyList(map);
 	}
 }

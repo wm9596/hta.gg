@@ -49,8 +49,8 @@ public class CommunityService {
 	public int addCount(int pNum) {
 		return dao.addCount(pNum);
 	}
-	public List<CommunityVo> list(String username){
-		return dao.boardList(username);
+	public List<CommunityVo> boardList(HashMap<String,Object> map){
+		return dao.boardList(map);
 	}
 	public int boardCount(String username) {
 		return dao.boardCount(username);

@@ -64,7 +64,8 @@ public class ListController {
 		int endRow = pu.getEndRow();
 		map.put("startRow",startRow);
 		map.put("endRow",endRow);
-		List<CommunityVo> list = service.list(principal.getName());
+		map.put("username", principal.getName());
+		List<CommunityVo> list = service.boardList(map);
 		m.addAttribute("list", list);
 		m.addAttribute("pu",pu);
 		return ".mypage.boardList";
@@ -78,7 +79,8 @@ public class ListController {
 		int endRow = pu.getEndRow();
 		map.put("startRow",startRow);
 		map.put("endRow",endRow);
-		List<ReplyVo> list = reservice.replyList(principal.getName());
+		map.put("username", principal.getName());
+		List<ReplyVo> list = reservice.replyList(map);
 		m.addAttribute("list", list);
 		m.addAttribute("pu",pu);
 		return ".mypage.replyList";

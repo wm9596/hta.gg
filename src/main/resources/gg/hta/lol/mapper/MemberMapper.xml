@@ -114,4 +114,18 @@
 		)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
+	<select id="reportListCount" resultType="int">
+		select NVL(count(*),0) cnt from report
+	</select>
+	<select id="reportList" parameterType="hashmap" resultType="gg.hta.lol.vo.ReportVo">
+		 select * from
+		 (
+		   select a.*,rownum rwnum from
+		   (
+			   select * from report
+			   order by rNum desc
+		   )a
+		 )
+		 <![CDATA[ where rwnum>=#{startRow} and rwnum<=#{endRow} ]]>
+	</select>
 </mapper>

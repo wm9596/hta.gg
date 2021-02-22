@@ -91,8 +91,16 @@
 		 ]]>
 	</select>
 	
-	<select id="boardList" parameterType="string" resultType="community">
-		select * from community where username=#{username}
+	<select id="boardList" parameterType="hashmap" resultType="community">
+		select * from
+		 (
+		   select a.*,rownum rnum from
+		   (
+			  select * from community where username=#{username}
+			   order by regdate desc
+		   )a
+		 )
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow}  ]]>
 	</select>
 	
 	<select id="boardCount" resultType="int">
@@ -104,16 +112,6 @@
 		from community
 		where cNum = #{cNum}
 		order by viewCount desc
-	</select>
-	
-	<insert id="report" parameterType="hashmap">
-		insert into report values(rNum_seq.nextval, #{pNum}, #{username}, #{detail})
-	</insert>
-	
-	<select id="checkReport" resultType="gg.hta.lol.vo.ReportVo" parameterType="hashmap">
-		select *
-		from report
-		where pNum = #{pNum} and username = #{username}
 	</select>
 	
 </mapper>

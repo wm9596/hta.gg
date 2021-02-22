@@ -24,6 +24,7 @@ import gg.hta.lol.service.match.SearchService;
 import gg.hta.lol.vo.MemberVo;
 import gg.hta.lol.vo.PointVo;
 import gg.hta.lol.vo.QueueInfoVo;
+import gg.hta.lol.vo.ReportVo;
 import gg.hta.lol.vo.match.MostChampVo;
 import gg.hta.lol.vo.match.SearchVo;
 
@@ -180,5 +181,19 @@ public class MemberController {
 		m.addAttribute("field", field);
 		m.addAttribute("keyword", keyword);
 		return ".adminpage.memberList";
+	}
+	@GetMapping("/member/admin/report")
+	public String reportPage(@RequestParam(value="pageNum", defaultValue = "1")int pageNum, Model m) {
+		int totalRowCount = service.reportListCount();
+		PageUtil pu = new PageUtil(pageNum, 10,5,totalRowCount);
+		int startRow = pu.getStartRow();
+		int endRow = pu.getEndRow();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("startRow",startRow);
+		map.put("endRow",endRow);
+		List<ReportVo> list = service.reportList(map);
+		m.addAttribute("list", list);
+		m.addAttribute("pu",pu);
+		return ".adminpage.reportList";
 	}
 }

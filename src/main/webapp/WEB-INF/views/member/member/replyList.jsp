@@ -6,12 +6,14 @@
 	<table style="width: 1000px;">
 		<tr>
 			<th>댓글 번호</th>
+			<th>게시글 번호</th>
 			<th>댓글 내용</th>
 			<th>댓글 작성일</th>
 		</tr>
-		<c:forEach var="vo" items="${list }">
+		<c:forEach var="vo" items="${list }" varStatus="status">
 			<tr>
-				<td>111</td>
+				<td><c:out value="${(pu.pageNum-1)*10 + status.count }"/></td>
+				<td>${vo.pNum }</td>
 				<td><a href="${pageContext.request.contextPath }/community/detailMy?pNum=${vo.pNum }">${vo.rContent }</a></td>
 				<td>${vo.regdate }</td>
 			</tr>

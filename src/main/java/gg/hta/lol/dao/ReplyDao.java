@@ -1,5 +1,6 @@
 package gg.hta.lol.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -59,7 +60,7 @@ public class ReplyDao {
 	public int replyCount(String username) {
 		return sqlSession.selectOne(NAMESPACE + ".replyCount", username);
 	}
-	public List<ReplyVo> replyList(String username){
-		return sqlSession.selectList(NAMESPACE + ".replyList", username);
+	public List<ReplyVo> replyList(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE + ".replyList", map);
 	}
 }

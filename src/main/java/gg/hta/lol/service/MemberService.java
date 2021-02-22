@@ -13,6 +13,7 @@ import gg.hta.lol.security.CustomUserDetail;
 import gg.hta.lol.vo.AuthoritiesVo;
 import gg.hta.lol.vo.MemberVo;
 import gg.hta.lol.vo.PointVo;
+import gg.hta.lol.vo.ReportVo;
 import gg.hta.lol.vo.VisitVo;
 
 @Service
@@ -89,5 +90,11 @@ public class MemberService {
 	}
 	public int visitListCount() {
 		return vdao.visitListCount();
+	}
+	public int reportListCount() {
+		return dao.reportListCount();
+	}
+	public List<ReportVo> reportList(HashMap<String, Object> map){
+		return dao.reportList(map);
 	}
 }

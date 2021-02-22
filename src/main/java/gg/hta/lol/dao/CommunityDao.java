@@ -52,8 +52,8 @@ public class CommunityDao {
 	public int nohitCount(int pNum) {
 		return sqlSession.selectOne(NAMESPACE+".nohitCount",pNum);
 	}
-	public List<CommunityVo> boardList(String username){
-		return sqlSession.selectList(NAMESPACE + ".boardList", username);
+	public List<CommunityVo> boardList(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE + ".boardList", map);
 	}
 	public int boardCount(String username) {
 		return sqlSession.selectOne(NAMESPACE + ".boardCount", username);
