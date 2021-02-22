@@ -81,8 +81,8 @@ $(function(){
 	}
 
 	input.keydown(function(e) {
-		e.preventDefault();
 		if(e.keyCode===13){
+			e.preventDefault();
 			search(form,input);
 		}
 	})

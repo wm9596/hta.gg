@@ -20,16 +20,16 @@
 var isError = <c:out value="${not empty isError}"/>;
 
 $(function(){
-	var input = $(".form-control");
-	var form = $(".form-inline");
+	var form = $("#main_home_search");
+	var input = form.find(".form-control");
 	
 	if(isError){
 		alert("존재하지 않는 아이디 입니다");
 	}
 
 	input.keydown(function(e) {
-		e.preventDefault();
 		if(e.keyCode===13){
+			e.preventDefault();
 			search(form,input);
 		}
 	})
