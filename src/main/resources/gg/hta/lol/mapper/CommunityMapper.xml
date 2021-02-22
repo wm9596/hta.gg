@@ -106,4 +106,14 @@
 		order by viewCount desc
 	</select>
 	
+	<insert id="report" parameterType="hashmap">
+		insert into report values(rNum_seq.nextval, #{pNum}, #{username}, #{detail})
+	</insert>
+	
+	<select id="checkReport" resultType="gg.hta.lol.vo.ReportVo" parameterType="hashmap">
+		select *
+		from report
+		where pNum = #{pNum} and username = #{username}
+	</select>
+	
 </mapper>
