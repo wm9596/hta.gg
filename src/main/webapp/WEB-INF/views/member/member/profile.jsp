@@ -8,7 +8,7 @@
 }
 
 #profile_wrap div {
-	border: 0.1px solid gray;
+	border: 0.1px solid black;
 }
 
 .search-bar {
@@ -113,7 +113,7 @@
 
 .lastMatch img {
 	width: 50%;
-	height: 40%;
+	height: 35%;
 	border-radius: 100%;
 }
 
@@ -173,8 +173,37 @@
 
 <script>
 
+	function LoadingWithMask(gif) {
+	    //화면의 높이와 너비를 구하기.
+	    var maskHeight = $(document).height();
+	    var maskWidth  = window.document.body.clientWidth;
+	     
+	    //화면에 출력할 마스크를 설정.
+	    var mask       ="<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
+	    var loadingImg ='';
+	      
+	    loadingImg +=" <img src='"+ gif +"' style='position: absolute; display: block; margin: 0px auto;'/>";
+	 
+	    //화면에 레이어 추가
+	    $('body').append(mask)
+	 
+	    //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채우기.
+	    $('#mask').css({
+	            'width' : maskWidth,
+	            'height': maskHeight,
+	            'opacity' :'0.3'
+	    });
+	  
+	    //마스크 표시
+	    $('#mask').show();
+	  
+	    //로딩중 이미지 표시
+	    $('#loadingImg').append(loadingImg);
+	    $('#loadingImg').show();
+	}
+
 	function showProfile(snickname) {
-		console.log(snickname);
+		LoadingWithMask('/lol/resources/images/Spinner.gif');
 		$.ajax({
 			url : '/lol/member/member/registerProfile?snickname=' + snickname,
 			success : function(result) {
@@ -216,29 +245,36 @@
 				var mostArea = $(".profile_mostarea").get();
 				for(let i=0; i<3; i++) {
 					let most = $(result).find("mlist")[i];
-					$(mostArea[i]).append(
-							"<img alt='' src='https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/" + $(most).find("picture").text() +"'><br>" +
-							"<span>" + Math.round((parseFloat($(most).find("kill").text()) + parseFloat($(most).find("assist").text()))/parseFloat($(most).find("death").text()) * 100)/100 +"</span><br>" +
-							"<span>(" + $(most).find("kill").text() + "/" + $(most).find("death").text() + "/" + $(most).find("assist").text() +")</span><br>" +
-							"<span>" + $(most).find("wincnt").text() + "W" + (parseInt($(most).find("cnt").text()) - parseInt($(most).find("wincnt").text()))  + "L</span><br>" +
-							"<span>" + $(most).find("rate").text() +"%</span>"
-					)
+					
+					if ($(most).find("picture").text() != ""){
+						$(mostArea[i]).append(
+								"<img alt='' src='https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/" + $(most).find("picture").text() +"'><br>" +
+								"<span>" + Math.round((parseFloat($(most).find("kill").text()) + parseFloat($(most).find("assist").text()))/parseFloat($(most).find("death").text()) * 100)/100 +"</span><br>" +
+								"<span>(" + $(most).find("kill").text() + "/" + $(most).find("death").text() + "/" + $(most).find("assist").text() +")</span><br>" +
+								"<span>" + $(most).find("wincnt").text() + "W" + (parseInt($(most).find("cnt").text()) - parseInt($(most).find("wincnt").text()))  + "L</span><br>" +
+								"<span>" + $(most).find("rate").text() +"%</span>"
+						)
+					}
 				}
 				
 				var lastMatchArea = $(".lastMatch").get();
 				for (let i=0; i<3; i++) {
 					let lastMatch = $(result).find("matchLastThree")[i];
-					if ($(lastMatch).find("winlose").text() == 'Win') {
-						$(lastMatchArea[i]).css("backgroundColor", "#9ac0ff");
-					} else {
-						$(lastMatchArea[i]).css("backgroundColor", "#ffaeae");
+					if ($(lastMatch).find("winlose").text() != "") {
+						if ($(lastMatch).find("winlose").text() == 'Win') {
+							$(lastMatchArea[i]).css("backgroundColor", "#9ac0ff");
+						} else {
+							$(lastMatchArea[i]).css("backgroundColor", "#ffaeae");
+						}
+						$(lastMatchArea[i]).append(
+								"<img alt='' src='https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/" + $(lastMatch).find("championId").text() +"'><br>" +
+								"<span>" + Math.round((parseInt($(lastMatch).find("kill").text()) + parseInt($(lastMatch).find("assist").text()))/parseInt($(lastMatch).find("death").text()) * 100)/100 + "</span><br>" +
+								"<span>(" + $(lastMatch).find("kill").text() + "/" + $(lastMatch).find("death").text() + "/" + $(lastMatch).find("assist").text() + ")</span>"
+						)	
 					}
-					$(lastMatchArea[i]).append(
-							"<img alt='' src='https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/" + $(lastMatch).find("championId").text() +"'><br>" +
-							"<span>" + Math.round((parseInt($(lastMatch).find("kill").text()) + parseInt($(lastMatch).find("assist").text()))/parseInt($(lastMatch).find("death").text()) * 100)/100 + "</span><br>" +
-							"<span>(" + $(lastMatch).find("kill").text() + "/" + $(lastMatch).find("death").text() + "/" + $(lastMatch).find("assist").text() + ")</span>"
-					)
 				}
+				$('#mask, #loadingImg').hide();
+			    $('#mask, #loadingImg').empty(); 
 			}
 		});
 	}
