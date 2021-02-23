@@ -68,6 +68,7 @@
 		카테고리 <input type="text" name="cNum" value="${vo.cNum }" style="width:87px; text-align: center;" readonly="readonly" >
 		등록일 <input type="text" value="${vo.regdate }" style="width:87px; text-align: center;" readonly="readonly">
 		조회수 <input type="text" value="${vo.viewCount+1}" style="width:87px; text-align: center;" readonly="readonly"><br><br>
+		<input type="button" id="sendMsg" value="쪽지"> <br>
 		<textarea rows="1" cols="80" name="title" readonly="readonly">[제목] ${vo.title }</textarea><br>
 		<textarea rows="25" cols="80" name="content" readonly="readonly">${vo.content }</textarea><br>
 		<input type="button" value="이전 페이지로" onclick="beforePage()">
@@ -237,6 +238,10 @@
 				}
 			})	
 		}
+	})
+	
+	$("#sendMsg").click(function() {
+		window.open('/lol/sendMsgPage?pNum=' + pNum + '&username=' + username,'신고하기','width=500px, height=300px')
 	})
 
 </script>
