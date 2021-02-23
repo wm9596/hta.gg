@@ -22,7 +22,7 @@
 		<hr size="2" width="600" color="black" id=line>
 		<input type="hidden" id="pNum" name="pNum" value="${vo.pNum }">
 		<!-- DB에 username의 임의의 값 넣음 (추후 회원가입 후 진행) -->
-		작성자 <input type="text" name="username" value="${vo.username}" style="width:87px; text-align: center;" readonly="readonly">
+		작성자 <input type="text" id="username" name="username" value="${vo.username}" style="width:87px; text-align: center;" readonly="readonly">
 		<!-- DB에 cNum의 임의의 값 넣음 (추후 회원가입 후 진행) -->
 		카테고리 <input type="text" name="cNum" value="${vo.cNum }" style="width:87px; text-align: center;" readonly="readonly" >
 		등록일 <input type="text" value="${vo.regdate }" style="width:87px; text-align: center;" readonly="readonly">
@@ -191,6 +191,7 @@
 		var pNum = $("#pNum").val();
 		if (username == "") {
 			alert("로그인이 필요한 페이지입니다.");
+			location.href = "/lol/member/login";
 		} else {
 			$.ajax({
 				url: "/lol/reportCheck?pNum=" + pNum + "&username=" + username,
@@ -205,6 +206,19 @@
 			})
 		}
 	})
+	
+	$("#sendMsg").click(function() {
+		var receiver =  $("#username").val();
+		var sender = $("#rWriter").val();
+		if (sender == "") {
+			alert("로그인이 필요한 페이지입니다.");
+			location.href = "/lol/member/login";
+		}
+		else {
+			window.open('/lol/sendMsgPage?sender=' + sender + '&receiver=' + receiver,'쪽지 보내기','width=500px, height=300px')	
+		}
+	})
+	
 	
 			function beforePage(){
 		history.go(-1);
@@ -249,10 +263,6 @@
 			}
 		});
 	}
-	
-	$("#sendMsg").click(function() {
-		window.open('/lol/sendMsgPage?pNum=' + pNum + '&username=' + username,'신고하기','width=500px, height=300px')
-	})
 
 </script>
 </body>

@@ -15,7 +15,14 @@
 			<tr>
 				<td><c:out value="${(pu.pageNum-1)*10 + status.count }"/></td>
 				<td>${vo.sender }</td>
-				<td>${vo.msg }</td>
+				<c:choose>
+					<c:when test="${vo.open == '0' }">
+						<td><a href="${pageContext.request.contextPath }/updateMsg?msgNum=${vo.msgNum }">${vo.msg }</a></td>
+					</c:when>
+					<c:otherwise>
+						<td>${vo.msg }</td>
+					</c:otherwise>
+				</c:choose>
 				<td>${vo.sendTime }</td>
 				<c:if test="${vo.open == '0' }">
 					<td>안읽음</td>

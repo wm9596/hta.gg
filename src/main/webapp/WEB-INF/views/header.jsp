@@ -23,12 +23,12 @@
 		<sec:authorize access="isAnonymous()">
 			<div id="header_msg">
 				<span style="color:rgba(255, 255, 255, 0.5);">
-					<i class="fa fa-comments-o" aria-hidden="true" onclick="location.href='/lol/member/login'"></i><br>
+					<i class="far fa-comments" aria-hidden="true" onclick="location.href='/lol/member/login'"></i><br>
 				</span>
 			</div>
 			<div id="header_mypage">
 				<span style="color:rgba(255, 255, 255, 0.5);">
-					<i class="fa fa-user-circle-o" aria-hidden="true" onclick="location.href='/lol/member/login'"></i><br>
+					<i class="fa fa-user-circle" aria-hidden="true" onclick="location.href='/lol/member/login'"></i><br>
 					<a href="/lol/member/login" style="color:rgba(255, 255, 255, 0.5);">login</a>
 				</span>
 			</div>
@@ -36,7 +36,7 @@
 		<sec:authorize access="isAuthenticated()">
 			<div id="header_msg">
 				<span style="color:rgba(255, 255, 255, 0.5);">
-					<i class="fa fa-comments-o" aria-hidden="true"></i><br>
+					<i class="fa fa-comments" aria-hidden="true" onclick="location.href='/lol/member/member/messageList'"></i><br>
 					<sec:authentication property="principal.username"/>님
 				</span>
 			</div>
@@ -46,11 +46,11 @@
 					<span style="color:rgba(255, 255, 255, 0.5);">
 						<c:choose>
 							<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == 'admin'}">
-								<i class="fa fa-user-circle-o" aria-hidden="true" onclick="location.href='/lol/member/admin/memberList'"></i><br>
+								<i class="fa fa-user-circle" aria-hidden="true" onclick="location.href='/lol/member/admin/memberList'"></i><br>
 								<a href="#" onclick="javascript:document.logout.submit();" style="color:rgba(255, 255, 255, 0.5);">logout</a>		
 							</c:when>
 							<c:otherwise>
-								<i class="fa fa-user-circle-o" aria-hidden="true" onclick="location.href='/lol/member/member/info'"></i><br>
+								<i class="fa fa-user-circle" aria-hidden="true" onclick="location.href='/lol/member/member/info'"></i><br>
 								<a href="#" onclick="javascript:document.logout.submit();" style="color:rgba(255, 255, 255, 0.5);">logout</a>
 							</c:otherwise>
 						</c:choose>

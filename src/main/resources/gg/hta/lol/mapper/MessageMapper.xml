@@ -6,4 +6,7 @@
 	<insert id="sendMsg" parameterType="hashmap">
 		insert into message values(msgNum_seq.nextval, #{sender}, #{receiver}, #{msg}, sysdate, '0')
 	</insert>
+	<update id="update" parameterType="int">
+		update message set open='1' where msgNum = #{msgNum}
+	</update>
 </mapper>
