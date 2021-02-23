@@ -1,6 +1,7 @@
 package gg.hta.lol.vo;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class ReplyVo {
 	private int rNum;
@@ -63,8 +64,9 @@ public class ReplyVo {
 		this.rContent = rContent;
 	}
 
-	public Date getRegdate() {
-		return regdate;
+	public String getRegdate() {
+		SimpleDateFormat sdfm = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+		return sdfm.format(regdate);
 	}
 
 	public void setRegdate(Date regdate) {

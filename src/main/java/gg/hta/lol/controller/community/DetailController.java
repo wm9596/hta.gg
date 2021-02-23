@@ -79,26 +79,27 @@ public class DetailController {
 	@Autowired ReplyService service1;
 	@GetMapping(value = "/reply/{pNum}", produces = "application/xml;charset=utf-8")
 	@ResponseBody
-	public String select(@PathVariable("pNum")int pNum) {
+	public List<ReplyVo> select(@PathVariable("pNum")int pNum) {
 		
 		System.out.println("==========================");
 		List<ReplyVo> list = service1.list(pNum);
-		StringBuffer sb = new StringBuffer();
-		sb.append("<contents>");
-		for(ReplyVo vo:list) {
-			sb.append("<content>");
-			sb.append("<rNum>"+vo.getrNum()+"</rNum>");
-			sb.append("<pNum>"+vo.getpNum()+"</pNum>");
-			sb.append("<rHit>"+vo.getrHit()+"</rHit>");
-			sb.append("<rNohit>"+vo.getrNohit()+"</rNohit>");
-			sb.append("<rWriter>"+vo.getrWriter()+"</rWriter>");
-			sb.append("<regdate>"+vo.getRegdate()+"</regdate>");
-			sb.append("<rContent>"+vo.getrContent()+"</rContent>");
-			sb.append("</content>");
-		}
-		sb.append("</contents>");
-		
-		return sb.toString();
+//		StringBuffer sb = new StringBuffer();
+//		sb.append("<contents>");
+//		for(ReplyVo vo:list) {
+//			sb.append("<content>");
+//			sb.append("<rNum>"+vo.getrNum()+"</rNum>");
+//			sb.append("<pNum>"+vo.getpNum()+"</pNum>");
+//			sb.append("<rHit>"+vo.getrHit()+"</rHit>");
+//			sb.append("<rNohit>"+vo.getrNohit()+"</rNohit>");
+//			sb.append("<rWriter>"+vo.getrWriter()+"</rWriter>");
+//			sb.append("<regdate>"+vo.getRegdate()+"</regdate>");
+//			sb.append("<rContent>"+vo.getrContent()+"</rContent>");
+//			sb.append("</content>");
+//		}
+//		sb.append("</contents>");
+//		
+//		return sb.toString();
+		return list;
 	}
 
 	@GetMapping(value = "/insert/{pNum}/{rWriter}/{rContent}", produces = "application/xml;charset=utf-8")
