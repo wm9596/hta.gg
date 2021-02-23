@@ -29,6 +29,8 @@ public class SearchController {
 	@GetMapping("/match/search")
 	public String search(String sName,Model model,HttpServletRequest request ,RedirectAttributes redirectAttributes) {
 
+		sName = sName.replaceAll(" ", "");
+		
 		SearchVo svo = searchService.getSummoner(sName);
 		
 		if(svo == null) {
@@ -40,7 +42,7 @@ public class SearchController {
 			
 			model.addAttribute("rating", ratingService.getRatingAvg(sName));
 
-			searchService.readMatchList(svo.getAccountId(), 0, 20);
+			searchService.readMatchList(svo.getAccountId(), 0, 20,svo.getSnickname());
 			
 			List<MostChampVo> mlist = searchService.getMost(sName);
 			

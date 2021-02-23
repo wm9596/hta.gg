@@ -22,7 +22,7 @@ public interface SearchService {
 	
 	public void addQueueInfo(String sid);
 	
-	public void readMatchList(String aid,int start,int end);
+	public void readMatchList(String aid,int start,int end,String snickname);
 	
 	public void addMatchInfo(String gameId,int code);
 	

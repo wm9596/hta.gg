@@ -87,7 +87,7 @@ public class SearchServiceImpl implements SearchService {
 				);
 		
 		addQueueInfo(sid);
-		readMatchList(aid,0,20);
+		readMatchList(aid,0,20,name);
 		
 	}
 	
@@ -178,15 +178,20 @@ public class SearchServiceImpl implements SearchService {
 	}
 	
 	@Override
-	@Transactional
-	public void readMatchList(String aid,int start,int end) {
+//	@Transactional
+	public void readMatchList(String aid,int start,int end,String snickname) {
+		
+		List<String> mList = matchinfoMapper.getMatchList(snickname);
+		
 		JsonObject matchInfo = dataRequester.getMatchList(aid,start,end);
 		
 		JsonArray matchArr = matchInfo.get("matches").getAsJsonArray();
 		
 		Stream<JsonElement> stream = StreamSupport.stream(matchArr.spliterator(), true);
+		
+		ThreadGroup group = new ThreadGroup("group");
+		
 		stream.filter(item->{
-			
 			JsonObject match =item.getAsJsonObject();
 			int gameTypeCode = match.get("queue").getAsInt();
 			
@@ -195,11 +200,27 @@ public class SearchServiceImpl implements SearchService {
 			}
 			
 			return false;
-		}).forEach(item->{
+		}).filter(item->{
+			String str = item.getAsJsonObject().get("gameId").getAsString();
+			return !mList.contains(str);
+		})
+		.forEach(item->{
+			String gameId = item.getAsJsonObject().get("gameId").getAsString();
 			int gameTypeCode = item.getAsJsonObject().get("queue").getAsInt();
-			addMatchInfo(item.getAsJsonObject().get("gameId").getAsString(),gameTypeCode);
+			Thread t = new Thread(group, gameId) {
+				@Override
+				public void run() {
+					int cnt = 0 ; 
+					addMatchInfo(gameId,gameTypeCode);
+//					System.out.println("완료");
+				}
+			};
+			t.start();
 		});
 		
+		while(group.activeCount()>0) {
+//			System.out.println(group.activeCount());
+		}
 		
 //		for(int i = 0; i < matchArr.size(); i++) {
 //			JsonObject match =matchArr.get(i).getAsJsonObject();
@@ -277,7 +298,7 @@ public class SearchServiceImpl implements SearchService {
 		for(int i = 0 ; i < banarr.size();i++) {
 			String cid = banarr.get(i).getAsJsonObject().get("championId").getAsString();
 			if(cid.equals("-1")) {
-				System.out.println("벤기권");
+//				System.out.println("벤기권");
 				continue;
 			}
 			list.add(cid);

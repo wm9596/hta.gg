@@ -33,8 +33,8 @@ public class StaticDataInsert {
 	@Test
 	public void addChamp() {
 		mapper.deleteAllChampion();
-		String summaryUrl = "http://ddragon.leagueoflegends.com/cdn/11.3.1/data/ko_KR/champion.json";
-		String detailUrl = "http://ddragon.leagueoflegends.com/cdn/11.3.1/data/ko_KR/champion/%s.json";
+		String summaryUrl = "http://ddragon.leagueoflegends.com/cdn/11.4.1/data/ko_KR/champion.json";
+		String detailUrl = "http://ddragon.leagueoflegends.com/cdn/11.4.1/data/ko_KR/champion/%s.json";
 		
 		JsonObject obj = dr.getStaticData(summaryUrl).getAsJsonObject().get("data").getAsJsonObject();
 			

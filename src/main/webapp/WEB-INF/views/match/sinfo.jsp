@@ -10,7 +10,7 @@
 <div id="mm_smCard">
 		<div id="mm_smLeft">
 			<div id="mm_smIconDiv">
-				<img alt="" src="http://ddragon.leagueoflegends.com/cdn/10.11.1/img/profileicon/${svo.icon }.png" id="smIcon">
+				<img alt="" src="http://ddragon.leagueoflegends.com/cdn/11.4.1/img/profileicon/${svo.icon }.png" id="smIcon">
 			</div>
 			<div id="mm_smNicknameDiv">
 				<h2>${svo.snickname }</h2>
@@ -82,7 +82,7 @@
 		<c:forEach items="${most }" var="item">
 			<div class="mostItem">
 				<div class="mostFace">
-					<img src="https://ddragon.leagueoflegends.com/cdn/11.2.1/img/champion/${item.picture }">
+					<img src="https://ddragon.leagueoflegends.com/cdn/11.4.1/img/champion/${item.picture }">
 				</div>
 				<div class="mostName">
 					<b>${item.name }</b><br>
@@ -245,13 +245,13 @@ function addMatchList(matchList){
 		
 		matchItem.append(matchinfo);
 		
-		let face =$("<div>",{class:'face',html:"<img src='https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/"+sum.picture+"'>"});
+		let face =$("<div>",{class:'face',html:"<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/champion/"+sum.picture+"'>"});
 		face.append("<div class='name'>"+sum.name+"</div>")
 		matchItem.append(face);
 		
 		let spells = $("<div>",{class:'spells'});
-		spells.append("<img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/spell/"+sum.spell1+"'><br>");
-		spells.append("<img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/spell/"+sum.spell2+"'>");
+		spells.append("<img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/spell/"+sum.spell1+"'><br>");
+		spells.append("<img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/spell/"+sum.spell2+"'>");
 		matchItem.append(spells);
 		
 		let rune = $("<div>",{class:'rune'});
@@ -283,37 +283,37 @@ function addMatchList(matchList){
 		let tr2 = $("<tr>");
 		
 		if(sum.item1!=0){
-			tr1.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/"+sum.item1+".png'></td>");
+			tr1.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item1+".png'></td>");
 		}else{
 			tr1.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
 		}
 
 		if(sum.item2!=0){
-			tr1.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/"+sum.item2+".png'></td>");
+			tr1.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item2+".png'></td>");
 		}else{
 			tr1.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
 		}
 		
 		if(sum.item3!=0){
-			tr1.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/"+sum.item3+".png'></td>");
+			tr1.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item3+".png'></td>");
 		}else{
 			tr1.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
 		}
 		
 		if(sum.item4!=0){
-			tr2.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/"+sum.item4+".png'></td>");
+			tr2.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item4+".png'></td>");
 		}else{
 			tr2.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
 		}
 		
 		if(sum.item5!=0){
-			tr2.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/"+sum.item5+".png'></td>");
+			tr2.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item5+".png'></td>");
 		}else{
 			tr2.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
 		}
 		
 		if(sum.item6!=0){
-			tr2.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/"+sum.item6+".png'></td>");
+			tr2.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item6+".png'></td>");
 		}else{
 			tr2.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
 		}
@@ -328,7 +328,7 @@ function addMatchList(matchList){
 		if(sum.accessory==0){
 			accessory.append("<img src='${pageContext.request.contextPath }/resources/images/noneImg.png'>");
 		}else{
-			accessory.append("<img src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/item/"+sum.accessory+".png'>");
+			accessory.append("<img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.accessory+".png'>");
 		}
 		
 		matchItem.append(accessory);
@@ -354,7 +354,7 @@ function addMatchList(matchList){
 			
 			
 			summoner=$("<div>",{class:className});
-			summoner.append("<img  src='https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/"+t.picture+"'>")
+			summoner.append("<img  src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/champion/"+t.picture+"'>")
 			
 			let asncik = $("<a>",{
 				href:'${pageContext.request.contextPath }/match/search?sName='+t.snickname,
@@ -378,7 +378,7 @@ function addMatchList(matchList){
 			
 			
 			summoner=$("<div>",{class:className});
-			summoner.append("<img  src='https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/"+t.picture+"'>");
+			summoner.append("<img  src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/champion/"+t.picture+"'>");
 			
 			let asncik = $("<a>",{
 				href:'${pageContext.request.contextPath }/match/search?sName='+t.snickname,
@@ -441,7 +441,7 @@ function addMost3(mostList){
 		
 		let most3Face = $("<div>",{
 					class:'most3Face',
-					html:"<img src='https://ddragon.leagueoflegends.com/cdn/11.2.1/img/champion/"+most.picture+"'>"
+					html:"<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/champion/"+most.picture+"'>"
 				}
 		);
 		

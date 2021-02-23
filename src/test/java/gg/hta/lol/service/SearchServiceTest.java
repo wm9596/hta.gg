@@ -28,14 +28,14 @@ public class SearchServiceTest {
 	@Autowired
 	private SearchService service;
 	
-//	@Test
-//	public void getTest() {
-//		SearchVo vo = service.getSummoner("안녕");
-//		service.readMatchList(vo.getAccountId(), 0, 20);
-//		
-//	}
-	
 	@Test
+	public void getTest() {
+		SearchVo vo = service.getSummoner("더덕순대국");
+		service.readMatchList(vo.getAccountId(), 0, 20,vo.getSnickname());
+		
+	}
+	
+//	@Test
 	public void getMost() {
 		List<MostChampVo> list = service.getMost("더덕순대국");
 //		System.out.println(list);
