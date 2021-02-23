@@ -14,4 +14,7 @@ public class MessageService {
 	public int sendMsg (HashMap<String, String> map) {
 		return messageDao.sendMsg(map);
 	}
+	public int update (int msgNum) {
+		return messageDao.update(msgNum);
+	}
 }

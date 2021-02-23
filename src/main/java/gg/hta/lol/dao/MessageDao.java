@@ -15,4 +15,7 @@ public class MessageDao {
 	public int sendMsg(HashMap<String, String> map) {
 		return sqlSession.insert(NAMESPACE + ".sendMsg", map);
 	}
+	public int update(int msgNum) {
+		return sqlSession.update(NAMESPACE + ".update", msgNum);
+	}
 }

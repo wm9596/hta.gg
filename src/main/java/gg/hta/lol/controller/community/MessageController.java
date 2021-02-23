@@ -49,4 +49,10 @@ public class MessageController {
 			return false;
 		}
 	}
+	
+	@GetMapping("/updateMsg")
+	public String updateMsg(int msgNum) {
+		msgService.update(msgNum);
+		return "redirect:/member/member/messageList"; 
+	}
 }
