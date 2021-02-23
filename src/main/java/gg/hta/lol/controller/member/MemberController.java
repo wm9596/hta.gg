@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import gg.hta.lol.joinvo.MatchMoreJoinVo;
 import gg.hta.lol.service.ChampionService;
@@ -22,6 +23,7 @@ import gg.hta.lol.service.MemberService;
 import gg.hta.lol.util.PageUtil;
 import gg.hta.lol.service.match.SearchService;
 import gg.hta.lol.vo.MemberVo;
+import gg.hta.lol.vo.MessageVo;
 import gg.hta.lol.vo.PointVo;
 import gg.hta.lol.vo.QueueInfoVo;
 import gg.hta.lol.vo.ReportVo;
@@ -163,6 +165,22 @@ public class MemberController {
 		m.addAttribute("list", list);
 		m.addAttribute("pu",pu);
 		return ".mypage.pointList";
+	}
+	@GetMapping("/member/member/messageList")
+	public ModelAndView messageList(@RequestParam(value="pageNum", defaultValue = "1")int pageNum, Principal principal) {
+		int totalRowCount = service.messageListCount(principal.getName());
+		PageUtil pu = new PageUtil(pageNum, 10,10,totalRowCount);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int startRow = pu.getStartRow();
+		int endRow = pu.getEndRow();
+		map.put("startRow",startRow);
+		map.put("endRow",endRow);
+		map.put("username",principal.getName());
+		List<MessageVo> list = service.messageList(map);
+		ModelAndView mv = new ModelAndView(".mypage.messageList");
+		mv.addObject("list",list);
+		mv.addObject("pu",pu);
+		return mv;
 	}
 	@RequestMapping("/member/admin/memberList")
 	public String adminPage(@RequestParam(value="pageNum", defaultValue = "1")int pageNum, String field, String keyword, Model m) {

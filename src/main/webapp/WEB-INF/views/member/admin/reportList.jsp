@@ -7,12 +7,14 @@
 		<tr>
 			<th>신고 번호</th>
 			<th>신고한 게시글 번호</th>
+			<th>신고한 아이디</th>
 			<th>신고 내용</th>
 		</tr>
 		<c:forEach var="vo" items="${list }">
 			<tr>
 				<td>${vo.RNum }</td>
 				<td><a href="${pageContext.request.contextPath }/community/detailMy?pNum=${vo.PNum }">${vo.PNum }</a></td>
+				<td>${vo.username }</td>
 				<td>${vo.detail }</td>
 			</tr>
 		</c:forEach>

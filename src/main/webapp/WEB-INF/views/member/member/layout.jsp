@@ -49,6 +49,7 @@
 									<li><a href="#">스크랩 한 게시물 </a></li>
 								</ul>
 							</li>
+							<li><a href="${pageContext.request.contextPath }/member/member/messageList"><i class="fa fa-glass"></i>받은 쪽지함</a></li>
 							<form:form method="post" name="out" action="${pageContext.request.contextPath }/member/logout">
 								<li><a href="javascript:delchk()"><i class="fa fa-envelope"></i>회원탈퇴 </a></li>
 							</form:form>

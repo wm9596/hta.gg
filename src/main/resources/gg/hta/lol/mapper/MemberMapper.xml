@@ -128,4 +128,19 @@
 		 )
 		 <![CDATA[ where rwnum>=#{startRow} and rwnum<=#{endRow} ]]>
 	</select>
+	<select id="messageListCount" parameterType="string" resultType="int">
+		select NVL(count(*),0) cnt from message where receiver = #{username}
+	</select>
+	<select id="messageList" parameterType="hashmap" resultType="gg.hta.lol.vo.MessageVo">
+		select * from
+		 (
+		   select a.*,rownum rnum from
+		   (
+			   select * from message
+			   where receiver = #{username}
+			   order by msgNum desc
+		   )a
+		 )
+		 <![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	</select>
 </mapper>

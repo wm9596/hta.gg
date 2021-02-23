@@ -12,6 +12,7 @@ import gg.hta.lol.dao.VisitCountDao;
 import gg.hta.lol.security.CustomUserDetail;
 import gg.hta.lol.vo.AuthoritiesVo;
 import gg.hta.lol.vo.MemberVo;
+import gg.hta.lol.vo.MessageVo;
 import gg.hta.lol.vo.PointVo;
 import gg.hta.lol.vo.ReportVo;
 import gg.hta.lol.vo.VisitVo;
@@ -96,5 +97,11 @@ public class MemberService {
 	}
 	public List<ReportVo> reportList(HashMap<String, Object> map){
 		return dao.reportList(map);
+	}
+	public int messageListCount(String username) {
+		return dao.messageListCount(username);
+	}
+	public List<MessageVo> messageList(HashMap<String, Object> map){
+		return dao.messageList(map);
 	}
 }
