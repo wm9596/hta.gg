@@ -97,7 +97,9 @@
 	height: 100%;
 }
 
-
+.date{
+	font-size: 14px;
+}
 #most3 li{
 	list-style: none;
 	width: 100%;
