@@ -3,35 +3,39 @@
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <h1 style="text-align: center; margin-top: 30px;">내가 받은 쪽지 목록</h1>
 <div style="margin: 70px;">
-	<table style="width: 1000px;">
-		<tr>
-			<th>쪽지 번호</th>
-			<th>보낸 아이디</th>
-			<th>쪽지 내용</th>
-			<th>쪽지 전송 날짜</th>
-			<th>쪽지 읽은 여부</th>
-		</tr>
-		<c:forEach var="vo" items="${list }" varStatus="status">
+	<table style="width: 1000px;" class="table table-hover">
+		<thead>
 			<tr>
-				<td><c:out value="${(pu.pageNum-1)*10 + status.count }"/></td>
-				<td>${vo.sender }</td>
-				<c:choose>
-					<c:when test="${vo.open == '0' }">
-						<td><a href="${pageContext.request.contextPath }/updateMsg?msgNum=${vo.msgNum }">${vo.msg }</a></td>
-					</c:when>
-					<c:otherwise>
-						<td>${vo.msg }</td>
-					</c:otherwise>
-				</c:choose>
-				<td>${vo.sendTime }</td>
-				<c:if test="${vo.open == '0' }">
-					<td>안읽음</td>
-				</c:if>
-				<c:if test="${vo.open == '1' }">
-					<td>읽음</td>
-				</c:if>
+				<th scope="col">쪽지 번호</th>
+				<th scope="col">보낸 아이디</th>
+				<th scope="col">쪽지 내용</th>
+				<th scope="col">쪽지 전송 날짜</th>
+				<th scope="col">쪽지 읽은 여부</th>
 			</tr>
-		</c:forEach>
+		</thead>
+		<tbody>
+			<c:forEach var="vo" items="${list }" varStatus="status">
+				<tr>
+					<th scope="row"><c:out value="${(pu.pageNum-1)*10 + status.count }"/></th>
+					<td>${vo.sender }</td>
+					<c:choose>
+						<c:when test="${vo.open == '0' }">
+							<td><a href="${pageContext.request.contextPath }/updateMsg?msgNum=${vo.msgNum }">${vo.msg }</a></td>
+						</c:when>
+						<c:otherwise>
+							<td>${vo.msg }</td>
+						</c:otherwise>
+					</c:choose>
+					<td>${vo.sendTime }</td>
+					<c:if test="${vo.open == '0' }">
+						<td>안읽음</td>
+					</c:if>
+					<c:if test="${vo.open == '1' }">
+						<td>읽음</td>
+					</c:if>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 	<div>
 		<c:if test="${pu.startPageNum>5 }">

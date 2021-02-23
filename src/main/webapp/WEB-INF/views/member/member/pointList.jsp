@@ -6,19 +6,23 @@
 	<a href="${pageContext.request.contextPath}/member/member/pointList" style="font-size: 20px;">포인트 전체 내역</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="${pageContext.request.contextPath}/member/member/pointList?score=1" style="font-size: 20px;">포인트 획득 내역</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="${pageContext.request.contextPath}/member/member/pointList?score=-1" style="font-size: 20px;">포인트 소비 내역</a>
-	<table style="width: 1000px;">
-		<tr>
-			<th>포인트 내역</th>
-			<th>포인트</th>
-			<th>일시</th>
-		</tr>
-		<c:forEach var="vo" items="${list }">
+	<table style="width: 1000px;" class="table table-hover">
+		<thead>
 			<tr>
-				<td>${vo.method }</td>
-				<td>${vo.score }</td>
-				<td>${vo.regdate }</td>
+				<th scope="col">포인트 내역</th>
+				<th scope="col">포인트</th>
+				<th scope="col">일시</th>
 			</tr>
-		</c:forEach>
+		</thead>
+		<tbody>
+			<c:forEach var="vo" items="${list }">
+				<tr>
+					<th scope="row">${vo.method }</th>
+					<td>${vo.score }</td>
+					<td>${vo.regdate }</td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 	<div>
 		<c:if test="${pu.startPageNum>5 }">

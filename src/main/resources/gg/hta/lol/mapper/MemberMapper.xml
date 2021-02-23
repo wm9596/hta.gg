@@ -65,11 +65,9 @@
 		where username=#{username}
 	</update>
 	<sql id="search">
+		where enabled=1
 		<if test="field != null and field!=''">
-			where ${field} like '%'||#{keyword}||'%' and enabled=1
-		</if>
-		<if test="field == null and field == ''">
-			where enabled=1
+			and ${field} like '%'||#{keyword}||'%'
 		</if>
 	</sql>
 	<select id="count" resultType="int" parameterType="hashmap">

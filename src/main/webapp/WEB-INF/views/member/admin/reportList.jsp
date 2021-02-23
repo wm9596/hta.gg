@@ -3,21 +3,25 @@
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <h1 style="text-align: center; margin-top: 30px;">신고 접수 내역</h1>
 <div style="margin: 70px;">
-	<table style="width: 1000px;">
-		<tr>
-			<th>신고 번호</th>
-			<th>신고한 게시글 번호</th>
-			<th>신고한 아이디</th>
-			<th>신고 내용</th>
-		</tr>
-		<c:forEach var="vo" items="${list }">
+	<table style="width: 1000px;" class="table table-hover">
+		<thead>
 			<tr>
-				<td>${vo.RNum }</td>
-				<td><a href="${pageContext.request.contextPath }/community/detailMy?pNum=${vo.PNum }">${vo.PNum }</a></td>
-				<td>${vo.username }</td>
-				<td>${vo.detail }</td>
+				<th scope="col">신고 번호</th>
+				<th scope="col">신고한 게시글 번호</th>
+				<th scope="col">신고한 아이디</th>
+				<th scope="col">신고 내용</th>
 			</tr>
-		</c:forEach>
+		</thead>
+		<tbody>
+			<c:forEach var="vo" items="${list }">
+				<tr>
+					<th scope="row">${vo.RNum }</th>
+					<td><a href="${pageContext.request.contextPath }/community/detailMy?pNum=${vo.PNum }">${vo.PNum }</a></td>
+					<td>${vo.username }</td>
+					<td>${vo.detail }</td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 	<div>
 		<c:if test="${pu.startPageNum>5 }">

@@ -6,17 +6,21 @@
 <div style="margin: 70px;">
 	<h3 style="display: inline;">오늘 접속자 수 : ${todayCnt }</h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<h3 style="display: inline;">총 접속자 수 : ${totalCnt }</h3>
-	<table style="width: 1000px;">
-		<tr>
-			<th>날짜</th>
-			<th>접속자 수</th>
-		</tr>
+	<table style="width: 1000px;" class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col">날짜</th>
+				<th scope="col">접속자 수</th>
+			</tr>
+		</thead>
+		<tbody>
 		<c:forEach var="vo" items="${list }">
 			<tr>
-				<td><fmt:formatDate value="${vo.regdate }" pattern="20YY년 MM월 dd일" /></td>
+				<th scope="row"><fmt:formatDate value="${vo.regdate }" pattern="20YY년 MM월 dd일" /></th>
 				<td>${vo.cnt}</td>
 			</tr>
 		</c:forEach>
+		</tbody>
 	</table>
 	<div>
 		<c:if test="${pu.startPageNum>5 }">

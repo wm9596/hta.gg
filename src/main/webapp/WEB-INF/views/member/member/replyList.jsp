@@ -15,7 +15,7 @@
 		<tbody>
 		<c:forEach var="vo" items="${list }" varStatus="status">
 			<tr>
-				<td><c:out value="${(pu.pageNum-1)*10 + status.count }"/></td>
+				<th scope="row"><c:out value="${(pu.pageNum-1)*10 + status.count }"/></th>
 				<td>${vo.pNum }</td>
 				<td><a href="${pageContext.request.contextPath }/community/detailMy?pNum=${vo.pNum }">${vo.rContent }</a></td>
 				<td>${vo.regdate }</td>

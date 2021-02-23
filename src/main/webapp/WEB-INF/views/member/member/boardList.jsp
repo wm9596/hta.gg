@@ -3,46 +3,50 @@
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <h1 style="text-align: center; margin-top: 30px;">내가 작성한 글 목록</h1>
 <div style="margin: 70px;">
-	<table style="width: 1000px;">
-		<tr>
-			<th>카테고리</th>
-			<th>글제목</th>
-			<th>추천수</th>
-			<th>반대수</th>
-			<th>조회수</th>
-			<th>댓글수</th>
-			<th>작성일</th>
-		</tr>
-		<c:forEach var="vo" items="${list }">
+	<table style="width: 1000px;" class="table table-hover">
+		<thead>
 			<tr>
-				<c:choose>
-					<c:when test="${vo.cNum }=='1'">
-						<td>공략 게시판</td>
-					</c:when>
-					<c:when test="${vo.cNum }=='2'">
-						<td>자유 게시판</td>
-					</c:when>
-					<c:when test="${vo.cNum }=='3'">
-						<td>팀원모집 게시판</td>
-					</c:when>
-					<c:when test="${vo.cNum }=='4'">
-						<td>사건사고 게시판</td>
-					</c:when>
-					<c:when test="${vo.cNum }=='5'">
-						<td>Q&A 게시판</td>
-					</c:when>
-					<c:otherwise>
-						<td>경기일정 게시판</td>
-					</c:otherwise>
-				</c:choose>
-				<td><a href="${pageContext.request.contextPath }/community/detail?pNum=${vo.pNum }&cNum=${vo.cNum }">${vo.title }</a></td>
-				<td>${vo.hit }</td>
-				<td>${vo.nohit }</td>
-				<td>${vo.viewCount }</td>
-				<td>${vo.commentCount }</td>
-				<td>${vo.regdate }</td>
+				<th scope="col">카테고리</th>
+				<th scope="col">글제목</th>
+				<th scope="col">추천수</th>
+				<th scope="col">반대수</th>
+				<th scope="col">조회수</th>
+				<th scope="col">댓글수</th>
+				<th scope="col">작성일</th>
 			</tr>
-		</c:forEach>
+		</thead>
+		<tbody>
+			<c:forEach var="vo" items="${list }">
+				<tr>
+					<c:choose>
+						<c:when test="${vo.cNum }=='1'">
+							<th scope="row">공략 게시판</th>
+						</c:when>
+						<c:when test="${vo.cNum }=='2'">
+							<th scope="row">자유 게시판</th>
+						</c:when>
+						<c:when test="${vo.cNum }=='3'">
+							<th scope="row">팀원모집 게시판</th>
+						</c:when>
+						<c:when test="${vo.cNum }=='4'">
+							<th scope="row">사건사고 게시판</th>
+						</c:when>
+						<c:when test="${vo.cNum }=='5'">
+							<th scope="row">Q&A 게시판</th>
+						</c:when>
+						<c:otherwise>
+							<th scope="row">경기일정 게시판</th>
+						</c:otherwise>
+					</c:choose>
+					<td><a href="${pageContext.request.contextPath }/community/detail?pNum=${vo.pNum }&cNum=${vo.cNum }">${vo.title }</a></td>
+					<td>${vo.hit }</td>
+					<td>${vo.nohit }</td>
+					<td>${vo.viewCount }</td>
+					<td>${vo.commentCount }</td>
+					<td>${vo.regdate }</td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 	<div>
 		<c:if test="${pu.startPageNum>5 }">

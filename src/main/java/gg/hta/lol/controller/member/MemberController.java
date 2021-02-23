@@ -214,4 +214,13 @@ public class MemberController {
 		m.addAttribute("pu",pu);
 		return ".adminpage.reportList";
 	}
+	@PostMapping("/member/admin/listDelete")
+	public String listDelete(String[] mem) {		
+		if(mem!=null) {
+			for(int i=0 ; i<mem.length; i++) {
+				service.delete(mem[i]);
+			}
+		}
+		return "redirect:/member/admin/memberList"; 
+	}
 }

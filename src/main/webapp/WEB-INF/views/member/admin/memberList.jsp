@@ -4,26 +4,35 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <h1 style="text-align: center; margin-top: 30px;">회원 정보 목록</h1>
 <div style="margin: 70px;">
-	<table style="width: 1100px; font-size: 18px;">
-		<tr>
-			<th>아이디</th>
-			<th>소환사 이름</th>
-			<th>이메일</th>
-			<th>커뮤니티 닉네임</th>
-			<th>총 포인트</th>
-			<th>가입일</th>
-		</tr>
-		<c:forEach var="vo" items="${list }">
-			<tr>
-				<td>${vo.username }</td>
-				<td>${vo.snickname }</td>
-				<td>${vo.email }</td>
-				<td>${vo.nickname }</td>
-				<td>${vo.point }</td>
-				<td>${vo.regDate }</td>
-			</tr>
-		</c:forEach>
-	</table>
+	<form:form method="post" action="${pageContext.request.contextPath}/member/admin/listDelete">
+		<table style="width: 1100px; font-size: 18px;" class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col"><input type="checkbox" id="allMember"></th>
+					<th scope="col">아이디</th>
+					<th scope="col">소환사 이름</th>
+					<th scope="col">이메일</th>
+					<th scope="col">커뮤니티 닉네임</th>
+					<th scope="col">총 포인트</th>
+					<th scope="col">가입일</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="vo" items="${list }">
+					<tr>
+						<th scope="row"><input type="checkbox" name="mem" value="${vo.username }"></th>
+						<td>${vo.username }</td>
+						<td>${vo.snickname }</td>
+						<td>${vo.email }</td>
+						<td>${vo.nickname }</td>
+						<td>${vo.point }</td>
+						<td>${vo.regDate }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<input type="submit" value="선택삭제" class="btn btn-secondary">
+	</form:form>
 	<div>
 		<c:if test="${pu.startPageNum>5 }">
 		<a href="/lol/member/admin/memberList?pageNum=${pu.pageNum-1}&field=${field}&keyword=${keyword}">[이전]</a>
@@ -54,3 +63,22 @@
 		</form:form>
 	</div>
 </div>
+<script type="text/javascript">
+	var check = 0;
+	document.getElementById("allMember").addEventListener('click', function(e) {
+		var mem = document.getElementsByName("mem");
+		//console.log(check); //0일때 체크박스 클릭, 1이면 체크박스 풀기
+		for (let i=0; i<mem.length; i++) {
+			if (check == 0) {
+				mem[i].checked = true;	
+			} else {
+				mem[i].checked = false;
+			}
+		}
+		if (check == 0) {
+			check = 1;
+		} else {
+			check = 0;
+		}
+	}, true)
+</script>
