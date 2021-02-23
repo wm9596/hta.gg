@@ -8,9 +8,6 @@
 <meta charset="UTF-8">
 <title>/community/list.jsp</title>
 <style type="text/css">
- 	a:link { text-decoration:none; color:black;}
- 	a:visited { text-decoration:none;color:#ffffff;}
- 	a:active {text-decoration:none; color:#ffffff; }
  	a:hover { text-decoration:none; color:#EDA900;}
 /* 	th, td{text-align: center; border: 1px solid black;} */
 	#g_menu_1{width:60px; margin-top:10px;font-weight:bold;font-size:15pt;display:inline-block; text-align:center;}
