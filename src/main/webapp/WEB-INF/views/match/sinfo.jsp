@@ -224,9 +224,16 @@ function addMatchList(matchList){
 		let gameDate = dateDiff(new Date(sum.startTime),toDay);
 		
 		if(gameDate < 1){
-			gameDate *= 24;
+			gameDate = gameDate  * 24;
+			if(gameDate <1){
+				gameDate *= 60;
+				gameDate = gameDate.toFixed(0)+"분 전"
+			}else{
+				gameDate = gameDate.toFixed(0)+"시간 전"
+			}
+			
 		}else{
-			gameDate = gameDate.toFixed(0) +"일전";
+			gameDate = gameDate.toFixed(0) +"일 전";
 		}
 	
 		let dateDiv = $("<div>",{class:'date',text:gameDate});

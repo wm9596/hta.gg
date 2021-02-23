@@ -1,6 +1,9 @@
 package gg.hta.lol.vo;
 
-import java.sql.Date;
+
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +15,7 @@ public class MatchinfoVo {
 	private String matchid;
 	private String type;
 	private String runtime;	
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	private Date startTime;
 	
 	

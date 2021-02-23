@@ -43,7 +43,7 @@
 		from(
 		select rownum rn, m.picture,m.name,m."kill",m."death",m."assist",m."cs",m.cnt
 		from view_mostchampion m
-		where m.snickname='더덕순대국'
+		where m.snickname=#{snickname}
 		order by cnt desc
 		)
 		<![CDATA[where rn<=5]]>

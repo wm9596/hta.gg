@@ -40,7 +40,7 @@ public class SearchController {
 			
 			model.addAttribute("rating", ratingService.getRatingAvg(sName));
 
-			searchService.readMatchList(svo.getAccountId(), 0, 3);
+			searchService.readMatchList(svo.getAccountId(), 0, 20);
 			
 			List<MostChampVo> mlist = searchService.getMost(sName);
 			
@@ -50,6 +50,7 @@ public class SearchController {
 					item.setName(item.getName().substring(0, diff).concat("..."));
 				}
 			});
+			
 			
 			model.addAttribute("most", mlist);
 			

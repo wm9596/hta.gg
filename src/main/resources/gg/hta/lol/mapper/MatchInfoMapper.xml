@@ -40,7 +40,7 @@
                 and tm.matchid = t.matchid
                 and tm.teamid = t.teamid
 		        AND tm.snickname = #{snickname}
-		    order by tm.matchid desc
+		    order by m.STARTTIME desc
 		    )t
 		)
 		<![CDATA[where rn<=20]]>

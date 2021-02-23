@@ -1,7 +1,8 @@
 package gg.hta.lol.service.match;
 
-import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -215,14 +216,21 @@ public class SearchServiceImpl implements SearchService {
 	public void addMatchInfo(String gameId,int code) {
 		JsonObject matchInfo = dataRequester.getMatchInfo(gameId);
 		
+		MatchinfoVo mvo = new MatchinfoVo(
+				matchInfo.get("gameId").getAsString(), 
+				GameType.getStringType(code), 
+				matchInfo.get("gameDuration").getAsLong(), 
+				new Date(matchInfo.get("gameCreation").getAsLong())
+				);
+//		
+//		SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd HH:mm:dd");
+//		System.out.println(mvo);
+//		System.out.println(sd.format(new Date(matchInfo.get("gameCreation").getAsLong())));
+		
 		try {
+//			System.out.println(mvo);
 			matchinfoMapper.addMatchinfo(
-					new MatchinfoVo(
-							matchInfo.get("gameId").getAsString(), 
-							GameType.getStringType(code), 
-							matchInfo.get("gameDuration").getAsLong(), 
-							new Date(matchInfo.get("gameCreation").getAsLong())
-							)
+					mvo
 					);
 		}catch (DuplicateKeyException e) {
 //			System.out.println("경기 정보 중복");

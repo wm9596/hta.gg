@@ -35,6 +35,7 @@ public class MatchHistoryListController {
 		HashMap<String, MostChampVo> cmap = new HashMap<String, MostChampVo>();
 		
 		list.stream().forEach(item->{
+//			System.out.println(item.getMatchid());
 			item.setSpell1(rsConverter.convertSpell(item.getSpell1()));
 			item.setSpell2(rsConverter.convertSpell(item.getSpell2()));
 			item.setRune1(rsConverter.convertRune(item.getRune1()));

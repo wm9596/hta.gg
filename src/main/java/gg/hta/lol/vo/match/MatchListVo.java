@@ -1,7 +1,9 @@
 package gg.hta.lol.vo.match;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,7 +41,8 @@ public class MatchListVo {
 	private int item6;
 	private int accessory;
 	private int multiKill;
-	private String runtime;	
+	private String runtime;
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	private Date startTime;
 	private String winlose;
 	private List<ParticipantsVo> friendly;
