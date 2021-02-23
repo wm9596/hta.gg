@@ -18,6 +18,25 @@
 <!-- <link rel="stylesheet" href="/style.css"> -->
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	.user-dropdown .dropdown-menu {
+	  left: 0;
+	  transform: translateX(-50%) !important;
+	  top: 100% !important;
+	}
+	
+	.arrow-up {
+	  width: 0px;
+	  height: 0px;
+	  border-left: 10px solid transparent;
+	  border-right: 10px solid transparent;
+	  border-bottom: 10px solid #FFFFFF;
+	  margin: 0 0 15px 0;
+	  position: absolute;
+	  top: -9px;
+	  right: 0;
+	}
+</style>
 </head>
 <body>
 	<div id="wrap">

@@ -7,7 +7,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script> 
-
 	<div id="header_left">
 		<img alt="" src="${pageContext.request.contextPath }/resources/images/hta.PNG" width="40" height="40">
 	</div>
@@ -27,17 +26,32 @@
 				</span>
 			</div>
 			<div id="header_mypage">
-				<span style="color:rgba(255, 255, 255, 0.5);">
-					<i class="fa fa-user-circle" aria-hidden="true" onclick="location.href='/lol/member/login'"></i><br>
-					<a href="/lol/member/login" style="color:rgba(255, 255, 255, 0.5);">login</a>
-				</span>
+				<div class="row">
+					<div class="col-md pl-4 user-dropdown">
+						<div class="dropdown">
+					    	<a class="navbar-brand dropdown-toggle" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					        	<i class="fas fa-user"></i>
+					       	</a>
+				          	<div style="position: absolute; left: -35px;">
+					          	<div class="dropdown-menu text-center mt-2" style="left: -10px; position: absolute;">
+						            <div class="arrow-up"></div>
+						            <a href="/lol/member/login">
+						            	<button type="button" class="btn btn-warning text-dark">Sign-in now</button>
+						            </a>
+						            <div class="dropdown-divider"></div>
+						            <h6>Don't have an account?</h6>
+						            <a href="/lol/member/login">Sign-up here</a>
+					      		</div>
+					      	</div>
+					 	</div>
+					</div>
+				</div>
 			</div>
 		</sec:authorize>
 		<sec:authorize access="isAuthenticated()">
 			<div id="header_msg">
 				<span style="color:rgba(255, 255, 255, 0.5);">
 					<i class="fa fa-comments" aria-hidden="true" onclick="location.href='/lol/member/member/messageList'"></i><br>
-					<sec:authentication property="principal.username"/>님
 				</span>
 			</div>
 			<div id="header_mypage">
@@ -46,12 +60,48 @@
 					<span style="color:rgba(255, 255, 255, 0.5);">
 						<c:choose>
 							<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == 'admin'}">
-								<i class="fa fa-user-circle" aria-hidden="true" onclick="location.href='/lol/member/admin/memberList'"></i><br>
-								<a href="#" onclick="javascript:document.logout.submit();" style="color:rgba(255, 255, 255, 0.5);">logout</a>		
+								<div class="row">
+							      <div class="col-md pl-4 user-dropdown">
+							        <div class="dropdown">
+							        <a class="navbar-brand dropdown-toggle" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							          	<i class="fas fa-user"></i>
+							          </a>
+							          <div style="position: absolute; left: -35px;">
+								          <div class="dropdown-menu text-center mt-2" style="left: -10px; position: absolute;">
+								            <div class="arrow-up"></div>
+								            <h6><sec:authentication property="principal.username"/> 님</h6>
+								            <a href="/lol/member/admin/memberList">
+								              <button type="button" class="btn btn-warning text-dark">AdminPage</button>
+								            </a>
+								            <div class="dropdown-divider"></div>
+								            <a href="#" onclick="javascript:document.logout.submit();">logout</a>
+								          </div>
+								      </div>
+							    	</div>
+							      </div>
+							    </div>
 							</c:when>
 							<c:otherwise>
-								<i class="fa fa-user-circle" aria-hidden="true" onclick="location.href='/lol/member/member/info'"></i><br>
-								<a href="#" onclick="javascript:document.logout.submit();" style="color:rgba(255, 255, 255, 0.5);">logout</a>
+							    <div class="row">
+							      <div class="col-md pl-4 user-dropdown">
+							        <div class="dropdown">
+							          <a class="navbar-brand dropdown-toggle" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							          	<i class="fas fa-user"></i>
+							          </a>
+							          <div style="position: absolute; left: -35px;">
+								          <div class="dropdown-menu text-center mt-2" style="left: -10px; position: absolute;">
+								            <div class="arrow-up"></div>
+								            <h6><sec:authentication property="principal.username"/> 님</h6>
+								            <a href="/lol/member/member/info">
+								              <button type="button" class="btn btn-warning text-dark">MyPage</button>
+								            </a>
+								            <div class="dropdown-divider"></div>
+								            <a href="#" onclick="javascript:document.logout.submit();">logout</a>
+								          </div>
+								      </div>
+							        </div>
+							      </div>
+							    </div>
 							</c:otherwise>
 						</c:choose>
 					</span>
