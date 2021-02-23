@@ -21,6 +21,9 @@ public class ReplyService {
 	public List<ReplyVo> list(int pNum){
 		return dao.list(pNum);
 	}
+	public List<ReplyVo> rereList(int rNum){
+		return dao.rereList(rNum);
+	}
 	public int update1(int pNum) {
 		return dao.update1(pNum);
 	}
@@ -35,7 +38,6 @@ public class ReplyService {
 		dao.rNohit(rNum);
 		return dao.rNohitCount(rNum);
 	}
-	
 	
 	public int replyCount(String username) {
 		return dao.replyCount(username);

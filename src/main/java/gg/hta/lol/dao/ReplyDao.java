@@ -29,6 +29,10 @@ public class ReplyDao {
 		return sqlSession.selectList(NAMESPACE + ".list", pNum);
 	}
 	
+	public List<ReplyVo> rereList(int rNum) {
+		return sqlSession.selectList(NAMESPACE + ".rereList", rNum);
+	}
+	
 	public int update1(int pNum) {
 		int n=sqlSession.update(NAMESPACE + ".pCount", pNum);
 		return n;
@@ -60,6 +64,7 @@ public class ReplyDao {
 	public int replyCount(String username) {
 		return sqlSession.selectOne(NAMESPACE + ".replyCount", username);
 	}
+	
 	public List<ReplyVo> replyList(HashMap<String, Object> map){
 		return sqlSession.selectList(NAMESPACE + ".replyList", map);
 	}

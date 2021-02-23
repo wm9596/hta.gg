@@ -4,7 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gg.hta.lol.mapper.ReplyMapper">
 	<select id="list" parameterType="int" resultType="reply">
-	 	select * from reply where pNum=#{pNum}
+	 	select * from reply where pNum=#{pNum} and rerenum = 0
+	</select>
+	
+	<select id="rereList" parameterType="int" resultType="reply">
+	select *
+	from reply
+	where rerenum = #{rNum}
 	</select>
 	
 	<insert id="insert" parameterType="reply">
@@ -43,10 +49,10 @@
 		where rNum = #{rNum}
 	</select>
 	
-	
 	<select id="replyCount" resultType="int" parameterType="string">
 		select NVL(count(*),0) cnt from reply where rwriter=#{username}
 	</select>
+	
 	<select id="replyList" parameterType="hashmap" resultType="reply">
 		select * from
 		 (

@@ -13,6 +13,7 @@
 	a{ text-decoration:none; color: black; }
 	.insert{margin-top: 5%}
 	.comm{margin-bottom: 20px; margin-left: 22%; width: 600px; border: 1px solid #aaa;position: relative;}
+	.commWrap1{margin-bottom: 20px; margin-left: 25%; width: 600px; position: relative;}
 </style>
 </head>
 <body><br>
@@ -62,8 +63,8 @@
 			<hr size="2" width="600" color="black" id=line>
 		</div>
 		<div >
-			<div id="commList">
-		</div><br>
+			<div id="commList"></div><br> <!-------------------------------------------------------------------------------------->
+<!-- 			<div id="rc" style="background-color: black"></div> -------------------------------------------------------------------------------------------- -->
 			<div align="center">
 			<div id="commAdd" style="display: inline-block;">
 				아이디 <input type="text" id="rWriter" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" readonly="readonly">
@@ -85,7 +86,7 @@
 		$.ajax({
 			url:"/lol/update/" + ${vo.pNum },
 			success: function(data){
-				$("#hit").html('추천'+data);
+				$("#hit").html('추천 '+data);
 			}
 		});
 		}
@@ -235,13 +236,7 @@
 				var commList = $("#commList");
 				var childs = commList.childNodes;
 				
-// 				for(let i=childs.length-1; i>=0; i--){
-// 					var child=childs.item(i);
-// 					commList.removeChild(child);
-// 				}
-				
-				commList.empty();
-				
+				commList.empty(); // ------------------------------------------------------------------------------------------------------------->>>
 				$(data).find("item").each(function(){
 					var rNum = $(this).find("rNum").text();
 					var pNum = $(this).find("pNum").text();
@@ -250,19 +245,48 @@
 					var regdate = $(this).find("regdate").text();
 					var rHit = $(this).find("rHit").text();
 					var rNohit = $(this).find("rNohit").text();
-					var div = document.createElement("div");
-					div.innerHTML=rWriter+"&nbsp;&nbsp;&nbsp;"+rContent+"<br>"
-												+regdate+"&nbsp;&nbsp;&nbsp;"
-												+"<a href='javascript:replyHit("+ rNum + ")'>추천</a>[" + rHit +"]&nbsp;&nbsp;"
-												+"<a href='javascript:replyNohit("+ rNum + ")'>반대</a>[" + rNohit +"]&nbsp;&nbsp;"
-												+"<a href='javascript:replyComment'>답글</a>"+"&nbsp;&nbsp;"
-												+"<a href='javascript:removeComm("+ rNum + "," + pNum + ")'>삭제</a>";
-					div.className="comm";
-					commList.append(div);
+					var wrapDiv = $("<div>",{class:'commWrap'});
+					var div = $("<div>",{class:'comm'});
+					div.html(
+							rWriter+"&nbsp;&nbsp;&nbsp;"+rContent+"<br>"
+							+regdate+"&nbsp;&nbsp;&nbsp;"
+							+"<a href='javascript:replyHit("+ rNum + ")'>추천</a>[" + rHit +"]&nbsp;&nbsp;"
+							+"<a href='javascript:replyNohit("+ rNum + ")'>반대</a>[" + rNohit +"]&nbsp;&nbsp;"
+							+"<a href='javascript:replyComment'>답글</a>"+"&nbsp;&nbsp;"
+							+"<a href='javascript:removeComm("+ rNum + "," + pNum + ")'>삭제</a>"
+							);
+					
+					wrapDiv.append(div);
+					
+					getRRlist(wrapDiv,rNum);
+					
+					commList.append(wrapDiv);
+					
 				});
 			}
 		});
 	}
+	
+	function getRRlist(wrapDiv,rNum){
+		$.ajax({
+			url:"/lol/rereply/"+rNum,
+			dataType: 'json',
+			success: function(data){
+				console.log(rNum+"번 대댓");
+				for(rereply of data){
+					console.log(rereply);
+					var rereDiv = $("<div>",{class:'commWrap1'});
+					rereDiv.text("└" + rereply.regdate + " " + rereply.rWriter + " " + rereply.rContent);
+					console.log(wrapDiv);
+					wrapDiv.append(rereDiv);
+				}
+			},
+			error :function(data){
+				console.log("없음");
+			}
+		});
+	}
+	
 
 </script>
 </body>

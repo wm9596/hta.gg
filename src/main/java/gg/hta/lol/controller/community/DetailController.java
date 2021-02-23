@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -83,23 +85,17 @@ public class DetailController {
 		
 		System.out.println("==========================");
 		List<ReplyVo> list = service1.list(pNum);
-//		StringBuffer sb = new StringBuffer();
-//		sb.append("<contents>");
-//		for(ReplyVo vo:list) {
-//			sb.append("<content>");
-//			sb.append("<rNum>"+vo.getrNum()+"</rNum>");
-//			sb.append("<pNum>"+vo.getpNum()+"</pNum>");
-//			sb.append("<rHit>"+vo.getrHit()+"</rHit>");
-//			sb.append("<rNohit>"+vo.getrNohit()+"</rNohit>");
-//			sb.append("<rWriter>"+vo.getrWriter()+"</rWriter>");
-//			sb.append("<regdate>"+vo.getRegdate()+"</regdate>");
-//			sb.append("<rContent>"+vo.getrContent()+"</rContent>");
-//			sb.append("</content>");
-//		}
-//		sb.append("</contents>");
-//		
-//		return sb.toString();
 		return list;
+	}
+	
+	@GetMapping(value = "/rereply/{rNum}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<ReplyVo>> selectReRe(@PathVariable("rNum")int rNum) {
+		
+		System.out.println("==========================");
+		List<ReplyVo> list = service1.rereList(rNum);
+		System.out.println(list);
+		return new ResponseEntity<List<ReplyVo>>(list, list.size()>0?HttpStatus.OK:HttpStatus.NOT_FOUND);
 	}
 
 	@GetMapping(value = "/insert/{pNum}/{rWriter}/{rContent}", produces = "application/xml;charset=utf-8")
