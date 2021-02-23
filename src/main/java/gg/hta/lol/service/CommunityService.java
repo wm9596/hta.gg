@@ -55,4 +55,12 @@ public class CommunityService {
 	public int boardCount(String username) {
 		return dao.boardCount(username);
 	}
+	
+	public HashMap<String, Integer> getCurrentPnum() {
+		return dao.getCurrentPnum();
+	}
+	
+	public int getNextPnum() {
+		return dao.getNextPnum();
+	}
 }

@@ -58,4 +58,12 @@ public class CommunityDao {
 	public int boardCount(String username) {
 		return sqlSession.selectOne(NAMESPACE + ".boardCount", username);
 	}
+	
+	public HashMap<String, Integer> getCurrentPnum() {
+		return sqlSession.selectOne(NAMESPACE + ".getCurrentPnum");
+	}
+	
+	public int getNextPnum() {
+		return sqlSession.selectOne(NAMESPACE + ".getNextPnum");
+	}
 }

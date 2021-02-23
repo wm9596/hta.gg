@@ -12,7 +12,7 @@
  	a:visited { text-decoration:none;color:#ffffff;}
  	a:active {text-decoration:none; color:#ffffff; }
  	a:hover { text-decoration:none; color:#EDA900;}
-	th, td{text-align: center; border: 1px solid black;}
+/* 	th, td{text-align: center; border: 1px solid black;} */
 	#g_menu_1{width:60px; margin-top:10px;font-weight:bold;font-size:15pt;display:inline-block; text-align:center;}
 	#g_menu_2{width:60px;margin-top:10px;font-weight:bold;font-size:15pt;display:inline-block; text-align:center;}
 	#g_menu_3{width:80px;margin-top:10px;margin-left:20px;font-weight:bold;font-size:15pt;display:inline-block; text-align:center;}
@@ -81,18 +81,21 @@
 			action="${pageContext.request.contextPath }/community/list"></form>
 	</div><br>
 	<div>
-	<table border="3" width="1000">
-		<tr>
-			<th>글번호</th>
-			<th>ID</th>
-			<th>제목</th>
-			<th>조회수</th>
-			<th>추천수</th>
-			<th>등록날짜</th>
-		</tr>
+	<table width="1000" class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col">글번호</th>
+				<th scope="col">ID</th>
+				<th scope="col">제목</th>
+				<th scope="col">조회수</th>
+				<th scope="col">추천수</th>
+				<th scope="col">등록날짜</th>
+			</tr>
+		</thead>
+		<tbody>
 		<c:forEach var="vo" items="${list }">
 			<tr>
-				<td>${vo.pNum }</td>
+				<th scope="row">${vo.pNum }</th>
 				<td>${vo.username }</td>
 				<td><a href="${pageContext.request.contextPath }/community/detail?pNum=${vo.pNum }&cNum=${vo.cNum }">${vo.title }</a>&nbsp;[${vo.commentCount }]</td>
 				<td>${vo.viewCount }</td>

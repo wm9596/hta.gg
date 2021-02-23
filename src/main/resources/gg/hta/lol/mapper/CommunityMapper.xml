@@ -5,7 +5,7 @@
 <mapper namespace="gg.hta.lol.mapper.CommunityMapper">
 
 	<insert id="insert" parameterType="community">
-		insert into community values(pNum_seq.nextval,#{username},#{cNum},#{title},#{content},0,0,0,0,sysdate)
+		insert into community values(pNum_seq.nextval,#{username},#{cNum},#{title},0,0,0,0,sysdate,#{content})
 	</insert>
 	
 	<delete id="delete" parameterType="int">
@@ -124,4 +124,24 @@
 		where pNum = #{pNum} and username = #{username}
 	</select>
 	
+	<select id="getCurrentPnum" resultType="hashmap">
+	<![CDATA[
+		select *
+		from 
+		(
+		    select tt.*, rownum rnum
+		    FROM
+		    (
+		        select pnum
+		        from community
+                order by pnum desc
+		    ) tt
+		)
+		where rnum = 1
+	]]>
+	</select>
+	<select id="getNextPnum" resultType="int">
+		select pnum_seq.nextval
+		from dual
+	</select>
 </mapper>
