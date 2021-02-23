@@ -3,13 +3,16 @@
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <h1 style="text-align: center; margin-top: 30px;">내가 작성한 댓글 목록</h1>
 <div style="margin: 70px;">
-	<table style="width: 1000px;">
-		<tr>
-			<th>댓글 번호</th>
-			<th>게시글 번호</th>
-			<th>댓글 내용</th>
-			<th>댓글 작성일</th>
-		</tr>
+	<table style="width: 1000px;" class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col">댓글 번호</th>
+				<th scope="col">게시글 번호</th>
+				<th scope="col">댓글 내용</th>
+				<th scope="col">댓글 작성일</th>
+			</tr>
+		</thead>
+		<tbody>
 		<c:forEach var="vo" items="${list }" varStatus="status">
 			<tr>
 				<td><c:out value="${(pu.pageNum-1)*10 + status.count }"/></td>
@@ -18,6 +21,7 @@
 				<td>${vo.regdate }</td>
 			</tr>
 		</c:forEach>
+		</tbody>
 	</table>
 	<div>
 		<c:if test="${pu.startPageNum>5 }">
