@@ -29,6 +29,7 @@ public class MatchHistoryListController {
 	@RequestMapping(value = {"/match/getList/{name}/{type}","/match/getList/{name}"}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	private MatchMostVo MatchList(@PathVariable("name")String name, @PathVariable(name = "type",required = false) String type) {
 		
+		name = name.replaceAll(" ", "");
 		List<MatchListVo> list = null;
 		list = service.getMatchList(name, type);
 		

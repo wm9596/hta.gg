@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/searchInfo.css">
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+<c:set var="nickname" value="${svo.snickname }"/>
 <div id="mm_smCard">
 		<div id="mm_smLeft">
 			<div id="mm_smIconDiv">
@@ -125,6 +125,7 @@
 
 <script type="text/javascript">
 var isRunning = false;
+
 google.charts.load("current", {packages:["corechart"]});
 google.charts.setOnLoadCallback(getMatchList);
 

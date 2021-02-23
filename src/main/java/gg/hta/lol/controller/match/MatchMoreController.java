@@ -55,17 +55,17 @@ public class MatchMoreController {
 	// 소환사 평가 추가
 	@ResponseBody
 	@GetMapping("/insertRating")
-	public HashMap<String, Object> insertRating(Model model, double rate, HttpServletResponse res, HttpServletRequest req) {
+	public HashMap<String, Object> insertRating(Model model,String nickname, double rate, HttpServletResponse res, HttpServletRequest req) {
 		
 		rate = Math.round(rate*10)/10.0;
 		
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("ratingAvg", rtService.getRatingAvg(NICKNAME));
-		resultMap.put("ratingCnt", rService.getRatingCnt(NICKNAME));
+		resultMap.put("ratingAvg", rtService.getRatingAvg(nickname));
+		resultMap.put("ratingCnt", rService.getRatingCnt(nickname));
 		
 		String nick = "";
 		try {
-			nick = URLEncoder.encode(NICKNAME, "utf-8");
+			nick = URLEncoder.encode(nickname, "utf-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
@@ -83,7 +83,7 @@ public class MatchMoreController {
 			resultMap.put("msg", "err");
 		} else {
 			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("snickname", NICKNAME);
+			map.put("snickname", nickname);
 			map.put("rate", rate);
 			rService.addRating(map);
 			

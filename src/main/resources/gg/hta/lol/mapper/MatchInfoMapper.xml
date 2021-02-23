@@ -13,6 +13,18 @@
 		where matchid = #{matchid}
 	</select>
 	
+	<select id="getMatchList" resultType="String">
+		select matchid
+		from (
+		    select rownum rn,m.matchid
+		    from matchinfo m , teammemberinfo tm
+		    where m.matchid = tm.matchid
+		    and tm.snickname = #{snickname}
+		    order by m.starttime desc
+		)
+		<![CDATA[where rn<=20]]>
+	</select>
+	
 	<select id="getMatchInfoList" resultType="gg.hta.lol.vo.match.MatchListVo">
 		select *
 		from(
@@ -54,7 +66,6 @@
 		<foreach collection="list" open="matchid in(" close=")" index="index" item="item" separator=",">
 			#{item}
 		</foreach>
-		
 	</select>
 	
 </mapper>

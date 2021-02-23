@@ -54,8 +54,7 @@
 		select name,wincnt
 		from view_summon_champ_odds 
 		where snickname = #{snickname}
-		and
-		<foreach collection="list" index="index" open="name in (" close=")" item="item" separator=",">
+		<foreach collection="list" index="index" open="and name in (" close=")" item="item" separator=",">
 			#{item.name}
 		</foreach>
 	</select>

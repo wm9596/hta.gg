@@ -1,10 +1,8 @@
 package gg.hta.lol.mapper;
 
-import java.sql.BatchUpdateException;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.dao.DuplicateKeyException;
 
 import gg.hta.lol.vo.MatchinfoVo;
 import gg.hta.lol.vo.match.MatchListVo;
@@ -17,4 +15,6 @@ public interface MatchInfoMapper {
 	public List<MatchListVo> getMatchInfoList(@Param("snickname")String nickname,@Param("type")String type);
 	
 	public List<ParticipantsVo> getParticipants(List<String> nicknames);
+	
+	public List<String> getMatchList(String snickname);
 }

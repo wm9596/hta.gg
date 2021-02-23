@@ -79,7 +79,7 @@ public class MemberController {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		
 		SearchVo searchVo = searchService.getSummoner(snickname);
-		searchService.readMatchList(searchVo.getAccountId(), 0, 20);
+		searchService.readMatchList(searchVo.getAccountId(), 0, 20,searchVo.getSnickname());
 		
 		QueueInfoVo soloVo = searchVo.getSolo();
 		QueueInfoVo flexVo = searchVo.getFlex();

@@ -33,6 +33,8 @@
 	</div>
 </body>
 <script type="text/javascript">
+
+
 $( ".star_rating a" ).click(function() {
     $(this).parent().children("a").removeClass("on");
     $(this).addClass("on").prevAll("a").addClass("on");
@@ -69,12 +71,17 @@ $("#ratingSubmit").click(function(e) {
 })
 
 function postRating(rate) {
+	var nickdiv  = $("#mm_smNicknameDiv");
+	if(nickdiv==null){
+		return;
+	}
+	
+	let nickname = nickdiv.find("h2").text();
 	$.ajax({
 		type: "GET",
-		url: "/lol/insertRating?rate=" + rate,
+		url: "/lol/insertRating?rate=" + rate+"&nickname="+nickname,
 		dataType: "text",
 		success: function(result) {
-			console.log(result);
 			let value = $(result).find("ratingAvg").text();
 			value = Math.round(value * 10)/10;
 			let cnt = $(result).find("ratingCnt").text();
