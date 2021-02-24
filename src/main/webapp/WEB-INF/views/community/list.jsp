@@ -102,7 +102,7 @@
 					<tr>
 						<th scope="row">${vo.pNum }</th>
 						<td>${vo.username }</td>
-						<td><a href="${pageContext.request.contextPath }/community/detail?pNum=${vo.pNum }&cNum=${vo.cNum }">${vo.title }</a>&nbsp;[${vo.commentCount }]</td>
+						<td><a href="${pageContext.request.contextPath }/community/detail?pNum=${vo.pNum }&cNum=${vo.cNum }">${vo.title }</a>&nbsp;<c:if test="${vo.commentCount != 0}">[${vo.commentCount }]</c:if></td>
 						<td>${vo.viewCount }</td>
 						<td>${vo.hit }</td>
 						<td>${vo.regdate }</td>
