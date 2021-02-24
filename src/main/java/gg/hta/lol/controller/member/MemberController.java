@@ -182,6 +182,20 @@ public class MemberController {
 		mv.addObject("pu",pu);
 		return mv;
 	}
+	@GetMapping("/member/member/scrapList")
+	public String scrapList(@RequestParam(value="pageNum", defaultValue = "1")int pageNum, Principal principal) {
+//		int totalRowCount = service.scrapListCount(principal.getName());
+		int totalRowCount = 0;
+		PageUtil pu = new PageUtil(pageNum, 10,5,totalRowCount);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int startRow = pu.getStartRow();
+		int endRow = pu.getEndRow();
+		map.put("startRow",startRow);
+		map.put("endRow",endRow);
+		map.put("username",principal.getName());
+		List<MessageVo> list = service.messageList(map);
+		return ".mypage.scrapList";
+	}
 	@RequestMapping("/member/admin/memberList")
 	public String adminPage(@RequestParam(value="pageNum", defaultValue = "1")int pageNum, String field, String keyword, Model m) {
 		HashMap<String, Object> map = new HashMap<String, Object>();

@@ -65,7 +65,7 @@
 									<ul class="submenu">
 										<li><a href="${pageContext.request.contextPath }/member/member/boardList">내가 작성한 글 </a></li>
 										<li><a href="${pageContext.request.contextPath }/member/member/replyList">내가 작성한 댓글 </a></li>
-										<li><a href="#">스크랩 한 게시물 </a></li>
+										<li><a href="${pageContext.request.contextPath }/member/member/scrapList">스크랩 한 게시물 </a></li>
 									</ul>
 								</li>
 								<li><a href="${pageContext.request.contextPath }/member/member/messageList"><i class="fa fa-glass"></i>받은 쪽지함</a></li>

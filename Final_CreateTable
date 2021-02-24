@@ -12,6 +12,7 @@ drop SEQUENCE tmNum_seq;
 drop SEQUENCE iNum_seq;
 drop SEQUENCE banNum_seq;
 drop SEQUENCE ptNum_seq;
+drop SEQUENCE scNum_seq;
 
 ---------- drop table ---------- 
 drop table visitLog;
@@ -37,6 +38,7 @@ drop table queueinfo;
 drop table Summoner;
 drop table champion;
 drop table item;
+drop table scrap;
 
 ---------- create table ---------- 
 create table visitLog
@@ -296,6 +298,25 @@ create table banList
 	championid	varchar2(255) references champion(championid)
 );
 
+CREATE TABLE "FINAL"."SCRAP" 
+   (	"SNUM" NUMBER NOT NULL ENABLE, 
+	"PNUM" NUMBER, 
+	"USERNAME" VARCHAR2(50 BYTE), 
+	 CONSTRAINT "SCRAP_PK" PRIMARY KEY ("SNUM")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE, 
+	 CONSTRAINT "SCRAP_FK1" FOREIGN KEY ("USERNAME")
+	  REFERENCES "FINAL"."MEMBER" ("USERNAME") ENABLE, 
+	 CONSTRAINT "SCRAP_FK2" FOREIGN KEY ("PNUM")
+	  REFERENCES "FINAL"."COMMUNITY" ("PNUM") ENABLE
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+
 ---------- create sequence -----------
 create SEQUENCE msgNum_seq;
 create SEQUENCE tNum_seq;
@@ -310,10 +331,4 @@ create SEQUENCE tmNum_seq;
 create SEQUENCE iNum_seq;
 create SEQUENCE banNum_seq;
 create SEQUENCE ptNum_seq;
-
-------------�뚎됱쓥筌륅옙 獄쏅떽��疫뀐옙 --------------------------------
-alter table member rename column enable to enabled;
-alter table member modify ENABLED CHAR(1) DEFAULT 1 CHECK(ENABLED='0' OR ENABLED='1') NOT NULL;
-
-ALTER TABLE reply ADD(rhit number);
-ALTER TABLE reply ADD(rnohit number);
+create SEQUENCE scNum_seq;
