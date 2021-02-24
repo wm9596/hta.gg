@@ -141,4 +141,20 @@
 		 )
 		 <![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
+	<select id="scrapListCount" parameterType="string" resultType="int">
+		select NVL(count(*),0) cnt from scrap where username = #{username}
+	</select>
+	<select id="scrapList" parameterType="hashmap" resultType="gg.hta.lol.vo.CommunityVo">
+		select * from
+		 (
+		   select a.*,rownum rnum from
+		   (
+			   select * from community where pNum In
+			   (
+			   		select pNUm from scrap where username = #{username}
+			   )
+		   )a
+		 )
+		 <![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	</select>
 </mapper>

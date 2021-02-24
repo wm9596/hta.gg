@@ -15,6 +15,7 @@ import gg.hta.lol.vo.MemberVo;
 import gg.hta.lol.vo.MessageVo;
 import gg.hta.lol.vo.PointVo;
 import gg.hta.lol.vo.ReportVo;
+import gg.hta.lol.vo.ScrapVo;
 import gg.hta.lol.vo.VisitVo;
 
 @Service
@@ -103,5 +104,11 @@ public class MemberService {
 	}
 	public List<MessageVo> messageList(HashMap<String, Object> map){
 		return dao.messageList(map);
+	}
+	public int scrapListCount(String username) {
+		return dao.scrapListCount(username);
+	}
+	public List<ScrapVo> scrapList(HashMap<String, Object> map){
+		return dao.scrapList(map);
 	}
 }

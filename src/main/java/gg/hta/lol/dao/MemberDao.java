@@ -14,6 +14,7 @@ import gg.hta.lol.vo.MemberVo;
 import gg.hta.lol.vo.MessageVo;
 import gg.hta.lol.vo.PointVo;
 import gg.hta.lol.vo.ReportVo;
+import gg.hta.lol.vo.ScrapVo;
 
 @Repository
 public class MemberDao {
@@ -93,5 +94,11 @@ public class MemberDao {
 	}
 	public List<MessageVo> messageList(HashMap<String, Object> map){
 		return sqlSession.selectList(NAMESPACE + ".messageList", map);
+	}
+	public int scrapListCount(String username) {
+		return sqlSession.selectOne(NAMESPACE + ".scrapListCount", username);
+	}
+	public List<ScrapVo> scrapList(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE + ".scrapList", map);
 	}
 }
