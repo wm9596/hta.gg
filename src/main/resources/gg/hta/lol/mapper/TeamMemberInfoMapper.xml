@@ -4,82 +4,89 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gg.hta.lol.mapper.TeamMemberInfoMapper">
 	<insert id="addTeamMemberInfo">
-		insert into teammemberinfo values(
-			tmnum_seq.nextval,
-			#{snickname},
-			#{teamId},
-			#{matchId},
-			#{championId},
-			#{kill},
-			#{death},
-			#{assist},
-			#{championLevel},
-			#{spell1},
-			#{spell2},
-			#{rune1},
-			#{rune2},
-			#{championDamage},
-			#{takenDamage},
-			#{cs},
-			#{wardInstall},
-			#{wardRemove},
-			#{gold},
-			<choose>
-				<when test="item1==0 or item1>6695">
-					null
-				</when>
-				<otherwise>
-					#{item1}
-				</otherwise>
-			</choose>
-			,
-			<choose>
-				<when test="item2==0 or item2>6695">
-					null
-				</when>
-				<otherwise>
-					#{item2}
-				</otherwise>
-			</choose>
-			,
-			<choose>
-				<when test="item3==0 or item3>6695">
-					null
-				</when>
-				<otherwise>
-					#{item3}
-				</otherwise>
-			</choose>
-			,
-			<choose>
-				<when test="item4==0 or item4>6695">
-					null
-				</when>
-				<otherwise>
-					#{item4}
-				</otherwise>
-			</choose>
-			,
-			<choose>
-				<when test="item5==0 or item5>6695">
-					null
-				</when>
-				<otherwise>
-					#{item5}
-				</otherwise>
-			</choose>
-			,
-			<choose>
-				<when test="item6==0 or item6>=6695">
-					null
-				</when>
-				<otherwise>
-					#{item6}
-				</otherwise>
-			</choose>
-			,
-			#{accessory},
-			#{multiKill}
-		)
+		insert into teammemberinfo(
+		tmnum,snickname,teamId,matchId,championId,kill,death,assist,championLevel,spell1,spell2,
+		rune1,rune2,championDamage,takenDamage,cs,wardInstall,wardRemove,gold,item1,item2,item3,item4,item5,item6,accessory,multiKill
+		) 
+		select tmnum_seq.nextval, i.*
+		from(
+			<foreach collection="list" item="item" separator="union all ">
+				select #{item.snickname},
+				#{item.teamId},
+				#{item.matchId},
+				#{item.championId},
+				#{item.kill},
+				#{item.death},
+				#{item.assist},
+				#{item.championLevel},
+				#{item.spell1},
+				#{item.spell2},
+				#{item.rune1},
+				#{item.rune2},
+				#{item.championDamage},
+				#{item.takenDamage},
+				#{item.cs},
+				#{item.wardInstall},
+				#{item.wardRemove},
+				#{item.gold},
+				<choose>
+					<when test="item.item1==0 or item.item1>6695">
+						null
+					</when>
+					<otherwise>
+						#{item.item1}
+					</otherwise>
+				</choose>
+				, 
+				<choose>
+					<when test="item.item2==0 or item.item2>6695">
+						null
+					</when>
+					<otherwise>
+						#{item.item2}
+					</otherwise>
+				</choose>
+				,
+				<choose>
+					<when test="item.item3==0 or item.item3>6695">
+						null
+					</when>
+					<otherwise>
+						#{item.item3}
+					</otherwise>
+				</choose>
+				,
+				<choose>
+					<when test="item.item4==0 or item.item4>6695">
+						null
+					</when>
+					<otherwise>
+						#{item.item4}
+					</otherwise>
+				</choose>
+				,
+				<choose>
+					<when test="item.item5==0 or item.item5>6695">
+						null
+					</when>
+					<otherwise>
+						#{item.item5}
+					</otherwise>
+				</choose>
+				,
+				<choose>
+					<when test="item.item6==0 or item.item6>=6695">
+						null
+					</when>
+					<otherwise>
+						#{item.item6}
+					</otherwise>
+				</choose>
+				,
+				#{item.accessory},
+				#{item.multiKill}
+				from dual
+			</foreach>
+		)i
 	</insert>
 </mapper>

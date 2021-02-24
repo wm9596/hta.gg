@@ -17,6 +17,10 @@
 	 	insert into reply values(reNum_seq.nextval,#{pNum},0,#{rWriter},#{rContent},sysdate,0,0)
 	</insert>
 	
+		<insert id="reInsert" parameterType="reply">
+	 	insert into reply values(reNum_seq.nextval,#{pNum},#{rereNum},#{rWriter},#{rContent},sysdate,0,0)
+	</insert>
+	
 	<delete id="delete" parameterType="int">
 		delete from reply where rNum=#{rNum}
 	</delete>

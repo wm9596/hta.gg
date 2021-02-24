@@ -67,6 +67,20 @@ public class DataRequester {
 		}
 		return getData(url).getAsJsonObject();
 	}
+	
+	public JsonObject getMatchList(String aid) {
+		String url = "https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/%s?api_key="
+				+ KEY;
+		
+		try {
+			aid = URLEncoder.encode(aid, "utf-8");
+			url = String.format(url, aid);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return getData(url).getAsJsonObject();
+	}
 
 	public JsonObject getMatchInfo(String mid) {
 		String url = "https://kr.api.riotgames.com/lol/match/v4/matches/%s?api_key=" + KEY;

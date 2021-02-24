@@ -57,7 +57,8 @@
 		    select championid 
 		    from teaminfo ti, teammemberinfo tm
 		    where ti.matchid=tm.matchid
-		    and tm.matchid = #{matchid}
+		   	<foreach collection="" open=" and tm.matchid  in(" close=")" separator=",">
+		   	</foreach>
 		    and winlose = 'Fail'
   	  	)
 	</update>

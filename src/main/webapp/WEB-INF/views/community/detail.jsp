@@ -63,7 +63,7 @@
 			<hr size="2" width="600" color="black" id=line>
 		</div>
 		<div >
-			<div id="commList"></div><br> <!-------------------------------------------------------------------------------------->
+			<div id="commList"></div><br>
 <!-- 			<div id="rc" style="background-color: black"></div> -------------------------------------------------------------------------------------------- -->
 			<div align="center">
 			<div id="commAdd" style="display: inline-block;">
@@ -236,7 +236,7 @@
 				var commList = $("#commList");
 				var childs = commList.childNodes;
 				
-				commList.empty(); // ------------------------------------------------------------------------------------------------------------->>>
+				commList.empty();
 				$(data).find("item").each(function(){
 					var rNum = $(this).find("rNum").text();
 					var pNum = $(this).find("pNum").text();
@@ -252,7 +252,7 @@
 							+regdate+"&nbsp;&nbsp;&nbsp;"
 							+"<a href='javascript:replyHit("+ rNum + ")'>추천</a>[" + rHit +"]&nbsp;&nbsp;"
 							+"<a href='javascript:replyNohit("+ rNum + ")'>반대</a>[" + rNohit +"]&nbsp;&nbsp;"
-							+"<a href='javascript:replyComment'>답글</a>"+"&nbsp;&nbsp;"
+							+"<a href=\"javascript:rereComment("+ rNum + "," + pNum + ",'" + rWriter + "','" + rContent + "')\">답글</a>"+"&nbsp;&nbsp;"
 							+"<a href='javascript:removeComm("+ rNum + "," + pNum + ")'>삭제</a>"
 							);
 					
@@ -272,6 +272,7 @@
 			url:"/lol/rereply/"+rNum,
 			dataType: 'json',
 			success: function(data){
+				if(data.length < 1 ) return;
 				console.log(rNum+"번 대댓");
 				for(rereply of data){
 					console.log(rereply);
@@ -287,6 +288,29 @@
 		});
 	}
 	
+	function rereComment(rNum, pNum, rWriter, rContent){
+		var rWriter = document.getElementById("rWriter").value;
+		// var ask = document.getElementById("ask").value;
+		var prompt_test = prompt("댓글을 입력해주세요.");
+		var ask = confirm("댓글을 등록하시겠습니까?");
+		if(ask == true){
+		$.ajax({
+			url:"/lol/rinsert/"+rNum+"/"+pNum+"/"+rWriter+"/"+prompt_test,
+			success: function(data) {
+				var code=$(data).find("code").text();
+				if(code=='success'){
+					alert("댓글이 등록되었습니다.");
+					getList();
+				}else{
+					alert('등록 실패!');
+				}
+			}
+		});
+		}
+	}
+
+	
+
 
 </script>
 </body>

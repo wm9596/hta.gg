@@ -19,6 +19,7 @@ padding-left: 5px;
 </head>
 
 <body>
+<h1>gdgdgd</h1>
 <script type="text/javascript">
 $(function(){
 	$.ajax({
@@ -28,16 +29,21 @@ $(function(){
 		success: function(data){
 			$.each(data.map,function(key,value){
 				
-		
+			
 			 
 			
-			
-				$("#charFace").append("<a href='/lol/champ/selectList?championid="+value.championid+"'><image id='"+key+"' src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/"+value.picture+"'></a>").addClass("charFace");
+				
+				$("#charFace").append("<a href='/lol/champ/selectList?championid="+value.championid+"'><image id='"+key+"' src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/"+value.picture+"'>"+value.name+"</a>").addClass("charFace");
 				$("#"+key).append("<br><span>dd</span>");
 			})
 		
 		}
 	})
+
+
+	
+	
+	
 })
 </script>
 <div id="all" style="width: 550px;">

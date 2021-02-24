@@ -26,5 +26,11 @@ public class ItemListController {
 		ItemVo info=service.item_select(inum);
 		return info;
 	}
+	@RequestMapping(value="/select/iteminfo",produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ItemVo item_info2(int inum) {
+		System.out.println("dd");
+		ItemVo info=service.item_select(inum);
+		return info;
+}
 }
 	

@@ -14,6 +14,8 @@ public interface SummonerMapper {
 	
 	public int addSummoner(SummonerVo vo);
 	
+	public int addSummonerList(List<SummonerVo> list);
+	
 	public int updateSummoner(SummonerVo vo);
 	
 	public SearchVo getSummonerInfo(String name);

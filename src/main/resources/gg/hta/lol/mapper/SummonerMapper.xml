@@ -7,6 +7,17 @@
 		insert into summoner values(#{snickname},#{slevel},#{icon})
 	</insert>
 	
+	<insert id="addSummonerList" >
+		insert into summoner(snickname,slevel,icon)
+			select i.*
+			from(
+				<foreach collection="list" item="item" separator="union all ">
+					select #{item.snickname},#{item.slevel},#{item.slevel}
+					from dual
+				</foreach>
+			)i
+	</insert>
+	
 	<select id="getSummoner" parameterType="String" resultType="gg.hta.lol.vo.SummonerVo">
 		select * from summoner where sNickName =  #{nickname}
 	</select>
