@@ -14,7 +14,7 @@
 	a{ text-decoration:none; color: black; }
 	.insert{margin-top: 5%}
 	.comm{margin-bottom: 20px; margin-left: 22%; width: 600px; border: 1px solid #aaa;position: relative;}
-	.commWrap1{margin-bottom: 20px; margin-left: 25%; width: 600px; position: relative;}
+	.commWrap1{margin-bottom: 20px; margin-left: 24%; width: 600px; position: relative;}
 </style>
 </head>
 <body><br>
@@ -163,28 +163,39 @@
 	})
 
 	$("#hit").click(function(e){
-		var ask=confirm("해당 게시글을 추천하시겠습니까?");
+		var ask = confirm("해당 게시글을 추천하시겠습니까?");
+		var username = document.getElementById("object HTMLInputElement");
 		if(ask == true){
-		$.ajax({
-			url:"/lol/update/" + ${vo.pNum },
-			success: function(data){
-				$("#hit").html('추천 '+data);
+			if(username != null){
+				$.ajax({
+					url:"/lol/update/" + ${vo.pNum },
+					success: function(data){
+						alert('추천 성공');
+						$("#hit").html('추천 '+data);
+					}
+				});
 			}
-		});
+			alert('로그인 후 이용해주세요.');
 		}
 	});
 	
 	$("#nohit").click(function(e){
-		var ask=confirm("해당 게시글을 반대하시겠습니까?");
+		var ask = confirm("해당 게시글을 반대하시겠습니까?");
+		var username = document.getElementById("object HTMLInputElement");
 		if(ask == true){
-		$.ajax({
-			url:"/lol/update1/" + ${vo.pNum },
-			success: function(data){
-				$("#nohit").html('반대 '+data);
-			}
-		});
+			if(username != null){
+				$.ajax({
+					url:"/lol/update1/" + ${vo.pNum },
+					success: function(data){
+						alert('반대 성공');
+						$("#nohit").html('반대 '+data);
+				}
+			});
 		}
+		alert('로그인 후 이용해주세요.');
+	}
 	});
+
 	
 	$("#btn").click(function(){
 		var rWriter = document.getElementById("rWriter").value;
@@ -216,6 +227,7 @@
 			success: function(data) {
 				var code=$(data).find("code").text();
 				if(code=='success'){
+					alert('댓글이 삭제되었습니다.');
 					getList();
 				}else{
 					alert('삭제 실패!');
@@ -359,7 +371,7 @@
 				for(rereply of data){
 					console.log(rereply);
 					var rereDiv = $("<div>",{class:'commWrap1'});
-					rereDiv.text("└" + rereply.regdate + " " + rereply.rWriter + " " + rereply.rContent);
+					rereDiv.text("└ " + rereply.regdate + " " + rereply.rWriter + " " + rereply.rContent);
 					console.log(wrapDiv);
 					wrapDiv.append(rereDiv);
 				}
