@@ -12,7 +12,7 @@
 			select i.*
 			from(
 				<foreach collection="list" item="item" separator="union all ">
-					select #{item.snickname},#{item.slevel},#{item.slevel}
+					select #{item.snickname} as snickname,#{item.slevel} as slevel,#{item.icon} as icon
 					from dual
 				</foreach>
 			)i

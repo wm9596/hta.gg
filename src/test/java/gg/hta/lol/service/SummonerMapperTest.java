@@ -1,5 +1,6 @@
 package gg.hta.lol.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import gg.hta.lol.mapper.ChampionMapper;
 import gg.hta.lol.mapper.MatchInfoMapper;
 import gg.hta.lol.mapper.SummonerMapper;
 import gg.hta.lol.service.match.SearchService;
@@ -25,12 +27,19 @@ import lombok.Setter;
 public class SummonerMapperTest {
 
 	@Autowired
-	private SummonerMapper mapper;
+	private ChampionMapper mapper;
 //	private MatchInfoMapper mapper;
 
+//	@Test
+//	public void getSummonerTest() {
+//		System.out.println(mapper.getSummonerInfo("더덕순대국"));
+//	}
 	@Test
 	public void getSummonerTest() {
-		System.out.println(mapper.getSummonerInfo("더덕순대국"));
+		List<String> list =new ArrayList<String>();
+		list.add("4923998077");
+		
+		mapper.updateWin(list);
 	}
 
 //	@Test

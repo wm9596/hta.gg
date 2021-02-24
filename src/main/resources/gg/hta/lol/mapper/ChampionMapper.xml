@@ -44,7 +44,10 @@
 	    select championid 
 	    from teaminfo ti, teammemberinfo tm
 	    where ti.matchid=tm.matchid
-	    and tm.matchid = #{matchid}
+	     and ti.teamid = tm.teamid
+	    	<foreach collection="list" item="item" open=" and tm.matchid  in(" close=")" separator=",">
+		   		#{item}
+		   	</foreach>
 	    and winlose = 'Win'
     )
     </update>
@@ -57,7 +60,9 @@
 		    select championid 
 		    from teaminfo ti, teammemberinfo tm
 		    where ti.matchid=tm.matchid
-		   	<foreach collection="" open=" and tm.matchid  in(" close=")" separator=",">
+		     and ti.teamid = tm.teamid
+		   	<foreach collection="list" item="item" open=" and tm.matchid  in(" close=")" separator=",">
+		   		#{item}
 		   	</foreach>
 		    and winlose = 'Fail'
   	  	)

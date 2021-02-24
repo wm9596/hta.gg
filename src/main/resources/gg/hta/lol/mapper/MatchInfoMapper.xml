@@ -8,7 +8,11 @@
 		insert into matchinfo(matchid,type,runtime,startTime) 
 			select i.* from(
 				<foreach collection="list" item="item" separator="union all ">
-					select #{item.matchinfoVo.matchid},#{item.matchinfoVo.type},#{item.matchinfoVo.runtime},#{item.matchinfoVo.startTime}
+					select 
+					#{item.matchinfoVo.matchid} as matchid,
+					#{item.matchinfoVo.type} as type,
+					#{item.matchinfoVo.runtime} as runtime,
+					#{item.matchinfoVo.startTime} as startTime
 					from dual
 				</foreach>
 			)i

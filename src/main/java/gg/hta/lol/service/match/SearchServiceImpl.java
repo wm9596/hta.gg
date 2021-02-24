@@ -219,15 +219,12 @@ public class SearchServiceImpl implements SearchService {
 				public void run() {
 					int cnt = 0 ; 
 					mlist.add(readMatchDetail(gameId,gameTypeCode));
-//					addMatchInfo(gameId,gameTypeCode);
-//					System.out.println("완료");
 				}
 			};
 			t.start();
 		});
 		
 		while(group.activeCount()>0) {
-//			System.out.println(group.activeCount());
 		}
 		
 		if(mlist.size() < 1) {
@@ -237,6 +234,11 @@ public class SearchServiceImpl implements SearchService {
 		addMatchInfo(mlist);
 		addTeamInfo(mlist);
 		addTeamMemberInfo(mlist);
+		
+		List<String>gameList = mlist.stream().map(item->item.getMatchinfoVo().getMatchid()).collect(Collectors.toList());
+		
+		champMapper.updateWin(gameList);
+		champMapper.updateLose(gameList);
 		
 	}
 
@@ -257,9 +259,6 @@ public class SearchServiceImpl implements SearchService {
 	public void addMatchInfo(List<MatchInfosWrapper> mlist) {
 
 		matchinfoMapper.addMatchinfo(mlist);
-		
-//		champMapper.updateWin(gameId);
-//		champMapper.updateLose(gameId);
 	}
 	
 	@Override
@@ -371,6 +370,7 @@ public class SearchServiceImpl implements SearchService {
 		
 		sList.forEach(item->addSummoner(item, false));
 //		summonerMapper.addSummonerList(sList);
+		
 		tminfoMapper.addTeamMemberInfo(tmList);
 	}
 	
