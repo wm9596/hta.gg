@@ -20,8 +20,8 @@ public class VisitCountDao {
 	public int getTodayCnt() {
 		return sqlSession.selectOne(NAMESPACE + ".todayCnt");
 	}
-	public List<VisitVo> visitList(HashMap<String, Object> map){
-		return sqlSession.selectList(NAMESPACE + ".list",map);
+	public List<VisitVo> visitList(){
+		return sqlSession.selectList(NAMESPACE + ".list");
 	}
 	public int visitListCount() {
 		return sqlSession.selectOne(NAMESPACE + ".count");

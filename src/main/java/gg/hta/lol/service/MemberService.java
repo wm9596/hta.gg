@@ -87,8 +87,8 @@ public class MemberService {
 	public List<PointVo> pointList(HashMap<String, Object> map){
 		return dao.pointList(map);
 	}
-	public List<VisitVo> visitList(HashMap<String, Object> map){
-		return vdao.visitList(map);
+	public List<VisitVo> visitList(){
+		return vdao.visitList();
 	}
 	public int visitListCount() {
 		return vdao.visitListCount();

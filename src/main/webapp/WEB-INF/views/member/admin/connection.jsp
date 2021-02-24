@@ -46,31 +46,50 @@
 </div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+	
 	google.charts.load('current', {'packages':['corechart']});
 	google.charts.setOnLoadCallback(drawChart);
 	
 	function drawChart() {
-	  
-	  var data[i][j];
-		  
-		  
-		['Day', 'cnt'],
-	    ['2004', 10     ],
-	    ['2005', 20     ],
-	    ['2006', 30     ],
-	    ['2007', 40     ]
-	  ];
-	  
-	  google.visualization.arrayToDataTable(data);
-	
-	  var options = {
-	    title: 'Company Performance',
-	    curveType: 'function',
-	    legend: { position: 'bottom' }
-	  };
-	
-	  var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-	
-	  chart.draw(data, options);
+		$.ajax({
+			url: "/lol/member/admin/connectionList",
+			dataType: "json",
+			success: function(data){
+// 				console.log(data);
+// 				console.log(new Date(data[0].regdate))
+
+				function create2DArray(rows, columns) {
+				    var arr = new Array(rows);
+				    for (var i = 0; i < rows; i++) {
+				        arr[i] = new Array(columns);
+				    }
+				    return arr;
+				}
+				var visit = create2DArray(data.length+1, 2);
+
+
+				console.log(visit);
+				
+// 				var data[data.length+1][2];
+				visit[0][0]='Day';	visit[0][1]='cnt';
+				console.log(data.length);
+				for(var i=0;i<data.length;i++){
+					visit[i+1][0] = new Date(data[i].regdate);
+					visit[i+1][1] =data[i].cnt;
+					
+				}
+				visit = google.visualization.arrayToDataTable(visit);
+				
+				
+				var options = {
+					    title: 'Company Performance',
+					    curveType: 'function',
+					    legend: { position: 'bottom' }
+				};
+				 var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+			
+				chart.draw(visit, options);
+			}
+		});
 	}
 </script>

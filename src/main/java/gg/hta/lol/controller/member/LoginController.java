@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
@@ -116,16 +118,24 @@ public class LoginController {
 	}
 	@GetMapping("/member/admin/connection")
 	public String connection(@RequestParam(value="pageNum", defaultValue = "1")int pageNum, Model m) {
-		int totalRowCount = service.visitListCount(); 
-		PageUtil pu = new PageUtil(pageNum, 10,5,totalRowCount);
-		int startRow = pu.getStartRow();
-		int endRow = pu.getEndRow();
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("startRow",startRow);
-		map.put("endRow",endRow);
-		List<VisitVo> list = service.visitList(map);
-		m.addAttribute("list", list);
-		m.addAttribute("pu",pu);
+//		int totalRowCount = service.visitListCount(); 
+//		PageUtil pu = new PageUtil(pageNum, 10,5,totalRowCount);
+//		int startRow = pu.getStartRow();
+//		int endRow = pu.getEndRow();
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//		map.put("startRow",startRow);
+//		map.put("endRow",endRow);
+//		List<VisitVo> list = service.visitList(map);
+//		m.addAttribute("list", list);
+//		m.addAttribute("pu",pu);
 		return ".adminpage.connection";
+	}
+	@GetMapping(value = "/member/admin/connectionList", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	@ResponseBody
+	public List<VisitVo> connectionList() {
+		List<VisitVo> list = service.visitList();
+
+		System.out.println(list);
+		return list;
 	}
 }

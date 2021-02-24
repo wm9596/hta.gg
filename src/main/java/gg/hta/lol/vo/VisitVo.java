@@ -2,20 +2,22 @@ package gg.hta.lol.vo;
 
 import java.sql.Date;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class VisitVo {
 	private Date regdate;
 	private int cnt;
-	public VisitVo(Date regdate, int cnt) {
-		super();
-		this.regdate = regdate;
-		this.cnt = cnt;
-	}
-	public VisitVo() {
-		super();
-	}
+//	public VisitVo(Date regdate, int cnt) {
+//		super();
+//		this.regdate = regdate;
+//		this.cnt = cnt;
+//	}
+//	public VisitVo() {
+//		super();
+//	}
 }
