@@ -23,7 +23,6 @@
 	<div id="header_right">
 		<div id="header_none">
 		</div>
-		
 		<sec:authorize access="isAnonymous()">
 			<div id="header_msg">
 				<span style="color:rgba(255, 255, 255, 0.5);">

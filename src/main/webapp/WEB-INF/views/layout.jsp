@@ -95,6 +95,7 @@ function postRating(rate) {
 		return;
 	}
 	
+	
 	let nickname = nickdiv.find("h2").text();
 	$.ajax({
 		type: "GET",
