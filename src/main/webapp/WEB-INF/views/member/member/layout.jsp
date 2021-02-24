@@ -52,34 +52,36 @@
 			<tiles:insertAttribute name="header"/>
 		</div>
 		<div id="content">
-			<div id="myPage_Menu" style="height: 100%; position: absolute;">
-				<div class="content" style="width: 100%; height: 100%; margin: 0px;">
-					<div id="jquery-accordion-menu" class="jquery-accordion-menu" style="width: 100%; min-width: 100%;">
-						<div class="jquery-accordion-menu-header">MENU </div>
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath }/member/member/info"><i class="fas fa-user"></i>내 정보 </a></li>
-							<li><a href="${pageContext.request.contextPath }/member/member/profile"><i class="fa fa-glass"></i>프로필 등록 </a></li>
-							<li><a href="${pageContext.request.contextPath }/member/member/pointList"><i class="fa fa-glass"></i>포인트 내역 </a></li>
-							<li><a href="#"><i class="fa fa-suitcase"></i>내 활동 </a>
-								<ul class="submenu">
-									<li><a href="${pageContext.request.contextPath }/member/member/boardList">내가 작성한 글 </a></li>
-									<li><a href="${pageContext.request.contextPath }/member/member/replyList">내가 작성한 댓글 </a></li>
-									<li><a href="#">스크랩 한 게시물 </a></li>
-								</ul>
-							</li>
-							<li><a href="${pageContext.request.contextPath }/member/member/messageList"><i class="fa fa-glass"></i>받은 쪽지함</a></li>
-							<form:form method="post" name="out" action="${pageContext.request.contextPath }/member/logout">
-								<li><a href="javascript:delchk()"><i class="fa fa-envelope"></i>회원탈퇴 </a></li>
-							</form:form>
-						</ul>
+			<div style="height: 1500px;">
+				<div id="myPage_Menu" style="height: 100%; position: absolute;">
+					<div class="content" style="width: 100%; height: 100%; margin: 0px;">
+						<div id="jquery-accordion-menu" class="jquery-accordion-menu" style="width: 100%; min-width: 100%;">
+							<div class="jquery-accordion-menu-header">MENU </div>
+							<ul>
+								<li class="active"><a href="${pageContext.request.contextPath }/member/member/info"><i class="fas fa-user"></i>내 정보 </a></li>
+								<li><a href="${pageContext.request.contextPath }/member/member/profile"><i class="fa fa-glass"></i>프로필 등록 </a></li>
+								<li><a href="${pageContext.request.contextPath }/member/member/pointList"><i class="fa fa-glass"></i>포인트 내역 </a></li>
+								<li><a href="#"><i class="fa fa-suitcase"></i>내 활동 </a>
+									<ul class="submenu">
+										<li><a href="${pageContext.request.contextPath }/member/member/boardList">내가 작성한 글 </a></li>
+										<li><a href="${pageContext.request.contextPath }/member/member/replyList">내가 작성한 댓글 </a></li>
+										<li><a href="#">스크랩 한 게시물 </a></li>
+									</ul>
+								</li>
+								<li><a href="${pageContext.request.contextPath }/member/member/messageList"><i class="fa fa-glass"></i>받은 쪽지함</a></li>
+								<form:form method="post" name="out" action="${pageContext.request.contextPath }/member/logout">
+									<li><a href="javascript:delchk()"><i class="fa fa-envelope"></i>회원탈퇴 </a></li>
+								</form:form>
+							</ul>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div id="myPage_section" style="margin-left: 21.4%;">
-				<tiles:insertAttribute name="content"/>
+				<div id="myPage_section" style="margin-left: 21.4%;">
+					<tiles:insertAttribute name="content"/>
+				</div>
 			</div>
 		</div>
-		<div id="footer" style="position: absolute; bottom: 0px;">
+		<div id="footer">
 			<tiles:insertAttribute name="footer"/>
 		</div>
 	</div>

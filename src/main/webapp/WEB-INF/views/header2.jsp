@@ -143,7 +143,7 @@ $(function(){
 		}
 	})
 	
-	var btn = $(".btn-primary");
+	var btn = form.find(".btn-primary");
 	btn.click(function(e){
 		e.preventDefault();
 		search(form,input);

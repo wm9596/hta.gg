@@ -51,31 +51,33 @@
 			<tiles:insertAttribute name="header"/>
 		</div>
 		<div id="content">
-			<div id="adminPage_Menu" style="height: 100%; position: absolute;">
-				<div class="content" style="width: 100%; height: 100%; margin: 0px;">
-					<div id="jquery-accordion-menu" class="jquery-accordion-menu" style="width: 100%; min-width: 100%;">
-						<div class="jquery-accordion-menu-header">MENU </div>
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath }/member/admin/memberList"><i class="fas fa-user"></i>회원 관리</a></li>
-							<li><a href="#"><i class="fa fa-suitcase"></i>게시판 관리</a>
-								<ul class="submenu">
-									<li><a href="">공지사항 등록</a></li>
-									<li><a href="">경기일정 등록</a></li>
-									<li><a href="">경기결과 처리</a></li>
-									<li><a href="">게시글 관리</a></li>
-								</ul>
-							</li>
-							<li><a href="${pageContext.request.contextPath }/member/admin/report"><i class="fa fa-glass"></i>신고 접수 내역</a></li>
-							<li><a href="${pageContext.request.contextPath }/member/admin/connection"><i class="fa fa-glass"></i>접속자 수 통계</a></li>
-						</ul>
+			<div style="height: 1500px;">
+				<div id="adminPage_Menu" style="height: 100%; position: absolute;">
+					<div class="content" style="width: 100%; height: 100%; margin: 0px;">
+						<div id="jquery-accordion-menu" class="jquery-accordion-menu" style="width: 100%; min-width: 100%;">
+							<div class="jquery-accordion-menu-header">MENU </div>
+							<ul>
+								<li class="active"><a href="${pageContext.request.contextPath }/member/admin/memberList"><i class="fas fa-user"></i>회원 관리</a></li>
+								<li><a href="#"><i class="fa fa-suitcase"></i>게시판 관리</a>
+									<ul class="submenu">
+										<li><a href="">공지사항 등록</a></li>
+										<li><a href="">경기일정 등록</a></li>
+										<li><a href="">경기결과 처리</a></li>
+										<li><a href="">게시글 관리</a></li>
+									</ul>
+								</li>
+								<li><a href="${pageContext.request.contextPath }/member/admin/report"><i class="fa fa-glass"></i>신고 접수 내역</a></li>
+								<li><a href="${pageContext.request.contextPath }/member/admin/connection"><i class="fa fa-glass"></i>접속자 수 통계</a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div id="adminPage_section" style="margin-left: 21.4%;">
-				<tiles:insertAttribute name="content"/>
+				<div id="adminPage_section" style="margin-left: 21.4%;">
+					<tiles:insertAttribute name="content"/>
+				</div>
 			</div>
 		</div>
-		<div id="footer" style="position: absolute; bottom: 0px;">
+		<div id="footer">
 			<tiles:insertAttribute name="footer"/>
 		</div>
 	</div>
