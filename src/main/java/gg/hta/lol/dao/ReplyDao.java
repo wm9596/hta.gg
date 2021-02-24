@@ -19,9 +19,15 @@ public class ReplyDao {
 	}
 	
 	public int insert(ReplyVo vo) {
-		System.out.println("==================================");
+		System.out.println("1111111111111111111111111111111");
 		int n=sqlSession.insert(NAMESPACE + ".insert", vo);
 		System.out.println("=================================="+n);
+		return n;
+	}
+	
+	public int reInsert(ReplyVo vo) {
+		System.out.println("222222222222222222222222222222222");
+		int n=sqlSession.insert(NAMESPACE + ".reInsert", vo);
 		return n;
 	}
 	

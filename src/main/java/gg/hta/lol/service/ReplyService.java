@@ -18,6 +18,9 @@ public class ReplyService {
 	public int insert(ReplyVo vo) {
 		return dao.insert(vo);
 	}
+	public int reInsert(ReplyVo vo) {
+		return dao.reInsert(vo);
+	}
 	public List<ReplyVo> list(int pNum){
 		return dao.list(pNum);
 	}

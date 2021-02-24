@@ -41,6 +41,7 @@ import oracle.jdbc.proxy.annotation.Post;
 @Controller
 public class DetailController {
 	@Autowired private CommunityService service;
+	@Autowired ReplyService service1;
 	@Autowired private ReportService reportService;
 	
 	@GetMapping("/community/detailMy")
@@ -88,7 +89,6 @@ public class DetailController {
 		
 	}
 	
-	@Autowired ReplyService service1;
 	@GetMapping(value = "/reply/{pNum}", produces = "application/xml;charset=utf-8")
 	@ResponseBody
 	public List<ReplyVo> select(@PathVariable("pNum")int pNum) {
@@ -105,7 +105,7 @@ public class DetailController {
 		System.out.println("==========================");
 		List<ReplyVo> list = service1.rereList(rNum);
 		System.out.println(list);
-		return new ResponseEntity<List<ReplyVo>>(list, list.size()>0?HttpStatus.OK:HttpStatus.NOT_FOUND);
+		return new ResponseEntity<List<ReplyVo>>(list,HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/insert/{pNum}/{rWriter}/{rContent}", produces = "application/xml;charset=utf-8")
@@ -124,6 +124,28 @@ public class DetailController {
 		sb.append("</result>");
 		return sb.toString();
 	}
+
+
+	@GetMapping(value = "/rinsert/{rNum}/{pNum}/{rWriter}/{rContent}", produces = "application/xml;charset=utf-8")
+	@ResponseBody
+	public String insert(@PathVariable("rNum")int rNum,@PathVariable("pNum")int pNum,@PathVariable("rWriter")String rWriter,@PathVariable("rContent")String rContent) {
+		ReplyVo vo=new ReplyVo(0, pNum, rNum, rWriter, rContent, null);
+		System.out.println("vo:"+ vo);
+		int n = service1.reInsert(new ReplyVo(0, pNum, rNum, rWriter, rContent, null));
+		int n1 = service1.update1(pNum);
+		StringBuffer sb = new StringBuffer();
+		sb.append("<result>");
+		try {
+			sb.append("<code>success</code>");
+		}catch(Exception e) {
+			e.printStackTrace();
+			sb.append("<code>fail</code>");
+		}
+		sb.append("</result>");
+		return sb.toString();
+	}
+	
+
 	
 	@RequestMapping(value="/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
 	@ResponseBody
