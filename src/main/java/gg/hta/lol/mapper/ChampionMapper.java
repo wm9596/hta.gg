@@ -10,9 +10,9 @@ public interface ChampionMapper {
 	
 	public int deleteAllChampion();
 	
-	public int updateWin(String matchId);
+	public int updateWin(List<String> list);
 	
-	public int updateLose(String matchId);
+	public int updateLose(List<String> list);
 	
 	public int updateBan(List<String> championId);
 	

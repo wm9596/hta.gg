@@ -11,24 +11,25 @@
 		select tmnum_seq.nextval, i.*
 		from(
 			<foreach collection="list" item="item" separator="union all ">
-				select #{item.snickname},
-				#{item.teamId},
-				#{item.matchId},
-				#{item.championId},
-				#{item.kill},
-				#{item.death},
-				#{item.assist},
-				#{item.championLevel},
-				#{item.spell1},
-				#{item.spell2},
-				#{item.rune1},
-				#{item.rune2},
-				#{item.championDamage},
-				#{item.takenDamage},
-				#{item.cs},
-				#{item.wardInstall},
-				#{item.wardRemove},
-				#{item.gold},
+				select
+				 #{item.snickname} as snickname,
+				#{item.teamId} as teamId,
+				#{item.matchId} as matchId,
+				#{item.championId} as championId,
+				#{item.kill} as kill,
+				#{item.death} as death,
+				#{item.assist} as assist,
+				#{item.championLevel} as championLevel,
+				#{item.spell1} as spell1,
+				#{item.spell2} as spell2,
+				#{item.rune1} as rune1,
+				#{item.rune2} as rune2,
+				#{item.championDamage} as championDamage,
+				#{item.takenDamage} as takenDamage,
+				#{item.cs} as cs,
+				#{item.wardInstall} as wardInstall,
+				#{item.wardRemove} as wardRemove,
+				#{item.gold} as gold,
 				<choose>
 					<when test="item.item1==0 or item.item1>6695">
 						null
@@ -37,6 +38,7 @@
 						#{item.item1}
 					</otherwise>
 				</choose>
+				as item1
 				, 
 				<choose>
 					<when test="item.item2==0 or item.item2>6695">
@@ -46,6 +48,7 @@
 						#{item.item2}
 					</otherwise>
 				</choose>
+				as item2
 				,
 				<choose>
 					<when test="item.item3==0 or item.item3>6695">
@@ -55,6 +58,7 @@
 						#{item.item3}
 					</otherwise>
 				</choose>
+				as item3
 				,
 				<choose>
 					<when test="item.item4==0 or item.item4>6695">
@@ -64,6 +68,7 @@
 						#{item.item4}
 					</otherwise>
 				</choose>
+				as item4
 				,
 				<choose>
 					<when test="item.item5==0 or item.item5>6695">
@@ -73,18 +78,20 @@
 						#{item.item5}
 					</otherwise>
 				</choose>
+				as item5
 				,
 				<choose>
-					<when test="item.item6==0 or item.item6>=6695">
+					<when test="item.item6==0 or item.item6>6695">
 						null
 					</when>
 					<otherwise>
 						#{item.item6}
 					</otherwise>
 				</choose>
+				as item6
 				,
-				#{item.accessory},
-				#{item.multiKill}
+				#{item.accessory} as accessory,
+				#{item.multiKill} as multiKill
 				from dual
 			</foreach>
 		)i

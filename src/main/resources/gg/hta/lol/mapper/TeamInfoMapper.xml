@@ -8,7 +8,14 @@
 			select i.*
 			from(
 				<foreach collection="list" item="item" separator="union all ">
-					select #{item.teamId},#{item.matchId},#{item.winlose},#{item.firstBlood},#{item.firstTower},#{item.baronKill},#{item.dragonKill},#{item.towerKill}
+					select #{item.teamId} as teamId,
+					#{item.matchId} as matchId,
+					#{item.winlose} as winlose,
+					#{item.firstBlood} as firstBlood,
+					#{item.firstTower} as firstTower,
+					#{item.baronKill} as baronKill,
+					#{item.dragonKill} as dragonKill,
+					#{item.towerKill} as towerKill
 					from dual
 				</foreach>
 			)i
