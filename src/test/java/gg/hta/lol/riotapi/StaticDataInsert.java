@@ -69,15 +69,15 @@ public class StaticDataInsert {
 			
 			tempSpell = getSpellsSummary(info.get("spells").getAsJsonArray().get(1).getAsJsonObject());
 			vo.setSkillW_info(tempSpell.toString());
-			vo.setSkillW_icon(info.get("spells").getAsJsonArray().get(0).getAsJsonObject().getAsJsonObject("image").get("full").getAsString());
+			vo.setSkillW_icon(info.get("spells").getAsJsonArray().get(1).getAsJsonObject().getAsJsonObject("image").get("full").getAsString());
 			
 			tempSpell = getSpellsSummary(info.get("spells").getAsJsonArray().get(2).getAsJsonObject());
 			vo.setSkillE_info(tempSpell.toString());
-			vo.setSkillE_icon(info.get("spells").getAsJsonArray().get(0).getAsJsonObject().getAsJsonObject("image").get("full").getAsString());
+			vo.setSkillE_icon(info.get("spells").getAsJsonArray().get(2).getAsJsonObject().getAsJsonObject("image").get("full").getAsString());
 			
 			tempSpell = getSpellsSummary(info.get("spells").getAsJsonArray().get(3).getAsJsonObject());
 			vo.setSkillR_info(tempSpell.toString());
-			vo.setSkillR_icon(info.get("spells").getAsJsonArray().get(0).getAsJsonObject().getAsJsonObject("image").get("full").getAsString());
+			vo.setSkillR_icon(info.get("spells").getAsJsonArray().get(3).getAsJsonObject().getAsJsonObject("image").get("full").getAsString());
 			
 			tempSpell = getPassiveSummary(info.get("passive").getAsJsonObject());
 			vo.setSkillP_info(tempSpell.toString());
