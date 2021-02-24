@@ -11,10 +11,12 @@
 <script type="text/javascript">
 </script>
 <style type="text/css">
-	a{ text-decoration:none; color: black; }
-	.insert{margin-top: 5%}
-	.comm{margin-bottom: 20px; margin-left: 22%; width: 600px; border: 1px solid #aaa;position: relative;}
-	.commWrap1{margin-bottom: 20px; margin-left: 25%; width: 600px; position: relative;}
+/* 	a{ text-decoration:none; color: black; } */
+	.commWrap{margin-bottom: 20px; width: 80%; position: relative; margin-bottom: 20px; margin-left: auto; margin-right: auto;}
+	.comm{width: 100%; border: 1px solid #aaa;position: relative;} 
+/* 	.insert{margin-top: 5%} */
+/* 	.comm{margin-bottom: 20px; margin-left: 22%; width: 600px; border: 1px solid #aaa;position: relative;} */
+/* 	.commWrap1{margin-bottom: 20px; margin-left: 25%; width: 600px; position: relative;} */
 </style>
 </head>
 <body><br>
@@ -51,17 +53,10 @@
 		</tr>
 		<tr>
 			<td>
-				<span>${vo.username }</span> | <span>${categoryName }</span> | <span>${vo.regdate }</span>
+				<span>${vo.username }</span><input type="button" id="sendMsg" value="쪽지"> | <span>${categoryName }</span> | <span>${vo.regdate }</span>
 			</td>
 			<td>
-				<span>조회 ${vo.viewCount+1} |</span>
-<!-- 				<input type="button" id="sendMsg" value="쪽지"> <br> -->
-			</td>
-			<td>
-				<span>추천 ${vo.hit } |</span>
-			</td>
-			<td>
-				<span>반대 ${vo.nohit } |</span>
+				<span>조회 ${vo.viewCount+1}</span> | <span>추천 ${vo.hit }</span> | <span>반대 ${vo.nohit }</span>
 			</td>
 		</tr>
 		<tr>
@@ -70,17 +65,29 @@
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<input type="button" value="이전 페이지로" onclick="beforePage()">
+			<td colspan="2" style="text-align: center;">
+				<button type="button" id="hit" class="btn btn-info likeBtn"	style="width: 100px; height: 50px; font-size: 25px;">추천 ${vo.hit }</button>
+				<button type="button" id="nohit" class="btn btn-info likeBtn" style="width: 100px; height: 50px; font-size: 25px;">반대 ${vo.nohit }</button>
+				<button type="button" id="report" class="btn btn-info likeBtn" onclick="" style="width: 100px; height: 50px; font-size: 25px;">신고</button>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: center;">
+<!-- 				<input type="button" value="이전 페이지로" onclick="beforePage()"> -->
 				<button>게시글 수정</button>
 				<input type="button" value="게시글 삭제" onclick="postDelete(${vo.pNum})">
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<button type="button" id="hit" class="btn btn-info likeBtn"	style="width: 100px; height: 50px; font-size: 25px;">추천 ${vo.hit }</button>
-				<button type="button" id="nohit" class="btn btn-info likeBtn" style="width: 100px; height: 50px; font-size: 25px;">반대 ${vo.nohit }</button>
-				<button type="button" id="report" class="btn btn-info likeBtn" onclick="" style="width: 100px; height: 50px; font-size: 25px;">신고</button>
+			<td colspan="2" style="text-align: center">
+				<input type="hidden" id="rWriter" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" readonly="readonly">
+				<input type="text" id="rContent" style="width:70%">
+				<input type="button" value="댓글등록" id="btn"><br><br><br>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<div id="commList"></div>
 			</td>
 		</tr>
 		<tr>
@@ -128,23 +135,23 @@
 <!-- 				태그 안에 조건문 -->
 <!-- 			</div> -->
 <!-- 		</div> -->
-		<br><br><br>
-		<!-- 댓글 목록 -->
-		<h3 style="margin-left: 22%">댓글 입력</h3>
-		<div align="center">
-			<hr size="2" width="600" color="black" id=line>
-		</div>
-		<div >
-			<div id="commList"></div><br>
-<!-- 			<div id="rc" style="background-color: black"></div> -------------------------------------------------------------------------------------------- -->
-			<div align="center">
-			<div id="commAdd" style="display: inline-block;">
-				아이디 <input type="text" id="rWriter" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" readonly="readonly">
-				댓글 <input type="text" id="rContent" style="width:250px">
-				<input type="button" value="댓글등록" id="btn"><br><br><br>
-			</div>
-			</div>
-		</div>
+<!-- 		<br><br><br> -->
+<!-- 		<!-- 댓글 목록 --> -->
+<!-- 		<h3 style="margin-left: 22%">댓글 입력</h3> -->
+<!-- 		<div align="center"> -->
+<!-- 			<hr size="2" width="600" color="black" id=line> -->
+<!-- 		</div> -->
+<!-- 		<div > -->
+<!-- 			<div id="commList"></div><br> -->
+<!-- <!-- 			<div id="rc" style="background-color: black"></div> -------------------------------------------------------------------------------------------- --> -->
+<!-- 			<div align="center"> -->
+<!-- 			<div id="commAdd" style="display: inline-block;"> -->
+<%-- 				아이디 <input type="text" id="rWriter" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" readonly="readonly"> --%>
+<!-- 				댓글 <input type="text" id="rContent" style="width:250px"> -->
+<!-- 				<input type="button" value="댓글등록" id="btn"><br><br><br> -->
+<!-- 			</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 
 <script type="text/javascript">
 	$(function(){
@@ -326,7 +333,7 @@
 							+"<a href='javascript:replyNohit("+ rNum + ")'>반대</a>[" + rNohit +"]&nbsp;&nbsp;"
 							+"<a href=\"javascript:rereComment("+ rNum + "," + pNum + ",'" + rWriter + "','" + rContent + "')\">답글</a>"+"&nbsp;&nbsp;"
 							+"<a href='javascript:removeComm("+ rNum + "," + pNum + ")'>삭제</a>"
-							);
+					);
 					
 					wrapDiv.append(div);
 					

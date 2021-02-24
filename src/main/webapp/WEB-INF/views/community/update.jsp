@@ -1,58 +1,161 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>community/update.jsp</title>
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+<title>views/community/insert.jsp</title>
 <script type="text/javascript">
 	function beforePage(){
 		history.go(-1);
 		return;
 	}
 </script>
-
 <style type="text/css">
 	a{ text-decoration:none }
-	.update{margin-top: 5%}
+	.insert{margin-top: 5%}
+	#community_update_wrap{
+		width: 100%;
+		height: 800px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 </style>
+<script src="${pageContext.request.contextPath}/resources/summernote/summernote-lite.js"></script>
+<script src="${pageContext.request.contextPath}/resources/summernote/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
 </head>
 <body><br>
-<form:form method="post" action="${pageContext.request.contextPath }/community/update">
-	<div align="center" class="update">
-		<h2>게시글 수정하기</h2>
-		<hr size="2" width="600" color="black" id=line>
-		<input type="hidden" name="pNum" value="${vo.pNum }">
-		작성자 <input type="text" name="username" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" style="width:87px; text-align: center;" readonly="readonly">
-		<!-- DB에 cNum의 임의의 값 넣음 (추후 회원가입 후 진행) -->
-		카테고리 <input type="text" name="cNum" value="${vo.cNum }" style="width:87px; text-align: center;" readonly="readonly">
-		등록일 <input type="text" value="${vo.regdate }" style="width:87px; text-align: center;" readonly="readonly">
-		조회수 <input type="text" value="${vo.viewCount}" style="width:87px; text-align: center;" readonly="readonly"><br><br>
-		<textarea rows="1" cols="80" name="title">${vo.title }</textarea><br>
-		<textarea rows="25" cols="80" name="content">${vo.content }</textarea><br>
-		<input type="button" value="수정취소" onclick="beforePage()">
-		<input type="submit" value="수정완료" onclick="update()">
+	<div id="community_update_wrap">
+		<form:form method="post" action="${pageContext.request.contextPath }/community/update">
+			<input type="hidden" name="pNum" value="${vo.pNum }">
+			<input type="hidden" name="username" value="${vo.username }">
+			<table class="table" style="width: 100%; height: 100%;">
+				<tr>
+					<th scope="col">
+						<p style="font-size: 18px;">수정</p>
+					</th>
+				</tr>
+				<tr>
+					<td>
+						<select name="cNum" style="width: 20%;">
+							<option value="1"<c:if test="${vo.cNum == 1}">selected</c:if>>공략</option>
+							<option value="2"<c:if test="${vo.cNum == 2}">selected</c:if>>자유</option>
+							<option value="3"<c:if test="${vo.cNum == 3}">selected</c:if>>팀원모집</option>
+							<option value="4"<c:if test="${vo.cNum == 4}">selected</c:if>>사건사고</option>
+							<option value="5"<c:if test="${vo.cNum == 5}">selected</c:if>>Q&A</option>
+						</select> 
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="title" placeholder="제목을 입력해주세요." style="width: 100%;" value="${vo.title }">
+					</td>
+				<tr>
+				<tr>
+					<td>
+						<textarea rows="25" cols="80" placeholder="내용을 입력해주세요.." name="content" class="summernote" required="required">${vo.content }</textarea><br>
+					</td>
+				</tr>
+				<tr>
+					<td style="display: flex; justify-content: center;">
+						<input type="button" value="이전" onclick="beforePage()">
+						<input type="submit" value="등록" onclick="update()">
+					</td>
+				</tr>
+			</table>
+		</form:form>
 	</div>
-</form:form><br>
-	<script type="text/javascript">	
-	function update(pNum) {
-		console.log("===========================");
-		var ask = confirm("정말로 수정하시겠습니까?");
-		if(ask == true){
+<script type="text/javascript">
+function update(pNum) {
+	console.log("===========================");
+	var ask = confirm("정말로 수정하시겠습니까?");
+	if(ask == true){
+	$.ajax({
+		url:"/lol/update/"+pNum,
+		success: function(data) {
+			var code=$(data).find("code").text();
+			if(code=='success'){
+				getList();
+			}else{
+				alert('수정 실패!');
+			}
+		}
+	});
+	}
+}
+	
+	// ****************************************	summernote ****************************************
+	
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	
+	$('.summernote').summernote({
+	  // 에디터 높이
+	  height: 400,
+	  // 에디터 한글 설정
+	  lang: "ko-KR",
+	  // 에디터에 커서 이동
+	  focus : true,
+	  toolbar: [
+		    // 글꼴 설정
+		    ['fontname', ['fontname']],
+		    // 글자 크기 설정
+		    ['fontsize', ['fontsize']],
+		    // 굵기, 기울임꼴, 밑줄,취소 선, 서식지우기
+		    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+		    // 글자색
+		    ['color', ['forecolor','color']],
+		    // 표만들기
+		    ['table', ['table']],
+		    // 글머리 기호, 번호매기기, 문단정렬
+		    ['para', ['ul', 'ol', 'paragraph']],
+		    // 줄간격
+		    ['height', ['height']],
+		    // 그림첨부, 링크만들기, 동영상첨부
+		    ['insert',['picture','link','video']],
+		    // 코드보기, 확대해서보기, 도움말
+		    ['view', ['codeview','fullscreen', 'help']]
+		  ],
+		  // 추가한 글꼴
+		fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
+		 // 추가한 폰트사이즈
+		fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+		callbacks : { 
+        	onImageUpload : function(files, editor, welEditable) {
+			        // 파일 업로드(다중업로드를 위해 반복문 사용)
+			    for (var i = files.length - 1; i >= 0; i--) {
+			       	uploadSummernoteImageFile(files[i], this);
+        		}
+        	}
+        }
+		
+	});
+	
+	function uploadSummernoteImageFile(file, el) {
+		data = new FormData();
+		data.append("file", file);
 		$.ajax({
-			url:"/lol/update/"+pNum,
-			success: function(data) {
-				var code=$(data).find("code").text();
-				if(code=='success'){
-					getList();
-				}else{
-					alert('수정 실패!');
-				}
+			data : data,
+			type : "POST",
+			url : "/lol/uploadSummernoteImageFile",
+			contentType : false,
+			enctype : 'multipart/form-data',
+			processData : false,
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader(header, token);
+			},
+			success : function(data) {
+				$(el).summernote('editor.insertImage', data.url);
 			}
 		});
-		}
 	}
+	// ****************************************	summernote ****************************************
 </script>
 </body>
 </html>
