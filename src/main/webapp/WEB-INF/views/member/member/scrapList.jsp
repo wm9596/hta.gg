@@ -6,15 +6,15 @@
 	<table style="width: 1000px;" class="table table-hover">
 		<thead>
 			<tr>
-				<th scope="col">스크랩 번호</th>
 				<th scope="col">게시글 번호</th>
+				<th scope="col">게시글 제목</th>
 			</tr>
 		</thead>
 		<tbody>
 		<c:forEach var="vo" items="${list }" varStatus="status">
 			<tr>
-				<th scope="row"><c:out value="${(pu.pageNum-1)*10 + status.count }"/></th>
-				<td><a href="${pageContext.request.contextPath }/community/detailMy?pNum=${vo.PNum }">${vo.PNum }</a></td>
+				<th scope="row">${vo.pNum }</th>
+				<td><a href="${pageContext.request.contextPath }/community/detailMy?pNum=${vo.pNum }">${vo.title }</a></td>
 			</tr>
 		</c:forEach>
 		</tbody>
