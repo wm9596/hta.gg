@@ -27,6 +27,7 @@ import gg.hta.lol.vo.MessageVo;
 import gg.hta.lol.vo.PointVo;
 import gg.hta.lol.vo.QueueInfoVo;
 import gg.hta.lol.vo.ReportVo;
+import gg.hta.lol.vo.ScrapVo;
 import gg.hta.lol.vo.match.MostChampVo;
 import gg.hta.lol.vo.match.SearchVo;
 
@@ -183,9 +184,8 @@ public class MemberController {
 		return mv;
 	}
 	@GetMapping("/member/member/scrapList")
-	public String scrapList(@RequestParam(value="pageNum", defaultValue = "1")int pageNum, Principal principal) {
-//		int totalRowCount = service.scrapListCount(principal.getName());
-		int totalRowCount = 0;
+	public String scrapList(@RequestParam(value="pageNum", defaultValue = "1")int pageNum, Principal principal, Model m) {
+		int totalRowCount = service.scrapListCount(principal.getName());
 		PageUtil pu = new PageUtil(pageNum, 10,5,totalRowCount);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		int startRow = pu.getStartRow();
@@ -193,7 +193,9 @@ public class MemberController {
 		map.put("startRow",startRow);
 		map.put("endRow",endRow);
 		map.put("username",principal.getName());
-		List<MessageVo> list = service.messageList(map);
+		List<ScrapVo> list = service.scrapList(map);
+		m.addAttribute("list", list);
+		m.addAttribute("pu",pu);
 		return ".mypage.scrapList";
 	}
 	@RequestMapping("/member/admin/memberList")
