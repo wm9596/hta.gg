@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,45 +18,116 @@
 </style>
 </head>
 <body><br>
+<c:choose>
+	<c:when test="${vo.cNum == 1}">
+		<c:set var="categoryName" value="공략"/>
+	</c:when>
+	<c:when test="${vo.cNum == 2}">
+		<c:set var="categoryName" value="자유"/>
+	</c:when>
+	<c:when test="${vo.cNum == 3}">
+		<c:set var="categoryName" value="팀원모집"/>
+	</c:when>
+	<c:when test="${vo.cNum == 4}">
+		<c:set var="categoryName" value="사건사고"/>
+	</c:when>
+	<c:when test="${vo.cNum == 5}">
+		<c:set var="categoryName" value="사건사고"/>
+	</c:when>
+	<c:otherwise>
+		<c:set var="categoryName" value="Q&A"/>
+	</c:otherwise>
+</c:choose>
 <form:form method="get" action="${pageContext.request.contextPath }/community/update">
-	<div align="center" class="insert">
-		<h2>게시글 조회하기</h2>
-		<hr size="2" width="600" color="black" id=line>
-		<input type="hidden" id="pNum" name="pNum" value="${vo.pNum }">
+	<input type="hidden" name="title" readonly="readonly" value="${vo.title }">
+	<input type="hidden" id="pNum" name="pNum" value="${vo.pNum }">
+	<input type="hidden" id="username" name="username" value="${vo.username}">
+	<input type="hidden" name="cNum" value="${vo.cNum }">
+	<table class="table" style="width: 70%; margin: auto;">
+		<tr>
+			<th scope="col">
+				<h3>${vo.title }</h3>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				<span>${vo.username }</span> | <span>${categoryName }</span> | <span>${vo.regdate }</span>
+			</td>
+			<td>
+				<span>조회 ${vo.viewCount+1} |</span>
+<!-- 				<input type="button" id="sendMsg" value="쪽지"> <br> -->
+			</td>
+			<td>
+				<span>추천 ${vo.hit } |</span>
+			</td>
+			<td>
+				<span>반대 ${vo.nohit } |</span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			${vo.content }
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="button" value="이전 페이지로" onclick="beforePage()">
+				<button>게시글 수정</button>
+				<input type="button" value="게시글 삭제" onclick="postDelete(${vo.pNum})">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<button type="button" id="hit" class="btn btn-info likeBtn"	style="width: 100px; height: 50px; font-size: 25px;">추천 ${vo.hit }</button>
+				<button type="button" id="nohit" class="btn btn-info likeBtn" style="width: 100px; height: 50px; font-size: 25px;">반대 ${vo.nohit }</button>
+				<button type="button" id="report" class="btn btn-info likeBtn" onclick="" style="width: 100px; height: 50px; font-size: 25px;">신고</button>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span>이전글</span> <a href='${pageContext.request.contextPath }/community/detail?pNum=${next.pNum}&cNum=${vo.cNum}'>${next.title }</a>
+				<br>
+				<span>다음글</span> <a href='${pageContext.request.contextPath }/community/detail?pNum=${prev.pNum}&cNum=${vo.cNum}'>${prev.title }</a>
+			</td>
+		</tr>
+	</table>
+	
+	
+<!-- 	<div align="center" class="insert"> -->
+<!-- 		<h2>게시글 조회하기</h2> -->
+<!-- 		<hr size="2" width="600" color="black" id=line> -->
+<%-- 		<input type="hidden" id="pNum" name="pNum" value="${vo.pNum }"> --%>
 		<!-- DB에 username의 임의의 값 넣음 (추후 회원가입 후 진행) -->
-		작성자 <input type="text" id="username" name="username" value="${vo.username}" style="width:87px; text-align: center;" readonly="readonly">
+<%-- 		작성자 <input type="text" id="username" name="username" value="${vo.username}" style="width:87px; text-align: center;" readonly="readonly"> --%>
 		<!-- DB에 cNum의 임의의 값 넣음 (추후 회원가입 후 진행) -->
-		카테고리 <input type="text" name="cNum" value="${vo.cNum }" style="width:87px; text-align: center;" readonly="readonly" >
-		등록일 <input type="text" value="${vo.regdate }" style="width:87px; text-align: center;" readonly="readonly">
-		조회수 <input type="text" value="${vo.viewCount+1}" style="width:87px; text-align: center;" readonly="readonly"><br><br>
-		<input type="button" id="sendMsg" value="쪽지"> <br>
-		<textarea rows="1" cols="80" name="title" readonly="readonly">[제목] ${vo.title }</textarea><br>
-		${vo.content }
-		<input type="button" value="이전 페이지로" onclick="beforePage()">
-		<button>게시글 수정</button>
-		<input type="button" value="게시글 삭제" onclick="postDelete(${vo.pNum})">
+<%-- 		카테고리 <input type="text" name="cNum" value="${vo.cNum }" style="width:87px; text-align: center;" readonly="readonly" > --%>
+<%-- 		등록일 <input type="text" value="${vo.regdate }" style="width:87px; text-align: center;" readonly="readonly"> --%>
+<%-- 		조회수 <input type="text" value="${vo.viewCount+1}" style="width:87px; text-align: center;" readonly="readonly"><br><br> --%>
+<!-- 		<input type="button" id="sendMsg" value="쪽지"> <br> -->
+<%-- 		<textarea rows="1" cols="80" name="title" readonly="readonly">[제목] ${vo.title }</textarea><br> --%>
+<%-- 		${vo.content } --%>
 		<!--
 		<a href="${pageContext.request.contextPath }/community/delete?pNum=${vo.pNum }" style="position: right;">게시글 삭제</a>
 		-->
-	</div><br><br><br>
+<!-- 	</div><br><br><br> -->
 </form:form>
-	<div align="center">
-		<button type="button" id="hit" class="btn btn-info likeBtn"	style="width: 100px; height: 50px; font-size: 25px;">추천 ${vo.hit }</button>
-		<button type="button" id="nohit" class="btn btn-info likeBtn" style="width: 100px; height: 50px; font-size: 25px;">반대 ${vo.nohit }</button>
-		<button type="button" id="report" class="btn btn-info likeBtn" onclick="" style="width: 100px; height: 50px; font-size: 25px;">신고</button>
-	</div>
-		<br><br><br>
-		<div align="center">
-			<div style="display: inline-block;">
-				다음 글&nbsp;&nbsp;&nbsp;<br>
-				이전 글&nbsp;&nbsp;&nbsp;
-			</div>
-			<div  style="display: inline-block;">
-				<a href='${pageContext.request.contextPath }/community/detail?pNum=${next.pNum}&cNum=${vo.cNum}'>${next.title }</a><br>
-				<a href='${pageContext.request.contextPath }/community/detail?pNum=${prev.pNum}&cNum=${vo.cNum}'>${prev.title }</a>
-				<!-- 태그 안에 조건문 -->
-			</div>
-		</div>
+<!-- 	<div align="center"> -->
+<%-- 		<button type="button" id="hit" class="btn btn-info likeBtn"	style="width: 100px; height: 50px; font-size: 25px;">추천 ${vo.hit }</button> --%>
+<%-- 		<button type="button" id="nohit" class="btn btn-info likeBtn" style="width: 100px; height: 50px; font-size: 25px;">반대 ${vo.nohit }</button> --%>
+<!-- 		<button type="button" id="report" class="btn btn-info likeBtn" onclick="" style="width: 100px; height: 50px; font-size: 25px;">신고</button> -->
+<!-- 	</div> -->
+<!-- 		<br><br><br> -->
+<!-- 		<div align="center"> -->
+<!-- 			<div style="display: inline-block;"> -->
+<!-- 				다음 글&nbsp;&nbsp;&nbsp;<br> -->
+<!-- 				이전 글&nbsp;&nbsp;&nbsp; -->
+<!-- 			</div> -->
+<!-- 			<div  style="display: inline-block;"> -->
+<%-- 				<a href='${pageContext.request.contextPath }/community/detail?pNum=${next.pNum}&cNum=${vo.cNum}'>${next.title }</a><br> --%>
+<%-- 				<a href='${pageContext.request.contextPath }/community/detail?pNum=${prev.pNum}&cNum=${vo.cNum}'>${prev.title }</a> --%>
+<!-- 				태그 안에 조건문 -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 		<br><br><br>
 		<!-- 댓글 목록 -->
 		<h3 style="margin-left: 22%">댓글 입력</h3>
