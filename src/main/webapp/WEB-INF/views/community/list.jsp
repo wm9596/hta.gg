@@ -32,7 +32,7 @@
 	<h2 style=" width:200px; padding: 2%;">전체</h2>
 <div align="center">
 	<div style="display:inline;">
-		<form:form method="post" action="${pageContext.request.contextPath }/community/list">
+<%-- 		<form:form method="post" action="${pageContext.request.contextPath }/community/list"> --%>
 		
 		<table id="community_menu" class="table">
 			<tr>
@@ -82,9 +82,9 @@
 <!-- 				<a href="javascript:array1('hit')">TOP (추천수)</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
 <!-- 			</div> -->
 <!-- 		</div> -->
-		</form:form>
+<%-- 		</form:form> --%>
 	</div>
-		<form method="post" action="${pageContext.request.contextPath }/community/list"></form>
+<%-- 		<form method="post" action="${pageContext.request.contextPath }/community/list"></form> --%>
 			<div>
 			<table width="1000" class="table table-hover">
 				<thead>
@@ -110,13 +110,15 @@
 				</c:forEach>
 			</table>
 			</div>
-			<select name="field"  style="margin-left: 9%;">
-				<option value="username"<c:if test="${field=='username' }">selected</c:if>>ID</option>
-				<option value="title"<c:if test="${field=='title' }">selected</c:if>>제목</option>
-			</select>
-			<input type="text" name="keyword" value="${keyword }">
-			<input type="submit" value="검색">
-			<input type="button" onclick="location.href('${pageContext.request.contextPath }/community/insert?cNum=${cNum}')" value="글쓰기" style="">
+			<form:form method="post" action="${pageContext.request.contextPath }/community/list">
+				<select name="field">
+					<option value="username"<c:if test="${field=='username' }">selected</c:if>>ID</option>
+					<option value="title"<c:if test="${field=='title' }">selected</c:if>>제목</option>
+				</select>
+				<input type="text" name="keyword" value="${keyword }">
+				<input type="submit" value="검색">
+				<input type="button" onclick="location.href='${pageContext.request.contextPath }/community/insert?cNum=${cNum}'" value="글쓰기" style="float: right;">
+			</form:form>
 			<div>
 				<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 					<c:choose>
