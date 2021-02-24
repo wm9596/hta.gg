@@ -317,6 +317,12 @@ CREATE TABLE "FINAL"."SCRAP"
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "SYSTEM" ;
 
+
+
+ALTER TABLE community ADD (test CLOB);
+UPDATE community SET test = content;
+ALTER TABLE community DROP COLUMN content; 
+ALTER TABLE community RENAME COLUMN test TO content;
 ---------- create sequence -----------
 create SEQUENCE msgNum_seq;
 create SEQUENCE tNum_seq;

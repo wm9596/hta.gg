@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gg.hta.lol.mapper.ScrapMapper">
+	
+	<insert id="addScrap">
+		insert into scrap values(scNum_seq.nextval,#{pNum},#{username})
+	</insert>
+	
+	<select id="existScrap" resultType="int">
+		select count(*)
+		from scrap
+		where username=#{username}
+		and pnum = #{pNum}
+	</select>
+	
+</mapper>
