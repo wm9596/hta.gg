@@ -72,7 +72,12 @@
 		<tr>
 			<td>
 				<input type="button" value="이전 페이지로" onclick="beforePage()">
-				<input type="button" value="스크랩 기능" onclick="scrap()">
+				<c:choose>
+					<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username != null}">
+						<input type="button" value="스크랩하기" onclick="scrap()">
+						<input type="button" value="게시글 삭제" onclick="postDelete(${vo.pNum})">
+					</c:when>
+				</c:choose>
 				<c:choose>
 					<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == 'admin' || 
 					sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == vo.username}">
