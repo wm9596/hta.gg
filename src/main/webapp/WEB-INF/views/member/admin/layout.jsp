@@ -61,7 +61,7 @@
 								<li><a href="#"><i class="fa fa-suitcase"></i>게시판 관리</a>
 									<ul class="submenu">
 										<li><a href="">공지사항 등록</a></li>
-										<li><a href="">경기일정 등록</a></li>
+										<li><a href="${pageContext.request.contextPath }/battingTeam/insert">경기일정 등록</a></li>
 										<li><a href="">경기결과 처리</a></li>
 										<li><a href="">게시글 관리</a></li>
 									</ul>
