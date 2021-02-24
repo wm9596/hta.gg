@@ -17,27 +17,58 @@
 <style type="text/css">
 	a{ text-decoration:none }
 	.insert{margin-top: 5%}
+	#community_insert_wrap{
+		width: 100%;
+		height: 800px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 </style>
 <script src="${pageContext.request.contextPath}/resources/summernote/summernote-lite.js"></script>
 <script src="${pageContext.request.contextPath}/resources/summernote/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
 </head>
 <body><br>
-<form:form method="post" action="${pageContext.request.contextPath }/community/insert">
-	<div align="center" class="insert">
-		<h2>커뮤니티 글쓰기</h2>
-		<hr size="2" width="600" color="black" id=line>
-		<!-- 작성자 : <input type="text" name="username" value="abcd" style="width:200px" readonly="readonly"> --><!-- DB에 username의 임의의 값 넣음 (추후 회원가입 후 진행) -->
-		작성자 <input type="text" name="username" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" style="width:220px" readonly="readonly">
-		&nbsp;&nbsp;&nbsp;&nbsp;
-		카테고리 <input type="text" name="cNum" value="${cNum }" style="width:220px" readonly="readonly"><br><br><!-- DB에 cNum의 임의의 값 넣음 (추후 회원가입 후 진행) -->
-		<textarea rows="1" cols="80" placeholder="제목을 입력해 주세요." name="title" required="required"></textarea><br>
-		<textarea rows="25" cols="80" placeholder="내용을 입력하세요." name="content" class="summernote" required="required"></textarea><br>
-		<!-- 첨부파일 <input type="file" name="file1"><br><br><br> -->
-		<input type="button" value="이전 페이지로" onclick="beforePage()">
-		<input type="submit" value="새 글 등록" onclick="insert()">
-	</div><br>
-</form:form>
+	<div id="community_insert_wrap">
+		<form:form method="post" action="${pageContext.request.contextPath }/community/insert">
+			<input type="hidden" name="username" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}">
+			<table class="table" style="width: 100%; height: 100%;">
+				<tr>
+					<th scope="col">
+						<p style="font-size: 18px;">글쓰기</p>
+					</th>
+				</tr>
+				<tr>
+					<td>
+						<select name="cNum" style="width: 20%;">
+							<option value="1">공략</option>
+							<option value="2">자유</option>
+							<option value="3">팀원모집</option>
+							<option value="4">사건사고</option>
+							<option value="5">Q&A</option>
+						</select> 
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="title" placeholder="제목을 입력해주세요." style="width: 100%;">
+					</td>
+				<tr>
+				<tr>
+					<td>
+						<textarea rows="25" cols="80" placeholder="내용을 입력해주세요.." name="content" class="summernote" required="required"></textarea><br>
+					</td>
+				</tr>
+				<tr>
+					<td style="display: flex; justify-content: center;">
+						<input type="button" value="이전" onclick="beforePage()">
+						<input type="submit" value="등록" onclick="insert()">
+					</td>
+				</tr>
+			</table>
+		</form:form>
+	</div>
 <script type="text/javascript">
 	function insert(pNum) {
 		console.log(pNum);
@@ -64,7 +95,7 @@
 	
 	$('.summernote').summernote({
 	  // 에디터 높이
-	  height: 150,
+	  height: 400,
 	  // 에디터 한글 설정
 	  lang: "ko-KR",
 	  // 에디터에 커서 이동
