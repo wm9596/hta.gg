@@ -3,8 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gg.hta.lol.mapper.MatchInfoMapper">
+
 	<insert id="addMatchinfo">
-		insert into matchinfo values(#{matchid},#{type},#{runtime},#{startTime})
+		insert into matchinfo(matchid,type,runtime,startTime) 
+			select i.* from(
+				<foreach collection="list" item="item" separator="union all ">
+					select #{item.matchinfoVo.matchid},#{item.matchinfoVo.type},#{item.matchinfoVo.runtime},#{item.matchinfoVo.startTime}
+					from dual
+				</foreach>
+			)i
 	</insert>
 	
 	<select id="getMatchType" parameterType="String" resultType="String">

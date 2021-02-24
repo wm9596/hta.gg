@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,11 +30,14 @@ import gg.hta.lol.mapper.TeamInfoMapper;
 import gg.hta.lol.mapper.TeamMemberInfoMapper;
 import gg.hta.lol.riotapi.DataRequester;
 import gg.hta.lol.riotapi.GameType;
+import gg.hta.lol.vo.BanListVo;
+import gg.hta.lol.vo.MatchVo;
 import gg.hta.lol.vo.MatchinfoVo;
 import gg.hta.lol.vo.QueueInfoVo;
 import gg.hta.lol.vo.SummonerVo;
 import gg.hta.lol.vo.TeamInfoVo;
 import gg.hta.lol.vo.TeamMemberinfoVo;
+import gg.hta.lol.vo.match.MatchInfosWrapper;
 import gg.hta.lol.vo.match.MostChampVo;
 import gg.hta.lol.vo.match.SearchVo;
 import gg.hta.lol.vo.match.WinCountVo;
@@ -88,7 +92,6 @@ public class SearchServiceImpl implements SearchService {
 		
 		addQueueInfo(sid);
 		readMatchList(aid,0,20,name);
-		
 	}
 	
 	@Override
@@ -178,16 +181,19 @@ public class SearchServiceImpl implements SearchService {
 	}
 	
 	@Override
-//	@Transactional
+	@Transactional
 	public void readMatchList(String aid,int start,int end,String snickname) {
 		
-		List<String> mList = matchinfoMapper.getMatchList(snickname);
+		List<String> oldMList = matchinfoMapper.getMatchList(snickname);
 		
-		JsonObject matchInfo = dataRequester.getMatchList(aid,start,end);
+//		JsonObject matchInfo = dataRequester.getMatchList(aid,start,end);
+		JsonObject matchInfo = dataRequester.getMatchList(aid);
 		
 		JsonArray matchArr = matchInfo.get("matches").getAsJsonArray();
 		
 		Stream<JsonElement> stream = StreamSupport.stream(matchArr.spliterator(), true);
+		
+		List<MatchInfosWrapper> mlist = new ArrayList<MatchInfosWrapper>();
 		
 		ThreadGroup group = new ThreadGroup("group");
 		
@@ -198,11 +204,12 @@ public class SearchServiceImpl implements SearchService {
 			if(gameTypeCode==GameType.RANKED_FLEX_SR.getCode() || gameTypeCode==GameType.RANKED_SOLO_5x5.getCode()) {
 				return true;
 			}
-			
 			return false;
-		}).filter(item->{
+		})
+		.limit(20)
+		.filter(item->{
 			String str = item.getAsJsonObject().get("gameId").getAsString();
-			return !mList.contains(str);
+			return !oldMList.contains(str);
 		})
 		.forEach(item->{
 			String gameId = item.getAsJsonObject().get("gameId").getAsString();
@@ -211,7 +218,8 @@ public class SearchServiceImpl implements SearchService {
 				@Override
 				public void run() {
 					int cnt = 0 ; 
-					addMatchInfo(gameId,gameTypeCode);
+					mlist.add(readMatchDetail(gameId,gameTypeCode));
+//					addMatchInfo(gameId,gameTypeCode);
 //					System.out.println("완료");
 				}
 			};
@@ -222,19 +230,17 @@ public class SearchServiceImpl implements SearchService {
 //			System.out.println(group.activeCount());
 		}
 		
-//		for(int i = 0; i < matchArr.size(); i++) {
-//			JsonObject match =matchArr.get(i).getAsJsonObject();
-//			int gameTypeCode = match.get("queue").getAsInt();
-//			
-//			if(gameTypeCode==GameType.RANKED_FLEX_SR.getCode() || gameTypeCode==GameType.RANKED_SOLO_5x5.getCode()) {
-//				addMatchInfo(match.get("gameId").getAsString(),gameTypeCode);
-//			}
-//		}
+		if(mlist.size() < 1) {
+			return;
+		}
+		
+		addMatchInfo(mlist);
+		addTeamInfo(mlist);
+		addTeamMemberInfo(mlist);
 		
 	}
-	
-	@Override
-	public void addMatchInfo(String gameId,int code) {
+
+	public MatchInfosWrapper readMatchDetail(String gameId,int code) {
 		JsonObject matchInfo = dataRequester.getMatchInfo(gameId);
 		
 		MatchinfoVo mvo = new MatchinfoVo(
@@ -243,93 +249,95 @@ public class SearchServiceImpl implements SearchService {
 				matchInfo.get("gameDuration").getAsLong(), 
 				new Date(matchInfo.get("gameCreation").getAsLong())
 				);
-//		
-//		SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd HH:mm:dd");
-//		System.out.println(mvo);
-//		System.out.println(sd.format(new Date(matchInfo.get("gameCreation").getAsLong())));
 		
-		try {
-//			System.out.println(mvo);
-			matchinfoMapper.addMatchinfo(
-					mvo
-					);
-		}catch (DuplicateKeyException e) {
-//			System.out.println("경기 정보 중복");
-			return;
-		}
-		
-		
-		JsonArray teamArr = matchInfo.get("teams").getAsJsonArray();
-		
-		for(int i = 0 ; i < teamArr.size(); i++) {
-			addTeamInfo(gameId,teamArr.get(i).getAsJsonObject());
-		}
-		
-		addTeamMemberInfo(
-				gameId,
-				matchInfo.get("participants").getAsJsonArray(),
-				matchInfo.get("participantIdentities").getAsJsonArray()
-				);
-		
-		champMapper.updateWin(gameId);
-		champMapper.updateLose(gameId);
+		return new MatchInfosWrapper(mvo,matchInfo);
 	}
 	
 	@Override
-	public void addTeamInfo(String gameId,JsonObject teamInfo) {
-			teaminfoMapper.addTeaminfo(new TeamInfoVo(
-					teamInfo.get("teamId").getAsString(),
-					gameId,
-					teamInfo.get("win").getAsString(), 
-					teamInfo.get("firstBlood").getAsString(), 
-					teamInfo.get("firstTower").getAsString(), 
-					teamInfo.get("baronKills").getAsInt(),
-					teamInfo.get("dragonKills").getAsInt(),
-					teamInfo.get("towerKills").getAsInt()));
+	public void addMatchInfo(List<MatchInfosWrapper> mlist) {
+
+		matchinfoMapper.addMatchinfo(mlist);
+		
+//		champMapper.updateWin(gameId);
+//		champMapper.updateLose(gameId);
+	}
+	
+	@Override
+	public void addTeamInfo(List<MatchInfosWrapper> mlist) {
+		
+		List<TeamInfoVo> teamList = new ArrayList<TeamInfoVo>();
+		List<String> banList = new ArrayList<String>();
+		
+		for(MatchInfosWrapper mwv : mlist) {
+			JsonArray teamInfoArr = mwv.getJson().get("teams").getAsJsonArray();
 			
-			JsonArray banarr = teamInfo.get("bans").getAsJsonArray();
-			addBanList(banarr);
+			teamInfoArr.iterator().forEachRemaining(item->{
+				JsonObject teamInfo = item.getAsJsonObject();
+				TeamInfoVo vo =new TeamInfoVo(
+						teamInfo.get("teamId").getAsString(),
+						mwv.getMatchinfoVo().getMatchid(),
+						teamInfo.get("win").getAsString(), 
+						teamInfo.get("firstBlood").getAsString(), 
+						teamInfo.get("firstTower").getAsString(), 
+						teamInfo.get("baronKills").getAsInt(),
+						teamInfo.get("dragonKills").getAsInt(),
+						teamInfo.get("towerKills").getAsInt());
+//				teaminfoMapper.addTeaminfo(vo);
+				
+				teamList.add(vo);
+				
+				JsonArray banarr = teamInfo.get("bans").getAsJsonArray();
+				
+				for(int i = 0 ; i < banarr.size();i++) {
+					String cid = banarr.get(i).getAsJsonObject().get("championId").getAsString();
+					if(cid.equals("-1")) {
+//						System.out.println("벤기권");
+						continue;
+					}
+					banList.add(cid);
+//					System.out.println(cid);
+				}
+			});
+		}
+		
+		teaminfoMapper.addTeaminfo(teamList);
+		addBanList(banList);
 	}
 	
 	@Override
-	public void addBanList(JsonArray banarr) {
-		List<String> list = new ArrayList<String>();
-		
-		for(int i = 0 ; i < banarr.size();i++) {
-			String cid = banarr.get(i).getAsJsonObject().get("championId").getAsString();
-			if(cid.equals("-1")) {
-//				System.out.println("벤기권");
-				continue;
-			}
-			list.add(cid);
-//			System.out.println(cid);
-		}
+	public void addBanList(List<String> list) {
 		banlistMapper.addBan(list);
 		champMapper.updateBan(list);
 	}
 	
 	@Override
-	public void addTeamMemberInfo(String gameId,JsonArray tmInfoArr, JsonArray userInfoArr) {
-
-		for(int i = 0; i < tmInfoArr.size(); i++) {
-			JsonObject tmInfo = tmInfoArr.get(i).getAsJsonObject();
-			JsonObject userInfo = userInfoArr.get(i).getAsJsonObject();
-			JsonObject stats = tmInfo.get("stats").getAsJsonObject();
+	public void addTeamMemberInfo(List<MatchInfosWrapper> mlist) {
+		
+		List<SummonerVo> sList = new ArrayList<SummonerVo>();
+		List<TeamMemberinfoVo> tmList = new ArrayList<TeamMemberinfoVo>();
+		
+		for(MatchInfosWrapper miw : mlist) {
+			JsonArray tmInfoArr = miw.getJson().get("participants").getAsJsonArray();
+			JsonArray userInfoArr = miw.getJson().get("participantIdentities").getAsJsonArray();
 			
-			addSummoner(
-					new SummonerVo(
-					userInfo.get("player").getAsJsonObject().get("summonerName").getAsString().replaceAll(" ", ""),
-					0,
-					userInfo.get("player").getAsJsonObject().get("profileIcon").getAsString()
-					),
-					false
-				);
-			
-				TeamMemberinfoVo vo = new TeamMemberinfoVo(
+			for(int i = 0; i < tmInfoArr.size(); i++) {
+				JsonObject tmInfo = tmInfoArr.get(i).getAsJsonObject();
+				JsonObject userInfo = userInfoArr.get(i).getAsJsonObject();
+				JsonObject stats = tmInfo.get("stats").getAsJsonObject();
+				
+				SummonerVo svo = new SummonerVo(
+						userInfo.get("player").getAsJsonObject().get("summonerName").getAsString().replaceAll(" ", ""),
+						0,
+						userInfo.get("player").getAsJsonObject().get("profileIcon").getAsString()
+						);
+				
+				sList.add(svo);
+				
+				TeamMemberinfoVo tvo = new TeamMemberinfoVo(
 						0, 
 						userInfo.get("player").getAsJsonObject().get("summonerName").getAsString().replaceAll(" ", ""), 
 						tmInfo.get("teamId").getAsString(),
-						gameId,
+						miw.getMatchinfoVo().getMatchid(),
 						tmInfo.get("championId").getAsString(),
 						stats.get("kills").getAsInt(),
 						stats.get("deaths").getAsInt(),
@@ -354,11 +362,16 @@ public class SearchServiceImpl implements SearchService {
 						stats.get("item6").getAsInt(), 
 						stats.get("largestMultiKill").getAsInt()
 						);
-			
-//				System.out.println(vo);
-				tminfoMapper.addTeamMemberInfo(vo);
+				
+				tmList.add(tvo);
+//					System.out.println(vo);
+//					tminfoMapper.addTeamMemberInfo(vo);
+			}
 		}
 		
+		sList.forEach(item->addSummoner(item, false));
+//		summonerMapper.addSummonerList(sList);
+		tminfoMapper.addTeamMemberInfo(tmList);
 	}
 	
 	@Override
