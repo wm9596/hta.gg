@@ -3,6 +3,11 @@
 "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 <!-- 	타일즈정의 -->
+	<definition name=".adminpage.*.*" template="/WEB-INF/views/member/admin/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/header2.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
+	</definition>
 	<definition name=".adminpage.*" template="/WEB-INF/views/member/admin/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/header2.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/member/admin/{1}.jsp"/>

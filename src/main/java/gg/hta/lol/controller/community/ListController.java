@@ -85,4 +85,37 @@ public class ListController {
 		m.addAttribute("pu",pu);
 		return ".mypage.replyList";
 	}
+	
+	
+	
+	
+	@GetMapping("/community/boardList")
+	public ModelAndView boardList(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum,@RequestParam(value = "cNum",defaultValue = "1")int cNum,@RequestParam(value = "vrh",defaultValue = "pNum")String vrh,@RequestParam(value = "commentCount",defaultValue = "1")int commentCount,String field,String keyword) {
+		HashMap<String,Object> map=new HashMap<String, Object>();
+		map.put("field", field);
+		map.put("keyword",keyword);
+		
+		map.put("vrh", vrh);
+		map.put("cNum", cNum);
+		map.put("commentCount", commentCount);
+		
+		int totalRowCount=service.count(map);
+		PageUtil pu=new PageUtil(pageNum, 10, 10, totalRowCount);
+		int startRow=pu.getStartRow();
+		int endRow=pu.getEndRow();
+		map.put("startRow",startRow);
+		map.put("endRow",endRow);
+		
+		List<CommunityVo> list=service.list(map);
+		System.out.println(list);
+		ModelAndView mv=new ModelAndView(".adminpage.community.list");
+		mv.addObject("list", list);
+		mv.addObject("pu",pu);
+		mv.addObject("field", field);
+		mv.addObject("keyword",keyword);
+		mv.addObject("cNum", cNum);
+		mv.addObject("vrh", vrh);
+		mv.addObject("commentCount",commentCount);
+		return mv;
+	}
 }
