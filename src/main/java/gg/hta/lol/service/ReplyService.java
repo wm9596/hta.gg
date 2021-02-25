@@ -13,7 +13,8 @@ import gg.hta.lol.vo.ReplyVo;
 public class ReplyService {
 	@Autowired private ReplyDao dao;
 	public int delete(int rNum) {
-		return dao.delete(rNum);
+		dao.rereDelete(rNum);
+		return dao.replyDelete(rNum);
 	}
 	public int insert(ReplyVo vo) {
 		return dao.insert(vo);

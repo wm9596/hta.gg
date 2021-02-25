@@ -21,8 +21,12 @@
 	 	insert into reply values(reNum_seq.nextval,#{pNum},#{rereNum},#{rWriter},#{rContent},sysdate,0,0)
 	</insert>
 	
-	<delete id="delete" parameterType="int">
+	<delete id="replyDelete" parameterType="int">
 		delete from reply where rNum=#{rNum}
+	</delete>
+	
+	<delete id="rereDelete" parameterType="int">
+		delete from reply where rerenum=#{rNum}
 	</delete>
 	
 	<update id="pCount" parameterType="int">

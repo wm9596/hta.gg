@@ -163,10 +163,13 @@
 		<c:set var="categoryName" value="사건사고"/>
 	</c:when>
 	<c:when test="${vo.cNum == 5}">
-		<c:set var="categoryName" value="사건사고"/>
+		<c:set var="categoryName" value="Q&A"/>
+	</c:when>
+	<c:when test="${vo.cNum == 6}">
+		<c:set var="categoryName" value="공지사항"/>
 	</c:when>
 	<c:otherwise>
-		<c:set var="categoryName" value="Q&A"/>
+		<c:set var="categoryName" value="경기일정"/>
 	</c:otherwise>
 </c:choose>
 <form:form method="get" action="${pageContext.request.contextPath }/community/update">
@@ -401,35 +404,53 @@
 	})
 </script>
 </c:if>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/scrap.js" ></script>
 <script type="text/javascript">
 
+	var username = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}";
+	var pnum = ${vo.pNum };
+	
 	$(function(){
-		console.log("문서 로딩");
-		getList();
+	   getList();
+	   
+	   $("#btnScrap").on("click",function(){
+	      scrap(pnum,username);
+	   });
+	   
 	})
 
 	$("#hit").click(function(e){
-		var ask=confirm("해당 게시글을 추천하시겠습니까?");
+		var ask = confirm("해당 게시글을 추천하시겠습니까?");
+		var username = document.getElementById("object HTMLInputElement");
 		if(ask == true){
-		$.ajax({
-			url:"/lol/update/" + ${vo.pNum },
-			success: function(data){
-				$("#hit").html('추천 '+data);
+			if(username != null){
+				$.ajax({
+					url:"/lol/update/" + ${vo.pNum },
+					success: function(data){
+						alert('추천 성공');
+						$("#hit").html('추천 '+data);
+					}
+				});
 			}
-		});
+			alert('로그인 후 이용해주세요.');
 		}
 	});
 	
 	$("#nohit").click(function(e){
-		var ask=confirm("해당 게시글을 반대하시겠습니까?");
+		var ask = confirm("해당 게시글을 반대하시겠습니까?");
+		var username = document.getElementById("object HTMLInputElement");
 		if(ask == true){
-		$.ajax({
-			url:"/lol/update1/" + ${vo.pNum },
-			success: function(data){
-				$("#nohit").html('반대 '+data);
-			}
-		});
+			if(username != null){
+				$.ajax({
+					url:"/lol/update1/" + ${vo.pNum },
+					success: function(data){
+						alert('반대 성공');
+						$("#nohit").html('반대 '+data);
+				}
+			});
 		}
+		alert('로그인 후 이용해주세요.');
+	}
 	});
 	
 	$("#btn").click(function(){
@@ -462,6 +483,7 @@
 			success: function(data) {
 				var code=$(data).find("code").text();
 				if(code=='success'){
+					alert('댓글이 삭제되었습니다.');
 					getList();
 				}else{
 					alert('삭제 실패!');
@@ -549,8 +571,8 @@
 	})
 	
 	
-			function beforePage(){
-		history.go(-1);
+	function beforePage(){
+		location.href = "/lol/community/list";
 		return;
 	}
 
@@ -575,14 +597,27 @@
 					var rNohit = $(this).find("rNohit").text();
 					var wrapDiv = $("<div>",{class:'commWrap'});
 					var div = $("<div>",{class:'comm'});
+					
 					div.html(
 							rWriter+"&nbsp;&nbsp;&nbsp;"+rContent+"<br>"
 							+regdate+"&nbsp;&nbsp;&nbsp;"
 							+"<a href='javascript:replyHit("+ rNum + ")'>추천</a>[" + rHit +"]&nbsp;&nbsp;"
 							+"<a href='javascript:replyNohit("+ rNum + ")'>반대</a>[" + rNohit +"]&nbsp;&nbsp;"
 							+"<a href=\"javascript:rereComment("+ rNum + "," + pNum + ",'" + rWriter + "','" + rContent + "')\">답글</a>"+"&nbsp;&nbsp;"
-							+"<a href='javascript:removeComm("+ rNum + "," + pNum + ")'>삭제</a>"
-					);
+							);
+					
+					console.log(username == rWriter)
+					if(username == rWriter){
+						let delA = $("<a>",{href:"",text:'삭제'});
+						delA.on("click",function(){
+							removeComm(rNum,pNum);
+						});
+						console.log(delA);
+						div.append(delA);
+					}
+					
+
+					
 					
 					wrapDiv.append(div);
 					
@@ -603,10 +638,10 @@
 				if(data.length < 1 ) return;
 				console.log(rNum+"번 대댓");
 				for(rereply of data){
-					console.log(rereply);
+// 					console.log(rereply);
 					var rereDiv = $("<div>",{class:'commWrap1'});
-					rereDiv.text("└" + rereply.regdate + " " + rereply.rWriter + " " + rereply.rContent);
-					console.log(wrapDiv);
+					rereDiv.text("└ " + rereply.regdate + " " + rereply.rWriter + " " + rereply.rContent);
+// 					console.log(wrapDiv);
 					wrapDiv.append(rereDiv);
 				}
 			},
@@ -620,20 +655,25 @@
 		var rWriter = document.getElementById("rWriter").value;
 		// var ask = document.getElementById("ask").value;
 		var prompt_test = prompt("댓글을 입력해주세요.");
-		var ask = confirm("댓글을 등록하시겠습니까?");
-		if(ask == true){
-		$.ajax({
-			url:"/lol/rinsert/"+rNum+"/"+pNum+"/"+rWriter+"/"+prompt_test,
-			success: function(data) {
-				var code=$(data).find("code").text();
-				if(code=='success'){
-					alert("댓글이 등록되었습니다.");
-					getList();
-				}else{
-					alert('등록 실패!');
+		console.log(prompt_test);
+		if(prompt_test == null){
+			getList();
+		}else{
+			var ask = confirm("댓글을 등록하시겠습니까?");
+			if(ask == true){
+			$.ajax({
+				url:"/lol/rinsert/"+rNum+"/"+pNum+"/"+rWriter+"/"+prompt_test,
+				success: function(data) {
+					var code=$(data).find("code").text();
+					if(code=='success'){
+						alert("댓글이 등록되었습니다.");
+						getList();
+					}else{
+						alert('등록 실패!');
+					}
 				}
+			});
 			}
-		});
 		}
 	}
 

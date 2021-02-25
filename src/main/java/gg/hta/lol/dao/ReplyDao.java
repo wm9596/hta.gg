@@ -14,8 +14,12 @@ public class ReplyDao {
 	@Autowired private SqlSession sqlSession;
 	private static String NAMESPACE = "gg.hta.lol.mapper.ReplyMapper";
 	
-	public int delete(int rNum) {
-		return sqlSession.delete(NAMESPACE + ".delete", rNum);
+	public int replyDelete(int rNum) {
+		return sqlSession.delete(NAMESPACE + ".replyDelete", rNum);
+	}
+	
+	public int rereDelete(int rNum) {
+		return sqlSession.delete(NAMESPACE + ".rereDelete", rNum);
 	}
 	
 	public int insert(ReplyVo vo) {

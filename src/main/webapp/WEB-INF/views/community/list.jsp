@@ -41,6 +41,7 @@
 				<th scope="col"><a href="javascript:page(3)">팀원모집</a> </td>
 				<th scope="col"><a href="javascript:page(4)">사건사고</a> </td>
 				<th scope="col"><a href="javascript:page(5)">Q&A</a> </td>
+				<th scope="col"><a href="javascript:page(6)">공지사항</a> </td>
 				<th scope="col"><a href="javascript:page(5)">경기일정</a> </td>
 			</tr>
 			<tr>
