@@ -285,37 +285,37 @@ function addMatchList(matchList){
 		if(sum.item1!=0){
 			tr1.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item1+".png'></td>");
 		}else{
-			tr1.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
+			tr1.append("<td><img src='${pageContext.request.contextPath }/resources/images/noItem.png'></td>");
 		}
 
 		if(sum.item2!=0){
 			tr1.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item2+".png'></td>");
 		}else{
-			tr1.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
+			tr1.append("<td><img src='${pageContext.request.contextPath }/resources/images/noItem.png'></td>");
 		}
 		
 		if(sum.item3!=0){
 			tr1.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item3+".png'></td>");
 		}else{
-			tr1.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
+			tr1.append("<td><img src='${pageContext.request.contextPath }/resources/images/noItem.png'></td>");
 		}
 		
 		if(sum.item4!=0){
 			tr2.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item4+".png'></td>");
 		}else{
-			tr2.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
+			tr2.append("<td><img src='${pageContext.request.contextPath }/resources/images/noItem.png'></td>");
 		}
 		
 		if(sum.item5!=0){
 			tr2.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item5+".png'></td>");
 		}else{
-			tr2.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
+			tr2.append("<td><img src='${pageContext.request.contextPath }/resources/images/noItem.png'></td>");
 		}
 		
 		if(sum.item6!=0){
 			tr2.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item6+".png'></td>");
 		}else{
-			tr2.append("<td><img src='${pageContext.request.contextPath }/resources/images/noneImg.png'></td>");
+			tr2.append("<td><img src='${pageContext.request.contextPath }/resources/images/noItem.png'></td>");
 		}
 		
 		table.append(tr1);
@@ -326,7 +326,7 @@ function addMatchList(matchList){
 		let accessory = $("<div>",{class:'accessory'})
 		
 		if(sum.accessory==0){
-			accessory.append("<img src='${pageContext.request.contextPath }/resources/images/noneImg.png'>");
+			accessory.append("<img src='${pageContext.request.contextPath }/resources/images/noItem.png'>");
 		}else{
 			accessory.append("<img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.accessory+".png'>");
 		}
