@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <style>
 
+
 #profile_wrap {
+	width: 100%;
  	font-size: 12px; 
 }
 
@@ -100,8 +102,8 @@
 }
 
 .profile_mostarea img {
-	width: 50%;
-	height: 40%;
+	width: 40%;
+	height: 45%;
 	border-radius: 100%;
 }
 
@@ -111,8 +113,8 @@
 }
 
 .lastMatch img {
-	width: 50%;
-	height: 35%;
+	width: 40%;
+	height: 40%;
 	border-radius: 100%;
 }
 
@@ -223,7 +225,7 @@
 				})
 
 				$("#profile_top_iconArea").append("<img alt='' src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/profileicon/" + icon +".png' class='profileIcon'>")
-				$("#profile_top_nicknameArea").append("<span>" + snickname + "</span>")
+				$("#profile_top_nicknameArea").append("<h5>" + snickname + "</h5>")
 				if (soloTier != "") {
 					$("#soloTier").append("<span>솔로랭크</span><br>")
 					$("#soloTier").append("<img alt='' src='/lol/resources/images/tierEmblem/" + soloTier +".png'><br>")
@@ -237,8 +239,8 @@
 					$("#flexTier").append("<span>(" + parseInt(flexWin/(flexWin+flexLose)*100) +"%)</span>")	
 				}
 				
-				$("#profile_middle_2_titleArea").append("<span>많이 플레이한 챔피언 TOP3</span>");
-				$("#profile_bottom_titleArea").append("<span>최근 3경기 </span>");
+				$("#profile_middle_2_titleArea").append("<h6>많이 플레이한 챔피언 TOP3</h6>");
+				$("#profile_bottom_titleArea").append("<h6>최근 3경기 </h6>");
 				
 				
 				var mostArea = $(".profile_mostarea").get();
