@@ -11,10 +11,12 @@
 <script type="text/javascript">
 </script>
 <style type="text/css">
-	a{ text-decoration:none; color: black; }
-	.insert{margin-top: 5%}
-	.comm{margin-bottom: 20px; margin-left: 22%; width: 600px; border: 1px solid #aaa;position: relative;}
-	.commWrap1{margin-bottom: 20px; margin-left: 24%; width: 600px; position: relative;}
+/* 	a{ text-decoration:none; color: black; } */
+	.commWrap{margin-bottom: 20px; width: 80%; position: relative; margin-bottom: 20px; margin-left: auto; margin-right: auto;}
+	.comm{width: 100%; border: 1px solid #aaa;position: relative;} 
+/* 	.insert{margin-top: 5%} */
+/* 	.comm{margin-bottom: 20px; margin-left: 22%; width: 600px; border: 1px solid #aaa;position: relative;} */
+/* 	.commWrap1{margin-bottom: 20px; margin-left: 25%; width: 600px; position: relative;} */
 </style>
 </head>
 <body><br>
@@ -51,17 +53,10 @@
 		</tr>
 		<tr>
 			<td>
-				<span>${vo.username }</span> | <span>${categoryName }</span> | <span>${vo.regdate }</span>
+				<span>${vo.username }</span><input type="button" id="sendMsg" value="쪽지"> | <span>${categoryName }</span> | <span>${vo.regdate }</span>
 			</td>
 			<td>
-				<span>조회 ${vo.viewCount+1} |</span>
-<!-- 				<input type="button" id="sendMsg" value="쪽지"> <br> -->
-			</td>
-			<td>
-				<span>추천 ${vo.hit } |</span>
-			</td>
-			<td>
-				<span>반대 ${vo.nohit } |</span>
+				<span>조회 ${vo.viewCount+1}</span> | <span>추천 ${vo.hit }</span> | <span>반대 ${vo.nohit }</span>
 			</td>
 		</tr>
 		<tr>
@@ -70,27 +65,29 @@
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<input type="button" value="이전 페이지로" onclick="beforePage()">
-				<c:choose>
-					<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username != null}">
-						<input id="btnScrap" type="button" value="스크랩하기"> 
-					</c:when>
-				</c:choose>
-				<c:choose>
-					<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == 'admin' || 
-					sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == vo.username}">
-						<button>게시글 수정</button>
-						<input type="button" value="게시글 삭제" onclick="postDelete(${vo.pNum})">
-					</c:when>
-				</c:choose>
-			</td>
-		</tr>
-		<tr>
-			<td>
+			<td colspan="2" style="text-align: center;">
 				<button type="button" id="hit" class="btn btn-info likeBtn"	style="width: 100px; height: 50px; font-size: 25px;">추천 ${vo.hit }</button>
 				<button type="button" id="nohit" class="btn btn-info likeBtn" style="width: 100px; height: 50px; font-size: 25px;">반대 ${vo.nohit }</button>
 				<button type="button" id="report" class="btn btn-info likeBtn" onclick="" style="width: 100px; height: 50px; font-size: 25px;">신고</button>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: center;">
+<!-- 				<input type="button" value="이전 페이지로" onclick="beforePage()"> -->
+				<button>게시글 수정</button>
+				<input type="button" value="게시글 삭제" onclick="postDelete(${vo.pNum})">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: center">
+				<input type="hidden" id="rWriter" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" readonly="readonly">
+				<input type="text" id="rContent" style="width:70%">
+				<input type="button" value="댓글등록" id="btn"><br><br><br>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<div id="commList"></div>
 			</td>
 		</tr>
 		<tr>
@@ -138,73 +135,53 @@
 <!-- 				태그 안에 조건문 -->
 <!-- 			</div> -->
 <!-- 		</div> -->
-		<br><br><br>
-		<!-- 댓글 목록 -->
-		<h3 style="margin-left: 22%">댓글 입력</h3>
-		<div align="center">
-			<hr size="2" width="600" color="black" id=line>
-		</div>
-		<div >
-			<div id="commList"></div><br>
-<!-- 			<div id="rc" style="background-color: black"></div> -------------------------------------------------------------------------------------------- -->
-			<div align="center">
-			<div id="commAdd" style="display: inline-block;">
-				아이디 <input type="text" id="rWriter" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" readonly="readonly">
-				댓글 <input type="text" id="rContent" style="width:250px">
-				<input type="button" value="댓글등록" id="btn"><br><br><br>
-			</div>
-			</div>
-		</div>
-			
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/scrap.js" ></script>
-<script type="text/javascript">
+<!-- 		<br><br><br> -->
+<!-- 		<!-- 댓글 목록 --> -->
+<!-- 		<h3 style="margin-left: 22%">댓글 입력</h3> -->
+<!-- 		<div align="center"> -->
+<!-- 			<hr size="2" width="600" color="black" id=line> -->
+<!-- 		</div> -->
+<!-- 		<div > -->
+<!-- 			<div id="commList"></div><br> -->
+<!-- <!-- 			<div id="rc" style="background-color: black"></div> -------------------------------------------------------------------------------------------- --> -->
+<!-- 			<div align="center"> -->
+<!-- 			<div id="commAdd" style="display: inline-block;"> -->
+<%-- 				아이디 <input type="text" id="rWriter" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" readonly="readonly"> --%>
+<!-- 				댓글 <input type="text" id="rContent" style="width:250px"> -->
+<!-- 				<input type="button" value="댓글등록" id="btn"><br><br><br> -->
+<!-- 			</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 
-	var username = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}";
-	var pnum = ${vo.pNum };
-	
+<script type="text/javascript">
 	$(function(){
-	   getList();
-	   
-	   $("#btnScrap").on("click",function(){
-	      scrap(pnum,username);
-	   });
-	   
+		console.log("문서 로딩");
+		getList();
 	})
 
 	$("#hit").click(function(e){
-		var ask = confirm("해당 게시글을 추천하시겠습니까?");
-		var username = document.getElementById("object HTMLInputElement");
+		var ask=confirm("해당 게시글을 추천하시겠습니까?");
 		if(ask == true){
-			if(username != null){
-				$.ajax({
-					url:"/lol/update/" + ${vo.pNum },
-					success: function(data){
-						alert('추천 성공');
-						$("#hit").html('추천 '+data);
-					}
-				});
+		$.ajax({
+			url:"/lol/update/" + ${vo.pNum },
+			success: function(data){
+				$("#hit").html('추천 '+data);
 			}
-			alert('로그인 후 이용해주세요.');
+		});
 		}
 	});
 	
 	$("#nohit").click(function(e){
-		var ask = confirm("해당 게시글을 반대하시겠습니까?");
-		var username = document.getElementById("object HTMLInputElement");
+		var ask=confirm("해당 게시글을 반대하시겠습니까?");
 		if(ask == true){
-			if(username != null){
-				$.ajax({
-					url:"/lol/update1/" + ${vo.pNum },
-					success: function(data){
-						alert('반대 성공');
-						$("#nohit").html('반대 '+data);
-				}
-			});
+		$.ajax({
+			url:"/lol/update1/" + ${vo.pNum },
+			success: function(data){
+				$("#nohit").html('반대 '+data);
+			}
+		});
 		}
-		alert('로그인 후 이용해주세요.');
-	}
 	});
-
 	
 	$("#btn").click(function(){
 		var rWriter = document.getElementById("rWriter").value;
@@ -236,7 +213,6 @@
 			success: function(data) {
 				var code=$(data).find("code").text();
 				if(code=='success'){
-					alert('댓글이 삭제되었습니다.');
 					getList();
 				}else{
 					alert('삭제 실패!');
@@ -356,12 +332,8 @@
 							+"<a href='javascript:replyHit("+ rNum + ")'>추천</a>[" + rHit +"]&nbsp;&nbsp;"
 							+"<a href='javascript:replyNohit("+ rNum + ")'>반대</a>[" + rNohit +"]&nbsp;&nbsp;"
 							+"<a href=\"javascript:rereComment("+ rNum + "," + pNum + ",'" + rWriter + "','" + rContent + "')\">답글</a>"+"&nbsp;&nbsp;"
-							<c:choose>
-								<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username eq vo.username}">
-									+"<a href='javascript:removeComm("+ rNum + "," + pNum + ")'>삭제</a>"
-								</c:when>
-							</c:choose>
-							);
+							+"<a href='javascript:removeComm("+ rNum + "," + pNum + ")'>삭제</a>"
+					);
 					
 					wrapDiv.append(div);
 					
@@ -384,7 +356,7 @@
 				for(rereply of data){
 					console.log(rereply);
 					var rereDiv = $("<div>",{class:'commWrap1'});
-					rereDiv.text("└ " + rereply.regdate + " " + rereply.rWriter + " " + rereply.rContent);
+					rereDiv.text("└" + rereply.regdate + " " + rereply.rWriter + " " + rereply.rContent);
 					console.log(wrapDiv);
 					wrapDiv.append(rereDiv);
 				}
@@ -399,25 +371,20 @@
 		var rWriter = document.getElementById("rWriter").value;
 		// var ask = document.getElementById("ask").value;
 		var prompt_test = prompt("댓글을 입력해주세요.");
-		console.log(prompt_test);
-		if(prompt_test == null){
-			getList();
-		}else{
-			var ask = confirm("댓글을 등록하시겠습니까?");
-			if(ask == true){
-			$.ajax({
-				url:"/lol/rinsert/"+rNum+"/"+pNum+"/"+rWriter+"/"+prompt_test,
-				success: function(data) {
-					var code=$(data).find("code").text();
-					if(code=='success'){
-						alert("댓글이 등록되었습니다.");
-						getList();
-					}else{
-						alert('등록 실패!');
-					}
+		var ask = confirm("댓글을 등록하시겠습니까?");
+		if(ask == true){
+		$.ajax({
+			url:"/lol/rinsert/"+rNum+"/"+pNum+"/"+rWriter+"/"+prompt_test,
+			success: function(data) {
+				var code=$(data).find("code").text();
+				if(code=='success'){
+					alert("댓글이 등록되었습니다.");
+					getList();
+				}else{
+					alert('등록 실패!');
 				}
-			});
 			}
+		});
 		}
 	}
 
