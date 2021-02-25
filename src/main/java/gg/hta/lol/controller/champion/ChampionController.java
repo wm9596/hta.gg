@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import gg.hta.lol.service.ChampService;
 import gg.hta.lol.vo.ChampionVo;
@@ -54,7 +55,8 @@ public class ChampionController {
 	}
 
 	@GetMapping(value = "/champ/ChampList1")
-	public String ChampList() {
+	public String ChampList(Model mv) {
+		mv.addAttribute("win", service.winlistAll());
 		return ".header2.champ.ChampList";
 	}
 
@@ -79,12 +81,7 @@ public class ChampionController {
 	public ChampionVo selectList1(int championid) {
 	
 		service.selectList(championid);
-		service.wincount(championid);
-		service.banCount(championid);
-		service.matchCount(championid);
-		System.out.println(service.wincount(championid));
-		System.out.println(service.banCount(championid));
-		System.out.println(service.matchCount(championid));
+		
 		return service.selectList(championid);
 	}
 	
@@ -100,10 +97,23 @@ public class ChampionController {
 		mc.put("bancount", service.banCount(championid));
 		mc.put("matchcount", service.matchCount(championid));
 		mc.put("maxCount",service.maxCount(championid));
+		mc.put("winrank",service.winrank(championid));
+		mc.put("banrank",service.banrank(championid));
 		return mc;
 				
 	}
+	@ResponseBody
+	@GetMapping(value="/champ/itemtree")
+	public Map<String,Object> itemtree(int championid){
+		Map<String, Object> mp=new HashMap<String, Object>();
+		String aa="http://ddragon.leagueoflegends.com/cdn/11.4.1/data/ko_KR/summoner.json";
+
+		mp.put("itemlist",service.itemtree(championid));
+		return mp;
+	}
 	
+
+
 /*
 	static String api_key = "RGAPI-707cfdb4-37f8-461f-883e-e936f4d5b09c";
 
@@ -154,6 +164,7 @@ public class ChampionController {
 								StringBuffer sb1 = new StringBuffer();
 								while ((line1 = br1.readLine()) != null) {
 									sb1.append(line1);
+									JSONArray jarr=new JSONArray();
 									JSONParser parser1 = new JSONParser();
 									Object obj1 = parser1.parse(sb1.toString());
 									JSONObject jsonObj1 = (JSONObject) obj1;
@@ -216,34 +227,7 @@ public class ChampionController {
 		}
 	}
 */
-//	@ResponseBody
-//	@GetMapping(value="/champ/ChampPick2")
-//	public String  ChampPic(String name) {
-//		
-//		String surl = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/"+name+"?api_key="+api_key;
-//		StringBuffer sb = new StringBuffer();
-//		try {
-//		URL url = new URL(surl);
-//		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//		if (conn != null) {
-//			conn.setConnectTimeout(10000);
-//			conn.setUseCaches(false);
-//			if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-//				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
-//				String line = "";
-//				while ((line = br.readLine()) != null) {
-//					sb.append(line);
-//				}
-//				br.close();
-//				conn.disconnect();
-//			}
-//		}
-//		return sb.toString();
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
+
 	@GetMapping(value = "/champ/ChampPickList")
 	public String ChampPickList() {
 		return "champ/ChampPick";

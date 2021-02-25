@@ -5,14 +5,21 @@
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+<head>
+<style type="text/css">
+#d1{
+height:500px;
+padding-left: 550px;
+}
+</style>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript" src="/lol/resources/js/jquery-3.5.1.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
@@ -20,7 +27,7 @@
 </div>
 <script type="text/javascript">
 $(function(){
-	   $('.ui-datepicker ').css({ "margin-left" : "500px", "margin-top": "-223px"});  
+	   $('.ui-datepicker ').css({ "margin-left" : "1000px", "margin-top": "-223px"});  
 	 
 		var today1=new Date();
 		var year1 = today1.getFullYear(); // 년도
@@ -279,11 +286,12 @@ function b2win(data){
 }
 </script>
 <div id="allList" style="width: 100%">
-<div id="d1"></div>
+<div id="d1">
 
 <span id="ss"></span>
-
 <div id="matchList"></div>
+</div>
+
 </div>
 </body>
 </html>

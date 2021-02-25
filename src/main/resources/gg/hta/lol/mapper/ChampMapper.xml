@@ -75,4 +75,61 @@
 		from champion )aa
 		where championid=#{championid}
 	</select>
+		<select id="banrank" parameterType="int" resultType="hashmap">
+        select b.* from (
+       ( select a.championid,a.name,round(a.bancount/a.co/4*100)per ,ROW_NUMBER() over (order by round(a.bancount/a.co/4*100) desc)banrank from (
+   ( select champion.championid,champion.bancount,champion.name,count(teaminfo.matchid)co from teaminfo inner join teammemberinfo on 
+   teaminfo.matchid=teammemberinfo.matchid 
+   inner join champion on teammemberinfo.championid=champion.championid 
+    group by champion.name,champion.bancount,champion.championid))a))b
+  where b.championid=#{championid}
+	</select>
+			<select id="winrank" parameterType="int" resultType="hashmap">
+
+        select aa.*  from(
+        (select name,championid,
+		round(nvl((wincount)/decode(pickcount,0,null,pickcount),0)*100)winrank,ROW_NUMBER() over(order by round(nvl((wincount*100)/decode(pickcount,0,null,pickcount),0)) desc,wincount desc)rank from
+		champion)) aa where championid=#{championid}
+	</select>
+	
+	<select id='pickrank' resultType="hashmap">
+	
+	           select c.* from(     select b.* from (
+       ( select a.championid,a.name,a.pickcount ,row_number() over (order by a.pickcount desc) from (
+   ( select champion.championid,champion.pickcount,champion.name,count(teaminfo.matchid)co from teaminfo inner join teammemberinfo on 
+   teaminfo.matchid=teammemberinfo.matchid 
+   inner join champion on teammemberinfo.championid=champion.championid 
+    group by champion.name,champion.pickcount,champion.championid))a))b)c where
+    rownum <![CDATA[ < ]]> 10
+    
+	</select>
+	<select id='itemtree' resultType="hashmap" parameterType="int">
+        select a.spell1,a.spell2,nvl(a.item1,2138)item1 ,nvl(a.item2,2138)item2 ,nvl(a.item3,2138)item3 from(
+        (select   spell2,spell1,item1,item2, item3, rank() over (order by item1 desc) from teammemberinfo inner join champion on 
+        champion.championid=teammemberinfo.championid where champion.championid=#{championid} group by 
+        item1,item2,item3,spell1,spell2)a)
+        where rownum <![CDATA[ < ]]> 3
+	
+	</select>
+	
+	<select id='banlistAll' resultType="hashmap">
+	        select b.* from (
+       ( select a.championid,a.name,round(a.bancount/a.co/4*100)per ,ROW_NUMBER() over (order by round(a.bancount/a.co/4*100) desc)banrank from (
+   ( select champion.championid,champion.bancount,champion.name,count(teaminfo.matchid)co from teaminfo inner join teammemberinfo on 
+   teaminfo.matchid=teammemberinfo.matchid 
+   inner join champion on teammemberinfo.championid=champion.championid 
+    group by champion.name,champion.bancount,champion.championid))a))b
+     where
+    rownum <![CDATA[ < ]]> 10
+	</select>
+	
+	<select id='winlistAll' resultType="hashmap">
+	     select aa.*  from(
+        (select name,championid,
+		round(nvl((wincount)/decode(pickcount,0,null,pickcount),0)*100)winrank,ROW_NUMBER() over(order by round(nvl((wincount*100)/decode(pickcount,0,null,pickcount),0)) desc,wincount desc)rank from
+		champion)) aa 
+		     where
+    rownum <![CDATA[ < ]]> 10
+	</select>
+	
 </mapper>

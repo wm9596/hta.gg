@@ -106,8 +106,13 @@ white-space: nowrap;
 padding-left: 50px;
 }
 #whichi{
-
-
+display:inline-block;
+position: absolute;
+right: 90px;
+top:198px;
+}
+#whichi h1{
+padding-left: 80px;
 }
 #pickben div h1{
 padding-left: 70px;
@@ -140,11 +145,15 @@ $(function(){
 		},
 		dataType:'json',
 		success:function(data){
+			
 			console.log(data)
-			$("<input type='button' value='픽률'>").appendTo("#pickben").addClass('buttonCol')
-			$("<input type='button' value='승률'>").appendTo("#pickben").addClass('buttonCol')
-			$("<input type='button' value='벤률'>").appendTo("#pickben").addClass('buttonCol')
-			$("#pickben").append("<div><h2>"+data.maxCount.RANK+"위&nbsp&nbsp&nbsp/</h2><h4>"+data.allCount.MAXCOUNT+"</h4><h1>"+data.maxCount.NAME+"</h1></div><div class='sic'><strong></strong></div>")
+			$("<input type='button' value='픽률' id='pickbtn'>").appendTo("#pickben").addClass('buttonCol')
+			$("<input type='button' value='승률' id='winbtn'>").appendTo("#pickben").addClass('buttonCol')
+			$("<input type='button' value='벤률' id='banbtn'>").appendTo("#pickben").addClass('buttonCol')
+			$("#pickbtn").css({
+					border: "3px solid red",
+				})
+			$("#pickben").append("<div id='pickben2'><h2>"+data.maxCount.RANK+"위&nbsp&nbsp&nbsp/</h2><h4>"+data.allCount.MAXCOUNT+"</h4><h1>"+data.maxCount.NAME+"</h1></div><div class='sic'><strong></strong></div>")
 			  $('.sic').circleProgress({
 				  value: data.matchcount/100,
 				    startAngle:300,
@@ -159,15 +168,120 @@ $(function(){
 				    },
 				    lineCap : "butt",
 				    reverse:true,
-				    thickness:100,
+				    thickness:10,
 				          
 				  }).on('circle-animation-progress', function(event, progress) {
-			          $(this).find('strong').html("<h1 id='whichi'>"+Math.round(data.matchcount * progress) + '%<p></h1> <p>픽률 기록중</p>');
+			          $(this).find('strong').html("<h1 id='whichi'>"+Math.round(data.matchcount * progress) + '%</h1><br<br><br><span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'+data.matchcount+"번의 게임플레이</span>");
 				    });
-				  
-			
+			$("#banbtn").click(function(){
+				$(this).css({
+					border: "3px solid red",
+				})
+					$("#winbtn").css({
+					border: "none",
+				})
+					$("#pickbtn").css({
+					border: "none",
+				})
+				$("#pickben2").empty();
+				$(".sic").empty();	
+				$("#pickben2").append("<div><h2>"+data.banrank.BANRANK
+						+"위&nbsp&nbsp&nbsp/</h2><h4>"+data.allCount.MAXCOUNT+"</h4><h1>"+data.maxCount.NAME+"</h1></div><div class='sic'><strong></strong></div>")
+				 $('.sic').circleProgress({
+					  value: data.banrank.PER/100,
+					    startAngle:300,
+					    size:200,
+					    fill:{
+					      gradient:["#46BEFF","#F4FFFF"],
+					      gradientAngle: Math.PI / 2
+					    },
+					    animation:{
+					      duration:2200,
+					      easing:"swing"
+					    },
+					    lineCap : "butt",
+					    reverse:true,
+					    thickness:10,
+					          
+					  }).on('circle-animation-progress', function(event, progress) {
+						  $(this).find('strong').html("<h1 id='whichi'>"+Math.round(data.banrank.PER * progress) + '%</h1><br<br><br><span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'+data.matchcount+"번의 게임플레이</span>");
+					    });
+			})	
+			$("#pickbtn").click(function(){
+				$(this).css({
+					border: "3px solid red",
+				})
+					$("#banbtn").css({
+					border: "none",
+				})
+					$("#winbtn").css({
+					border: "none",
+				})
+				console.log($("#pickben2").parent().children()[7]);
+				$("#pickben2").empty();
+				$(".sic").empty();	
+				$("#pickben2").append("<div><h2>"+data.maxCount.RANK
+						+"위&nbsp&nbsp&nbsp/</h2><h4>"+data.allCount.MAXCOUNT+"</h4><h1>"+data.winrank.NAME+"</h1></div><div class='sic'><strong></strong></div>")
+				 $('.sic').circleProgress({
+					  value: data.matchcount/100,
+					    startAngle:300,
+					    size:200,
+					    fill:{
+					      gradient:["#46BEFF","#F4FFFF"],
+					      gradientAngle: Math.PI / 2
+					    },
+					    animation:{
+					      duration:2200,
+					      easing:"swing"
+					    },
+					    lineCap : "butt",
+					    reverse:true,
+					    thickness:10,
+					          
+					  }).on('circle-animation-progress', function(event, progress) {
+						  $(this).find('strong').html("<h1 id='whichi'>"+Math.round(data.matchcount * progress) + '%</h1><br<br><br><span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'+data.matchcount+"번의 게임플레이</span>");
+					    });
+			})
+			$("#winbtn").click(function(){
+				$(this).css({
+					border: "3px solid red",
+				})
+				$("#pickbtn").css({
+					border: "none",
+				})
+					$("#pickbtn").css({
+					border: "none",
+				})
+				
+				$("#pickben2").empty();
+				$(".sic").empty();	
+				$("#pickben2").append("<div><h2>"+data.winrank.RANK
+						+"위&nbsp&nbsp&nbsp/</h2><h4>"+data.allCount.MAXCOUNT+"</h4><h1>"+data.banrank.NAME+"</h1></div><div class='sic'><strong></strong></div>")
+				 $('.sic').circleProgress({
+					  value: data.winrank.WINRANK/100,
+					    startAngle:300,
+					    size:200,
+					    fill:{
+					      gradient:["#46BEFF","#F4FFFF"],
+					      gradientAngle: Math.PI / 2
+					    },
+					    animation:{
+					      duration:2200,
+					      easing:"swing"
+					    },
+					    lineCap : "butt",
+					    reverse:true,
+					    thickness:10,
+					          
+					  }).on('circle-animation-progress', function(event, progress) {
+						  $(this).find('strong').html("<h1 id='whichi'>"+Math.round(data.winrank.WINRANK * progress) + '%</h1><br<br><br><span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'+data.matchcount+"번의 게임플레이</span>");
+						 
+					    });
+			})
 		}
+		
 	})	
+
 	$.ajax({
 		url:"/lol/champ/selectList1", 
 		data:{
@@ -347,28 +461,186 @@ $(function(){
 						var name1 = name.substring(0, name.length - 4);
 
 						console.log(name1);
-						$
-								.ajax({
-									url : "http://ddragon.leagueoflegends.com/cdn/11.4.1/data/ko_KR/champion/"
-											+ name1 + ".json",
-									dataType : 'json',
+						$.ajax({
+								url : "/lol/champ/itemtree",
+								dataType : 'json',
+								data:{
+										championid:list
+									},
 									success : function(data) {
-										
-								let num5=		data.data[""+name1+""].recommended.length-1;
-								
-											console.log(name1);
 											console.log(data);
-											console.log(data.data[""+name1+""].recommended[num5].blocks[0].items[1]);
-									
-											$("#simte").append("<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+data.data[""+name1+""].recommended[num5].blocks[0].items[0].id+".png'>");
-											$("#simte").append("<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+data.data[""+name1+""].recommended[num5].blocks[0].items[1].id+".png'>");
-											$("#simte").append("<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+data.data[""+name1+""].recommended[num5].blocks[0].items[2].id+".png'>");
-											$("#hackitem").append("<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+data.data[""+name1+""].recommended[num5].blocks[2].items[0].id+".png'>");
-											$("#hackitem").append("<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+data.data[""+name1+""].recommended[num5].blocks[2].items[1].id+".png'>");
-											$("#hackitem").append("<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+data.data[""+name1+""].recommended[num5].blocks[2].items[2].id+".png'>");
-											$("#hackitem").append("<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+data.data[""+name1+""].recommended[num5].blocks[2].items[3].id+".png'>");
-											$("#hackitem").append("<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+data.data[""+name1+""].recommended[num5].blocks[2].items[4].id+".png'>");
-											$("#hackitem").append("<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+data.data[""+name1+""].recommended[num5].blocks[2].items[5].id+".png'>");
+											console.log(data.itemlist[0].ITEM1);	
+											var spell1num=data.itemlist[0].SPELL1
+											var spell2num=data.itemlist[0].SPELL2
+											var spell1_img="";
+											var spell2_img="";
+											var spellinfo="";
+											var spellinfo2="";
+											if(data.itemlist[0]){
+											$("#simte").append("<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+data.itemlist[0].ITEM1+".png'>");
+											$("#simte").append("<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+data.itemlist[0].ITEM2+".png'>");
+											$("#simte").append("<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+data.itemlist[0].ITEM3+".png'>");
+											$.ajax({
+												url:'http://ddragon.leagueoflegends.com/cdn/11.4.1/data/ko_KR/summoner.json',
+												dataType:'json',
+												success:function(data){
+													console.log(data.data)
+													if(data.data.SummonerBarrier.key==spell1num){
+														spell1_img=data.data.SummonerBarrier.image.full;
+														spellinfo=data.data.SummonerBarrier.description
+													}else if(data.data.SummonerBoost.key==spell1num){
+														spell1_img=data.data.SummonerBoost.image.full
+														
+														spellinfo=data.data.SummonerBoost.description
+													}else if(data.data.SummonerDot.key==spell1num){
+														spell1_img=data.data.SummonerDot.image.full
+														
+														spellinfo=data.data.SummonerDot.description
+													}else if(data.data.SummonerExhaust.key==spell1num){
+														spell1_img=data.data.SummonerExhaust.image.full
+														
+														spellinfo=data.data.SummonerExhaust.description
+													}else if(data.data.SummonerFlash.key==spell1num){
+														spell1_img=data.data.SummonerFlash.image.full
+														
+														spellinfo=data.data.SummonerFlash.description
+													}else if(data.data.SummonerHaste.key==spell1num){
+														spell1_img=data.data.SummonerHaste.image.full
+														
+														spellinfo=data.data.SummonerHaste.description
+													}else if(data.data.SummonerHeal.key==spell1num){
+														spell1_img=data.data.SummonerHeal.image.full
+														
+														spellinfo=data.data.SummonerHeal.description
+													}else if(data.data.SummonerMana.key==spell1num){
+														spell1_img=data.data.SummonerMana.image.full
+														
+														spellinfo=data.data.SummonerMana.description
+													}else if(data.data.SummonerPoroRecall.key==spell1num){
+														spell1_img=data.data.SummonerPoroRecall.image.full
+														
+														spellinfo=data.data.SummonerPoroRecall.description
+													}else if(data.data.SummonerPoroThrow.key==spell1num){
+														spell1_img=data.data.SummonerPoroThrow.image.full
+														
+														spellinfo=data.data.SummonerPoroThrow.description
+													}else if(data.data.SummonerSmite.key==spell1num){
+														spell1_img=data.data.SummonerSmite.image.full
+														
+														spellinfo=data.data.SummonerSmite.description
+													}
+													else if(data.data.SummonerSnowURFSnowball_Mark.key==spell1num){
+														spell1_img=data.data.SummonerSnowURFSnowball_Mark.image.full
+														
+														spellinfo=data.data.SummonerSnowURFSnowball_Mark.description
+													}
+													else if(data.data.SummonerSnowball.key==spell1num){
+														spell1_img=data.data.SummonerSnowball.image.full
+														
+														spellinfo=data.data.SummonerSnowball.description
+													}
+													else if(data.data.SummonerTeleport.key==spell1num){
+														spell1_img=data.data.SummonerTeleport.image.full
+														
+														spellinfo=data.data.SummonerTeleport.description
+													}
+													
+													
+													if(data.data.SummonerBarrier.key==spell2num){
+														spell2_img=data.data.SummonerBarrier.image.full
+														
+														spellinfo2=data.data.SummonerBarrier.description
+													}else if(data.data.SummonerBoost.key==spell2num){
+														spell2_img=data.data.SummonerBoost.image.full
+														
+														spellinfo2=data.data.SummonerBoost.description
+													}else if(data.data.SummonerDot.key==spell2num){
+														spell2_img=data.data.SummonerDot.image.full
+														
+														spellinfo2=data.data.SummonerDot.description
+													}else if(data.data.SummonerExhaust.key==spell2num){
+														spell2_img=data.data.SummonerExhaust.image.full
+														
+														
+														spellinfo2=data.data.SummonerExhaust.description
+													}else if(data.data.SummonerFlash.key==spell2num){
+														spell2_img=data.data.SummonerFlash.image.full
+														
+														
+														spellinfo2=data.data.SummonerFlash.description
+													}else if(data.data.SummonerHaste.key==spell2num){
+														spell2_img=data.data.SummonerHaste.image.full
+														
+														spellinfo2=data.data.SummonerHaste.description
+													}else if(data.data.SummonerHeal.key==spell2num){
+														spell2_img=data.data.SummonerHeal.image.full
+														
+														spellinfo2=data.data.SummonerHeal.description
+													}else if(data.data.SummonerMana.key==spell2num){
+														spell2_img=data.data.SummonerMana.image.full
+														
+														spellinfo2=data.data.SummonerMana.description
+														
+													}else if(data.data.SummonerPoroRecall.key==spell2num){
+														spell2_img=data.data.SummonerPoroRecall.image.full
+														
+														spellinfo2=data.data.SummonerPoroRecall.description
+														
+													}else if(data.data.SummonerPoroThrow.key==spell2num){
+														spell2_img=data.data.SummonerPoroThrow.image.full
+														
+														spellinfo2=data.data.SummonerPoroThrow.description
+														
+													}else if(data.data.SummonerSmite.key==spell2num){
+														spell2_img=data.data.SummonerSmite.image.full
+														
+														spellinfo2=data.data.SummonerSmite.description
+													}
+													else if(data.data.SummonerSnowURFSnowball_Mark.key==spell2num){
+														spell2_img=data.data.SummonerSnowURFSnowball_Mark.image.full
+														
+														spellinfo2=data.data.SummonerSnowURFSnowball_Mark.description
+													}
+													else if(data.data.SummonerSnowball.key==spell2num){
+														spell2_img=data.data.SummonerSnowball.image.full
+														
+														spellinfo2=data.data.SummonerSnowball.description
+													}
+													else if(data.data.SummonerTeleport.key==spell2num){
+														spell2_img=data.data.SummonerTeleport.image.full
+														
+														spellinfo2=data.data.SummonerTeleport.description
+													}
+													
+													console.log(spellinfo);
+													console.log(spellinfo2)
+													$("#spell").append("<img id='spell1' src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/spell/"+spell1_img+"'>");
+													$("#spell").append("<img id='spell2' src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/spell/"+spell2_img+"'>");
+													$("#spell1").hover(function(){
+														$("<div>" + spellinfo + "</div>").appendTo(
+														"#selectspell").addClass(
+														"content");
+													},function(){
+														console.log("ddddddddd");
+													})
+												}
+											})
+											}else{
+												$("#simte").append("<div>데이터부족으로 자료가 없습니다.</div>");
+											}
+											if(data.itemlist[1]){
+												$("#hackitem").append("<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+data.itemlist[1].ITEM1+".png'>");
+												$("#hackitem").append("<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+data.itemlist[1].ITEM2+".png'>");
+												$("#hackitem").append("<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+data.itemlist[1].ITEM3+".png'>");
+											}else{
+												
+												$("#hackitem").append("<div>데이터부족으로 자료가 없습니다.</div>");
+											}
+												
+												
+											
+											
+											
 									
 										$("#simte img").hover(function(){
 										let simteimg=$(this).attr('src');
@@ -385,11 +657,12 @@ $(function(){
 													$("#itemcon").append(nameeffect).addClass("content");
 												}
 											})
-										
+									
 											},function(){
 												$("#itemcon").empty();
 												$("#itemcon").removeClass("content");
 											})
+										
 											$("#hackitem img").hover(function(){
 												let simteimg=$(this).attr('src');
 												console.log(simteimg.substr(simteimg.length-8, 4));
@@ -422,6 +695,10 @@ $(function(){
 
 
 	})
+	
+	function pickbtn(){
+	
+}
 </script>
 <div id="ChampList">
 <div id="picture">
@@ -434,11 +711,15 @@ $(function(){
 
 <div id="name"></div>
 <div id="skillIcon"></div>
+<div id="spell">
+<h3>추천 스펠</h3></div>
+<div id='selectskill'></div>
+
 <div id="simte">
-<h3>스타팅 추천아이템</h3>
+<h3>승리팀 보유 아이템1</h3>
 </div>
 <div id="hackitem">
-<h3>라이엇 추천아이템</h3>
+<h3>승리팀 보유 아이템2</h3>
 </div>
 <div id="itemcon"></div>
 <div id="selectSkill"></div>

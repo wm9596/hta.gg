@@ -1,5 +1,6 @@
 package gg.hta.lol.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,5 +38,22 @@ public class ChampService {
 	}
 	public Map<String,Object> maxCount(int championid){
 		return dao.maxCount(championid);
+	}
+	public Map<String, Object> banrank(int championid){
+		return dao.banrank(championid);
+	}public Map<String,Object> winrank(int championid){
+		return dao.winrank(championid);
+	}
+	public List<HashMap<String, Object>> itemtree(int championid){
+		return dao.itemtree(championid);
+	}
+	public List<HashMap<String, Object>> winlistAll( ){
+		return dao.winlistAll();
+	}
+	public List<HashMap<String, Object>> banlistAll(){
+		return dao.banlistAll();
+	}
+	public List<HashMap<String, Object>> pickrank( ){
+		return dao.pickrank();
 	}
 }

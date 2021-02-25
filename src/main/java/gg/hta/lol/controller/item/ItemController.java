@@ -31,7 +31,7 @@ public class ItemController {
 	
 	@GetMapping("/itemlist")
 	public String itemlist() {
-		return ".header.item.itemlist";
+		return ".header2.item.itemlist";
 	}
 
 }

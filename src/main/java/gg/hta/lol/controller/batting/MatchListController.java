@@ -25,7 +25,8 @@ public class MatchListController {
 
 	@GetMapping(value = "/match/list")
 	public String matchlist() {
-		return "batting/matchlist";
+		return ".header2.batting.matchlist";
+		
 	}
 
 	@GetMapping(value = "/match/yesdaylist")

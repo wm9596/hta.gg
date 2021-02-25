@@ -42,7 +42,7 @@
 				<th scope="col"><a href="javascript:page(4)">사건사고</a> </td>
 				<th scope="col"><a href="javascript:page(5)">Q&A</a> </td>
 				<th scope="col"><a href="javascript:page(6)">공지사항</a> </td>
-				<th scope="col"><a href="javascript:page(5)">경기일정</a> </td>
+				<th scope="col"><a href="/lol/match/list">경기일정</a> </td>
 			</tr>
 			<tr>
 				<td colspan="2"><a href="javascript:array1('viewCount')">인기 (조회수)</a></td>
