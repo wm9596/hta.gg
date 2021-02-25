@@ -14,11 +14,11 @@
 	</select>
 	
 	<insert id="insert" parameterType="reply">
-	 	insert into reply values(reNum_seq.nextval,#{pNum},0,#{rWriter},#{rContent},sysdate,0,0)
+	 	insert into reply values(reNum_seq.nextval,#{pNum},0,#{rWriter},#{rContent},sysdate)
 	</insert>
 	
 		<insert id="reInsert" parameterType="reply">
-	 	insert into reply values(reNum_seq.nextval,#{pNum},#{rereNum},#{rWriter},#{rContent},sysdate,0,0)
+	 	insert into reply values(reNum_seq.nextval,#{pNum},#{rereNum},#{rWriter},#{rContent},sysdate)
 	</insert>
 	
 	<delete id="replyDelete" parameterType="int">

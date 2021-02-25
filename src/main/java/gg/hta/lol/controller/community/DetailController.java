@@ -117,6 +117,15 @@ public class DetailController {
 	public String insert(@PathVariable("pNum")int pNum,@PathVariable("rWriter")String rWriter,@PathVariable("rContent")String rContent) {
 		int n = service1.insert(new ReplyVo(0, pNum, 0, rWriter, rContent, null));
 		int n1 = service1.update1(pNum);
+		
+		
+		pointService.insert(new PointVo(0, rWriter,"댓글 등록", +50, null));
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("username",rWriter);
+		map.put("score",+50);
+		pointService.update(map);
+		
+		
 		StringBuffer sb = new StringBuffer();
 		sb.append("<result>");
 		try {
@@ -132,16 +141,20 @@ public class DetailController {
 
 	@GetMapping(value = "/rinsert/{rNum}/{pNum}/{rWriter}/{rContent}", produces = "application/xml;charset=utf-8")
 	@ResponseBody
-	public String insert(@PathVariable("rNum")int rNum,@PathVariable("pNum")int pNum,@PathVariable("rWriter")String rWriter,@PathVariable("rContent")String rContent, Principal principal) {
+	public String insert(@PathVariable("rNum")int rNum,@PathVariable("pNum")int pNum,@PathVariable("rWriter")String rWriter,@PathVariable("rContent")String rContent) {
 		ReplyVo vo=new ReplyVo(0, pNum, rNum, rWriter, rContent, null);
 		System.out.println("vo:"+ vo);
 		int n = service1.reInsert(new ReplyVo(0, pNum, rNum, rWriter, rContent, null));
 		int n1 = service1.update1(pNum);
-		pointService.insert(new PointVo(0, principal.getName(), "댓글 등록", +50, null));
+		
+		
+		pointService.insert(new PointVo(0, rWriter,"대댓글 등록", +50, null));
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("username",principal.getName());
+		map.put("username",rWriter);
 		map.put("score",+50);
 		pointService.update(map);
+		
+		
 		StringBuffer sb = new StringBuffer();
 		sb.append("<result>");
 		try {
