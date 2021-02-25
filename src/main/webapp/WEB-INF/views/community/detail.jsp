@@ -267,7 +267,6 @@
 </form:form>
 <c:if test="${categoryName == '팀원모집' }">
 	<script>
-
 	function LoadingWithMask(gif) {
 	    //화면의 높이와 너비를 구하기.
 	    var maskHeight = $(document).height();
@@ -299,6 +298,7 @@
 
 	function showProfile(snickname) {
 		LoadingWithMask('/lol/resources/images/Spinner.gif');
+		console.log("showProfile snickname = " + snickname)
 		$.ajax({
 			url : '/lol/member/member/registerProfile?snickname=' + snickname,
 			success : function(result) {
@@ -375,7 +375,6 @@
 	}
 	
 	var username = $("#user_name").val();
-	console.log("username = " + username);
 	$.ajax({
 		url : "/lol/member/member/checkProfile?username=" + username,
 		dataType: "text",
@@ -386,10 +385,10 @@
 		}
 	})
 
-	$("#getInfo").click(function() {
-		var snickname = $("#snickname").val();
-		showProfile(snickname);
-	});
+// 	$("#getInfo").click(function() {
+// 		var snickname = $("#snickname").val();
+// 		showProfile(snickname);
+// 	});
 	
 	$("#profile_register").click(function() {
 		var snickname = $("#snickname").val();
