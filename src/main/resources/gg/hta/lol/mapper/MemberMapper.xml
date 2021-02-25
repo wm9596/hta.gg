@@ -157,4 +157,10 @@
 		 )
 		 <![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
+	
+	<update id="updateSnickname" parameterType="hashmap">
+		update member
+		set snickname = #{snickname}
+		where username = #{username}
+	</update>
 </mapper>

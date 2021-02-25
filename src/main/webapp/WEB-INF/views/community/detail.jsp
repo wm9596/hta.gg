@@ -18,6 +18,133 @@
 /* 	.comm{margin-bottom: 20px; margin-left: 22%; width: 600px; border: 1px solid #aaa;position: relative;} */
 /* 	.commWrap1{margin-bottom: 20px; margin-left: 25%; width: 600px; position: relative;} */
 </style>
+<c:if test="${vo.cNum == 3 }">
+	<style>
+
+#profile_wrap {
+	width: 100%;
+ 	font-size: 12px; 
+}
+
+#profile_wrap div {
+	border: 0.1px solid black;
+}
+
+.search-bar {
+	width: 500px;
+}
+
+#myProfileArea {
+	width: 50%;
+	height: 700px;
+	margin: auto;
+}
+
+#profile_top {
+	width: 100%;
+	height: 20%;
+}
+
+#profile_top_iconArea {
+	width: 100%;
+	height: 80%;
+	text-align: center;
+}
+
+#profile_top_nicknameArea {
+	width: 100%;
+	height: 20%;
+	text-align: center;
+}
+
+.profileIcon {
+	width: 25%;
+	height: 100%;
+	border-radius: 100%;
+	text-align: center;
+}
+
+#profile_middle {
+	width: 100%;
+	height: 25%;
+}
+
+.profile_middle_tierArea {
+	width: 50%;
+	height: 100%;
+	float: left;
+	text-align: center;
+}
+
+.profile_middle_tierArea img {
+	width: 45%;
+	height: 50%;
+}
+
+#profile_middle_2 {
+	width: 100%;
+	height: 25%;
+}
+
+#profile_middle_2_titleArea {
+	width: 100%;
+	height: 15%;
+	text-align: center;
+}
+
+.profile_mostarea {
+	width: 33.3%;
+	height: 85%;
+	float: left;
+}
+
+#profile_bottom {
+	width: 100%;
+	height: 30%;
+}
+
+#profile_bottom_titleArea {
+	width: 100%;
+	height: 15%;
+	text-align: center;
+}
+
+.lastMatch {
+	width: 33.3%;
+	height: 85%;
+	float: left;
+}
+
+.profile_mostarea {
+	text-align: center;
+}
+
+.profile_mostarea img {
+	width: 50%;
+	height: 40%;
+	border-radius: 100%;
+}
+
+.lastMatch {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.lastMatch img {
+	width: 50%;
+	height: 35%;
+	border-radius: 100%;
+}
+
+#profile_registerArea {
+	width: 70px;
+	height: 25px;
+	margin: auto;
+}
+
+
+</style>
+</c:if>
 </head>
 <body><br>
 <c:choose>
@@ -60,7 +187,51 @@
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td colspan="2">
+			<c:if test="${categoryName == '팀원모집' }">
+				<div id="profile_wrap">
+					<div id="myProfileArea">
+						<div id="profile_top">
+							<div id="profile_top_iconArea"></div>
+							<div id="profile_top_nicknameArea"></div>
+						</div>
+						<div id="profile_middle">
+							<div id="soloTier" class="profile_middle_tierArea">
+							</div>
+							<div id="flexTier" class="profile_middle_tierArea">
+							</div>
+						</div>
+						<div id="profile_middle_2">
+							<div id="profile_middle_2_titleArea">
+							</div>
+							<div id="mostOne" class="profile_mostarea">
+							</div>
+							<div id="mostTwo" class="profile_mostarea">
+							</div>
+							<div id="mostThree" class="profile_mostarea">
+							</div>
+						</div>
+						<div id="profile_bottom">
+							<div id="profile_bottom_titleArea">
+							</div>
+							<div class="lastMatch">
+							</div>
+							<div class="lastMatch">
+							</div>
+							<div class="lastMatch">
+							</div>
+						</div>
+					</div>
+<!-- 					<div id="profile_registerArea"> -->
+<!-- 						<input type="button" id="profile_register" value="프로필 등록"> -->
+						<input type="hidden" id="user_name" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}">
+<!-- 					</div> -->
+<!-- 					<div class="mx-auto mt-5 search-bar input-group mb-3"> -->
+<!-- 						<input id="snickname" type="text" class="form-control rounded-pill" placeholder="LOL 닉네임을 입력해주세요." aria-label="Recipient's username" aria-describedby="button-addon2" value="더덕순대국">  -->
+<!-- 						<input type="button" id="getInfo" value="검색"> -->
+<!-- 					</div> -->
+				</div>
+			</c:if>
 			${vo.content }
 			</td>
 		</tr>
@@ -98,62 +269,145 @@
 			</td>
 		</tr>
 	</table>
-	
-	
-<!-- 	<div align="center" class="insert"> -->
-<!-- 		<h2>게시글 조회하기</h2> -->
-<!-- 		<hr size="2" width="600" color="black" id=line> -->
-<%-- 		<input type="hidden" id="pNum" name="pNum" value="${vo.pNum }"> --%>
-		<!-- DB에 username의 임의의 값 넣음 (추후 회원가입 후 진행) -->
-<%-- 		작성자 <input type="text" id="username" name="username" value="${vo.username}" style="width:87px; text-align: center;" readonly="readonly"> --%>
-		<!-- DB에 cNum의 임의의 값 넣음 (추후 회원가입 후 진행) -->
-<%-- 		카테고리 <input type="text" name="cNum" value="${vo.cNum }" style="width:87px; text-align: center;" readonly="readonly" > --%>
-<%-- 		등록일 <input type="text" value="${vo.regdate }" style="width:87px; text-align: center;" readonly="readonly"> --%>
-<%-- 		조회수 <input type="text" value="${vo.viewCount+1}" style="width:87px; text-align: center;" readonly="readonly"><br><br> --%>
-<!-- 		<input type="button" id="sendMsg" value="쪽지"> <br> -->
-<%-- 		<textarea rows="1" cols="80" name="title" readonly="readonly">[제목] ${vo.title }</textarea><br> --%>
-<%-- 		${vo.content } --%>
-		<!--
-		<a href="${pageContext.request.contextPath }/community/delete?pNum=${vo.pNum }" style="position: right;">게시글 삭제</a>
-		-->
-<!-- 	</div><br><br><br> -->
 </form:form>
-<!-- 	<div align="center"> -->
-<%-- 		<button type="button" id="hit" class="btn btn-info likeBtn"	style="width: 100px; height: 50px; font-size: 25px;">추천 ${vo.hit }</button> --%>
-<%-- 		<button type="button" id="nohit" class="btn btn-info likeBtn" style="width: 100px; height: 50px; font-size: 25px;">반대 ${vo.nohit }</button> --%>
-<!-- 		<button type="button" id="report" class="btn btn-info likeBtn" onclick="" style="width: 100px; height: 50px; font-size: 25px;">신고</button> -->
-<!-- 	</div> -->
-<!-- 		<br><br><br> -->
-<!-- 		<div align="center"> -->
-<!-- 			<div style="display: inline-block;"> -->
-<!-- 				다음 글&nbsp;&nbsp;&nbsp;<br> -->
-<!-- 				이전 글&nbsp;&nbsp;&nbsp; -->
-<!-- 			</div> -->
-<!-- 			<div  style="display: inline-block;"> -->
-<%-- 				<a href='${pageContext.request.contextPath }/community/detail?pNum=${next.pNum}&cNum=${vo.cNum}'>${next.title }</a><br> --%>
-<%-- 				<a href='${pageContext.request.contextPath }/community/detail?pNum=${prev.pNum}&cNum=${vo.cNum}'>${prev.title }</a> --%>
-<!-- 				태그 안에 조건문 -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 		<br><br><br> -->
-<!-- 		<!-- 댓글 목록 --> -->
-<!-- 		<h3 style="margin-left: 22%">댓글 입력</h3> -->
-<!-- 		<div align="center"> -->
-<!-- 			<hr size="2" width="600" color="black" id=line> -->
-<!-- 		</div> -->
-<!-- 		<div > -->
-<!-- 			<div id="commList"></div><br> -->
-<!-- <!-- 			<div id="rc" style="background-color: black"></div> -------------------------------------------------------------------------------------------- --> -->
-<!-- 			<div align="center"> -->
-<!-- 			<div id="commAdd" style="display: inline-block;"> -->
-<%-- 				아이디 <input type="text" id="rWriter" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" readonly="readonly"> --%>
-<!-- 				댓글 <input type="text" id="rContent" style="width:250px"> -->
-<!-- 				<input type="button" value="댓글등록" id="btn"><br><br><br> -->
-<!-- 			</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
+<c:if test="${categoryName == '팀원모집' }">
+	<script>
 
+	function LoadingWithMask(gif) {
+	    //화면의 높이와 너비를 구하기.
+	    var maskHeight = $(document).height();
+	    var maskWidth  = window.document.body.clientWidth;
+	     
+	    //화면에 출력할 마스크를 설정.
+	    var mask       ="<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
+	    var loadingImg ='';
+	      
+	    loadingImg +=" <img src='"+ gif +"' style='position: absolute; display: block; margin: 0px auto;'/>";
+	 
+	    //화면에 레이어 추가
+	    $('body').append(mask)
+	 
+	    //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채우기.
+	    $('#mask').css({
+	            'width' : maskWidth,
+	            'height': maskHeight,
+	            'opacity' :'0.3'
+	    });
+	  
+	    //마스크 표시
+	    $('#mask').show();
+	  
+	    //로딩중 이미지 표시
+	    $('#loadingImg').append(loadingImg);
+	    $('#loadingImg').show();
+	}
+
+	function showProfile(snickname) {
+		LoadingWithMask('/lol/resources/images/Spinner.gif');
+		$.ajax({
+			url : '/lol/member/member/registerProfile?snickname=' + snickname,
+			success : function(result) {
+				console.log(result);
+				var soloTier = $(result).find("soloVo").find("tier").text();
+				soloTier = soloTier.split("_")[0];
+				var soloWin = parseInt($(result).find("soloVo").find("win").text());
+				var soloLose = parseInt($(result).find("soloVo").find("lose").text());
+				var flexTier = $(result).find("flexVo").find("tier").text();
+				flexTier = flexTier.split("_")[0];
+				var flexWin = parseInt($(result).find("flexVo").find("win").text());
+				var flexLose = parseInt($(result).find("flexVo").find("lose").text());
+				var icon = $(result).find("searchVo").find("icon").text();
+				var level = $(result).find("searchVo").find("slevel").text();
+				
+				$("#myProfileArea div div").each(function() {
+					$(this).empty();
+				})
+
+				$("#profile_top_iconArea").append("<img alt='' src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/profileicon/" + icon +".png' class='profileIcon'>")
+				$("#profile_top_nicknameArea").append("<span>" + snickname + "</span>")
+				if (soloTier != "") {
+					$("#soloTier").append("<span>솔로랭크</span><br>")
+					$("#soloTier").append("<img alt='' src='/lol/resources/images/tierEmblem/" + soloTier +".png'><br>")
+					$("#soloTier").append("<span>" + soloWin + "W " + soloLose +"L</span><br>")
+					$("#soloTier").append("<span>(" + parseInt(soloWin/(soloWin+soloLose)*100) +"%)</span>")	
+				}
+				if (flexTier != "") {
+					$("#flexTier").append("<span>자유랭크</span><br>")
+					$("#flexTier").append("<img alt='' src='/lol/resources/images/tierEmblem/" + flexTier +".png'><br>")
+					$("#flexTier").append("<span>" + flexWin + "W " + flexLose +"L</span><br>")
+					$("#flexTier").append("<span>(" + parseInt(flexWin/(flexWin+flexLose)*100) +"%)</span>")	
+				}
+				
+				$("#profile_middle_2_titleArea").append("<span>많이 플레이한 챔피언 TOP3</span>");
+				$("#profile_bottom_titleArea").append("<span>최근 3경기 </span>");
+				
+				
+				var mostArea = $(".profile_mostarea").get();
+				for(let i=0; i<3; i++) {
+					let most = $(result).find("mlist")[i];
+					
+					if ($(most).find("picture").text() != ""){
+						$(mostArea[i]).append(
+								"<img alt='' src='https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/" + $(most).find("picture").text() +"'><br>" +
+								"<span>" + Math.round((parseFloat($(most).find("kill").text()) + parseFloat($(most).find("assist").text()))/parseFloat($(most).find("death").text()) * 100)/100 +"</span><br>" +
+								"<span>(" + $(most).find("kill").text() + "/" + $(most).find("death").text() + "/" + $(most).find("assist").text() +")</span><br>" +
+								"<span>" + $(most).find("wincnt").text() + "W" + (parseInt($(most).find("cnt").text()) - parseInt($(most).find("wincnt").text()))  + "L</span><br>" +
+								"<span>" + $(most).find("rate").text() +"%</span>"
+						)
+					}
+				}
+				
+				var lastMatchArea = $(".lastMatch").get();
+				for (let i=0; i<3; i++) {
+					let lastMatch = $(result).find("matchLastThree")[i];
+					if ($(lastMatch).find("winlose").text() != "") {
+						if ($(lastMatch).find("winlose").text() == 'Win') {
+							$(lastMatchArea[i]).css("backgroundColor", "#9ac0ff");
+						} else {
+							$(lastMatchArea[i]).css("backgroundColor", "#ffaeae");
+						}
+						$(lastMatchArea[i]).append(
+								"<img alt='' src='https://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/" + $(lastMatch).find("championId").text() +"'><br>" +
+								"<span>" + Math.round((parseInt($(lastMatch).find("kill").text()) + parseInt($(lastMatch).find("assist").text()))/parseInt($(lastMatch).find("death").text()) * 100)/100 + "</span><br>" +
+								"<span>(" + $(lastMatch).find("kill").text() + "/" + $(lastMatch).find("death").text() + "/" + $(lastMatch).find("assist").text() + ")</span>"
+						)	
+					}
+				}
+				$('#mask, #loadingImg').hide();
+			    $('#mask, #loadingImg').empty(); 
+			}
+		});
+	}
+	
+	var username = $("#user_name").val();
+	$.ajax({
+		url : "/lol/member/member/checkProfile?username=" + username,
+		dataType: "text",
+		success: function (result) {
+			if (result != "") {
+				showProfile(result);	
+			}
+		}
+	})
+
+	$("#getInfo").click(function() {
+		var snickname = $("#snickname").val();
+		showProfile(snickname);
+	});
+	
+	$("#profile_register").click(function() {
+		var snickname = $("#snickname").val();
+		$.ajax({
+			url: "/lol/member/member/registerProfileOk?username=" + username + "&snickname=" + snickname,
+			success: function() {
+				alert("프로필 등록이 완료되었습니다.")
+			}
+		})
+	})
+</script>
+</c:if>
 <script type="text/javascript">
+
 	$(function(){
 		console.log("문서 로딩");
 		getList();

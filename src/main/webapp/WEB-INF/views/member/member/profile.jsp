@@ -3,7 +3,6 @@
 <style>
 
 #profile_wrap {
-	background-color: yellow;
  	font-size: 12px; 
 }
 
@@ -16,8 +15,8 @@
 }
 
 #myProfileArea {
-	width: 30%;
-	height: 600px;
+	width: 50%;
+	height: 700px;
 	margin: auto;
 }
 
