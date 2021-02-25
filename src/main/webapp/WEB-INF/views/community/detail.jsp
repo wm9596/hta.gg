@@ -74,7 +74,7 @@
 				<input type="button" value="이전 페이지로" onclick="beforePage()">
 				<c:choose>
 					<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username != null}">
-						<input type="button" value="스크랩하기" onclick="scrap()">
+						<input id="btnScrap" type="button" value="스크랩하기"> 
 					</c:when>
 				</c:choose>
 				<c:choose>
@@ -155,11 +155,20 @@
 			</div>
 			</div>
 		</div>
-
+			
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/scrap.js" ></script>
 <script type="text/javascript">
+
+	var username = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}";
+	var pnum = ${vo.pNum };
+	
 	$(function(){
-		console.log("문서 로딩");
-		getList();
+	   getList();
+	   
+	   $("#btnScrap").on("click",function(){
+	      scrap(pnum,username);
+	   });
+	   
 	})
 
 	$("#hit").click(function(e){
@@ -347,7 +356,11 @@
 							+"<a href='javascript:replyHit("+ rNum + ")'>추천</a>[" + rHit +"]&nbsp;&nbsp;"
 							+"<a href='javascript:replyNohit("+ rNum + ")'>반대</a>[" + rNohit +"]&nbsp;&nbsp;"
 							+"<a href=\"javascript:rereComment("+ rNum + "," + pNum + ",'" + rWriter + "','" + rContent + "')\">답글</a>"+"&nbsp;&nbsp;"
-							+"<a href='javascript:removeComm("+ rNum + "," + pNum + ")'>삭제</a>"
+							<c:choose>
+								<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username eq vo.username}">
+									+"<a href='javascript:removeComm("+ rNum + "," + pNum + ")'>삭제</a>"
+								</c:when>
+							</c:choose>
 							);
 					
 					wrapDiv.append(div);
@@ -386,20 +399,25 @@
 		var rWriter = document.getElementById("rWriter").value;
 		// var ask = document.getElementById("ask").value;
 		var prompt_test = prompt("댓글을 입력해주세요.");
-		var ask = confirm("댓글을 등록하시겠습니까?");
-		if(ask == true){
-		$.ajax({
-			url:"/lol/rinsert/"+rNum+"/"+pNum+"/"+rWriter+"/"+prompt_test,
-			success: function(data) {
-				var code=$(data).find("code").text();
-				if(code=='success'){
-					alert("댓글이 등록되었습니다.");
-					getList();
-				}else{
-					alert('등록 실패!');
+		console.log(prompt_test);
+		if(prompt_test == null){
+			getList();
+		}else{
+			var ask = confirm("댓글을 등록하시겠습니까?");
+			if(ask == true){
+			$.ajax({
+				url:"/lol/rinsert/"+rNum+"/"+pNum+"/"+rWriter+"/"+prompt_test,
+				success: function(data) {
+					var code=$(data).find("code").text();
+					if(code=='success'){
+						alert("댓글이 등록되었습니다.");
+						getList();
+					}else{
+						alert('등록 실패!');
+					}
 				}
+			});
 			}
-		});
 		}
 	}
 
