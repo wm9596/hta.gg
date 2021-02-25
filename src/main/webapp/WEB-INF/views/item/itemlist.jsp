@@ -18,8 +18,7 @@ position: relative;
   color:white;
 
 }
-div{
-width: 800px;}
+
 img{
 margin: 2px;}
 h1{

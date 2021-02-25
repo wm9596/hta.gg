@@ -11,7 +11,7 @@
 		<img alt="" src="${pageContext.request.contextPath }/resources/images/hta.PNG" width="40" height="40">
 	</div>
 	<div id="header_center">
-		<div class="menu"><a href="#">챔피언</a></div>
+		<div class="menu"><a href="${pageContext.request.contextPath }/champ/ChampList1">챔피언</a></div>
 		<div class="menu"><a href="${pageContext.request.contextPath }/itemlist">아이템</a></div>
 		<div class="menu"><a href="${pageContext.request.contextPath }/community/list">커뮤니티</a></div>
 	</div>
