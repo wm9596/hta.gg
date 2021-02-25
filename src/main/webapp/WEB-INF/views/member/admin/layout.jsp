@@ -63,7 +63,7 @@
 										<li><a href="">공지사항 등록</a></li>
 										<li><a href="${pageContext.request.contextPath }/battingTeam/insert">경기일정 등록</a></li>
 										<li><a href="">경기결과 처리</a></li>
-										<li><a href="">게시글 관리</a></li>
+										<li><a href="${pageContext.request.contextPath }/community/list">게시글 관리</a></li>
 									</ul>
 								</li>
 								<li><a href="${pageContext.request.contextPath }/member/admin/report"><i class="fa fa-glass"></i>신고 접수 내역</a></li>
