@@ -55,7 +55,7 @@ public class ChampionController {
 
 	@GetMapping(value = "/champ/ChampList1")
 	public String ChampList() {
-		return "champ/ChampList";
+		return ".header2.champ.ChampList";
 	}
 
 	@ResponseBody
@@ -71,18 +71,40 @@ public class ChampionController {
 	@GetMapping(value = "/champ/selectList{championid}")
 	public String selectList(int championid, Model mv) {
 		mv.addAttribute("championid", championid);
-		return "champ/selectList";
+		return ".header2.champ.selectList";
 	}
 
 	@ResponseBody
 	@GetMapping(value = "/champ/selectList1")
 	public ChampionVo selectList1(int championid) {
-		System.out.println(championid);
+	
 		service.selectList(championid);
-
+		service.wincount(championid);
+		service.banCount(championid);
+		service.matchCount(championid);
+		System.out.println(service.wincount(championid));
+		System.out.println(service.banCount(championid));
+		System.out.println(service.matchCount(championid));
 		return service.selectList(championid);
 	}
-
+	
+	@ResponseBody
+	@GetMapping(value="/champ/count")
+	public Map<String, Object> count(int championid){
+		Map<String, Object> mc=new HashMap<String, Object>();
+		System.out.println(service.wincount(championid));
+		System.out.println(service.banCount(championid));
+		System.out.println(service.matchCount(championid));
+		mc.put("allCount", service.allCount(championid));
+		mc.put("wincount", service.wincount(championid));
+		mc.put("bancount", service.banCount(championid));
+		mc.put("matchcount", service.matchCount(championid));
+		mc.put("maxCount",service.maxCount(championid));
+		return mc;
+				
+	}
+	
+/*
 	static String api_key = "RGAPI-707cfdb4-37f8-461f-883e-e936f4d5b09c";
 
 	@ResponseBody
@@ -193,7 +215,7 @@ public class ChampionController {
 			return null;
 		}
 	}
-
+*/
 //	@ResponseBody
 //	@GetMapping(value="/champ/ChampPick2")
 //	public String  ChampPic(String name) {

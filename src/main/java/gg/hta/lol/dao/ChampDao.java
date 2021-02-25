@@ -1,6 +1,7 @@
 package gg.hta.lol.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,20 @@ public class ChampDao {
 	}
 	public ChampionVo selectList(int championid) {
 		return sqlSession.selectOne(NAMESPACE+".selectList",championid);
+	}
+	public int matchCount(int championid) {
+		return sqlSession.selectOne(NAMESPACE+".matchCount",championid);
+	}
+	public int banCount(int championid) {
+		return sqlSession.selectOne(NAMESPACE+".banCount",championid);
+	}
+	public int wincount(int championid) {
+		return sqlSession.selectOne(NAMESPACE+".wincount",championid);
+	}
+	public Map<String, Object> allCount(int championid){
+		return sqlSession.selectOne(NAMESPACE+".allCount",championid);
+	}
+	public Map<String,Object> maxCount(int championid){
+		return sqlSession.selectOne(NAMESPACE+".maxCount",championid);
 	}
 }

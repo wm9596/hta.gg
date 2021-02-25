@@ -3,7 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gg.hta.lol.mapper.ChampMapper">
-	<insert id="insertChamp" parameterType="gg.hta.lol.vo.ChampionVo">
+	<insert id="insertChamp"
+		parameterType="gg.hta.lol.vo.ChampionVo">
 		insert into champion values(
 		#{championid},
 		#{name},
@@ -26,13 +27,52 @@
 		'null'
 		)
 	</insert>
-	<delete id="deleteChamp" >
-	delete  from champion
+	<delete id="deleteChamp">
+		delete from champion
 	</delete>
 	<select id="ChampAll_List" resultType="gg.hta.lol.vo.ChampionVo">
-   select * from champion   order by name 
+		select * from champion
+		order by name
 	</select>
-	<select id="selectList" parameterType="int" resultType="gg.hta.lol.vo.ChampionVo">
-	select * from champion where championid=#{championid}
+	<select id="selectList" parameterType="int"
+		resultType="gg.hta.lol.vo.ChampionVo">
+		select * from champion where championid=#{championid}
+	</select>
+	<select id="matchCount" parameterType="int" resultType="int">
+		select
+		nvl(round(max((select pickcount from champion where
+		championid=#{championid}))/(count(matchid)/2)*100),0) from teaminfo
+	</select>
+	<select id="banCount" parameterType="int" resultType="int">
+		select
+		nvl(round(max((select bancount from champion where
+		championid=#{championid}))/(count(matchid)/2)*100),0) from teaminfo
+	</select>
+	<select id="wincount" parameterType="int" resultType="int">
+		select
+		round(nvl((wincount*100)/decode(pickcount,0,null,pickcount),0)) from
+		champion where championid=#{championid}
+	</select>
+	<select id='allCount' parameterType="int" resultType="hashmap">
+		select
+		max((select count(championid) from champion))maxcount
+		,count(matchid)/2 matchCount,max((select bancount from champion
+		where
+		championid=#{championid})) banCount,max((select pickcount from
+		champion
+		where championid=#{championid})) pickCount,max((select
+		wincount from
+		champion
+		where championid=#{championid})) winCount from
+		teaminfo
+	</select>
+	<select id="maxCount" parameterType="int" resultType="hashmap">
+		select
+		aa.rank rank,aa.name name from
+		(
+		select pickcount,name,
+		championid,rank() over ( order by pickcount desc)rank
+		from champion )aa
+		where championid=#{championid}
 	</select>
 </mapper>
