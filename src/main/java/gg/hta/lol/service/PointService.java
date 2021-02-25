@@ -1,5 +1,7 @@
 package gg.hta.lol.service;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +20,11 @@ public class PointService {
 	}
 	public int memberPointUpdate(BattingLogVo vo) {
 		return dao.memberPointUpdate(vo);
+	}
+	public int insert(PointVo vo) {
+		return dao.insert(vo);
+	}
+	public int update(HashMap<String, Object> map) {
+		return dao.update(map);
 	}
 }

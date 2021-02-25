@@ -3,6 +3,7 @@ package gg.hta.lol.controller.community;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -31,9 +32,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import gg.hta.lol.service.CommunityService;
+import gg.hta.lol.service.PointService;
 import gg.hta.lol.service.ReplyService;
 import gg.hta.lol.service.ReportService;
 import gg.hta.lol.vo.CommunityVo;
+import gg.hta.lol.vo.PointVo;
 import gg.hta.lol.vo.ReplyVo;
 import gg.hta.lol.vo.ReportVo;
 import oracle.jdbc.proxy.annotation.Post;
@@ -43,6 +46,7 @@ public class DetailController {
 	@Autowired private CommunityService service;
 	@Autowired ReplyService service1;
 	@Autowired private ReportService reportService;
+	@Autowired private PointService pointService;
 	
 	@GetMapping("/community/detailMy")
 	public String detailMy(int pNum, Model m) {
@@ -128,11 +132,16 @@ public class DetailController {
 
 	@GetMapping(value = "/rinsert/{rNum}/{pNum}/{rWriter}/{rContent}", produces = "application/xml;charset=utf-8")
 	@ResponseBody
-	public String insert(@PathVariable("rNum")int rNum,@PathVariable("pNum")int pNum,@PathVariable("rWriter")String rWriter,@PathVariable("rContent")String rContent) {
+	public String insert(@PathVariable("rNum")int rNum,@PathVariable("pNum")int pNum,@PathVariable("rWriter")String rWriter,@PathVariable("rContent")String rContent, Principal principal) {
 		ReplyVo vo=new ReplyVo(0, pNum, rNum, rWriter, rContent, null);
 		System.out.println("vo:"+ vo);
 		int n = service1.reInsert(new ReplyVo(0, pNum, rNum, rWriter, rContent, null));
 		int n1 = service1.update1(pNum);
+		pointService.insert(new PointVo(0, principal.getName(), "댓글 등록", +50, null));
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("username",principal.getName());
+		map.put("score",+50);
+		pointService.update(map);
 		StringBuffer sb = new StringBuffer();
 		sb.append("<result>");
 		try {
@@ -196,7 +205,12 @@ public class DetailController {
 	
 	@GetMapping(value = "/update/{pNum}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public int update(@PathVariable("pNum")int pNum) {
+	public int update(@PathVariable("pNum")int pNum, Principal principal) {
+		pointService.insert(new PointVo(0, principal.getName(), "게시글 추천", +10, null));
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("username",principal.getName());
+		map.put("score",+10);
+		pointService.update(map);
 		return service.hit(pNum);
 	}
 	

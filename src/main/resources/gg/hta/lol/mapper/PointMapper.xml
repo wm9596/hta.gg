@@ -19,4 +19,11 @@ where username=(select battinglog.username from match inner join battinglog on m
 where match.mnum=#{mNum} and battinglog.username=#{username})
     </update>
     
+    
+    <insert id="insert" parameterType="gg.hta.lol.vo.PointVo">
+    	 insert into point values(ptNum_seq.nextval,#{username},#{method},#{score},sysdate)
+    </insert>
+    <update id="update" parameterType="hashmap">
+    	update member set point = #{score}+point where username=#{username}
+    </update>
     </mapper>

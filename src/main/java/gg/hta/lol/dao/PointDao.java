@@ -1,5 +1,7 @@
 package gg.hta.lol.dao;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,5 +24,11 @@ public class PointDao {
 		System.out.println(vo.getMNum()+","+vo.getUsername());
 		return sqlSession.update(NAMESPACE+".memberPointUpdate",vo);
 		
+	}
+	public int insert(PointVo vo) {
+		return sqlSession.insert(NAMESPACE+".insert",vo);
+	}
+	public int update(HashMap<String, Object> map) {
+		return sqlSession.insert(NAMESPACE+".update",map);
 	}
 }
