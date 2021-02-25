@@ -421,7 +421,6 @@
 
 	$("#hit").click(function(e){
 		var ask = confirm("해당 게시글을 추천하시겠습니까?");
-		var username = document.getElementById("object HTMLInputElement");
 		if(ask == true){
 			if(username != null){
 				$.ajax({
@@ -432,13 +431,11 @@
 					}
 				});
 			}
-			alert('로그인 후 이용해주세요.');
 		}
 	});
 	
 	$("#nohit").click(function(e){
-		var ask = confirm("해당 게시글을 반대하시겠습니까?");
-		var username = document.getElementById("object HTMLInputElement");
+		var ask = confirm("해당 게시글을 반대하시겠습니까?1");
 		if(ask == true){
 			if(username != null){
 				$.ajax({
@@ -446,12 +443,12 @@
 					success: function(data){
 						alert('반대 성공');
 						$("#nohit").html('반대 '+data);
-				}
-			});
+					}
+				});
+			}
 		}
-		alert('로그인 후 이용해주세요.');
-	}
 	});
+	
 	
 	$("#btn").click(function(){
 		var rWriter = document.getElementById("rWriter").value;
