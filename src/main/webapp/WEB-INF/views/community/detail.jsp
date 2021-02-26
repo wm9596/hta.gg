@@ -243,17 +243,30 @@
 		<tr>
 			<td colspan="2" style="text-align: center;">
 <!-- 				<input type="button" value="이전 페이지로" onclick="beforePage()"> -->
-				<button>게시글 수정</button>
-				<input type="button" value="게시글 삭제" onclick="postDelete(${vo.pNum})">
+
+				<c:choose>
+					<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username != null}">
+						<input id="btnScrap" type="button" value="스크랩하기"> 
+					</c:when>
+				</c:choose>
+
+			<c:if test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == vo.username ||
+								sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == 'admin'}">
+					<button>게시글 수정</button>
+					<input type="button" value="게시글 삭제" onclick="postDelete(${vo.pNum})">
+			</c:if>
+				
 			</td>
 		</tr>
-		<tr>
-			<td colspan="2" style="text-align: center">
-				<input type="hidden" id="rWriter" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" readonly="readonly">
-				<input type="text" id="rContent" style="width:70%">
-				<input type="button" value="댓글등록" id="btn"><br><br><br>
-			</td>
-		</tr>
+		<c:if test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username != null}">
+			<tr>
+				<td colspan="2" style="text-align: center">
+					<input type="hidden" id="rWriter" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" readonly="readonly">
+					<input type="text" id="rContent" style="width:70%">
+					<input type="button" value="댓글등록" id="btn"><br><br><br>
+				</td>
+			</tr>
+		</c:if>
 		<tr>
 			<td colspan="2">
 				<div id="commList"></div>

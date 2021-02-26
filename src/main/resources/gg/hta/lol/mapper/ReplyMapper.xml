@@ -34,7 +34,7 @@
 	</update>
 	
 	<update id="mCount" parameterType="int">
-		update community set commentCount=commentCount-1 where pNum=#{pNum}
+		update community set commentCount=(select count(*)from reply where pnum = #{pNum} ) where pNum=#{pNum}
 	</update>
 	
 	<update id="rpCount" parameterType="int">

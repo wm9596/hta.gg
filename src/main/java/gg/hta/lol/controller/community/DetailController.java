@@ -116,7 +116,7 @@ public class DetailController {
 	@ResponseBody
 	public String insert(@PathVariable("pNum")int pNum,@PathVariable("rWriter")String rWriter,@PathVariable("rContent")String rContent) {
 		int n = service1.insert(new ReplyVo(0, pNum, 0, rWriter, rContent, null));
-		int n1 = service1.update1(pNum);
+		int n1 = service1.update2(pNum);
 		
 		
 		pointService.insert(new PointVo(0, rWriter,"댓글 등록", +50, null));
@@ -202,13 +202,14 @@ public class DetailController {
 	@GetMapping(value = "/delete/{rNum}/{pNum}", produces = "application/xml;charset=utf-8")
 	@ResponseBody
 	public String delete(@PathVariable("rNum")int rNum,@PathVariable("pNum")int pNum) {
-		int n1 = service1.update2(pNum);
+		System.out.println(rNum + " " +pNum);
 		int n = service1.delete(rNum);
+		 service1.update2(pNum);
 		StringBuffer sb = new StringBuffer();
 		sb.append("<result>");
 		try {
 			sb.append("<code>success</code>");
-		}catch(Exception e) {
+		}catch(Exception e) {//여기블록 진입할 때는 디비 관련 작업이 제대로 안됐을 때가 아
 			e.printStackTrace();
 			sb.append("<code>fail</code>");
 		}

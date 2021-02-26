@@ -29,7 +29,7 @@
 </style>
 </head>
 <body>
-	<h2 style=" width:200px; padding: 2%;">전체</h2>
+	<a href="${pageContext.request.contextPath }/community/list" style=" width:200px; padding: 2%; font-size:35px; color: black;">전체</a>
 <div align="center">
 	<div style="display:inline;">
 <%-- 		<form:form method="post" action="${pageContext.request.contextPath }/community/list"> --%>
@@ -141,9 +141,9 @@
 </body>
 <script type="text/javascript">
 function page(n){
-	console.log(n);
 	location.href="${pageContext.request.contextPath }/community/list?cNum="+n;
-}
+	}
+
 		
 // $("input[name='cNum']").val(n);
 		
