@@ -14,11 +14,11 @@
 	</select>
 	
 	<insert id="insert" parameterType="reply">
-	 	insert into reply values(reNum_seq.nextval,#{pNum},0,#{rWriter},#{rContent},sysdate)
+	 	insert into reply values(reNum_seq.nextval,#{pNum},0,#{rWriter},#{rContent},sysdate,0,0)
 	</insert>
 	
 		<insert id="reInsert" parameterType="reply">
-	 	insert into reply values(reNum_seq.nextval,#{pNum},#{rereNum},#{rWriter},#{rContent},sysdate)
+	 	insert into reply values(reNum_seq.nextval,#{pNum},#{rereNum},#{rWriter},#{rContent},sysdate,0,0)
 	</insert>
 	
 	<delete id="replyDelete" parameterType="int">
@@ -34,7 +34,7 @@
 	</update>
 	
 	<update id="mCount" parameterType="int">
-		update community set commentCount=commentCount-1 where pNum=#{pNum}
+		update community set commentCount=(select count(*)from reply where pnum = #{pNum} ) where pNum=#{pNum}
 	</update>
 	
 	<update id="rpCount" parameterType="int">

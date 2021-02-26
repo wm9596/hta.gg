@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,6 +48,10 @@
 							<option value="3">팀원모집</option>
 							<option value="4">사건사고</option>
 							<option value="5">Q&A</option>
+								<c:if test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == 'admin'}">
+									<option value="6">공지사항</option>
+								</c:if>
+								
 						</select> 
 					</td>
 				</tr>

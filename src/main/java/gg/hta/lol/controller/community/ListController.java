@@ -24,7 +24,7 @@ public class ListController {
 	@Autowired private ReplyService reservice;
 	
 	@RequestMapping("/community/list")
-	public ModelAndView list(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum,@RequestParam(value = "cNum",defaultValue = "1")int cNum,@RequestParam(value = "vrh",defaultValue = "pNum")String vrh,@RequestParam(value = "commentCount",defaultValue = "1")int commentCount,String field,String keyword) {
+	public ModelAndView list(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum,@RequestParam(value = "cNum",defaultValue = "0")int cNum,@RequestParam(value = "vrh",defaultValue = "pNum")String vrh,@RequestParam(value = "commentCount",defaultValue = "1")int commentCount,String field,String keyword) {
 		HashMap<String,Object> map=new HashMap<String, Object>();
 		map.put("field", field);
 		map.put("keyword",keyword);
@@ -40,7 +40,13 @@ public class ListController {
 		map.put("startRow",startRow);
 		map.put("endRow",endRow);
 		
-		List<CommunityVo> list=service.list(map);
+		
+		List<CommunityVo> list=null;
+		if(cNum==0) {
+			list=service.wholeList(map);
+		}else {
+			list=service.list(map);
+		}
 		System.out.println(list);
 		ModelAndView mv=new ModelAndView(".header2.community.list");
 		mv.addObject("list", list);
