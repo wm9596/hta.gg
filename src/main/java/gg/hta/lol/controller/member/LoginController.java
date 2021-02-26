@@ -118,24 +118,12 @@ public class LoginController {
 	}
 	@GetMapping("/member/admin/connection")
 	public String connection(@RequestParam(value="pageNum", defaultValue = "1")int pageNum, Model m) {
-//		int totalRowCount = service.visitListCount(); 
-//		PageUtil pu = new PageUtil(pageNum, 10,5,totalRowCount);
-//		int startRow = pu.getStartRow();
-//		int endRow = pu.getEndRow();
-//		HashMap<String, Object> map = new HashMap<String, Object>();
-//		map.put("startRow",startRow);
-//		map.put("endRow",endRow);
-//		List<VisitVo> list = service.visitList(map);
-//		m.addAttribute("list", list);
-//		m.addAttribute("pu",pu);
 		return ".adminpage.connection";
 	}
 	@GetMapping(value = "/member/admin/connectionList", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 	@ResponseBody
 	public List<VisitVo> connectionList() {
 		List<VisitVo> list = service.visitList();
-
-		System.out.println(list);
 		return list;
 	}
 }
