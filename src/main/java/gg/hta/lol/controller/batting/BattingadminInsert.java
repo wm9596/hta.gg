@@ -27,7 +27,7 @@ public class BattingadminInsert {
 	PointService Pservice;
 	@GetMapping(value = "/battingTeam/insert")
 	public String adminInsert() {
-		return "batting/teaminsert";
+		return ".adminpage.batting.teaminsert";
 	}
 
 	@GetMapping(value = "/insertTeam") // 새로운팀추가
