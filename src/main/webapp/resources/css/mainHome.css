@@ -10,6 +10,18 @@
 	height: 100px;
 }
 
+#header_left {
+	display: flex;
+	align-items: center;
+	font-family: 'Krona One', sans-serif;
+	font-size: 35px;
+	color: white;
+}
+
+#header_left a {
+	text-decoration: none;
+}
+
 #content {
 	margin-left: 15%;
 	margin-right: 15%;
@@ -18,7 +30,7 @@
 }
 
 #header_left {
-	background-color: #343a40 !important;
+	background-color: #191c20;
 	display: flex;
 	width: 33.3%;
 	height: 50px;
@@ -27,7 +39,7 @@
 }
 
 #header_center {
-	background-color: #343a40 !important;
+	background-color: #191c20;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -54,7 +66,7 @@
 }
 
 #header_right {
-	background-color: #343a40 !important;
+	background-color: #191c20;
 	display: flex;
 	width: 33.3%;
 	height: 50px;
@@ -90,7 +102,7 @@
 	display: flex;
 	width: 100%;
 	height: 50px;
-	background-color: orange;
+	background-color: #343a40 !important;
 }
 
 #sub_header div {
@@ -99,7 +111,7 @@
 	width: 33.3%;
 	height: 50px;
 	float: left;
-	background-color: orange;
+/* 	background-color: orange; */
 }
 
 #sub_header_center .menu {
@@ -125,6 +137,7 @@
 }
 
 #footer {
+	display: inline-grid;
     bottom:0;
     width:100%;  
     background:#ccc;

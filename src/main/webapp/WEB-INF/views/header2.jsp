@@ -8,7 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script> 
 	<div id="header_left">
-		<img alt="" src="${pageContext.request.contextPath }/resources/images/hta.PNG" width="40" height="40">
+		&nbsp;&nbsp;<span><a href="${pageContext.request.contextPath }/">HTA.GG</a></span>
 	</div>
 	<div id="header_center">
 		<form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" id ="searchForm" >
