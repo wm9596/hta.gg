@@ -422,7 +422,10 @@
 	$("#hit").click(function(e){
 		var ask = confirm("해당 게시글을 추천하시겠습니까?");
 		if(ask == true){
-			if(username != null){
+			if(username == ""){
+				alert("로그인 후 이용해주세요.");
+				location.href = "/lol/member/login";
+			} else {
 				$.ajax({
 					url:"/lol/update/" + ${vo.pNum },
 					success: function(data){
@@ -434,10 +437,14 @@
 		}
 	});
 	
+	
 	$("#nohit").click(function(e){
-		var ask = confirm("해당 게시글을 반대하시겠습니까?1");
+		var ask = confirm("해당 게시글을 반대하시겠습니까?");
 		if(ask == true){
-			if(username != null){
+			if(username == ""){
+				alert("로그인 후 이용해주세요.");
+				location.href = "/lol/member/login";
+			} else {
 				$.ajax({
 					url:"/lol/update1/" + ${vo.pNum },
 					success: function(data){

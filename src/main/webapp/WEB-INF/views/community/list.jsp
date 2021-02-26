@@ -119,9 +119,9 @@
 				<input type="text" name="keyword" value="${keyword }">
 				<input type="submit" value="검색">
 				
+					<c:if test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username != null}">
 						<input type="button" onclick="location.href='${pageContext.request.contextPath }/community/insert?cNum=${cNum}'" value="글쓰기" style="float: right;">
-				
-				
+					</c:if>
 			</form:form>
 			<div>
 				<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">

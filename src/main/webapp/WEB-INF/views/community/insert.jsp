@@ -47,6 +47,7 @@
 							<option value="3">팀원모집</option>
 							<option value="4">사건사고</option>
 							<option value="5">Q&A</option>
+							<option value="6">공지사항</option>
 						</select> 
 					</td>
 				</tr>
