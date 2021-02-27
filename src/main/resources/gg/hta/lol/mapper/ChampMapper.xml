@@ -67,29 +67,28 @@
 		teaminfo
 	</select>
 	<select id="maxCount" parameterType="int" resultType="hashmap">
-		select
-		aa.rank rank,aa.name name from
-		(
-		select pickcount,name,
-		championid,rank() over ( order by pickcount desc)rank
-		from champion )aa
-		where championid=#{championid}
+		select ccb.* from(
+select cc.*,ROW_number() over(order by cc.pickper desc)rank from (
+select distinct bb.name,bb.pickper,bb.championid,bb.picture,bb.pickcount from(
+select round((pickcount)/(select count(matchid) from matchinfo)*100)pickper ,name,champion.championid,champion.picture,champion.pickcount from teammemberinfo 
+inner join champion on champion.championid=teammemberinfo.championid where champion.bancount>3)bb)cc
+)ccb where championid=#{championid}
 	</select>
 		<select id="banrank" parameterType="int" resultType="hashmap">
-        select b.* from (
-       ( select a.championid,a.name,round(a.bancount/a.co/4*100)per ,ROW_NUMBER() over (order by round(a.bancount/a.co/4*100) desc)banrank from (
-   ( select champion.championid,champion.bancount,champion.name,count(teaminfo.matchid)co from teaminfo inner join teammemberinfo on 
-   teaminfo.matchid=teammemberinfo.matchid 
-   inner join champion on teammemberinfo.championid=champion.championid 
-    group by champion.name,champion.bancount,champion.championid))a))b
-  where b.championid=#{championid}
+       select ccb.* from(
+select cc.*,ROW_number() over(order by cc.banper desc)rank from (
+select distinct bb.name,bb.banPer,bb.championid,bb.picture,bb.bancount from(
+select round((bancount/2)/(select count(matchid) from matchinfo)*100)banPer ,name,champion.championid,champion.picture,champion.bancount from teammemberinfo 
+inner join champion on champion.championid=teammemberinfo.championid where champion.bancount>3)bb)cc)
+ccb where championid=#{championid}
 	</select>
 			<select id="winrank" parameterType="int" resultType="hashmap">
-
-        select aa.*  from(
-        (select name,championid,
-		round(nvl((wincount)/decode(pickcount,0,null,pickcount),0)*100)winrank,ROW_NUMBER() over(order by round(nvl((wincount*100)/decode(pickcount,0,null,pickcount),0)) desc,wincount desc)rank from
-		champion)) aa where championid=#{championid}
+select ccb.* from(
+select aa.*  from(
+        (select picture,name,championid,
+		round(nvl((wincount)/decode(pickcount,0,null,pickcount),0)*100)winrank,
+        ROW_NUMber() over(order by round(nvl((wincount*100)/decode(pickcount,0,null,pickcount),0)) desc,wincount desc)rank from
+		champion where pickcount>3)) aa )ccb where championid=#{championid}
 	</select>
 	
 	<select id='pickrank' resultType="hashmap">
@@ -102,11 +101,15 @@ inner join champion on champion.championid=teammemberinfo.championid where champ
     
 	</select>
 	<select id='itemtree' resultType="hashmap" parameterType="int">
-        select a.spell1,a.spell2,nvl(a.item1,2138)item1 ,nvl(a.item2,2138)item2 ,nvl(a.item3,2138)item3 from(
-        (select   spell2,spell1,item1,item2, item3, rank() over (order by item1 desc) from teammemberinfo inner join champion on 
-        champion.championid=teammemberinfo.championid where champion.championid=#{championid} group by 
-        item1,item2,item3,spell1,spell2)a)
-        where rownum <![CDATA[ < ]]> 60
+        
+       select a.* from(
+        (select   spell2,spell1,item1,item2, item3,item4,item5,item6,rune1,rune2, rank() over (order by item1 desc)rank from teammemberinfo inner join champion on 
+        champion.championid=teammemberinfo.championid inner join teaminfo on teammemberinfo.matchid=teaminfo.matchid where champion.championid=#{championid} and teaminfo.WINLOSE='Win' group by 
+        item1,item2,item3,item4,item5,item6,spell1,spell2,rune1,rune2)a )
+      where <![CDATA[
+           rank < 6
+        ]]>
+      
 	
 	</select>
 	

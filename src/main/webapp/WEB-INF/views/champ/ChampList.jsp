@@ -95,7 +95,7 @@
 						success : function(data) {
 							console.log(data);
 							console.log(data.winlist);
-
+							
 							$("#table1")
 									.append(
 											"<tbody><tr><td>순위</td><td>챔피언</td><td>승률</td></tr></tbody>");
@@ -110,7 +110,7 @@
 																"<tr><td>"
 																		+ (key + 1)
 																		+ "</td>"
-																		+ "<td><a href='#'><image style='width:45px;'  id='"+key+"' src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/"+value.PICTURE+"'>"
+																		+ "<td><a href='/lol/champ/selectList?championid="+value.CHAMPIONID+"'><image style='width:45px;'  id='"+key+"' src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/"+value.PICTURE+"'>"
 																		+ value.NAME
 																		+ "</a></td>"
 																		+ "<td>"
@@ -154,7 +154,7 @@
 																					"<tr><td>"
 																							+ (key + 1)
 																							+ "</td>"
-																							+ "<td><a href='#'><image style='width:45px;'  id='"+key+"' src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/"+value.PICTURE+"'>"
+																							+ "<td><a href='/lol/champ/selectList?championid="+value.CHAMPIONID+"'><image style='width:45px;'  id='"+key+"' src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/"+value.PICTURE+"'>"
 																							+ value.NAME
 																							+ "</a></td>"
 																							+ "<td>"
@@ -186,7 +186,7 @@
 																					"<tr><td>"
 																							+ (key + 1)
 																							+ "</td>"
-																							+ "<td><a href='#'><image style='width:45px;'  id='"+key+"' src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/"+value.PICTURE+"'>"
+																							+ "<td><a href='/lol/champ/selectList?championid="+value.CHAMPIONID+"'><image style='width:45px;'  id='"+key+"' src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/"+value.PICTURE+"'>"
 																							+ value.NAME
 																							+ "</a></td>"
 																							+ "<td>"
@@ -218,7 +218,7 @@
 																					"<tr><td>"
 																							+ (key + 1)
 																							+ "</td>"
-																							+ "<td><a href='#'><image style='width:45px;'  id='"+key+"' src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/"+value.PICTURE+"'>"
+																							+ "<td><a href='/lol/champ/selectList?championid="+value.CHAMPIONID+"'><image style='width:45px;'  id='"+key+"' src='http://ddragon.leagueoflegends.com/cdn/11.3.1/img/champion/"+value.PICTURE+"'>"
 																							+ value.NAME
 																							+ "</a></td>"
 																							+ "<td>"

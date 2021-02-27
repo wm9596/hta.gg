@@ -71,6 +71,7 @@ public class ChampionController {
 		map.put("picklist", service.banlistAll());
 		map.put("banlist", service.pickrank());
 		map.put("winlist", service.winlistAll());
+
 		
 		
 		return map;
@@ -106,6 +107,7 @@ public class ChampionController {
 		mc.put("maxCount",service.maxCount(championid));
 		mc.put("winrank",service.winrank(championid));
 		mc.put("banrank",service.banrank(championid));
+		mc.put("itemlist",service.itemtree(championid));
 		return mc;
 				
 	}
