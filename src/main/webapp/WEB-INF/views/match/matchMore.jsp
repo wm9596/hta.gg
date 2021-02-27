@@ -59,7 +59,8 @@
 			</div>
 			<div id="mm_smRatingDiv">
 				<h5>소환사평가</h5>
-				<span id="rate"><fmt:formatNumber value="${rt }" pattern=".0"/></span>
+<%-- 				<span id="rate"><fmt:formatNumber value="${rt }" pattern=".00"/></span> --%>
+				${rt}
 				<span id="rateCnt">(${ratingCnt })</span>
 				<p class="star_rating">
 				    <a href="#" class="star_rating_1">★</a>
@@ -75,7 +76,7 @@
 	</div>
 	<div id="mm_homeTeam">
 		<div id="mm_homeTeamInfo">
-			<div class="teamMember" id="homeTeamAvg" style="background-color: #9ac0ff;">
+			<div class="teamMember" id="homeTeamAvg">
 
 					<div class="mm_winLose" style="float: left;">
 						<c:choose>
@@ -104,26 +105,33 @@
 					</div>
 				</div>
 			</div>
-			<div class="teamMember" id="homeTeamMinimal" style="height: 300px; background-color: #9ac0ff;">
+			<div class="teamMember" id="homeTeamMinimal" style="height: 300px;">
 				<c:forEach var="nickname" items="#{homeTeamNicknameList }" varStatus="status">
 					<div class="minimal">
-						<div class="minimal_child" id="home_minimal_tierArea" style="width: 10%;">
-							${homeTeamTierList[status.index] }
+						<div class="minimal_child" id="home_minimal_tierArea" style="width: 10%; border-right: 1px solid black;">
+							<span style="border: 1px solid #343a40 !important; border-radius: 12px; padding: 3px;"><em>${homeTeamTierList[status.index] }</em></span>
 						</div>
-						<div class="minimal_child" id="home_minimal_nicknameArea" style="width: 20%;">
-							${nickname } <br>
+						<div class="minimal_child" id="home_minimal_nicknameArea" style="width: 20%; display: block;">
+							<span><a href="${pageContext.request.contextPath }/match/search?sName=${nickname}" style="white-space: nowrap; text-decoration: none; color: black;">${nickname }</a></span> <br>
 							<c:choose>
 								<c:when test="${homeTeamMemberDeath[status.index] == 0 }">
 									PERPECT
 								</c:when>
 								<c:otherwise>
-									${homeTeamMemberKda[status.index] }
+									<span style="
+										<c:choose>
+											<c:when test='${homeTeamMemberKda[status.index] > 3 }'>
+												color: #2daf7f;
+											</c:when>
+										</c:choose>
+									">KDA : ${homeTeamMemberKda[status.index] }</span>
 								</c:otherwise>
 							</c:choose>
+							<br>
 							(${homeTeamMemberKill[status.index] }/${homeTeamMemberDeath[status.index] }/${homeTeamMemberAssist[status.index] })
 						</div>
-						<div class="minimal_child" id="home_minimal_championPictureArea" style="width: 10%;">
-							<img alt="" src="https://ddragon.leagueoflegends.com/cdn/${cdn }/img/champion/${homeTeamChampIconList[status.index] }" width="100%" height="100%">
+						<div class="minimal_child" id="home_minimal_championPictureArea" style="width: 10%; overflow: hidden;">
+							<a href="${pageContext.request.contextPath }/champ/selectList?championid=${homeTeamChampIdList[status.index] }"><img alt="" src="https://ddragon.leagueoflegends.com/cdn/${cdn }/img/champion/${homeTeamChampIconList[status.index] }" width="100%" height="100%"></a>
 						</div>
 						<div class="minimal_child" id="home_minimal_spellRuneArea" style="width: 10%;">
 							<div class="minimal_spellRune">
@@ -139,9 +147,9 @@
 								<img alt="" src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/${homeTeamMemberSpellRune[status.index]['rune2'] }.png" width="100%" height="100%">
 							</div>
 						</div>
-						<div class="minimal_child" id="home_minimal_itemArea" style="width: 30%;">
+						<div class="minimal_child" id="home_minimal_itemArea" style="width: 30%; border-right: 1px solid black;">
 							<c:forEach var="item" items="${homeTeamItemList[status.index] }" varStatus="st">
-								<div id="minimal_item" style="width: 20%; height: 50%; background-color: #9ac0ff;">
+								<div id="minimal_item" style="width: 20%; height: 50%;">
 									<c:choose>
 										<c:when test="${item != 0}">
 											<img alt="" src="http://ddragon.leagueoflegends.com/cdn/${cdn }/img/item/${item }.png" width="100%" height="100%">
@@ -193,23 +201,24 @@
 			<div class="teamMember" id="awayTeamMinimal" style="height: 300px;">
 				<c:forEach var="nickname" items="#{awayTeamNicknameList }" varStatus="status">
 					<div class="minimal">
-						<div class="minimal_child" id="away_minimal_tierArea" style="width: 10%;">
-							${awayTeamTierList[status.index] }
+						<div class="minimal_child" id="away_minimal_tierArea" style="width: 10%; border-right: 1px solid black">
+							<span style="border: 1px solid #343a40 !important; border-radius: 12px; padding: 3px;"><em>${awayTeamTierList[status.index] }</em></span>
 						</div>
-						<div class="minimal_child" id="away_minimal_nicknameArea" style="width: 20%;">
-							${nickname } <br>
+						<div class="minimal_child" id="away_minimal_nicknameArea" style="width: 20%; display: block;">
+							<span><a href="${pageContext.request.contextPath }/match/search?sName=${nickname}" style="white-space: nowrap; text-decoration: none; color: black;">${nickname }</a></span> <br>
 							<c:choose>
 								<c:when test="${awayTeamMemberDeath[status.index] == 0 }">
 									PERPECT
 								</c:when>
 								<c:otherwise>
-									${awayTeamMemberKda[status.index] }
+									KDA : ${awayTeamMemberKda[status.index] }
 								</c:otherwise>
 							</c:choose>
+							<br>
 							(${awayTeamMemberKill[status.index] }/${awayTeamMemberDeath[status.index] }/${awayTeamMemberAssist[status.index] })
 						</div>
-						<div class="minimal_child" id="away_minimal_championPictureArea" style="width: 10%;">
-							<img alt="" src="https://ddragon.leagueoflegends.com/cdn/${cdn }/img/champion/${awayTeamChampIconList[status.index] }" width="100%" height="100%">
+						<div class="minimal_child" id="away_minimal_championPictureArea" style="width: 10%; overflow: hidden;">
+							<a href="${pageContext.request.contextPath }/champ/selectList?championid=${awayTeamChampIdList[status.index] }"><img alt="" src="https://ddragon.leagueoflegends.com/cdn/${cdn }/img/champion/${awayTeamChampIconList[status.index] }" width="100%" height="100%"></a>
 						</div>
 						<div class="minimal_child" id="away_minimal_spellRuneArea" style="width: 10%;">
 							<div class="minimal_spellRune">
@@ -225,9 +234,9 @@
 								<img alt="" src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/${awayTeamMemberSpellRune[status.index]['rune2'] }.png" width="100%" height="100%">
 							</div>
 						</div>
-						<div class="minimal_child" id="away_minimal_itemArea" style="width: 30%;">
+						<div class="minimal_child" id="away_minimal_itemArea" style="width: 30%; border-right: 1px solid black;">
 							<c:forEach var="item" items="${awayTeamItemList[status.index] }" varStatus="st">
-								<div id="minimal_item" style="width: 20%; height: 50%; background-color: #9ac0ff;">
+								<div id="minimal_item" style="width: 20%; height: 50%;">
 									<c:choose>
 										<c:when test="${item != 0}">
 											<img alt="" src="http://ddragon.leagueoflegends.com/cdn/${cdn }/img/item/${item }.png" width="100%" height="100%">
@@ -334,10 +343,11 @@
 				<div class="compare_member">
 					<div class="compare_barArea">
 						<div class="max_rage">
-							<span style="font-size: 12px; color: white; float: left;">${homeTeamValue }</span>
-							<div class="rage_value" style="width: ${homeTeamRageValue}%; height: 100%; background-color: #0088cc; float: right;">
+							<span style="font-size: 12px; float: left; margin-left: 5px;">${homeTeamValue }</span>
+							<div class="rage_value" style="width: ${homeTeamRageValue}%; height: 100%; background-color: #0088cc; float: right; border-radius: 10px;">
 							</div>
 						</div>
+							
 					</div>
 					<div class="compare_champIconArea">
 						<img alt="" src="https://ddragon.leagueoflegends.com/cdn/${cdn }/img/champion/${homeTeamChampIconList[icon] }" width="100%" height="100%">
@@ -347,8 +357,8 @@
 					</div>
 					<div class="compare_barArea">
 						<div class="max_rage">
-							<span style="font-size: 12px; color: white; float: right;">${awayTeamValue }</span>
-							<div class="rage_value" style="width: ${awayTeamRageValue}%; height: 100%; background-color: #d53f3a; float: left;">
+							<span style="font-size: 12px; float: right; margin-right: 5px;">${awayTeamValue }</span>
+							<div class="rage_value" style="width: ${awayTeamRageValue}%; height: 100%; background-color: #d53f3a; float: left; border-radius: 10px;">
 							</div>
 						</div>
 					</div>

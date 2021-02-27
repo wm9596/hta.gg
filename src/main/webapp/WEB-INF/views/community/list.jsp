@@ -26,6 +26,22 @@
 	#community_menu th{
 		text-align: center;
 	}
+	
+	#listTitle {
+		color: black;
+	}
+	
+	#sendMsg {
+		color: black;
+	}
+	
+/* 	table td{ */
+/* 		border: 1px solid gray; */
+/* 	} */
+	
+/* 	table th{ */
+/* 		border: 1px solid gray; */
+/* 	} */
 </style>
 </head>
 <body>
@@ -36,13 +52,13 @@
 		
 		<table id="community_menu" class="table">
 			<tr>
-				<th scope="col"><a href="javascript:page(1)">공략</a> </td>
-				<th scope="col"><a href="javascript:page(2)">자유</a> </td>
-				<th scope="col"><a href="javascript:page(3)">팀원모집</a> </td>
-				<th scope="col"><a href="javascript:page(4)">사건사고</a> </td>
-				<th scope="col"><a href="javascript:page(5)">Q&A</a> </td>
-				<th scope="col"><a href="javascript:page(6)">공지사항</a> </td>
-				<th scope="col"><a href="/lol/match/list">경기일정</a> </td>
+				<th scope="col"><a href="javascript:page(1)">공략</a> </th>
+				<th scope="col"><a href="javascript:page(2)">자유</a> </th>
+				<th scope="col"><a href="javascript:page(3)">팀원모집</a> </th>
+				<th scope="col"><a href="javascript:page(4)">사건사고</a> </th>
+				<th scope="col"><a href="javascript:page(5)">Q&A</a> </th>
+				<th scope="col"><a href="javascript:page(6)">공지사항</a> </th>
+				<th scope="col"><a href="/lol/match/list">경기일정</a> </th>
 			</tr>
 			<tr>
 				<td colspan="2"><a href="javascript:array1('viewCount')">인기 (조회수)</a></td>
@@ -87,23 +103,38 @@
 	</div>
 <%-- 		<form method="post" action="${pageContext.request.contextPath }/community/list"></form> --%>
 			<div>
-			<table width="1000" class="table table-hover">
+			<table class="table table-hover" style="table-layout:fixed;">
+				<colgroup>
+					<col style="width: 5%;">
+					<col style="width: 15%;">
+					<col style="width: 50%;">
+					<col style="width: 5%;">
+					<col style="width: 5%;">
+					<col style="width: 10%;">
+				</colgroup>
 				<thead>
 					<tr>
-						<th scope="col">글번호</th>
-						<th scope="col">ID</th>
-						<th scope="col">제목</th>
-						<th scope="col">조회수</th>
-						<th scope="col">추천수</th>
-						<th scope="col">등록날짜</th>
+						<th scope="col" colspan="1">글번호</th>
+						<th scope="col" colspan="1">ID</th>
+						<th scope="col" colspan="1">제목</th>
+						<th scope="col" colspan="1">조회</th>
+						<th scope="col" colspan="1">추천</th>
+						<th scope="col" colspan="1">등록날짜</th>
 					</tr>
 				</thead>
 				<tbody>
 				<c:forEach var="vo" items="${list }">
 					<tr>
 						<th scope="row">${vo.pNum }</th>
-						<td>${vo.username }</td>
-						<td><a href="${pageContext.request.contextPath }/community/detail?pNum=${vo.pNum }&cNum=${vo.cNum }">${vo.title }</a>&nbsp;<c:if test="${vo.commentCount != 0}">[${vo.commentCount }]</c:if></td>
+						<c:choose>
+							<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == vo.username}">
+								<td>${vo.username }</td>
+							</c:when>
+							<c:otherwise>
+								<td><a href="#" id="sendMsg">${vo.username }</a></td>
+							</c:otherwise>
+						</c:choose>
+						<td><a id="listTitle" href="${pageContext.request.contextPath }/community/detail?pNum=${vo.pNum }&cNum=${vo.cNum }">${vo.title }</a>&nbsp;<c:if test="${vo.commentCount != 0}">[${vo.commentCount }]</c:if></td>
 						<td>${vo.viewCount }</td>
 						<td>${vo.hit }</td>
 						<td>${vo.regdate }</td>
@@ -150,6 +181,18 @@ function page(n){
 function array1(vrh){
 	location.href="${pageContext.request.contextPath }/community/list?cNum=${cNum}&"+"vrh="+vrh;
 }
+
+$("#sendMsg").click(function() {
+	var receiver =  $("#username").val();
+	var sender = $("#rWriter").val();
+	if (sender == "") {
+		alert("로그인이 필요한 페이지입니다.");
+		location.href = "/lol/member/login";
+	}
+	else {
+		window.open('/lol/sendMsgPage?sender=' + sender + '&receiver=' + receiver,'쪽지 보내기','width=500px, height=300px')	
+	}
+})
 		
 	</script>
 </html>

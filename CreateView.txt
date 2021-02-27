@@ -1,25 +1,13 @@
 --------------------------------------------------------
---  DDL for View VIEW_SUMMON_CHAMP_ODDS
---------------------------------------------------------
-
-  CREATE OR REPLACE FORCE VIEW "FINAL"."VIEW_SUMMON_CHAMP_ODDS" ("SNICKNAME", "NAME", "WINCNT") AS 
-  select tm.snickname,c.name,count(*) wincnt
-from teammemberinfo tm,teaminfo t, champion c
-where tm.matchid = t.matchid
-and tm.teamid = t.teamid
-and tm.championid = c.championid
-and t.winlose = 'Win'
-group by tm.snickname,c.name
-;
---------------------------------------------------------
 --  DDL for View VIEW_MOSTCHAMPION
 --------------------------------------------------------
 
-  CREATE OR REPLACE FORCE VIEW "FINAL"."VIEW_MOSTCHAMPION" ("SNICKNAME", "NAME", "PICTURE", "kill", "death", "assist", "cs", "CNT") AS 
+  CREATE OR REPLACE FORCE VIEW "FINAL"."VIEW_MOSTCHAMPION" ("SNICKNAME", "NAME", "PICTURE", "CHAMPIONID", "kill", "death", "assist", "cs", "CNT") AS 
   SELECT
 	    tm.snickname,
         c.name,
 	    c.picture,
+        c.championid,
 	    round(AVG(tm.kill),1) AS "kill",
 	     round(AVG(tm.death),1) AS "death",
 	     round(AVG(tm.assist),1) AS "assist",
@@ -35,6 +23,20 @@ group by tm.snickname,c.name
 		GROUP BY
             tm.snickname,
 		    c.name,
-		    c.picture
+		    c.picture,
+            c.championid
     order by cnt desc
+;
+--------------------------------------------------------
+--  DDL for View VIEW_SUMMON_CHAMP_ODDS
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "FINAL"."VIEW_SUMMON_CHAMP_ODDS" ("SNICKNAME", "NAME", "WINCNT") AS 
+  select tm.snickname,c.name,count(*) wincnt
+from teammemberinfo tm,teaminfo t, champion c
+where tm.matchid = t.matchid
+and tm.teamid = t.teamid
+and tm.championid = c.championid
+and t.winlose = 'Win'
+group by tm.snickname,c.name
 ;

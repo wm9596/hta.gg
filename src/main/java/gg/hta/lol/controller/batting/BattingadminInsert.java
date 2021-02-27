@@ -30,6 +30,12 @@ public class BattingadminInsert {
 		return ".adminpage.batting.teaminsert";
 	}
 
+	
+	@GetMapping(value="/pakminho")
+	public String qq() {
+		return "champ/TestBoo";
+	}
+	
 	@GetMapping(value = "/insertTeam") // 새로운팀추가
 	@ResponseBody
 	public Map<String, Object> addTeam(String tname) {

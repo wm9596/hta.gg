@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MostChampVo {
+	private String championid;
 	private String name;
 	private String picture;
 	private float kill;

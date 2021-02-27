@@ -53,10 +53,11 @@ public class ChampionController {
 
 		return "{\"code\":\"dd\"}";
 	}
-
+	
 	@GetMapping(value = "/champ/ChampList1")
 	public String ChampList(Model mv) {
-		mv.addAttribute("win", service.winlistAll());
+		
+		
 		return ".header2.champ.ChampList";
 	}
 
@@ -64,8 +65,14 @@ public class ChampionController {
 	@GetMapping(value = "/champ/ChampList", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public Map<String, Object> ChampAll_List() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("map", service.ChampAll_List());
 
+	
+		map.put("map", service.ChampAll_List());
+		map.put("picklist", service.banlistAll());
+		map.put("banlist", service.pickrank());
+		map.put("winlist", service.winlistAll());
+		
+		
 		return map;
 
 	}

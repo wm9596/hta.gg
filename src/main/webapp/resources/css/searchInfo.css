@@ -26,6 +26,10 @@
 	margin-left: 5px;
 }
 
+.selectedType{
+	border: 1px solid black;
+}
+
 .mostItem  .mostFace,.mostName,.mostKda,.mostRate{
 	vertical-align:middle;
 	align-content:center;
@@ -36,6 +40,10 @@
 
 #mostList b{
 	font-size: 12px
+}
+
+.kdaSpan{
+	font-weight: bolder;
 }
 
 .smallTxt{
@@ -151,7 +159,6 @@
 #gameType a{
 	margin-left: auto;
 	margin-right: auto;
-	
 }
 
 .matchItem{
@@ -195,6 +202,11 @@
 	width: 30px
 }
 
+.mostRate > span{
+	font-weight: bold;
+	color:gray;
+}
+
 .matchinfo div{
 	text-align: center;
 	height: 30%;
@@ -215,6 +227,7 @@
 	height: 10px;
 	text-align: center;
 	margin-top: 7px;
+	font-size: 12px;
 }
 
 
@@ -235,7 +248,7 @@
 	display:inline-block;
 	height: 100%;
 	float: left;
-	padding-top: 10px;
+	padding-top: 20px;
 }
 
 .spells img{
@@ -247,7 +260,7 @@
 	display:inline-block;
 	height: 100%;
 	float: left;
-	padding-top: 10px;
+	padding-top: 20px;
 }
 
 .rune img{
@@ -255,7 +268,7 @@
 	height: 40px;
 }
 
-.kda{
+.gameStat{
 	display:flex;
 	width: 100px;
 	height: 100%;
@@ -266,6 +279,7 @@
 	size: 20px;
 	flex-wrap: wrap;
 }
+
 
 .multiKill{
 	background-color: orange;

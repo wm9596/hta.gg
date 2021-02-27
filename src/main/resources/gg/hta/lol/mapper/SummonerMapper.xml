@@ -50,9 +50,9 @@
 	</resultMap>
 	 
 	<select id="getChampLog" resultType="gg.hta.lol.vo.match.MostChampVo">
-		select picture,name,"kill","death","assist","cs",cnt
+		select picture,name,championid,"kill","death","assist","cs",cnt
 		from(
-		select rownum rn, m.picture,m.name,m."kill",m."death",m."assist",m."cs",m.cnt
+		select rownum rn, m.picture,m.championid ,m.name,m."kill",m."death",m."assist",m."cs",m.cnt
 		from view_mostchampion m
 		where m.snickname=#{snickname}
 		order by cnt desc
