@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class MatchListVo {
 	private String type;
 	private String snickname;
+	private String championid;
 	private String matchid;
 	private String teamid;
 	private String name;

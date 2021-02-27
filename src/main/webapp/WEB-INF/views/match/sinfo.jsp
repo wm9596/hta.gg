@@ -63,7 +63,7 @@
 			<div id="mm_smRatingDiv">
 				<h5>소환사평가</h5>
 				<span id="rate"><fmt:formatNumber value="${rt }" pattern=".0"/></span>
-				<span id="rateCnt">(${rating })</span>
+				<span id="rateCnt">(<fmt:formatNumber value="${rating }" pattern=".0"/>)</span>
 				<p class="star_rating">
 				    <a href="#" class="star_rating_1">★</a>
 				    <a href="#" class="star_rating_2">★</a>
@@ -80,27 +80,51 @@
 <div id="listWrapper">
 	<div id="mostList">
 		<c:forEach items="${most }" var="item">
+			<c:choose>
+				<c:when test="${item.death==0}">
+					<c:set var="kda" value="${(item.kill+item.assist)* 1.2}"/>
+				</c:when>
+				<c:otherwise>
+					<c:set var="kda" value="${(item.kill+item.assist)/item.death}"/>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${kda lt 3}">
+					<c:set var="kdaColor" value="gray"/>
+				</c:when>
+				<c:when test="${kda lt 4}">
+					<c:set var="kdaColor" value="green"/>
+				</c:when>
+				<c:when test="${kda lt 5}">
+					<c:set var="kdaColor" value="blue"/>
+				</c:when>
+				<c:otherwise>
+					<c:set var="kdaColor" value="#FACC2E"/>
+				</c:otherwise>
+			</c:choose>
 			<div class="mostItem">
 				<div class="mostFace">
-					<img src="https://ddragon.leagueoflegends.com/cdn/11.4.1/img/champion/${item.picture }">
+					<a href="/lol/champ/selectList?championid=${item.championid }">
+						<img src="https://ddragon.leagueoflegends.com/cdn/11.4.1/img/champion/${item.picture }">
+					</a>
 				</div>
 				<div class="mostName">
 					<b>${item.name }</b><br>
 					<div class="smallTxt">CS:${item.cs }</div>
 				</div>
 				<div class="mostKda">
-					<b>KDA:<fmt:formatNumber value="${(item.kill+item.assist)/item.death } " pattern=".0"/><br></b>
+					<span class="kdaSpan" style="color: ${kdaColor}">KDA:<fmt:formatNumber value="${kda } " pattern=".0"/></span><br>
 					<div class="smallTxt">${item.kill }/${item.death }/${item.assist }</div>
 				</div>
 				<div class="mostRate">
-					<b>${item.rate }%</b><br>
+					<span ${item.rate >= 60? "style='color: red'":"" }>${item.rate }%</span><br>
 					<div class="smallTxt">${item.cnt }게임</div>
 				</div>
 			</div>
 		</c:forEach>
 	</div>
 	<div id="matchList">
-		<div id="gameType"><a href="">전체 보기</a><a href="RANKED_SOLO_5x5">솔로 랭크</a><a href="RANKED_FLEX_SR">자유 랭크</a></div>
+		<div id="gameType"><a href="" class="selectedType">전체 보기</a><a href="RANKED_SOLO_5x5">솔로 랭크</a><a href="RANKED_FLEX_SR">자유 랭크</a></div>
 		<div id="summary">
 			<div id="record">
 				<div id="chart">
@@ -130,8 +154,17 @@ google.charts.load("current", {packages:["corechart"]});
 google.charts.setOnLoadCallback(getMatchList);
 
 $(function(){
+	var gameTypes = $("#gameType a");
 	$("#gameType a").click(function(e){
 		e.preventDefault();
+		
+		for(types of gameTypes){
+			types.className = "";
+			console.log(types);
+		}
+		
+		e.target.className='selectedType';
+		
 		let type = e.target.getAttribute('href');
 
 		if(!isRunning){
@@ -198,7 +231,15 @@ function addMatchList(matchList){
 	for(sum of matchList){
 // 		console.log(sum);
 		let ka = sum.kill+sum.assist;
-		let kda = ka / sum.death;
+		let kda;
+		
+		if(sum.death == 0){
+			kda = ka*1.2;
+		}else{
+			kda = ka / sum.death;	
+		}
+	
+		
 		let tka = 0;
 		for(fre of sum.friendly){
 			tka += fre.kill;
@@ -245,7 +286,11 @@ function addMatchList(matchList){
 		
 		matchItem.append(matchinfo);
 		
-		let face =$("<div>",{class:'face',html:"<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/champion/"+sum.picture+"'>"});
+		let face =$("<div>",{class:'face',
+			html:"<a href='/lol/champ/selectList?championid="+sum.championid+"'>"+
+				  	"<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/champion/"+sum.picture+"'>"+
+				 "</a>"
+			});
 		face.append("<div class='name'>"+sum.name+"</div>")
 		matchItem.append(face);
 		
@@ -259,8 +304,21 @@ function addMatchList(matchList){
 		rune.append("<img src='https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/"+sum.rune2+"'>");
 		matchItem.append(rune);
 		
-		let kdaDiv = $("<div>",{class:'kda'});
-		kdaDiv.append("<div>KDA:"+kda.toFixed(1)+"</div>");
+		let kdaDiv = $("<div>",{class:'gameStat'});
+// 		kdaDiv.append("<div>KDA:"+kda.toFixed(1)+"</div>");
+		kda = kda.toFixed(1);
+		let kdaColor;
+		if(kda<3){
+			kdaColor = 'gray';
+		}else if(kda<4){
+			kdaColor = 'green';
+		}else if(kda<5){
+			kdaColor = 'blue';
+		}else {
+			kdaColor = 'yellow';
+		}
+		
+		kdaDiv.append($("<div>",{text:"KDA:"+kda,css:{color: kdaColor}}));
 		kdaDiv.append("<div>"+sum.kill+"/"+sum.death+"/"+sum.assist+"</div>");
 		
 		let killName;
@@ -434,14 +492,24 @@ function addMost3(mostList){
 	//최근 모스트 챔프 3 추가
 	for(most of mostList){
 		let lose = most.cnt - most.wincnt;
-		let kda = (most.kill+most.assist)/most.death;
+		let kda;
+		
+		if(most.death==0){
+			kda = (most.kill+most.assist) * 1.2;
+		}else{
+			kda = (most.kill+most.assist)/most.death;
+		}
+		
+		
 		kda = kda.toFixed(1);
 		
 		let li = $("<li>");
 		
 		let most3Face = $("<div>",{
 					class:'most3Face',
-					html:"<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/champion/"+most.picture+"'>"
+					html:"<a href='/lol/champ/selectList?championid="+most.championid+"'>"+
+						 	"<img src='https://ddragon.leagueoflegends.com/cdn/11.4.1/img/champion/"+most.picture+"'>"+
+					     "</a>"
 				}
 		);
 		
@@ -453,11 +521,38 @@ function addMost3(mostList){
 		
 		let most3stats = $("<div>",{class:'most3stats'});
 		
-		let most3Odds = $("<div>",{class:'most3Odds',text:"승률 :"+most.rate+" ("+most.wincnt+"승 "+lose+" 패)"});
+// 		let most3Odds = $("<div>",{class:'most3Odds',text:"승률 :"+most.rate+"% ("+most.wincnt+"승 "+lose+" 패)"});
+		let most3Odds = $("<div>",{class:'most3Odds',text:"승률 :"});
+		
+		let oddsColor;
+		
+		if(most.rate >=60){
+			oddsColor = 'red';
+		}else{
+			oddsColor = 'black'
+		}
+		
+		let most3OddsItem1 = $("<span>",{text:most.rate+"%",css:{color: oddsColor}});
+		let most3OddsItem2 = $("<span>",{text:"("+most.wincnt+"승 "+lose+" 패)"});
+		
+		
+		most3Odds.append(most3OddsItem1);
+		most3Odds.append(most3OddsItem2);
 		
 		most3stats.append(most3Odds);
 		
-		let most3KDA = $("<div>",{class:'most3KDA',text:"KDA : "+kda});				
+		let kdaColor;
+		if(kda<3){
+			kdaColor = 'gray';
+		}else if(kda<4){
+			kdaColor = 'green';
+		}else if(kda<5){
+			kdaColor = 'blue';
+		}else {
+			kdaColor = '#FACC2E';
+		}
+		
+		let most3KDA = $("<div>",{class:'most3KDA',text:"KDA : "+kda, css:{color: kdaColor}});				
 		
 		most3stats.append(most3KDA);
 		

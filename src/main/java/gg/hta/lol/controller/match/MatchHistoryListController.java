@@ -43,6 +43,7 @@ public class MatchHistoryListController {
 			item.setRune2(rsConverter.convertRune(item.getRune2()));
 			
 			MostChampVo vo = cmap.getOrDefault(item.getName(), new MostChampVo(
+						item.getChampionid(),
 						item.getName(),
 						item.getPicture(),
 						0,
