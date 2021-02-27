@@ -185,7 +185,15 @@
 		</tr>
 		<tr>
 			<td>
-				<span>${vo.username }</span><input type="button" id="sendMsg" value="쪽지"> | <span>${categoryName }</span> | <span>${vo.regdate }</span>
+				<c:choose>
+					<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == vo.username}">
+						<span>${vo.username }</span>
+					</c:when>
+					<c:otherwise>
+						<span><a href="#" id="sendMsg">${vo.username }</a></span>
+					</c:otherwise>
+				</c:choose>
+				| <span>${categoryName }</span> | <span>${vo.regdate }</span>
 			</td>
 			<td>
 				<span>조회 ${vo.viewCount+1}</span> | <span>추천 ${vo.hit }</span> | <span>반대 ${vo.nohit }</span>
