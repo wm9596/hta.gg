@@ -116,7 +116,7 @@ public class MatchMoreController {
 		}
 		
 		//소환사 평가
-		model.addAttribute("rt", rtService.getRatingAvg(nickname));
+		model.addAttribute("rt", Math.round(rtService.getRatingAvg(nickname)*10)/10.0);
 		model.addAttribute("ratingCnt", rService.getRatingCnt(nickname));
 		
 		// 해당게임 타입 얻어오기
@@ -157,6 +157,8 @@ public class MatchMoreController {
 		List<String> awayTeamNicknameList = new ArrayList<String>();
 		List<String> homeTeamChampIconList = new ArrayList<String>();
 		List<String> awayTeamChampIconList = new ArrayList<String>();
+		List<String> homeTeamChampIdList = new ArrayList<String>();
+		List<String> awayTeamChampIdList = new ArrayList<String>();
 		List<int[]> homeTeamItemList = new ArrayList<int[]>();
 		List<int[]> awayTeamItemList = new ArrayList<int[]>();
 		
@@ -263,6 +265,7 @@ public class MatchMoreController {
 				homeTeamNicknameList.add(Vo.getSnickname());
 				
 				// 팀원 챔피언 초상화 리스트
+				homeTeamChampIdList.add(Vo.getChampionId());
 				homeTeamChampIconList.add(championPicture);
 				// 팀원 스펠, 룬 리스트
 				homeTeamMemberSpellRune.add(new HashMap<String, Object>() {{
@@ -327,6 +330,7 @@ public class MatchMoreController {
 				awayTeamNicknameList.add(Vo.getSnickname());
 				
 				awayTeamChampIconList.add(championPicture);
+				awayTeamChampIdList.add(Vo.getChampionId());
 				
 				awayTeamMemberSpellRune.add(new HashMap<String, Object>() {{
 					put("spell1", spell1);
@@ -409,6 +413,8 @@ public class MatchMoreController {
 		// 팀원 챔피언 초상화
 		model.addAttribute("homeTeamChampIconList", homeTeamChampIconList);
 		model.addAttribute("awayTeamChampIconList", awayTeamChampIconList);
+		model.addAttribute("homeTeamChampIdList", homeTeamChampIdList);
+		model.addAttribute("awayTeamChampIdList", awayTeamChampIdList);
 		
 		// 팀원 스펠, 룬
 		model.addAttribute("homeTeamMemberSpellRune", homeTeamMemberSpellRune);

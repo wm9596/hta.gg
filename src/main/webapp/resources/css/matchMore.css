@@ -90,6 +90,8 @@
 		background-color: #9ac0ff;
 	/* 	background-color: #343a40; */
 	float: left;
+	border: 1px solid black;
+	border-radius: 10px;
 }
 
 .teamMember {
@@ -225,7 +227,8 @@
 	justify-content: center;
 	align-items: center;
 	font-size: 12px;
-	border: 1px solid #343a40 !important;
+	border-top: 1px solid black;
+/* 	border : 1px solid black; */
 }
 
 #home_minimal_spellRuneArea {
@@ -249,6 +252,8 @@
 	width: 50%;
 	background-color: #ffaeae;
 	float: left;
+	border: 1px solid black;
+	border-radius: 10px;
 }
 
 .star_rating {
