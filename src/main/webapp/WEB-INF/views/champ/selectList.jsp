@@ -8,8 +8,12 @@
 <script type="text/javascript" src="/lol/resources/js/jquery-3.5.1.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/resources/js/scrap.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/dist/circle-progress.js"></script>
 <style type="text/css">
-
+#content{
+background-color: white;
+margin-left: 0px;
+}
 #ChampList {
 
 	margin-top:10px;
@@ -23,14 +27,17 @@
 position: 
 }
 .skill_info {
+	position:absolute;
 	border: 3px solid black;
 	border-radius: 25px;
 	background-color: #ffffff;
-	position: absolute;
+	top:35px;
+	left:500px;
 	background-color: black;
 	width: 30%;
 	height: auto;
 	color: white;
+	
 }
 #picture{
 display: inline-block;
@@ -127,7 +134,7 @@ status {
 }
 
 .table {
-    width: 808px;
+  
   
     margin-bottom: 1rem;
     background-color: transparent;
@@ -170,6 +177,11 @@ width: 70px;
 	<div id="pictureSkill">
 		<div id="picture"></div>
 		<div id="skillIcon"></div>
+		<div class='circleAll'>
+		<div style='display:inline' id="circle1"></div>
+		<div style='display:inline' id="circle2"></div>
+		<div style='display:inline' id="circle3"></div>
+		</div>
 		<div class="panel-heading" role="tab" id="headingOne">
 	<h5 class="pa">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -225,6 +237,7 @@ width: 70px;
 		<div id="nn"></div>
 		<div id="story2"></div>
 		<div id="gametip2"></div>
+	
 	</div>
 
 	
@@ -233,8 +246,29 @@ width: 70px;
 	<script type="text/javascript">
 
 $(function(){
+	  $('#circle1').circleProgress({
+		    value: 0.75,
+		    size: 80,
+		    fill: {
+		      gradient: ["red", "orange"]
+		    }
+		  });
+	  $('#circle2').circleProgress({
+		    value: 0.75,
+		    size: 80,
+		    fill: {
+		      gradient: ["red", "orange"]
+		    }
+		  });
+	  $('#circle3').circleProgress({
+		    value: 0.75,
+		    size: 80,
+		    fill: {
+		      gradient: ["red", "orange"]
+		    }
+		  });
 	var list=${championid}
-	
+
 	
 	$.ajax({
 		url:"/lol/champ/count",
@@ -299,14 +333,16 @@ $(function(){
 						"<tbody><tr><td id='tabletd'>통계가 부족하여 데이터가 없습니다.</td></tr></tbody>");
 			}else{
 				$("#table1").append(
-				"<tbody><tr ><td id='tabletd'>추천 아이템</td></tr></tbody>");
-				$("#table2").append("<tbody><tr ><td id='asd'>추천 스펠</td></tr></tbody>");
+				"<tbody><tr><td id='tabletd'>추천 아이템</td></tr></tbody>");
+				
 				var rune1="";
 				var rune2="";
-				
+				var spell11="";
 			$.each(data.itemlist,function(key,value){
 				rune1=value.RUNE1;
 				rune2=value.RUNE2;
+				spell11=value.SPELL1;
+			
 					console.log(value.RUNE1);
 					console.log(!value.ITEM6);
 					let item1="";
@@ -357,16 +393,23 @@ $(function(){
 					
 				
 					console.log(item6);
-				
+					
 					var rune1=value.RUNE1;
 					var rune2=value.RUNE2;
+					var spell1=value.SPELL1;
+					var spell2=value.SPELL2;
+					console.log(spell1)
+					console.log("dkddkdkdkdkdkkdkdkdkdkdkdkdkdkd")
 					var cc="";
 					var dd="";
+					var spell_1="";
+					var spell_2="";
 					$.ajax({
 						url:'http://ddragon.leagueoflegends.com/cdn/11.3.1/data/ko_KR/runesReforged.json',
 						dataType: 'json',
 						type: "get",
 						success:function(data){
+					
 							var m1="";
 							for(idx in data){
 								if(data[idx].id==rune1){
@@ -379,19 +422,127 @@ $(function(){
 									dd="<img src='http://ddragon.leagueoflegends.com/cdn/img/"+data[idx].icon+"'>";
 								
 								}
+								console.log(value.SPELL1);
+							$.ajax({
+								url:'http://ddragon.leagueoflegends.com/cdn/11.4.1/data/ko_KR/summoner.json',
+								dataType: 'json',
+								success:function(data){
+									console.log(data);
+								}
+							})
 							}
-					
-							console.log(cc);
-							console.log(data);
-							console.log(key);
-							console.log(key.length)
-						console.log(rune1)
-							$("#table1 tbody").append("<tr><td>"+(key+1)+"</td><td>"+item1+"</td><td>"+item2+"</td><td>"+item3+"</td><td>"+item4+"</td><td>"+item5+"</td><td>"+cc+"</td><td>"+dd+"</td></tr>");
-									
-									
+							if(spell1==21){
+								spell_1="SummonerBarrier.png";
 								
-						
+							}else if(spell1==1){
+								spell_1="SummonerBoost.png";
+							}if(spell1==14){
+								spell_1="SummonerDot.png";
+								
+							}else if(spell1==3){
+								spell_1="SummonerExhaust.png";
+							}if(spell1==4){
+								spell_1="SummonerFlash.png";
+								
+							}else if(spell1==6){
+								spell_1="SummonerHaste.png";
+							}if(spell1==7){
+								spell_1="SummonerHeal.png";
+								
+							}else if(spell1==13){
+								spell_1="SummonerMana.png";
+							}if(spell1==11){
+								spell_1="SummonerSmite.png";
+								
+							}else if(spell1==12){
+								spell_1="SummonerTeleport.png";
+							}
+							if(spell1==21){
+								spell_1="SummonerBarrier.png";
+								
+							}else if(spell1==1){
+								spell_1="SummonerBoost.png";
+							}if(spell1==14){
+								spell_1="SummonerDot.png";
+								
+							}else if(spell1==3){
+								spell_1="SummonerExhaust.png";
+							}if(spell1==4){
+								spell_1="SummonerFlash.png";
+								
+							}else if(spell1==6){
+								spell_1="SummonerHaste.png";
+							}if(spell1==7){
+								spell_1="SummonerHeal.png";
+								
+							}else if(spell1==13){
+								spell_1="SummonerMana.png";
+							}else if(spell1==11){
+								spell_1="SummonerSmite.png";
+								
+							}else if(spell1==12){
+								spell_1="SummonerTeleport.png";
+							}
 							
+							
+							if(spell2==21){
+								spell_2="SummonerBarrier.png";
+								
+							}else if(spell2==1){
+								spell_2="SummonerBoost.png";
+							}if(spell2==14){
+								spell_2="SummonerDot.png";
+								
+							}else if(spell2==3){
+								spell_2="SummonerExhaust.png";
+							}if(spell2==4){
+								spell_2="SummonerFlash.png";
+								
+							}else if(spell2==6){
+								spell_2="SummonerHaste.png";
+							}if(spell2==7){
+								spell_2="SummonerHeal.png";
+								
+							}else if(spell2==13){
+								spell_2="SummonerMana.png";
+							}if(spell2==11){
+								spell_2="SummonerSmite.png";
+								
+							}else if(spell2==12){
+								spell_2="SummonerTeleport.png";
+							}
+							if(spell2==21){
+								spell_2="SummonerBarrier.png";
+								
+							}else if(spell2==1){
+								spell_2="SummonerBoost.png";
+							}if(spell2==14){
+								spell_2="SummonerDot.png";
+								
+							}else if(spell2==3){
+								spell_2="SummonerExhaust.png";
+							}if(spell2==4){
+								spell_2="SummonerFlash.png";
+								
+							}else if(spell2==6){
+								spell_2="SummonerHaste.png";
+							}if(spell2==7){
+								spell_2="SummonerHeal.png";
+								
+							}else if(spell2==13){
+								spell_2="SummonerMana.png";
+							}else if(spell2==11){
+								spell_2="SummonerSmite.png";
+								
+							}else if(spell2==12){
+								spell_2="SummonerTeleport.png";
+							}
+							
+						console.log(spell_1)
+						let spell_11="<img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/spell/"+spell_1+"'>";
+						let spell_22="<img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/spell/"+spell_2+"'>";
+						console.log(spell_2)
+							$("#table1 tbody").append("<tr><td>"+(key+1)+"</td><td>"+item1+"</td><td>"+item2+"</td><td>"+item3+"</td><td>"+item4+"</td><td>"+item5+"</td><td>"+cc+"</td><td>"+dd+"</td><td>"+spell_11+"</td><td>"+spell_22+"</td></tr>");
 						}
 					})
 				

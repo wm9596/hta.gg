@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import gg.hta.lol.riotapi.RuneSpellConverter;
 import gg.hta.lol.service.ChampService;
 import gg.hta.lol.vo.ChampionVo;
 
@@ -31,6 +32,7 @@ import gg.hta.lol.vo.ChampionVo;
 public class ChampionController {
 	@Autowired
 	ChampService service;
+
 
 	@GetMapping(value = "/champ/ChampInsert")
 	public String ChmapList() {
@@ -115,12 +117,21 @@ public class ChampionController {
 	@GetMapping(value="/champ/itemtree")
 	public Map<String,Object> itemtree(int championid){
 		Map<String, Object> mp=new HashMap<String, Object>();
-		String aa="http://ddragon.leagueoflegends.com/cdn/11.4.1/data/ko_KR/summoner.json";
+		
 
 		mp.put("itemlist",service.itemtree(championid));
 		return mp;
 	}
-	
+	@ResponseBody
+	@GetMapping(value="/champ/conver")
+	public Map<String,Object> conver(String spell1){
+		Map<String,Object> aa=new HashMap<String, Object>();
+		System.out.println("아아");
+		System.out.println(spell1);
+		
+		return null;
+		
+	}
 
 
 /*
