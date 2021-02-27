@@ -405,7 +405,7 @@ $(()=>{
             </form:form>
 			
 			<form:form method="post" action="/lol/member/pwdChange" class="form-reset">
-				<h1 style="text-align: center;">비밀번호 찾기/변경</h1>
+				<h3 style="text-align: center;">비밀번호 찾기/변경</h3>
                 <input type="text" id="pwd_id" name="username" class="form-control" placeholder="아이디" required="" autofocus="">
                 <input type="email" id="pwd_email" class="form-control" placeholder="이메일" required="" autofocus="" style="width: 85%; float: left;">
                 <button class="btn btn-success btn-block" id="pwd_emailOk" style="width: 15%; float: left; text-align: left; height: 45px;">인증</button>
@@ -419,7 +419,7 @@ $(()=>{
             </form:form>
             
             <form:form method="post" class="form-reset">
-            	<h1 style="text-align: center;">아이디 찾기</h1>
+            	<h3 style="text-align: center;">아이디 찾기</h3>
                 <input type="email" id="id_email" class="form-control" placeholder="이메일" required="" autofocus="" style="width: 85%; float: left;">
                 <button class="btn btn-success btn-block" id="id_emailOk" style="width: 15%; float: left; text-align: left; height: 45px;">인증</button>
                 <span style="float: left;" id="id_emailcheck"></span><br>
