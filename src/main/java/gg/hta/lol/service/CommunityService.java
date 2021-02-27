@@ -21,6 +21,9 @@ public class CommunityService {
 	public List<CommunityVo> list(HashMap<String,Object> map){
 		return dao.list(map);
 	}
+	public List<CommunityVo> wholeList(HashMap<String,Object> map){
+		return dao.wholeList(map);
+	}
 	public CommunityVo select(int pNum) {
 		return dao.select(pNum);
 	}

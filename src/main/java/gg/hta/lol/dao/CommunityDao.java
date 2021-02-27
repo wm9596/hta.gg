@@ -22,6 +22,10 @@ public class CommunityDao {
 	public List<CommunityVo> list(HashMap<String, Object> map){
 		return sqlSession.selectList(NAMESPACE+".list",map);
 	}
+	public List<CommunityVo> wholeList(HashMap<String, Object> map){
+	    return sqlSession.selectList(NAMESPACE+".wholeList",map);
+	}
+
 	public int delete(int pNum) {
 		return sqlSession.delete(NAMESPACE+".delete",pNum);
 	}
