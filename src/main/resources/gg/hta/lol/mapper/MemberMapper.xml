@@ -28,19 +28,19 @@
 	<update id="updatePwd" parameterType="hashmap">
 		update member
 		set password=#{password}
-		where username=#{username}
+		where username=#{username} and enabled = 1
 	</update>
 	<select id="select" parameterType="string" resultType="member">
 		select * from member where username=#{username}
 	</select>
 	<select id="Emailselect" parameterType="string" resultType="member">
-		select * from member where email=#{email}
+		select * from member where email=#{email} and enabled = 1
 	</select>
 	<delete id="AuthDelete" parameterType="string">
 		delete from auth where username = #{username}
 	</delete>
 	<select id="AuthSelect" parameterType="string" resultType="gg.hta.lol.vo.AuthVo">
-		select * from auth where username = #{username}
+		select * from auth where username = #{username} 
 	</select>
 	<update id="AuthUpdate" parameterType="gg.hta.lol.vo.AuthVo">
 		update auth
@@ -49,10 +49,10 @@
 	</update>
 	<select id="EmailAuthSelect" parameterType="string" resultType="gg.hta.lol.vo.AuthVo">
 		select * from auth 
-		where username =  (select username from member where email = #{email})
+		where username =  (select username from member where email = #{email}) and enabled = 1
 	</select>
 	<select id="PwdEmailselect" parameterType="hashmap" resultType="member">
-		select * from member where username=#{username} and email=#{email}
+		select * from member where username=#{username} and email=#{email} and enabled = 1
 	</select>
 	<update id="update" parameterType="member">
 		update member

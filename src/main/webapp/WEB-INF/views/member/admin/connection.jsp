@@ -41,9 +41,12 @@
 				var options = {
 					    title: 'Company Performance',
 					    curveType: 'function',
-					    legend: { position: 'bottom' }
+					    legend: { position: 'bottom' },
+					    width: 1000,
+						height: 700    
 				};
-				 var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+				
+				var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 			
 				chart.draw(visit, options);
 			}

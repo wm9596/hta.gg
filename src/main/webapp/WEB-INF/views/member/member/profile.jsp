@@ -161,12 +161,12 @@
 		</div>
 	</div>
 	<div id="profile_registerArea">
-		<input type="button" id="profile_register" value="프로필 등록">
+		<input type="button" id="profile_register" value="프로필 등록" class="btn btn-primary btn-lg active" style="margin-left: -35px;">
 		<input type="hidden" id="user_name" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}">
 	</div>
 	<div class="mx-auto mt-5 search-bar input-group mb-3">
 		<input id="snickname" type="text" class="form-control rounded-pill" placeholder="LOL 닉네임을 입력해주세요." aria-label="Recipient's username" aria-describedby="button-addon2" value="더덕순대국"> 
-		<input type="button" id="getInfo" value="검색">
+		<input type="button" id="getInfo" value="검색" class="btn btn-primary btn-sm">
 	</div>
 </div>
 

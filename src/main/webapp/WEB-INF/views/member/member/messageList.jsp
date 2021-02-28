@@ -20,10 +20,10 @@
 					<td>${vo.sender }</td>
 					<c:choose>
 						<c:when test="${vo.open == '0' }">
-							<td style="word-break:break-all; width: 500px;"><a href="${pageContext.request.contextPath }/updateMsg?msgNum=${vo.msgNum }">${vo.msg }</a></td>
+							<td style="word-break:break-all; width: 400px;"><a href="${pageContext.request.contextPath }/updateMsg?msgNum=${vo.msgNum }">${vo.msg }</a></td>
 						</c:when>
 						<c:otherwise>
-							<td style="word-break:break-all; width: 500px;">${vo.msg }</td>
+							<td style="word-break:break-all; width: 400px;">${vo.msg }</td>
 						</c:otherwise>
 					</c:choose>
 					<td>${vo.sendTime }</td>
@@ -37,22 +37,34 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<div>
-		<c:if test="${pu.startPageNum>5 }">
-		<a href="/lol/member/member/messageList?pageNum=${pu.pageNum-1}">[이전]</a>
-		</c:if>
-		<c:forEach var="i" begin="${pu.startPageNum}" end="${pu.endPageNum }">
-			<c:choose>
-				<c:when test="${i==pu.pageNum }">
-					<a href="/lol/member/member/messageList?pageNum=${i}"><span style='color:blue'>[${i }]</span></a>
-				</c:when>
-				<c:otherwise>
-					<a href="/lol/member/member/messageList?pageNum=${i}"><span style='color:gray'>[${i }]</span></a>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-		<c:if test="${pu.endPageNum<pu.totalPageCount }">
-			<a href="/lol/member/member/messageList?pageNum=${pu.pageNum+1}">[다음]</a>
-		</c:if>
-	</div>
+	<nav aria-label="Page navigation example">
+		<ul class="pagination">
+			<c:if test="${pu.startPageNum>5 }">
+				<li class="page-item">
+					<a class="page-link" href="/lol/member/member/messageList?pageNum=${pu.pageNum-1}" aria-label="Previous">
+						<span aria-hidden="true" style="font-size: 25px;">&laquo;</span>
+	        			<span class="sr-only" style="font-size: 25px;">Previous</span>
+	      			</a>
+				</li>
+			</c:if>
+			<c:forEach var="i" begin="${pu.startPageNum}" end="${pu.endPageNum }">
+				<c:choose>
+					<c:when test="${i==pu.pageNum }">
+						<li class="page-item"><a class="page-link" href="/lol/member/member/messageList?pageNum=${i}"><span style='color:blue; font-size: 25px;'>[${i }]</span></a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="/lol/member/member/messageList?pageNum=${i}"><span style='color:gray; font-size: 25px;'>[${i }]</span></a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${pu.endPageNum<pu.totalPageCount }">
+				<li class="page-item">
+      				<a class="page-link" href="/lol/member/member/messageList?pageNum=${pu.pageNum+1}" aria-label="Next">
+        				<span aria-hidden="true" style="font-size: 25px;">&raquo;</span>
+        				<span class="sr-only" style="font-size: 25px;">Next</span>
+      				</a>
+    			</li>
+			</c:if>
+		</ul>
+	</nav>
 </div>
