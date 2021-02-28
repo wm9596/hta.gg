@@ -132,7 +132,7 @@
 									PERPECT
 								</c:when>
 								<c:otherwise>
-									<span style="color: ${kdaColor}">KDA : ${homeTeamMemberKda[status.index] }</span>
+									<span style=" font-weight: bold; color: ${kdaColor}">KDA : ${homeTeamMemberKda[status.index] }</span>
 								</c:otherwise>
 							</c:choose>
 							<br>
@@ -233,7 +233,7 @@
 									PERPECT
 								</c:when>
 								<c:otherwise>
-									<span style="color: ${kdaColor}">KDA : ${awayTeamMemberKda[status.index] }</span>
+									<span style="font-weight: bold; color: ${kdaColor}">KDA : ${awayTeamMemberKda[status.index] }</span>
 								</c:otherwise>
 							</c:choose>
 							<br>
