@@ -120,6 +120,7 @@ color: #00ffff ;}
 	<div id="demege" ><h1>물리공격</h1></div>
 	<div id="iteminfo" ></div>
 	<div id="effect"></div>
+	
 	</div>
 	<c:if test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username eq 'admin'}">
 	<a href="/lol/item">업데이트</a>
