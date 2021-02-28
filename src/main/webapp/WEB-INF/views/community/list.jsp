@@ -179,9 +179,9 @@
 				<input type="text" name="keyword" value="${keyword }">
 				<input type="submit" value="검색">
 				
-<%-- 					<c:if test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username != null}"> --%>
+ 					<c:if test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username != null}">
 						<input type="button" id="insertBtn" value="글쓰기" style="float: right;">
-<%-- 					</c:if> --%>
+ 					</c:if>
 			</form:form>
 			<div>
 				<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
