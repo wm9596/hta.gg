@@ -311,9 +311,26 @@ $(function(){
 		},
 		dataType:'json',
 		success:function(data){
+		
 			console.log(data);
-			
-			var winrank=data.winrank.WINRANK;
+			if(data.winrank==null){
+				 $('#circle1').circleProgress({
+					  value: 0,
+						 
+					    size: 180,
+					    fill: {
+					      gradient: ["#FFF56E", "#8B4513"]
+					    }
+					  }).on('circle-animation-progress', 
+						      //그래프 애니메이션이 진행되는 동안 
+						      function(event, progress, stepValue) {
+						      //progress -현재 진행상탱 0.0~1.0
+						      //stepValue - 현재까지 그려진 그래프 값 
+						     $(this).find('strong').html("승률<br>통계부족");
+						   
+						  });
+					
+			}else{
 			  $('#circle1').circleProgress({
 				    value: data.winrank.WINRANK/100,
 				 
@@ -328,6 +345,25 @@ $(function(){
 					      //stepValue - 현재까지 그려진 그래프 값 
 					  $(this).find('strong').html("승률:"+Math.round(data.winrank.WINRANK * progress) + '<i>%</i><br>승률:'+data.winrank.RANK+'위');
 					  });
+			}
+				if(data.banrank==null){
+					 $('#circle2').circleProgress({
+						  value: 0,
+							 
+						    size: 180,
+						    fill: {
+						      gradient: ["#FFF56E", "#8B4513"]
+						    }
+						  }).on('circle-animation-progress', 
+							      //그래프 애니메이션이 진행되는 동안 
+							      function(event, progress, stepValue) {
+							      //progress -현재 진행상탱 0.0~1.0
+							      //stepValue - 현재까지 그려진 그래프 값 
+							     $(this).find('strong').html("벤률<br>통계부족");
+							   
+							  });
+						
+				}else{
 			  $('#circle2').circleProgress({
 				  value: data.banrank.BANPER/100,
 					 
@@ -343,6 +379,24 @@ $(function(){
 					     $(this).find('strong').html("벤률:"+Math.round(data.banrank.BANPER * progress) + '<i>%</i><br>벤률:'+data.banrank.RANK+'위');
 					   
 					  });
+				};
+				if(data.maxCount==null){
+					 $('#circle3').circleProgress({
+						  value: 0,
+							 
+						    size: 180,
+						    fill: {
+						      gradient: ["#FFF56E", "#8B4513"]
+						    }
+						  }).on('circle-animation-progress', 
+							      //그래프 애니메이션이 진행되는 동안 
+							      function(event, progress, stepValue) {
+							      //progress -현재 진행상탱 0.0~1.0
+							      //stepValue - 현재까지 그려진 그래프 값 
+							     $(this).find('strong').html("픽률<br>통계부족");
+							   
+							  });
+				}else{
 			  $('#circle3').circleProgress({
 				  value: data.maxCount.PICKPER/100,
 					 
@@ -357,7 +411,7 @@ $(function(){
 					      //stepValue - 현재까지 그려진 그래프 값 
 					  $(this).find('strong').html("픽률:"+Math.round(data.maxCount.PICKPER * progress) + '<i>%</i><br>픽률:'+data.maxCount.RANK+'위');
 					  });
-
+				}
 			$("#pickbtn").css({
 					border: "3px solid red",
 				})
