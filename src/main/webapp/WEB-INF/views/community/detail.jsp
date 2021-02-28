@@ -326,7 +326,6 @@
 		$.ajax({
 			url : '/lol/member/member/registerProfile?snickname=' + snickname,
 			success : function(result) {
-				console.log(result);
 				var soloTier = $(result).find("soloVo").find("tier").text();
 				soloTier = soloTier.split("_")[0];
 				var soloWin = parseInt($(result).find("soloVo").find("win").text());
@@ -398,12 +397,14 @@
 		});
 	}
 	
-	var username = $("#user_name").val();
+	var un = $("#user_name").val();
+	console.log(un);
 	$.ajax({
-		url : "/lol/member/member/checkProfile?username=" + username,
+		url : "/lol/member/member/checkProfile?username=" + un,
 		dataType: "text",
 		success: function (result) {
 			if (result != "") {
+				console.log("result = " + result);
 				showProfile(result);	
 			}
 		}
@@ -602,12 +603,12 @@
 	}
 
 	function getList() {
-		console.log("호출");
+// 		console.log("호출");
 		$.ajax({
 			url:"/lol/reply/${vo.pNum}",
 			dataType: 'xml',
 			success: function(data){
-				console.log(data);
+// 				console.log(data);
 				var commList = $("#commList");
 				var childs = commList.childNodes;
 				

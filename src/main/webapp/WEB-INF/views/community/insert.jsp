@@ -43,15 +43,13 @@
 				<tr>
 					<td>
 						<select name="cNum" style="width: 20%;">
-							<option value="1">공략</option>
-							<option value="2">자유</option>
-							<option value="3">팀원모집</option>
-							<option value="4">사건사고</option>
-							<option value="5">Q&A</option>
-								<c:if test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == 'admin'}">
-									<option value="6">공지사항</option>
-								</c:if>
-								
+							<c:if test=""></c:if>
+							<option value="1" <c:if test="${cNum == 1 }"> selected </c:if>>공략</option>
+							<option value="2" <c:if test="${cNum == 2 }"> selected </c:if>>자유</option>
+							<option value="3" <c:if test="${cNum == 3 }"> selected </c:if>>팀원모집</option>
+							<option value="4" <c:if test="${cNum == 4 }"> selected </c:if>>사건사고</option>
+							<option value="5" <c:if test="${cNum == 5 }"> selected </c:if>>Q&A</option>
+							<option value="6" <c:if test="${cNum == 6 }"> selected </c:if>>공지사항</option>
 						</select> 
 					</td>
 				</tr>

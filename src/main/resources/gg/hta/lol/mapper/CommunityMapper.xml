@@ -55,6 +55,22 @@
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow}  ]]>
 	</select>	
 	
+	<select id="wholeList" resultType="community" parameterType="hashmap">
+      select * from
+      (
+          select a.*,rownum rnum from 
+          (
+              select * from community
+              <if test="field!=null and field!=''">
+                 and ${field} like '%'||#{keyword}||'%'
+              </if>
+              order by pNum desc
+           ) a
+        )
+      <![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow}  ]]>
+   </select>
+	
+	
 	<select id="select" resultType="community" parameterType="int">
 		select * from community where pNum=#{pNum}
 	</select>

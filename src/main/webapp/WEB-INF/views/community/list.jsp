@@ -46,12 +46,40 @@
 </head>
 <body>
 	<a href="${pageContext.request.contextPath }/community/list" style=" width:200px; padding: 2%; font-size:35px; color: black;">전체</a>
+	<c:choose>
+		<c:when test="${cNum == 0 }">
+			<c:set var="title" value="전체"/>
+		</c:when>
+		<c:when test="${cNum == 1 }">
+			<c:set var="title" value="공략"/>
+		</c:when>
+		<c:when test="${cNum == 2 }">
+			<c:set var="title" value="자유"/>
+		</c:when>
+		<c:when test="${cNum == 3 }">
+			<c:set var="title" value="팀원모집"/>
+		</c:when>
+		<c:when test="${cNum == 4 }">
+			<c:set var="title" value="사건사고"/>
+		</c:when>
+		<c:when test="${cNum == 5 }">
+			<c:set var="title" value="Q&A"/>
+		</c:when>
+		<c:when test="${cNum == 6 }">
+			<c:set var="title" value="공지사항"/>
+		</c:when>
+		<c:otherwise>
+			<c:set var="title" value="경기일정"/>
+		</c:otherwise>
+	</c:choose>
+	<h2 style=" width:200px; padding: 2%;">${title }</h2>
 <div align="center">
 	<div style="display:inline;">
 <%-- 		<form:form method="post" action="${pageContext.request.contextPath }/community/list"> --%>
 		
 		<table id="community_menu" class="table">
 			<tr>
+				<th scope="col"><a href="javascript:page(0)">전체</a> </th>
 				<th scope="col"><a href="javascript:page(1)">공략</a> </th>
 				<th scope="col"><a href="javascript:page(2)">자유</a> </th>
 				<th scope="col"><a href="javascript:page(3)">팀원모집</a> </th>
@@ -61,9 +89,9 @@
 				<th scope="col"><a href="/lol/match/list">경기일정</a> </th>
 			</tr>
 			<tr>
-				<td colspan="2"><a href="javascript:array1('viewCount')">인기 (조회수)</a></td>
-				<td colspan="2"><a href="javascript:array1('regdate')">최신 (등록날짜)</a></td>
-				<td colspan="2"><a href="javascript:array1('hit')">TOP (추천수)</a></td>
+				<td colspan="3"><a href="javascript:array1('viewCount')">인기 (조회수)</a></td>
+				<td colspan="3"><a href="javascript:array1('regdate')">최신 (등록날짜)</a></td>
+				<td colspan="3"><a href="javascript:array1('hit')">TOP (추천수)</a></td>
 			</tr>
 		</table>
 		<input type="hidden" name="cNum" value="${ cNum}">

@@ -114,17 +114,25 @@
 						<div class="minimal_child" id="home_minimal_nicknameArea" style="width: 20%; display: block;">
 							<span><a href="${pageContext.request.contextPath }/match/search?sName=${nickname}" style="white-space: nowrap; text-decoration: none; color: black;">${nickname }</a></span> <br>
 							<c:choose>
+								<c:when test="${homeTeamMemberKda[status.index] lt 3}">
+									<c:set var="kdaColor" value="gray"/>
+								</c:when>
+								<c:when test="${homeTeamMemberKda[status.index] lt 4}">
+									<c:set var="kdaColor" value="green"/>
+								</c:when>
+								<c:when test="${homeTeamMemberKda[status.index] lt 5}">
+									<c:set var="kdaColor" value="blue"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="kdaColor" value="#ffecaa"/>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
 								<c:when test="${homeTeamMemberDeath[status.index] == 0 }">
 									PERPECT
 								</c:when>
 								<c:otherwise>
-									<span style="
-										<c:choose>
-											<c:when test='${homeTeamMemberKda[status.index] > 3 }'>
-												color: #2daf7f;
-											</c:when>
-										</c:choose>
-									">KDA : ${homeTeamMemberKda[status.index] }</span>
+									<span style="color: ${kdaColor}">KDA : ${homeTeamMemberKda[status.index] }</span>
 								</c:otherwise>
 							</c:choose>
 							<br>
@@ -207,11 +215,25 @@
 						<div class="minimal_child" id="away_minimal_nicknameArea" style="width: 20%; display: block;">
 							<span><a href="${pageContext.request.contextPath }/match/search?sName=${nickname}" style="white-space: nowrap; text-decoration: none; color: black;">${nickname }</a></span> <br>
 							<c:choose>
+								<c:when test="${awayTeamMemberKda[status.index] lt 3}">
+									<c:set var="kdaColor" value="gray"/>
+								</c:when>
+								<c:when test="${awayTeamMemberKda[status.index] lt 4}">
+									<c:set var="kdaColor" value="green"/>
+								</c:when>
+								<c:when test="${awayTeamMemberKda[status.index] lt 5}">
+									<c:set var="kdaColor" value="blue"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="kdaColor" value="#ffecaa"/>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
 								<c:when test="${awayTeamMemberDeath[status.index] == 0 }">
 									PERPECT
 								</c:when>
 								<c:otherwise>
-									KDA : ${awayTeamMemberKda[status.index] }
+									<span style="color: ${kdaColor}">KDA : ${awayTeamMemberKda[status.index] }</span>
 								</c:otherwise>
 							</c:choose>
 							<br>
