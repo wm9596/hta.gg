@@ -6,7 +6,7 @@
 <div style="margin: 70px;">
 	<h3 style="display: inline;">오늘 접속자 수 : ${todayCnt }</h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<h3 style="display: inline;">총 접속자 수 : ${totalCnt }</h3>
-	<div id="curve_chart" style="width: 900px; height: 500px"></div>
+	<div id="curve_chart" style="width: 900px; height: 700px;"></div>
 </div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">

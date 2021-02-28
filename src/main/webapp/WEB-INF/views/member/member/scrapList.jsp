@@ -7,14 +7,35 @@
 		<thead>
 			<tr>
 				<th scope="col">게시글 번호</th>
+				<th scope="col">게시글 종류</th>
 				<th scope="col">게시글 제목</th>
 			</tr>
 		</thead>
 		<tbody>
-		<c:forEach var="vo" items="${list }" varStatus="status">
+		<c:forEach var="vo" items="${list }">
 			<tr>
 				<th scope="row">${vo.pNum }</th>
-				<td><a href="${pageContext.request.contextPath }/community/detailMy?pNum=${vo.pNum }">${vo.title }</a></td>
+				<c:choose>
+					<c:when test="${vo.cNum == '1'}">
+						<td>공략 게시판</td>
+					</c:when>
+					<c:when test="${vo.cNum == '2'}">
+						<td>자유 게시판</td>
+					</c:when>
+					<c:when test="${vo.cNum == '3'}">
+						<td>팀원모집 게시판</td>
+					</c:when>
+					<c:when test="${vo.cNum == '4'}">
+						<td>사건사고 게시판</td>
+					</c:when>
+					<c:when test="${vo.cNum == '5'}">
+						<td>Q&A 게시판</td>
+					</c:when>
+					<c:otherwise>
+						<td>경기일정 게시판</td>
+					</c:otherwise>
+				</c:choose>
+				<td style="word-break:break-all; width: 700px;"><a href="${pageContext.request.contextPath }/community/detailMy?pNum=${vo.pNum }">${vo.title }</a></td>
 			</tr>
 		</c:forEach>
 		</tbody>

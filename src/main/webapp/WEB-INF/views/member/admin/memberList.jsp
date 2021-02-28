@@ -5,7 +5,7 @@
 <h1 style="text-align: center; margin-top: 30px;">회원 정보 목록</h1>
 <div style="margin: 70px;">
 	<form:form method="post" action="${pageContext.request.contextPath}/member/admin/listDelete">
-		<table style="width: 1100px; font-size: 18px;" class="table table-hover">
+		<table style="font-size: 18px;" class="table table-hover">
 			<thead>
 				<tr>
 					<th scope="col"><input type="checkbox" id="allMember"></th>
