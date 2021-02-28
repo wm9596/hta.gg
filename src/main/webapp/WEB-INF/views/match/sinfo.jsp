@@ -146,7 +146,7 @@
 		
 	</div>
 </div>
-
+<div id="effect"></div>
 <script type="text/javascript">
 var isRunning = false;
 
@@ -341,37 +341,86 @@ function addMatchList(matchList){
 		let tr2 = $("<tr>");
 		
 		if(sum.item1!=0){
-			tr1.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item1+".png'></td>");
+			let td = $("<td>");
+			
+			td.append($("<img>",{
+								class : sum.item1,
+								src : "http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item1+".png",
+								mouseover : function(e){showItemInfo(this,e)},
+								mouseout  : function(e){emptyItemInfo()}	
+								}));
+			tr1.append(td);
+// 			tr1.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item1+".png'></td>");
 		}else{
 			tr1.append("<td><img src='${pageContext.request.contextPath }/resources/images/noItem.png'></td>");
 		}
 
 		if(sum.item2!=0){
-			tr1.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item2+".png'></td>");
+			let td = $("<td>");
+			
+			td.append($("<img>",{
+								class : sum.item2,
+								src : "http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item2+".png",
+								mouseover : function(e){showItemInfo(this,e)},
+								mouseout  : function(e){emptyItemInfo()}	
+								}));
+			tr1.append(td);
 		}else{
 			tr1.append("<td><img src='${pageContext.request.contextPath }/resources/images/noItem.png'></td>");
 		}
 		
 		if(sum.item3!=0){
-			tr1.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item3+".png'></td>");
+			let td = $("<td>");
+			
+			td.append($("<img>",{
+								class : sum.item3,
+								src : "http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item3+".png",
+								mouseover : function(e){showItemInfo(this,e)},
+								mouseout  : function(e){emptyItemInfo()}	
+								}));
+			tr1.append(td);
 		}else{
 			tr1.append("<td><img src='${pageContext.request.contextPath }/resources/images/noItem.png'></td>");
 		}
 		
 		if(sum.item4!=0){
-			tr2.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item4+".png'></td>");
+			let td = $("<td>");
+			
+			td.append($("<img>",{
+								class : sum.item4,
+								src : "http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item4+".png",
+								mouseover : function(e){showItemInfo(this,e)},
+								mouseout  : function(e){emptyItemInfo()}	
+								}));
+			tr2.append(td);
 		}else{
 			tr2.append("<td><img src='${pageContext.request.contextPath }/resources/images/noItem.png'></td>");
 		}
 		
 		if(sum.item5!=0){
-			tr2.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item5+".png'></td>");
+			let td = $("<td>");
+			
+			td.append($("<img>",{
+								class : sum.item5,
+								src : "http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item5+".png",
+								mouseover : function(e){showItemInfo(this,e)},
+								mouseout  : function(e){emptyItemInfo()}	
+								}));
+			tr2.append(td);
 		}else{
 			tr2.append("<td><img src='${pageContext.request.contextPath }/resources/images/noItem.png'></td>");
 		}
 		
 		if(sum.item6!=0){
-			tr2.append("<td><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item6+".png'></td>");
+			let td = $("<td>");
+			
+			td.append($("<img>",{
+								class : sum.item6,
+								src : "http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.item6+".png",
+								mouseover : function(e){showItemInfo(this,e)},
+								mouseout  : function(e){emptyItemInfo()}	
+								}));
+			tr2.append(td);
 		}else{
 			tr2.append("<td><img src='${pageContext.request.contextPath }/resources/images/noItem.png'></td>");
 		}
@@ -386,7 +435,13 @@ function addMatchList(matchList){
 		if(sum.accessory==0){
 			accessory.append("<img src='${pageContext.request.contextPath }/resources/images/noItem.png'>");
 		}else{
-			accessory.append("<img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.accessory+".png'>");
+// 			accessory.append("<img>" src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.accessory+".png'>");
+			accessory.append($("<img>",{
+				class : sum.accessory,
+				src : "http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+sum.accessory+".png",
+				mouseover : function(e){showItemInfo(this,e)},
+				mouseout  : function(e){emptyItemInfo()}	
+				}));
 		}
 		
 		matchItem.append(accessory);
@@ -478,7 +533,7 @@ function addMatchList(matchList){
 	}
 	
 	totalLose = totalGame - totalWin;
-	console.log("승률" + totalGame +" "+totalWin +" " +totalLose);
+// 	console.log("승률" + totalGame +" "+totalWin +" " +totalLose);
 	drawChart(totalGame,totalWin,totalLose);
 	
 	$("#avgStats").html((totalKill/totalGame).toFixed(1)+"/"+(totalDeath/totalGame).toFixed(1)+"/"+(totalAssist/totalGame).toFixed(1));
@@ -571,5 +626,33 @@ function dateDiff(d1,d2){
 	return dif/ 1000 / 60 / 60 / 24;
 }
 
+var isToolTip = false;
+function showItemInfo(img,e){
+// 	console.log(img);
+
+	let inum = $(img).attr('class');
+	
+	if(isToolTip) return;
+	
+	isToolTip = true;
+	$.ajax({
+		contentType : 'application/json',
+		url : "/lol/iteminfo?inum="+inum,
+		dataType: 'json',
+		success:function(data){
+			var nameeffect="<div id='toolTip'><h2>"+data.name+"</h2><p>가격:"+data.price+"<br><img src=http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+data.icon+" style='width:50px; height:50px;'><br>"+data.effect+"</div>";
+			$("#effect").empty();
+			$(nameeffect).appendTo("#effect");
+			$("#toolTip").css("left",e.pageX);
+			$("#toolTip").css("top",e.pageY);
+			$("#toolTip").css("pointer-events",'none');
+		}
+	})
+}
+
+function emptyItemInfo(){
+ 	$("#effect").empty();
+ 	isToolTip = false;
+}
 
 </script>

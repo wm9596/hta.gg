@@ -375,4 +375,13 @@
 	border-radius: 100px;
 }
 
-
+#toolTip {
+	border: 3px solid black;
+	border-radius: 25px;
+	background-color: #ffffff; 
+	position:absolute;
+	background-color:black;
+	width: 30%;
+	height: auto;
+	color:white;
+}
