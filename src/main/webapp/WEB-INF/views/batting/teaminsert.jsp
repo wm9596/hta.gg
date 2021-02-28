@@ -7,11 +7,14 @@
 
 
 <html>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <head>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/resources/js/scrap.js"></script>
 <script type="text/javascript" src="/lol/resources/js/jquery-3.5.1.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <meta charset="UTF-8">
 <style type="text/css">
 #d1{
@@ -115,6 +118,36 @@ width: 40%; text-align: center; border: 2px solid black; display: inline-block; 
 }
 </style>
 <title>Insert title here</title>
+</head>
+<body>
+<div id="allList">
+<div id="addlist"></div>
+	<input type="button" value="새로운팀추가" id="addTeam" class="button">
+		<input type="button" id="removeTeambtn" style="display: none;" value="팀추가끄기">
+	<div id="addTeam">
+		<input type="text" id="addTeamname" style="display: none;"> <input
+			type="button" id="addTeambtn" style="display: none;" value="팀추가"><br>
+	</div>
+	</div>
+<div id="d1" ></div>
+<div id="addmatch" >
+<select id='addmatch1' style="display: none;">
+</select>
+<input type="button" id="teamDelete" value="x">
+<select id='addmatch2' style="display: none;">
+
+</select>
+<input type="button" id="teamDelete2" value="x"><br>
+
+<input type="button" id="matchinsert" value="경기등록">
+
+</div>
+<div id="d2"></div>
+<div id="matchList" style="width: 100%;"></div>
+<div id="Nomatch"></div>
+<input type="hidden" id="test11" >
+</div>
+</body>
 <script type="text/javascript">
 	$(function() {		
 		$("#teamDelete").click(function() {
@@ -224,6 +257,9 @@ $("#addmatch2").change(function(){
 	}
 })
 		$("#addTeam").click(function() {
+			
+			$(this).attr("disabled", false);
+
 			$("#addTeamname").css({
 				display : "inline"
 			});
@@ -468,32 +504,5 @@ function pointgo(mnum,mwinlose){
 	})
 }
 </script>
-</head>
-<body>
 
-	<input type="button" value="새로운팀추가" id="addTeam" class="button">
-		<input type="button" id="removeTeambtn" style="display: none;" value="팀추가끄기">
-	<div id="addTeam">
-		<input type="text" id="addTeamname" style="display: none;"> <input
-			type="button" id="addTeambtn" style="display: none;" value="팀추가"><br>
-	</div>
-<div id="d1" style="width:100%;"></div>
-<div id="addmatch" >
-<select id='addmatch1' style="display: none;">
-</select>
-<input type="button" id="teamDelete" value="x">
-<select id='addmatch2' style="display: none;">
-
-</select>
-<input type="button" id="teamDelete2" value="x"><br>
-
-<input type="button" id="matchinsert" value="경기등록">
-
-</div>
-<div id="d2"></div>
-<div id="matchList" style="width: 100%;"></div>
-<div id="Nomatch"></div>
-<input type="hidden" id="test11" >
-
-</body>
 </html>

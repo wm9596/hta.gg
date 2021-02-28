@@ -15,6 +15,8 @@ padding-left: 550px;
 </style>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript" src="/lol/resources/js/jquery-3.5.1.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/resources/js/scrap.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <meta charset="UTF-8">
