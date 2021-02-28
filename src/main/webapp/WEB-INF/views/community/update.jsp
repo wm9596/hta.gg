@@ -10,10 +10,13 @@
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <title>views/community/insert.jsp</title>
 <script type="text/javascript">
+
+	//이전 페이지로 돌아가기
 	function beforePage(){
 		history.go(-1);
 		return;
 	}
+	
 </script>
 <style type="text/css">
 	a{ text-decoration:none }
