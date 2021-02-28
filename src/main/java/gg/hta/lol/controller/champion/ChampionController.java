@@ -70,8 +70,8 @@ public class ChampionController {
 
 	
 		map.put("map", service.ChampAll_List());
-		map.put("picklist", service.banlistAll());
-		map.put("banlist", service.pickrank());
+		map.put("banlist", service.banlistAll());
+		map.put("picklist", service.pickrank());
 		map.put("winlist", service.winlistAll());
 
 		

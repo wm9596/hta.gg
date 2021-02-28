@@ -190,7 +190,7 @@
 																							+ value.NAME
 																							+ "</a></td>"
 																							+ "<td>"
-																							+ value.BANPER
+																							+ value.PICKPER
 																							+ "%</td></tr>");
 
 																})
@@ -222,7 +222,7 @@
 																							+ value.NAME
 																							+ "</a></td>"
 																							+ "<td>"
-																							+ value.PICKPER
+																							+ value.BANPER
 																							+ "%</td></tr>");
 
 																})

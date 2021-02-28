@@ -14,6 +14,17 @@
 background-color: white;
 margin-left: 0px;
 }
+.content1 {
+  border: 3px solid black;
+  border-radius: 25px;
+  background-color: #ffffff; 
+  position:absolute;
+ background-color:black;
+  width: 30%;
+  height: auto;
+  color:white;
+
+}
 #ChampList {
 
 	margin-top:10px;
@@ -31,8 +42,8 @@ position:
 	border: 3px solid black;
 	border-radius: 25px;
 	background-color: #ffffff;
-	top:35px;
-	left:500px;
+	top:5px;
+	left:450px;
 	background-color: black;
 	width: 30%;
 	height: auto;
@@ -169,6 +180,48 @@ top:20px;
 #table1 img{
 width: 70px;
 }
+#circle1 strong{
+position:absolute;
+top:50px;
+left:70px;
+text-align:center;
+line-height:40px;
+font-size:24px;
+}
+#circle2 strong{
+position:absolute;
+top:50px;
+left:260px;
+text-align:center;
+line-height:40px;
+font-size:24px;
+}
+#circle3 strong{
+position:absolute;
+top:50px;
+left:440px;
+text-align:center;
+line-height:40px;
+font-size:24px;
+}
+.circleAll{
+padding-left:30px;
+position: absolute;
+left:600px;
+top:5px;
+}
+#iteminfo{
+position: absolute;
+width: 300px;
+height: 550px;
+top:200px;
+left:1250px;
+}
+.tt { position: relative; display: inline-block; border-bottom: 2px dotted Sienna; background-color: yellow; }
+stats{
+color: #fafad2 ;}
+rules{
+color: #00ffff ;}
 </style>
 </head>
 
@@ -178,9 +231,9 @@ width: 70px;
 		<div id="picture"></div>
 		<div id="skillIcon"></div>
 		<div class='circleAll'>
-		<div style='display:inline' id="circle1"></div>
-		<div style='display:inline' id="circle2"></div>
-		<div style='display:inline' id="circle3"></div>
+		<div style='display:inline' id="circle1"><strong></strong><strong id='strong2'></strong></div>
+		<div style='display:inline' id="circle2"><strong></strong></div>
+		<div style='display:inline' id="circle3"><strong></strong></div>
 		</div>
 		<div class="panel-heading" role="tab" id="headingOne">
 	<h5 class="pa">
@@ -219,11 +272,8 @@ width: 70px;
 
 
 						</table>
-						
-			<table class="table table-striped loselist" id='table2'>
-
-
-						</table>
+						<div id='iteminfo'></div>
+		
 
 		<div id='selectskill'></div>
 
@@ -238,6 +288,8 @@ width: 70px;
 		<div id="story2"></div>
 		<div id="gametip2"></div>
 	
+	
+	<div id='tt'></div>
 	</div>
 
 	
@@ -246,27 +298,9 @@ width: 70px;
 	<script type="text/javascript">
 
 $(function(){
-	  $('#circle1').circleProgress({
-		    value: 0.75,
-		    size: 80,
-		    fill: {
-		      gradient: ["red", "orange"]
-		    }
-		  });
-	  $('#circle2').circleProgress({
-		    value: 0.75,
-		    size: 80,
-		    fill: {
-		      gradient: ["red", "orange"]
-		    }
-		  });
-	  $('#circle3').circleProgress({
-		    value: 0.75,
-		    size: 80,
-		    fill: {
-		      gradient: ["red", "orange"]
-		    }
-		  });
+	
+	
+
 	var list=${championid}
 
 	
@@ -277,8 +311,52 @@ $(function(){
 		},
 		dataType:'json',
 		success:function(data){
+			console.log(data);
 			
-			console.log(data)
+			var winrank=data.winrank.WINRANK;
+			  $('#circle1').circleProgress({
+				    value: data.winrank.WINRANK/100,
+				 
+				    size: 180,
+				    fill: {
+				      gradient: ["red", "orange"]
+				    }
+				  }).on('circle-animation-progress', 
+					      //그래프 애니메이션이 진행되는 동안 
+					      function(event, progress, stepValue) {
+					      //progress -현재 진행상탱 0.0~1.0
+					      //stepValue - 현재까지 그려진 그래프 값 
+					  $(this).find('strong').html("승률:"+Math.round(data.winrank.WINRANK * progress) + '<i>%</i><br>승률:'+data.winrank.RANK+'위');
+					  });
+			  $('#circle2').circleProgress({
+				  value: data.banrank.BANPER/100,
+					 
+				    size: 180,
+				    fill: {
+				      gradient: ["#FFF56E", "#8B4513"]
+				    }
+				  }).on('circle-animation-progress', 
+					      //그래프 애니메이션이 진행되는 동안 
+					      function(event, progress, stepValue) {
+					      //progress -현재 진행상탱 0.0~1.0
+					      //stepValue - 현재까지 그려진 그래프 값 
+					     $(this).find('strong').html("벤률:"+Math.round(data.banrank.BANPER * progress) + '<i>%</i><br>벤률:'+data.banrank.RANK+'위');
+					   
+					  });
+			  $('#circle3').circleProgress({
+				  value: data.maxCount.PICKPER/100,
+					 
+				    size: 180,
+				    fill: {
+				      gradient: ["#FFD2D7", "#B9062F"]
+				    }
+				  }).on('circle-animation-progress', 
+					      //그래프 애니메이션이 진행되는 동안 
+					      function(event, progress, stepValue) {
+					      //progress -현재 진행상탱 0.0~1.0
+					      //stepValue - 현재까지 그려진 그래프 값 
+					  $(this).find('strong').html("픽률:"+Math.round(data.maxCount.PICKPER * progress) + '<i>%</i><br>픽률:'+data.maxCount.RANK+'위');
+					  });
 
 			$("#pickbtn").css({
 					border: "3px solid red",
@@ -333,7 +411,7 @@ $(function(){
 						"<tbody><tr><td id='tabletd'>통계가 부족하여 데이터가 없습니다.</td></tr></tbody>");
 			}else{
 				$("#table1").append(
-				"<tbody><tr><td id='tabletd'>추천 아이템</td></tr></tbody>");
+				"<tbody><tr><td id='tabletd'>승리팀 세팅</td></tr></tbody>");
 				
 				var rune1="";
 				var rune2="";
@@ -352,40 +430,40 @@ $(function(){
 					let item5="";
 					let item6="";
 					if(value.ITEM1){
-						item1="<img id='"+value.ITEM1+"' src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+value.ITEM1+".png'>"
+						item1="<img onmouseover='ganada(event);' onmouseout='ganaout();' id='"+value.ITEM1+"' src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+value.ITEM1+".png'>"
 					}else{
-						item1="<img src='/lol/resources/images/noItem.png'>"
+						item1="<img  src='/lol/resources/images/noItem.png'>"
 					
 					}
 					console.log(item1);
 					if(value.ITEM2){
-						item2="<img id='"+value.ITEM2+"' src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+value.ITEM2+".png'>"
+						item2="<img onmouseover='ganada(event);' onmouseout='ganaout();' id='"+value.ITEM2+"' src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+value.ITEM2+".png'>"
 						
 						
 					}else{
-						item2="<img src='/lol/resources/images/noItem.png'>"
+						item2="<img  src='/lol/resources/images/noItem.png'>"
 						
 					}
 					if(value.ITEM3){
-						item3="<img id='"+value.ITEM3+"' src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+value.ITEM3+".png'>"
+						item3="<img onmouseover='ganada(event);' onmouseout='ganaout();' id='"+value.ITEM3+"' src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+value.ITEM3+".png'>"
 						
 					}else{
-						item3="<img src='/lol/resources/images/noItem.png'>"
+						item3="<img <img src='/lol/resources/images/noItem.png'>"
 					}
 					if(value.ITEM4){
-						item4="<img id='"+value.ITEM4+"' src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+value.ITEM4+".png'>"
+						item4="<img onmouseover='ganada(event);' onmouseout='ganaout();' id='"+value.ITEM4+"' src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+value.ITEM4+".png'>"
 						
 					}else{
-						item4="<img src='/lol/resources/images/noItem.png'>"
+						item4="<img  src='/lol/resources/images/noItem.png'>"
 					}
 					if(value.ITEM5){
-						item5="<img id='"+value.ITEM5+"' src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+value.ITEM5+".png'>"
+						item5="<img onmouseover='ganada(event);' onmouseout='ganaout();' id='"+value.ITEM5+"' src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+value.ITEM5+".png'>"
 		
 					}else{
 						item5="<img src='/lol/resources/images/noItem.png'>"
 					}
 					if(value.ITEM6){
-						item6="<img id='"+value.ITEM6+"' src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+value.ITEM6+".png'>"
+						item6="<img onmouseover='ganada(event);' onmouseout='ganaout();' id='"+value.ITEM6+"' src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+value.ITEM6+".png'>"
 						
 					}else{
 						item6="<img src='/lol/resources/images/noItem.png'>"
@@ -414,22 +492,16 @@ $(function(){
 							for(idx in data){
 								if(data[idx].id==rune1){
 									console.log("정답");
-									cc="<img src='http://ddragon.leagueoflegends.com/cdn/img/"+data[idx].icon+"'>";
+									cc="<img  src='http://ddragon.leagueoflegends.com/cdn/img/"+data[idx].icon+"'>";
 								
 								}
 								if(data[idx].id==rune2){
 									console.log("정답");
-									dd="<img src='http://ddragon.leagueoflegends.com/cdn/img/"+data[idx].icon+"'>";
+									dd="<img  src='http://ddragon.leagueoflegends.com/cdn/img/"+data[idx].icon+"'>";
 								
 								}
 								console.log(value.SPELL1);
-							$.ajax({
-								url:'http://ddragon.leagueoflegends.com/cdn/11.4.1/data/ko_KR/summoner.json',
-								dataType: 'json',
-								success:function(data){
-									console.log(data);
-								}
-							})
+					
 							}
 							if(spell1==21){
 								spell_1="SummonerBarrier.png";
@@ -539,10 +611,13 @@ $(function(){
 							}
 							
 						console.log(spell_1)
-						let spell_11="<img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/spell/"+spell_1+"'>";
-						let spell_22="<img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/spell/"+spell_2+"'>";
+						let spell_11="<img onmouseover='spell(event);' onmouseout='spellout();'  src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/spell/"+spell_1+"'>";
+						let spell_22="<img onmouseover='spell(event);'  onmouseout='spellout();' src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/spell/"+spell_2+"'>";
 						console.log(spell_2)
-							$("#table1 tbody").append("<tr><td>"+(key+1)+"</td><td>"+item1+"</td><td>"+item2+"</td><td>"+item3+"</td><td>"+item4+"</td><td>"+item5+"</td><td>"+cc+"</td><td>"+dd+"</td><td>"+spell_11+"</td><td>"+spell_22+"</td></tr>");
+							$("<tr><td>"+(key+1)+"</td><td>"+item1+"</td><td >"+item2+
+									"</td><td >"+item3+"</td><td >"+item4+"</div></td><td>"+item5+"</td><td >"+spell_11+"</td><td>"+spell_22+
+									"</td><td> "+cc+
+									"</td><td>"+dd+"</td></tr>").appendTo("#table1 tbody");
 						}
 					})
 				
@@ -554,9 +629,7 @@ $(function(){
 		}
 		
 	})	
-	
-
-	$.ajax({
+$.ajax({
 		url:"/lol/champ/selectList1", 
 		data:{
 			championid:list
@@ -599,7 +672,7 @@ $(function(){
 						var w_sum = "";
 						for (var kk = 0; kk <= w_.length; kk += 2) {
 						
-							w_sum += "?"
+							w_sum += "<"
 									+ w_[kk].substring(
 											w_[kk].indexOf('}}') + 2,
 											w_[kk].length);
@@ -608,18 +681,19 @@ $(function(){
 						let SkillW = "<p>"+W.name+"</p><br>"+w_[0] + w_sum;
 
 						let e_ = E.tooltip.split("{");
-					
+						console.log(e_)
 						var e_sum = "";
 						for (var kk = 0; kk <= e_.length; kk += 2) {
 							
-							e_sum += "?"
+							e_sum += "<"
 									+ e_[kk].substring(
 											e_[kk].indexOf('}}') + 2,
 											e_[kk].length);
+							
 
 						}
 						let SkillE = "<p>"+E.name+"</p><br>"+e_[0] + e_sum;
-
+						console.log(SkillE);
 						let r_ = R.tooltip.split("{");
 						
 						var r_sum = "";
@@ -694,6 +768,7 @@ $(function(){
 							
 						})
 						
+						
 						$("#sp").hover(
 								function() {
 									$("<div><status>"+skillp.name+"</status><br><br><br>"+ SkillP + "</div>").appendTo(
@@ -745,13 +820,73 @@ $(function(){
 					}
 
 				})
-
+	
 
 	})
-	
-	function pickbtn(){
-	
+	function ganada(e){
+					$("#iteminfo").empty();
+
+	var lets=e.target.src.split("/");
+	var code=lets[7].substr(0, lets[7].length-4)
+			$.ajax({
+				url:"/lol/iteminfo?inum="+code,
+				type:'get',
+				dataType:'json',
+				success:function(data){
+					var nameeffect="<div><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/"+data.icon+"'><br>"+data.name+"<br>"+data.effect+"</div>";
+				
+					$("#iteminfo").append(nameeffect);
+					$("#iteminfo").css({
+						backgroundColor: "black",
+						color:"white",
+					})
+					console.log(data);
+				}
+			})
 }
+	function ganaout(){
+		$("#iteminfo").css({
+			backgroundColor: "white",
+			color:"white",
+		})
+		$("#iteminfo").empty();
+		
+	}
+	function spell(e){
+		$("#iteminfo").empty();
+		console.log(e.target.src)
+		
+		console.log(e.target.id);
+		var lets=e.target.src.split("/");
+		var code=lets[7].substr(0, lets[7].length-4)
+		$.ajax({
+			url:"http://ddragon.leagueoflegends.com/cdn/11.4.1/data/ko_KR/summoner.json",
+			dataType: 'json',
+			success:function(data){
+				var cc=data.data[code].description;
+				var bb=data.data[code].name;
+				console.log(data.data[code].description);
+				console.log(data);
+				var nameeffect="<div><img src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/spell/"+code+".png'><br>"+bb+"<br>"+cc+"</div>";
+
+				$("#iteminfo").append(nameeffect);
+				$("#iteminfo").css({
+					backgroundColor: "black",
+					color:"white",
+				})
+			}
+		})
+		
+		
+	}
+	function spellout(){
+		$("#iteminfo").css({
+			backgroundColor: "white",
+			color:"white",
+		})
+		$("#iteminfo").empty();
+		
+	}
 </script>
 
 
