@@ -28,32 +28,38 @@ $(function(){
 	$("#id_emailOk").click(function(){
 		var email = document.getElementById("id_email").value;
 		email = email.substr(0,email.lastIndexOf("."));
-		$.ajax({
-			url:"/lol/member/emailCheck/"+email,
-			success: function(data){
-				var using = $(data).find("using").text();
-				if(eval(using)==true){
-					$.ajax({
-						url:"/lol/member/idSearch/"+email,
-						success: function(data){
-							var result = $(data).find("result").text();
-							if(result == 'success'){
-								document.getElementById("id_emailcheck").innerHTML="인증번호 전송이 완료되었습니다.";
-							}else{
-								document.getElementById("id_emailcheck").innerHTML="인증번호 전송이 실패되었습니다.";
+		if(email.indexOf("@") == -1){
+			alert("이메일을 확인 후 다시 입력해주세요!!!")
+		}else{
+			document.getElementById("id_emailcheck").innerHTML="인증번호 전송중.....";
+			$.ajax({
+				url:"/lol/member/emailCheck/"+email,
+				success: function(data){
+					var using = $(data).find("using").text();
+					if(eval(using)==true){
+						$.ajax({
+							url:"/lol/member/idSearch/"+email,
+							success: function(data){
+								var result = $(data).find("result").text();
+								if(result == 'success'){
+									document.getElementById("id_emailcheck").innerHTML="인증번호 전송이 완료되었습니다.";
+								}else{
+									document.getElementById("id_emailcheck").innerHTML="인증번호 전송이 실패되었습니다.";
+								}
 							}
-						}
-					});
-				}else if(using=='false'){
-					document.getElementById("id_emailcheck").innerHTML="등록되지 않은 이메일입니다. 회원가입 해주세요."
+						});
+					}else if(using=='false'){
+						document.getElementById("id_emailcheck").innerHTML="등록되지 않은 이메일입니다. 회원가입 해주세요."
+					}
 				}
-			}
-		});
+			});
+		}
 	});
 	$("#id_confirmOk").click(function(e){
 		e.preventDefault();
 		var email = document.getElementById("id_email").value;
 		email = email.substr(0,email.lastIndexOf("."));
+		
 		if(document.getElementById("id_emailcheck").textContent != "인증번호 전송이 완료되었습니다."){
 			alert("이메일 입력 후 이메일 인증 버튼을 클릭해 주세요!!!");
 		}else{
@@ -95,27 +101,32 @@ $(function(){
 		var id = document.getElementById("pwd_id").value;
 		var email = document.getElementById("pwd_email").value;
 		email = email.substr(0,email.lastIndexOf("."));
-		$.ajax({
-			url:"/lol/member/emailCheck/"+id+"/"+email,
-			success: function(data){
-				var using = $(data).find("using").text();
-				if(eval(using)==true){
-					$.ajax({
-						url:"/lol/member/pwdSearch/"+id+"/"+email,
-						success: function(data){
-							var result = $(data).find("result").text();
-							if(result == 'success'){
-								document.getElementById("pwd_emailcheck").innerHTML="인증번호 전송이 완료되었습니다.";
-							}else{
-								document.getElementById("pwd_emailcheck").innerHTML="인증번호 전송이 실패되었습니다.";
+		if(email.indexOf("@") == -1){
+			alert("이메일을 확인 후 다시 입력해주세요!!!")
+		}else{
+			$.ajax({
+				url:"/lol/member/emailCheck/"+id+"/"+email,
+				success: function(data){
+					var using = $(data).find("using").text();
+					if(eval(using)==true){
+						document.getElementById("pwd_emailcheck").innerHTML="인증번호 전송중.....";
+						$.ajax({
+							url:"/lol/member/pwdSearch/"+id+"/"+email,
+							success: function(data){
+								var result = $(data).find("result").text();
+								if(result == 'success'){
+									document.getElementById("pwd_emailcheck").innerHTML="인증번호 전송이 완료되었습니다.";
+								}else{
+									document.getElementById("pwd_emailcheck").innerHTML="인증번호 전송이 실패되었습니다.";
+								}
 							}
-						}
-					});
-				}else if(using=='false'){
-					document.getElementById("pwd_emailcheck").innerHTML="등록되지 않은 이메일입니다. 회원가입 해주세요."
+						});
+					}else if(using=='false'){
+						document.getElementById("pwd_emailcheck").innerHTML="등록되지 않은 이메일입니다. 회원가입 해주세요."
+					}
 				}
-			}
-		});
+			});
+		}
 	});
 	
 	$("#searchPwd").click(function(){
@@ -172,7 +183,10 @@ $(document).ready(function(){
 		email = email.substr(0,email.lastIndexOf("."));
 		if(document.getElementById("idcheck").textContent != "사용 가능 한 아이디입니다."){
 			alert("아이디 중복 확인을 완료해주세요.");
+		}else if(email.indexOf("@") == -1){
+			alert("이메일을 확인 후 다시 입력해주세요!!!")
 		}else{
+			document.getElementById("emailcheck").innerHTML="인증번호 전송중.....";
 			$.ajax({
 				url:"/lol/member/email/"+id+"/"+email,
 				success: function(data){

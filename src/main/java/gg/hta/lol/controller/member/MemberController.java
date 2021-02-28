@@ -22,12 +22,12 @@ import gg.hta.lol.service.MatchMoreJoinService;
 import gg.hta.lol.service.MemberService;
 import gg.hta.lol.util.PageUtil;
 import gg.hta.lol.service.match.SearchService;
+import gg.hta.lol.vo.CommunityVo;
 import gg.hta.lol.vo.MemberVo;
 import gg.hta.lol.vo.MessageVo;
 import gg.hta.lol.vo.PointVo;
 import gg.hta.lol.vo.QueueInfoVo;
 import gg.hta.lol.vo.ReportVo;
-import gg.hta.lol.vo.ScrapVo;
 import gg.hta.lol.vo.match.MostChampVo;
 import gg.hta.lol.vo.match.SearchVo;
 
@@ -193,7 +193,7 @@ public class MemberController {
 		map.put("startRow",startRow);
 		map.put("endRow",endRow);
 		map.put("username",principal.getName());
-		List<ScrapVo> list = service.scrapList(map);
+		List<CommunityVo> list = service.scrapList(map);
 		m.addAttribute("list", list);
 		m.addAttribute("pu",pu);
 		return ".mypage.scrapList";

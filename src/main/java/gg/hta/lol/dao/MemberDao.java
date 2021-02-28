@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 import gg.hta.lol.security.CustomUserDetail;
 import gg.hta.lol.vo.AuthVo;
 import gg.hta.lol.vo.AuthoritiesVo;
+import gg.hta.lol.vo.CommunityVo;
 import gg.hta.lol.vo.MemberVo;
 import gg.hta.lol.vo.MessageVo;
 import gg.hta.lol.vo.PointVo;
 import gg.hta.lol.vo.ReportVo;
-import gg.hta.lol.vo.ScrapVo;
 
 @Repository
 public class MemberDao {
@@ -98,7 +98,7 @@ public class MemberDao {
 	public int scrapListCount(String username) {
 		return sqlSession.selectOne(NAMESPACE + ".scrapListCount", username);
 	}
-	public List<ScrapVo> scrapList(HashMap<String, Object> map){
+	public List<CommunityVo> scrapList(HashMap<String, Object> map){
 		return sqlSession.selectList(NAMESPACE + ".scrapList", map);
 	}
 }

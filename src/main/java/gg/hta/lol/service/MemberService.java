@@ -11,11 +11,11 @@ import gg.hta.lol.dao.MemberDao;
 import gg.hta.lol.dao.VisitCountDao;
 import gg.hta.lol.security.CustomUserDetail;
 import gg.hta.lol.vo.AuthoritiesVo;
+import gg.hta.lol.vo.CommunityVo;
 import gg.hta.lol.vo.MemberVo;
 import gg.hta.lol.vo.MessageVo;
 import gg.hta.lol.vo.PointVo;
 import gg.hta.lol.vo.ReportVo;
-import gg.hta.lol.vo.ScrapVo;
 import gg.hta.lol.vo.VisitVo;
 
 @Service
@@ -108,7 +108,7 @@ public class MemberService {
 	public int scrapListCount(String username) {
 		return dao.scrapListCount(username);
 	}
-	public List<ScrapVo> scrapList(HashMap<String, Object> map){
+	public List<CommunityVo> scrapList(HashMap<String, Object> map){
 		return dao.scrapList(map);
 	}
 }

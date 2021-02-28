@@ -17,7 +17,7 @@
 			<tr>
 				<th scope="row"><c:out value="${(pu.pageNum-1)*10 + status.count }"/></th>
 				<td>${vo.pNum }</td>
-				<td><a href="${pageContext.request.contextPath }/community/detailMy?pNum=${vo.pNum }">${vo.rContent }</a></td>
+				<td style="word-break:break-all; width: 600px;"><a href="${pageContext.request.contextPath }/community/detailMy?pNum=${vo.pNum }">${vo.rContent }</a></td>
 				<td>${vo.regdate }</td>
 			</tr>
 		</c:forEach>

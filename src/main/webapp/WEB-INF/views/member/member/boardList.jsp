@@ -3,7 +3,7 @@
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <h1 style="text-align: center; margin-top: 30px;">내가 작성한 글 목록</h1>
 <div style="margin: 70px;">
-	<table style="width: 1000px;" class="table table-hover">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th scope="col">카테고리</th>
@@ -19,26 +19,26 @@
 			<c:forEach var="vo" items="${list }">
 				<tr>
 					<c:choose>
-						<c:when test="${vo.cNum }=='1'">
+						<c:when test="${vo.cNum == '1'}">
 							<th scope="row">공략 게시판</th>
 						</c:when>
-						<c:when test="${vo.cNum }=='2'">
+						<c:when test="${vo.cNum == '2'}">
 							<th scope="row">자유 게시판</th>
 						</c:when>
-						<c:when test="${vo.cNum }=='3'">
+						<c:when test="${vo.cNum == '3'}">
 							<th scope="row">팀원모집 게시판</th>
 						</c:when>
-						<c:when test="${vo.cNum }=='4'">
+						<c:when test="${vo.cNum == '4'}">
 							<th scope="row">사건사고 게시판</th>
 						</c:when>
-						<c:when test="${vo.cNum }=='5'">
+						<c:when test="${vo.cNum == '5'}">
 							<th scope="row">Q&A 게시판</th>
 						</c:when>
 						<c:otherwise>
 							<th scope="row">경기일정 게시판</th>
 						</c:otherwise>
 					</c:choose>
-					<td><a href="${pageContext.request.contextPath }/community/detail?pNum=${vo.pNum }&cNum=${vo.cNum }">${vo.title }</a></td>
+					<td style="word-break:break-all; width: 300px;"><a href="${pageContext.request.contextPath }/community/detail?pNum=${vo.pNum }&cNum=${vo.cNum }">${vo.title }</a></td>
 					<td>${vo.hit }</td>
 					<td>${vo.nohit }</td>
 					<td>${vo.viewCount }</td>

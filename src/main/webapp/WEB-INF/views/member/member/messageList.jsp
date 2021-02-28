@@ -3,7 +3,7 @@
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <h1 style="text-align: center; margin-top: 30px;">내가 받은 쪽지 목록</h1>
 <div style="margin: 70px;">
-	<table style="width: 1000px;" class="table table-hover">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th scope="col">쪽지 번호</th>
@@ -20,10 +20,10 @@
 					<td>${vo.sender }</td>
 					<c:choose>
 						<c:when test="${vo.open == '0' }">
-							<td><a href="${pageContext.request.contextPath }/updateMsg?msgNum=${vo.msgNum }">${vo.msg }</a></td>
+							<td style="word-break:break-all; width: 500px;"><a href="${pageContext.request.contextPath }/updateMsg?msgNum=${vo.msgNum }">${vo.msg }</a></td>
 						</c:when>
 						<c:otherwise>
-							<td>${vo.msg }</td>
+							<td style="word-break:break-all; width: 500px;">${vo.msg }</td>
 						</c:otherwise>
 					</c:choose>
 					<td>${vo.sendTime }</td>
