@@ -100,6 +100,7 @@ color: #00ffff ;}
 					console.log(y)
 					$(".content").css("left",x+50+"px");
 					$(".content").css("top",y+"px");
+					//ddd
 			}
 		})
 	}
