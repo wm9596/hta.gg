@@ -43,11 +43,12 @@
 	position: absolute;
 }
 
-.btn-primary {
+#btnset button{
 	background-color: black;
 	border-color: gray;
 	width: 32.5%;
 }
+
 </style>
 </head>
 
@@ -59,8 +60,8 @@
 			<div id="charFace">
 				<h1>챔피언데이터</h1>
 				<div id="list" class='list'>
-					<div>
-						<button type="button" id="winbtn" class="btn btn-primary btn-lg">
+					<div id="btnset">
+						<button type="button" id="winbtn" class="btn btn-primary btn-lg pak">
 							승률</button>
 						<button type="button" class="btn btn-primary btn-lg" id="pickbtn">픽률</button>
 						<button type="button" class="btn btn-primary btn-lg" id="banbtn">벤률</button>

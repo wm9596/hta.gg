@@ -98,6 +98,9 @@ select cc.*,ROW_number() over(order by cc.pickper desc)rank from (
 select distinct bb.name,bb.pickper,bb.championid,bb.picture,bb.pickcount from(
 select round((pickcount)/(select count(matchid) from matchinfo)*100)pickper ,name,champion.championid,champion.picture,champion.pickcount from teammemberinfo 
 inner join champion on champion.championid=teammemberinfo.championid where champion.bancount>3)bb)cc
+	<![CDATA[
+            where rownum<60
+        ]]>
     
 	</select>
 	<select id='itemtree' resultType="hashmap" parameterType="int">
@@ -120,7 +123,9 @@ select cc.*,ROW_number() over(order by cc.banper desc)rank from (
 select distinct bb.name,bb.banPer,bb.championid,bb.picture,bb.bancount from(
 select round((bancount/2)/(select count(matchid) from matchinfo)*100)banPer ,name,champion.championid,champion.picture,champion.bancount from teammemberinfo 
 inner join champion on champion.championid=teammemberinfo.championid where champion.bancount>3)bb)cc
-
+	<![CDATA[
+            where rownum<60
+        ]]>
 	</select>
 	
 	<select id='winlistAll' resultType="hashmap">
@@ -131,6 +136,10 @@ inner join champion on champion.championid=teammemberinfo.championid where champ
 		round(nvl((wincount)/decode(pickcount,0,null,pickcount),0)*100)winrank,
         ROW_NUMber() over(order by round(nvl((wincount*100)/decode(pickcount,0,null,pickcount),0)) desc,wincount desc)rank from
 		champion where pickcount>3)) aa 
+		<![CDATA[
+            where rownum<60
+        ]]>
+		
 	</select>
 	
 </mapper>
