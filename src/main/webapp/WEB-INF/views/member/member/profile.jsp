@@ -126,7 +126,7 @@
 
 
 </style>
-
+<h3 style="text-align: center; margin-top: 30px;">프로필 등록</h3>
 <div id="profile_wrap">
 	<div id="myProfileArea">
 		<div id="profile_top">
