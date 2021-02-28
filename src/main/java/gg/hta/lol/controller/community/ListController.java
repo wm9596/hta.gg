@@ -24,6 +24,7 @@ public class ListController {
 	@Autowired private CommunityService service;
 	@Autowired private ReplyService reservice;
 	
+	@GetMapping(value="/community/list")
 	public ModelAndView list(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum,@RequestParam(value = "cNum",defaultValue = "0")int cNum,@RequestParam(value = "vrh",defaultValue = "pNum")String vrh,@RequestParam(value = "commentCount",defaultValue = "1")int commentCount,String field,String keyword) {
 		HashMap<String,Object> map=new HashMap<String, Object>();
 		map.put("field", field);
