@@ -18,6 +18,7 @@ import gg.hta.lol.util.PageUtil;
 import gg.hta.lol.vo.CommunityVo;
 import gg.hta.lol.vo.ReplyVo;
 
+//asdf
 @Controller
 public class ListController {
 	@Autowired private CommunityService service;
