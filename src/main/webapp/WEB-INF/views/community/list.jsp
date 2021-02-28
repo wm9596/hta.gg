@@ -95,6 +95,7 @@
 			</tr>
 		</table>
 		<input type="hidden" name="cNum" value="${ cNum}">
+		<input type="hidden" id="loginUsername" value="${ sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}">
 <!-- 		<div id="g_menu"> -->
 <!-- 			<div id="g_menu_1"> -->
 <!-- 				<a href="javascript:page(1)">공략</a> -->
@@ -178,9 +179,9 @@
 				<input type="text" name="keyword" value="${keyword }">
 				<input type="submit" value="검색">
 				
-					<c:if test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username != null}">
-						<input type="button" onclick="location.href='${pageContext.request.contextPath }/community/insert?cNum=${cNum}'" value="글쓰기" style="float: right;">
-					</c:if>
+<%-- 					<c:if test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username != null}"> --%>
+						<input type="button" id="insertBtn" value="글쓰기" style="float: right;">
+<%-- 					</c:if> --%>
 			</form:form>
 			<div>
 				<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
@@ -199,6 +200,17 @@
 	</div>
 </body>
 <script type="text/javascript">
+
+console.log("유저네임" + $("#loginUsername").val());
+$("#insertBtn").click(function() {
+	if ($("#loginUsername").val() != "") {
+		location.href='${pageContext.request.contextPath }/community/insert?cNum=${cNum}'
+	} else {
+		alert("로그인 후에 이용해주세요.")
+		location.href = '${pageContext.request.contextPath}/member/login';
+	}
+})
+
 function page(n){
 	location.href="${pageContext.request.contextPath }/community/list?cNum="+n;
 	}
