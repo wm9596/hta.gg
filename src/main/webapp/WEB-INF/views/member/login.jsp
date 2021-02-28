@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
 $(document).ready(function(){ 
     // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
@@ -412,6 +413,13 @@ $(()=>{
             <input type="checkbox" id="idSaveCheck"  style="width:20px;height:20px;vertical-align:-3px;">아이디 저장&nbsp;&nbsp;&nbsp;
 			<input type="checkbox" id="remember-me" name="remember-me" style="width:20px;height:20px; vertical-align:-3px;">자동 로그인<br>
             <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> 로그인</button>
+            <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+    			<font color="red">
+        			<p>Your login attempt was not successful due to <br/>
+           			 ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
+        			<c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
+    			</font>
+			</c:if>
             <a href="#" id="forgot_pswd">아이디나 비밀번호를 잊으셨나요?</a>
             <hr>
             <!-- <p>Don't have an account!</p>  -->
