@@ -11,6 +11,10 @@
 				<div class="input-group-append">
 					<button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
 				</div>
+				<div></div>
+				<c:forEach var="item" items="${list }">
+					${item.title }
+				</c:forEach>
 			</div>
         </form>		
     </div>

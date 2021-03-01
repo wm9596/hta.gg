@@ -229,8 +229,26 @@ public class MatchMoreController {
 		HashMap<String, Object> homeTeamObject = new HashMap<String, Object>();
 		HashMap<String, Object> awayTeamObject = new HashMap<String, Object>();
 		
+		List<String> homeTeamMultiKill = new ArrayList<String>();
+		List<String> awayTeamMultiKill = new ArrayList<String>();
+		
 		int loopCnt = 0;
+		String multikill = "";
 		for (MatchMoreJoinVo Vo : matchMoreJoinList) {
+			
+			if (Vo.getMultiKill() <= 1) {
+				multikill = "솔로킬";
+			} else if (Vo.getMultiKill() == 2) {
+				multikill = "더블킬";
+			} else if (Vo.getMultiKill() == 3) {
+				multikill = "트리플킬";
+			} else if (Vo.getMultiKill() == 4) {
+				multikill = "쿼드라킬";
+			} else {
+				multikill = "펜타킬";
+			}
+			
+			System.out.println(multikill);
 			
 			// 팀원 챔피언 초상화 받아오기
 			String championPicture = championService.getChampionPicture(Vo.getChampionId());
@@ -312,6 +330,9 @@ public class MatchMoreController {
 				homeTeamObject.put("dragon", Vo.getDragonKill());
 				homeTeamObject.put("baron", Vo.getBaronKill());
 				homeTeamObject.put("tower", Vo.getTowerKill());
+				
+				// 멀티킬
+				homeTeamMultiKill.add(multikill);
 			
 			} else {
 				tierMap.put("snickname", Vo.getSnickname());
@@ -365,6 +386,8 @@ public class MatchMoreController {
 				awayTeamObject.put("dragon", Vo.getDragonKill());
 				awayTeamObject.put("baron", Vo.getBaronKill());
 				awayTeamObject.put("tower", Vo.getTowerKill());
+				
+				awayTeamMultiKill.add(multikill);
 			}
 			
 			
@@ -480,6 +503,10 @@ public class MatchMoreController {
 		// 오브젝트
 		model.addAttribute("homeTeamObject", homeTeamObject);
 		model.addAttribute("awayTeamObject", awayTeamObject);
+		
+		// 멀티킬
+		model.addAttribute("homeTeamMultikill", homeTeamMultiKill);
+		model.addAttribute("awayTeamMultikill", awayTeamMultiKill);
 		
 		return ".header2.match.matchMore";
 	}
