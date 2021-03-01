@@ -100,7 +100,7 @@ public class SearchServiceImpl implements SearchService {
 		String sid;
 		String aid;
 		JsonObject summonerInfo = dataRequester.getSummonerInfo(name);
-		
+//		System.out.println(summonerInfo);
 		if(summonerInfo==null) {
 			return null;
 		}
@@ -200,9 +200,10 @@ public class SearchServiceImpl implements SearchService {
 		
 		stream.filter(item->{
 			JsonObject match =item.getAsJsonObject();
+			System.out.println(match);
 			int gameTypeCode = match.get("queue").getAsInt();
 			
-			if(gameTypeCode==GameType.RANKED_FLEX_SR.getCode() || gameTypeCode==GameType.RANKED_SOLO_5x5.getCode()) {
+			if(gameTypeCode==GameType.RANKED_FLEX_SR.getCode1() || gameTypeCode==GameType.RANKED_SOLO_5x5.getCode1() ||gameTypeCode==GameType.RANKED_SOLO_5x5.getCode2()) {
 				return true;
 			}
 			return false;
@@ -212,6 +213,8 @@ public class SearchServiceImpl implements SearchService {
 		});
 		
 //		System.out.println(map);
+		
+		if(map.size() < 1 ) return;
 		
 		List<String> matchinfoList = matchinfoMapper.getNotExistMatchinfo(new ArrayList<String>(map.keySet()));
 		
@@ -309,6 +312,9 @@ public class SearchServiceImpl implements SearchService {
 	
 	@Override
 	public void addBanList(List<String> list) {
+		if(list.size() < 1) {
+			return;
+		}
 		banlistMapper.addBan(list);
 		champMapper.updateBan(list);
 	}
