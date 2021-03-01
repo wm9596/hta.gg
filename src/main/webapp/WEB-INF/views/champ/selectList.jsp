@@ -672,6 +672,7 @@ $(function(){
 									"</td><td >"+item3+"</td><td >"+item4+"</div></td><td>"+item5+"</td><td>"+item6+"</td><td>"+spell_11+"</td><td>"+spell_22+
 									"</td><td> "+cc+
 									"</td><td>"+dd+"</td></tr>").appendTo("#table1 tbody");
+						console.log("1");
 						}
 					})
 				
