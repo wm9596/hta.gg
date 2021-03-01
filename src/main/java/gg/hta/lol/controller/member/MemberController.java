@@ -74,7 +74,7 @@ public class MemberController {
 	}
 	// ****************************************************** profile ******************************************************
 	@ResponseBody
-	@GetMapping("/member/member/registerProfile")
+	@GetMapping("/registerProfile")
 	public HashMap<String, Object> registerProfile(String snickname, Model model) {
 		
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
@@ -106,7 +106,7 @@ public class MemberController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/member/member/registerProfileOk")
+	@GetMapping("/registerProfileOk")
 	public String registerProfileOk(String username, String snickname, Model model) {
 		HashMap<String, String> hashmap = new HashMap<String, String>();
 		hashmap.put("username", username);
@@ -116,7 +116,7 @@ public class MemberController {
 	}
 	
 	@ResponseBody
-	@GetMapping(value = "/member/member/checkProfile", produces = "application/text; charset=utf-8")
+	@GetMapping(value = "/checkProfile", produces = "application/text; charset=utf-8")
 	public String registerProfileOk(String username, Model model) {
 		String snickname = service.selectOne(username).getSnickname();
 		

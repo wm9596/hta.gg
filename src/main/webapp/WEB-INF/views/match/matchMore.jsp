@@ -107,9 +107,29 @@
 			</div>
 			<div class="teamMember" id="homeTeamMinimal" style="height: 300px;">
 				<c:forEach var="nickname" items="#{homeTeamNicknameList }" varStatus="status">
+					<c:choose>
+						<c:when test="${homeTeamMultikill[status.index] == '솔로킬' }">
+							<c:set var="multikillColor" value="gray"/>
+						</c:when>
+						<c:when test="${homeTeamMultikill[status.index] == '더블킬' }">
+							<c:set var="multikillColor" value="green"/>	
+						</c:when>
+						<c:when test="${homeTeamMultikill[status.index] == '트리플' }">
+							<c:set var="multikillColor" value="blue"/>	
+						</c:when>
+						<c:when test="${homeTeamMultikill[status.index] == '쿼드라' }">
+							<c:set var="multikillColor" value="#ffecaa"/>	
+						</c:when>
+						<c:otherwise>
+							<c:set var="multikillColor" value="red"/>
+						</c:otherwise>
+					</c:choose>
+				
 					<div class="minimal">
 						<div class="minimal_child" id="home_minimal_tierArea" style="width: 10%; border-right: 1px solid black;">
-							<span style="border: 1px solid #343a40 !important; border-radius: 12px; padding: 3px;"><em>${homeTeamTierList[status.index] }</em></span>
+							<c:if test="${!empty homeTeamTierList[status.index]}">
+								<span style="border: 1px solid #343a40 !important; border-radius: 12px; padding: 3px;"><em>${homeTeamTierList[status.index] }</em></span>
+							</c:if>
 						</div>
 						<div class="minimal_child" id="home_minimal_nicknameArea" style="width: 20%; display: block;">
 							<span><a href="${pageContext.request.contextPath }/match/search?sName=${nickname}" style="white-space: nowrap; text-decoration: none; color: black;">${nickname }</a></span> <br>
@@ -172,9 +192,7 @@
 						</div>
 						<div class="minimal_child" id="home_minimal_scoreArea" style="width: 20%;">
 							<div id="multikill" class="matchScore">
-								<span>${homeTeamMultikill[status.index] }</span>
-							</div>
-							<div class="matchScore">
+								<span style="color: ${multikillColor}">${homeTeamMultikill[status.index] }</span>
 							</div>
 						</div>
 					</div>
@@ -213,9 +231,28 @@
 			</div>
 			<div class="teamMember" id="awayTeamMinimal" style="height: 300px;">
 				<c:forEach var="nickname" items="#{awayTeamNicknameList }" varStatus="status">
+					<c:choose>
+						<c:when test="${awayTeamMultikill[status.index] == '솔로킬' }">
+							<c:set var="multikillColor" value="gray"/>
+						</c:when>
+						<c:when test="${awayTeamMultikill[status.index] == '더블킬' }">
+							<c:set var="multikillColor" value="green"/>	
+						</c:when>
+						<c:when test="${awayTeamMultikill[status.index] == '트리플' }">
+							<c:set var="multikillColor" value="blue"/>	
+						</c:when>
+						<c:when test="${awayTeamMultikill[status.index] == '쿼드라' }">
+							<c:set var="multikillColor" value="#ffecaa"/>	
+						</c:when>
+						<c:otherwise>
+							<c:set var="multikillColor" value="red"/>
+						</c:otherwise>
+					</c:choose>
 					<div class="minimal">
 						<div class="minimal_child" id="away_minimal_tierArea" style="width: 10%; border-right: 1px solid black">
-							<span style="border: 1px solid #343a40 !important; border-radius: 12px; padding: 3px;"><em>${awayTeamTierList[status.index] }</em></span>
+							<c:if test="${!empty awayTeamTierList[status.index]}">
+								<span style="border: 1px solid #343a40 !important; borer-radius: 12px; padding: 3px;"><em>${awayTeamTierList[status.index] }</em></span>
+							</c:if>
 						</div>
 						<div class="minimal_child" id="away_minimal_nicknameArea" style="width: 20%; display: block;">
 							<span><a href="${pageContext.request.contextPath }/match/search?sName=${nickname}" style="white-space: nowrap; text-decoration: none; color: black;">${nickname }</a></span> <br>
@@ -278,9 +315,7 @@
 						</div>
 						<div class="minimal_child" id="away_minimal_scoreArea" style="width: 20%;">
 							<div id="multikill" class="matchScore">
-								<span>${awayTeamMultikill[status.index] }</span>
-							</div>
-							<div class="matchScore">
+								<span style="color: ${multikillColor}">${awayTeamMultikill[status.index] }</span>
 							</div>
 						</div>
 					</div>

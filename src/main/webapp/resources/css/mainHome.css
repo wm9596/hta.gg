@@ -128,18 +128,21 @@
 }
 
 #main_logo {
-	width: 300px;
-	height: 200px;
+	width: 500px;
+	height: 400px;
+	margin-top: 100px;
 }
 
 #main_home_search {
-	width: 500px;
+	width: 550px;
 }
 
 #footer {
 	display: inline-grid;
     bottom:0;
-    width:100%;  
-    background:#ccc;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 2%;
     text-align: center;
+    font-size: 12px;
 }

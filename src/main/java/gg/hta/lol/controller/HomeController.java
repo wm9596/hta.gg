@@ -26,24 +26,24 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-//		HashMap<String,Object> map=new HashMap<String, Object>();
-//		map.put("filed", "");
-//		map.put("keyword", "");
-//		map.put("vrh", "hit");
-//		map.put("cNum", 1);
-//		map.put("commentCount", 0);
-//		
-//		int totalRowCount=service.count(map);
-//		PageUtil pu=new PageUtil(1, 10, 10, totalRowCount);
-//		int startRow=pu.getStartRow();
-//		int endRow=pu.getEndRow();
-//		map.put("startRow",startRow);
-//		map.put("endRow",endRow);
-//		
-//		List<CommunityVo> list = service.wholeList(map);
-//		System.out.println(list);
-//		
-//		model.addAttribute("list", list);
+		HashMap<String,Object> map=new HashMap<String, Object>();
+		map.put("filed", "");
+		map.put("keyword", "");
+		map.put("vrh", "hit");
+		map.put("cNum", 1);
+		map.put("commentCount", 0);
+		
+		int totalRowCount=service.count(map);
+		PageUtil pu=new PageUtil(1, 10, 10, totalRowCount);
+		int startRow=pu.getStartRow();
+		int endRow=pu.getEndRow();
+		map.put("startRow",startRow);
+		map.put("endRow",endRow);
+		
+		List<CommunityVo> list = service.wholeList(map);
+		System.out.println(list);
+		
+		model.addAttribute("list", list);
 		
 		return ".header.home";
 	}

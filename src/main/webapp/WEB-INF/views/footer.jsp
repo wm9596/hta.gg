@@ -2,5 +2,6 @@
     pageEncoding="UTF-8"%>
     
 <div>
-	<h1>footer</h1>
+	<span>© 2021-2021 HTA.GG. HTA.GG isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
+</span>
 </div>

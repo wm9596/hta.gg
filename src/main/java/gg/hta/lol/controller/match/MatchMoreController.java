@@ -232,7 +232,6 @@ public class MatchMoreController {
 		List<String> homeTeamMultiKill = new ArrayList<String>();
 		List<String> awayTeamMultiKill = new ArrayList<String>();
 		
-		int loopCnt = 0;
 		String multikill = "";
 		for (MatchMoreJoinVo Vo : matchMoreJoinList) {
 			
