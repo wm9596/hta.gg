@@ -211,7 +211,7 @@ public class SearchServiceImpl implements SearchService {
 			map.put(item.getAsJsonObject().get("gameId").getAsString(), item.getAsJsonObject().get("queue").getAsInt());
 		});
 		
-		System.out.println(map);
+//		System.out.println(map);
 		
 		List<String> matchinfoList = matchinfoMapper.getNotExistMatchinfo(new ArrayList<String>(map.keySet()));
 		
