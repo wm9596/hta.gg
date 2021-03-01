@@ -18,6 +18,19 @@
 			)i
 	</insert>
 	
+	<select id="getNotExistMatchinfo" resultType="String">
+		select *
+		from
+			<foreach collection="list" item="item" open="(" close=")" separator="union all ">
+				select #{item} as matchid
+				from dual
+			</foreach>
+		where matchid not in(
+			select matchid
+			from matchinfo
+		)
+	</select>
+	
 	<select id="getMatchType" parameterType="String" resultType="String">
 		select type
 		from matchinfo

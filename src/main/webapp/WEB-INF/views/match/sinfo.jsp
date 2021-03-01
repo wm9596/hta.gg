@@ -63,7 +63,7 @@
 			<div id="mm_smRatingDiv">
 				<h5>소환사평가</h5>
 				<span id="rate"><fmt:formatNumber value="${rt }" pattern=".0"/></span>
-				<span id="rateCnt">(<fmt:formatNumber value="${rating }" pattern=".0"/>)</span>
+				<span id="rateCnt">(<fmt:formatNumber value="${rating }" pattern="0.0"/>)</span>
 				<p class="star_rating">
 				    <a href="#" class="star_rating_1">★</a>
 				    <a href="#" class="star_rating_2">★</a>
@@ -204,7 +204,8 @@ function drawChart(tot,win,lose){
 		    pieHole: 0.4,
 		    legend : 'none',
 		    chartArea:{width:'80%',height:'80%'},
-		    fontSize : '12'
+		    fontSize : '12',
+		    tooltip: { trigger: 'none' }
 		  };
 
 		  var chart = new google.visualization.PieChart(document.getElementById('chart'));

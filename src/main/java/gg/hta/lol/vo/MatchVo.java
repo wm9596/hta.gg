@@ -17,10 +17,11 @@ public class MatchVo {
 	private int mWinlose;
 	private int tNum1;
 	private int tNum2;
+	private int point;
 	public MatchVo() {
 		super();
 	}
-	public MatchVo(int mNum, Date mDate, int mRate, int mWinlose, int tNum1, int tNum2) {
+	public MatchVo(int mNum, Date mDate, int mRate, int mWinlose, int tNum1, int tNum2,int point) {
 		super();
 		this.mNum = mNum;
 		this.mDate = mDate;

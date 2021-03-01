@@ -47,6 +47,8 @@ public class BattingService {
 	}
 	public List<HashMap<String,Object>> pointGo(int mnum){
 		return dao.pointGo(mnum);
+	}public int pointGo2(int mnum) {
+		return dao.pointGo2(mnum);
 	}
 	
 }
