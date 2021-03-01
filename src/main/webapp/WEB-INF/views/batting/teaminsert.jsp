@@ -16,17 +16,16 @@
 
 <meta charset="UTF-8">
 <style type="text/css">
-.btn:not(:disabled):not(.disabled) {
-    cursor: alias;
+#d1{
+    padding-left: 100px;
+}
+#adminList{
+width: 350px;
 }
 #tb{
-    position: absolute;
-    left: 800px;
-    top: 150px;
-}
-#matchList3 span{
-   border-bottom: 3px solid #f00;
-
+position: relative;
+    top: -400px;
+    left: 400px;
 }
 .button{
   background-color: #4CAF50; /* Green */
@@ -35,15 +34,17 @@
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+
   font-size: 16px;
 
+}
+#new{
+    padding-left: 100px;
 }
 
 #addTeamname {
 	border:solid 2px black;
   font-size: 16px;
-
 }
 #removeTeambtn{
   background-color: red; /* Green */
@@ -52,13 +53,10 @@
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
 
 }
-#span11{
-   border-bottom:black;
-}
+
 #addTeambtn{
 background-color: black; /* Green */
   border: 1px;
@@ -66,40 +64,16 @@ background-color: black; /* Green */
     padding: 3px 31px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+
   font-size: 13px;
 }
-select {
-width: 50px;
-
-border: 1px solid #999;
-
-border-radius: 0px;
-}
 
 
 
-#matchinsert{
-background-color: black; /* Green */
-  border: 1px;
-  color: white;
-    padding: 3px 31px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 13px;
 
-}
 
-#matchList{
-width:700px;
-    position: absolute;
-    left: 400px;
-    top: 140px;
-}
-.matchList{
 
-width: 40%; text-align: center;  display: inline-block; margin-left: 30%;"}
+
 #addmatch{
   background-color: #4CAF50; /* Green */
   border: none;
@@ -107,7 +81,7 @@ width: 40%; text-align: center;  display: inline-block; margin-left: 30%;"}
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+ 
   font-size: 16px;
 
 }
@@ -118,7 +92,7 @@ width: 40%; text-align: center;  display: inline-block; margin-left: 30%;"}
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  
   font-size: 16px;
  
 }
@@ -127,44 +101,38 @@ width: 40%; text-align: center;  display: inline-block; margin-left: 30%;"}
 <title>Insert title here</title>
 </head>
 <body>
-<div id="adminList">
-<div id="d2"></div>
-<div id="teaminsert" >
-	
+<div id="allList33">
 <div id="d1" ></div>
 
-<div id="adminmatchinsert">
 
-
-</div>
-</div>
-
-<div id="matchList"></div>
-<div id="Nomatch"></div>
 <div id="new">
 <input type="button" value="새로운팀추가" id="addTeam" class="button">
 		<input type="button" id="removeTeambtn" style="display: none;" value="팀추가끄기">
-	<div id="addTeam">
-		<input type="text" id="addTeamname" style="display: none;"> <input
-			type="button" id="addTeambtn" style="display: none;" value="팀추가"><br>
-	</div>
-	<input type="button" id="matchinsert" value="경기등록">
-	<select id='addmatch1' style="display: none;">
-</select>
-<select id='addmatch2' style="display: none;">
 
-</select>
+		<br>
+		<input type="text" id="addTeamname" style="display: none;"> 
+		<input type="button" id="addTeambtn" style="display: none;" value="팀추가"><br>
 	
+		<select id='addmatch1' style="display: none;">
+</select><br>
+<select id='addmatch2' style="display: none;">
+</select><br>
+		<input type="button" id="matchinsert" value="경기등록">
+	
+
+
 </div>
 
+	<div id='tb'>
+</div>
+</div>
 <input type="hidden" id="test11" >
 
-</div>
-<div id='tb'>
 
-</div>
+
 </body>
 <script type="text/javascript">
+teamList();
 	$(function() {		
 		$("#teamDelete").click(function() {
 			let team1 = $("#addmatch1 option:selected").val();
@@ -239,8 +207,8 @@ width: 40%; text-align: center;  display: inline-block; margin-left: 30%;"}
 		        		})
 		        		
 		        	})
-		 teamList();
-		dateList();
+		
+
 $("#addmatch1").change(function(){
 	let team1=$("#addmatch1 option:selected").val();
 	let team2=$("#addmatch2 option:selected").val();
@@ -274,16 +242,18 @@ $("#addmatch2").change(function(){
 })
 		$("#addTeam").click(function() {
 			$("#addTeamname").css({
-				display : "inline-block"
+				display : "inline"
+			
 			});
 			$("#addTeambtn").css({
-				display : "inline-block"
+				display : "inline"
 			});
 			$("#removeTeambtn").css({
-				display: "inline-block"
+				display: "inline"
 			})
 			$("#addTeam").prop("disabled",true);
 			$("#addTeam").css('backgroundColor', 'gray');
+			
 			$("#addTeambtn").click(function() {
 				var teamname = $("#addTeamname").val();
 				$.ajax({
@@ -349,14 +319,15 @@ $("#addmatch2").change(function(){
 		  }) */
 	});
 	
-function yesorno(aa,bb,cc){
+function yesorno(aa,bb,cc,dd,key){
 	if(confirm("승리한팀이 맞습니까?")) {
 		
 		console.log("aaㅁㅁㅁㅁㅁ"+aa);
 		console.log("매치번호"+bb);
 		console.log("팀번호"+cc);
+		console.log("승리팀"+dd);
 		console.log($("#"+aa).parent());
-		$("#"+aa).next().find("span").html("<span style='color:red'>&nbsp;&nbsp;홈팀 승리 입니다</span>")
+		$("#"+aa).next().find("span").html("<input type='button' id='"+key+"' onclick='pointgo("+bb+","+dd+",event)' class='button' value='포인트 즉시지급'>")
 		
 		/* $("<span style='color:red'>홈팀 승리 입니다</span>").appendTo("#matchList3"); */
 		$.ajax({
@@ -373,14 +344,14 @@ function yesorno(aa,bb,cc){
 	}else{
 		return;
 	}
-}function yesorno2(aa,bb,cc){
+}function yesorno2(aa,bb,cc,dd,key){
 	if(confirm("승리한팀이 맞습니까?")) {
 		console.log("aaㅁㅁㅁㅁㅁ"+aa);
 		console.log("매치번호"+bb);
 		console.log("팀번호"+cc);
 		console.log($("#"+aa).parent());
 		console.log($("#"+aa).parent());
-		$("#"+aa).next().find("span").html("<span style='color:red'>&nbsp;&nbsp;어웨이팀 승리 입니다</span>")
+		$("#"+aa).next().find("span").html("<input type='button' id='"+key+"' onclick='pointgo("+bb+","+dd+",event)' class='button' value='포인트 즉시지급'>")
 		/* $("<span style='color:red'>홈팀 승리 입니다</span>").appendTo("#matchList3"); */
 				$.ajax({
 			url:'/lol/winupdate',
@@ -409,10 +380,10 @@ function teamList(){
 				console.log(value.tname);
 				if(value.tname!=null){
 				$("#addmatch1").css({
-					display: "inline-block"
+					display: "inline"
 				})
 					$("#addmatch2").css({
-					display: "inline-block"
+					display: "inline"
 				})
 				var team1=value.tname;
 				$("#addmatch1").append("<option value='"+value.tnum+"'>"+value.tname+"</option> ");
@@ -466,10 +437,12 @@ function teamList(){
 	 				console.log(data.matchinfo[key].point+"포인트")
 	 				
 	 				if(((data.matchinfo[key].MWINLOSE==data.matchinfo[key].TNUM1) && (data.matchinfo[key].POINT==0))){
-	 					str +="<div id='matchList3' '>"+team1win+"vs"+team2win+"<br>"+
+	 					str +="<div id='matchList3' '><a href='javascript:yesorno("+key+","+data.matchinfo[key].MNUM+","+value.TNUM1+","+data.matchinfo[key].MWINLOSE+","+key+3+")'>"+data.matchinfo[key].B1NAME+"</a>vs"+
+	 					"<a href='javascript:yesorno2("+key+","+data.matchinfo[key].MNUM+","+value.TNUM2+","+data.matchinfo[key].MWINLOSE+","+key+4+")'>"+data.matchinfo[key].B2NAME+"</a><br>"+
 	 					"<span id='span11'>"+data.matchinfo[key].B1NAME+"</span>팀이 승리한 경기입니다 클릭시 승리팀이 변경됩니다.</span><input type='button' id='"+key+3+"' onclick='pointgo("+data.matchinfo[key].MNUM+","+data.matchinfo[key].MWINLOSE+",event)' class='button' value='포인트지급'></div> ";
 	 				}else if(((data.matchinfo[key].MWINLOSE==data.matchinfo[key].TNUM2) && (data.matchinfo[key].POINT==0)) ){
-	 					str +="<div id='matchList3' '>"+team1win+"vs"+team2win+"<br>"+
+	 					str +="<div id='matchList3' '><a href='javascript:yesorno("+key+","+data.matchinfo[key].MNUM+","+value.TNUM1+","+data.matchinfo[key].MWINLOSE+","+key+3+")'>"+data.matchinfo[key].B1NAME+"</a>vs"+
+	 					"<a href='javascript:yesorno2("+key+","+data.matchinfo[key].MNUM+","+value.TNUM2+","+data.matchinfo[key].MWINLOSE+","+key+4+")'>"+data.matchinfo[key].B2NAME+"</a><br>"+
 	 					"<span id='span11'>"+data.matchinfo[key].B2NAME+"</span>팀이 승리한 경기입니다 클릭시 승리팀이 변경됩니다.</span><input type='button' id='"+key+4+"' onclick='pointgo("+data.matchinfo[key].MNUM+","+data.matchinfo[key].MWINLOSE+",event)' class='button' value='포인트지급'></div> ";
 	 				}else if(data.matchinfo[key].POINT==1){
 	 					str +="<div id='matchList3' '>"+data.matchinfo[key].B1NAME+"vs"+data.matchinfo[key].B2NAME+"<br>"+
@@ -501,7 +474,8 @@ function teamList(){
 		})
 	}
 function pointgo(mnum,mwinlose,e){
-
+	if(confirm("해당팀이 승리팀이 맞습니까?")){
+		
 		console.log(e.target);
 		var aa=e.target.id;
 	
@@ -528,9 +502,12 @@ function pointgo(mnum,mwinlose,e){
 				}
 			})
 		})
-			
+		alert("포인트지금완료");
 		}
 	})
+	}else{
+		return;
+	}
 }
 </script>
 
