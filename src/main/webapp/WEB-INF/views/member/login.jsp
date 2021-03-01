@@ -63,6 +63,7 @@ $(function(){
 		
 		if(document.getElementById("id_emailcheck").textContent != "인증번호 전송이 완료되었습니다."){
 			alert("이메일 입력 후 이메일 인증 버튼을 클릭해 주세요!!!");
+			return;
 		}else{
 			$.ajax({
 				url:"/lol/member/idSearchCode/"+email,
@@ -142,7 +143,6 @@ $(function(){
 					var code = $(data).find("code").text();
 					if(code == document.getElementById("pwd_confirm").value){
 						document.getElementById("confirmPwd").innerHTML="이메일 인증 완료!!!";
-// 						document.getElementById("pwdChange").disabled = false;
 					}else{
 						document.getElementById("confirmPwd").innerHTML="이메일 인증 실패!!! 인증번호를 확인해주세요.";
 					}
