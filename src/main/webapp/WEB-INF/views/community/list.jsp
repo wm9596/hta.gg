@@ -178,7 +178,7 @@
 					<option value="title"<c:if test="${field=='title' }">selected</c:if>>제목</option>
 				</select>
 				<input type="text" name="keyword" value="${keyword }">
-				<input type="submit" value="검색"><br>
+				<input type="submit" value="검색"><br><br>
 				<input type="button" id="insertBtn" value="글쓰기" style="float: right;">
 
 			</form:form>

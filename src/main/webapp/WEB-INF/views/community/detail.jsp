@@ -449,10 +449,14 @@
 				location.href = "/lol/member/login";
 			} else {
 				$.ajax({
-					url:"/lol/update/" + ${vo.pNum },
+					url:"/lol/update/"+pnum +"/"+ username+"/0",
 					success: function(data){
-						alert('추천 성공');
-						$("#hit").html('추천 '+data);
+						if(data==-99){
+							alert('이미 추천/반대 한 게시물 입니다');
+						}else{
+							alert('추천 성공');
+							$("#hit").html('추천 '+data);
+						}
 					}
 				});
 			}
@@ -468,10 +472,14 @@
 				location.href = "/lol/member/login";
 			} else {
 				$.ajax({
-					url:"/lol/update1/" + ${vo.pNum },
+					url:"/lol/update/"+pnum +"/"+ username+"/1",
 					success: function(data){
-						alert('반대 성공');
-						$("#nohit").html('반대 '+data);
+						if(data==-99){
+							alert('이미 추천/반대 한 게시물 입니다');
+						}else{
+							alert('반대 성공');
+							$("#nohit").html('반대 '+data);
+						}
 					}
 				});
 			}
@@ -540,7 +548,11 @@
 	function replyHit(rNum) {
 		var ask = confirm("해당 댓글을 추천하시겠습니까?");
 		if(ask == true){
-		$.ajax({
+			if(username == ""){
+				alert("로그인 후 이용해주세요.");
+				location.href = "/lol/member/login";
+			}else{
+			$.ajax({
 			url:"/lol/reHitUpdate/"+rNum,
 			success: function(data) {
 					alert('추천 성공');
@@ -548,11 +560,16 @@
 			}
 		});
 		}
+		}
 	}
 
 	function replyNohit(rNum) {
 		var ask = confirm("해당 댓글을 반대하시겠습니까?");
 		if(ask == true){
+			if(username == ""){
+				alert("로그인 후 이용해주세요.");
+				location.href = "/lol/member/login";
+			}else{
 		$.ajax({
 			url:"/lol/reNohitUpdate/"+rNum,
 			success: function(data) {
@@ -560,6 +577,7 @@
 					getList();
 			}
 		});
+		}
 		}
 	}
 	
@@ -642,9 +660,8 @@
 						div.append(delA);
 					}
 					
+					
 
-					
-					
 					wrapDiv.append(div);
 					
 					getRRlist(wrapDiv,rNum);
