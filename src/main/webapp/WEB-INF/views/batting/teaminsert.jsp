@@ -19,8 +19,10 @@
 .btn:not(:disabled):not(.disabled) {
     cursor: alias;
 }
-#d1{
-margin-left:40%;
+#tb{
+    position: absolute;
+    left: 800px;
+    top: 150px;
 }
 #matchList3 span{
    border-bottom: 3px solid #f00;
@@ -35,13 +37,13 @@ margin-left:40%;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin-left: 40%;"
+
 }
 
 #addTeamname {
 	border:solid 2px black;
   font-size: 16px;
-  margin-left: 40%;"
+
 }
 #removeTeambtn{
   background-color: red; /* Green */
@@ -52,7 +54,7 @@ margin-left:40%;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin-left: 200px;
+
 }
 #span11{
    border-bottom:black;
@@ -86,12 +88,9 @@ background-color: black; /* Green */
   text-decoration: none;
   display: inline-block;
   font-size: 13px;
-    margin-left: 40%;
+
 }
-#addmatch1{
-	
-  margin-left: 40%;
-}
+
 #matchList{
 width:700px;
     position: absolute;
@@ -110,7 +109,7 @@ width: 40%; text-align: center;  display: inline-block; margin-left: 30%;"}
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin-left: 40%;"
+
 }
 #matchinsert{
   background-color: #4CAF50; /* Green */
@@ -128,39 +127,41 @@ width: 40%; text-align: center;  display: inline-block; margin-left: 30%;"}
 <title>Insert title here</title>
 </head>
 <body>
-<div id="adminList" style="width: 1000px;">
+<div id="adminList">
 <div id="d2"></div>
-<div id="teaminsert"    >
-	<input type="button" value="새로운팀추가" id="addTeam" class="button">
-		<input type="button" id="removeTeambtn" style="display: none;" value="팀추가끄기">
-	<div id="addTeam">
-		<input type="text" id="addTeamname" style="display: none;"> <input
-			type="button" id="addTeambtn" style="display: none;" value="팀추가"><br>
-	</div>
-<div id="d1" style="width:100%;"></div>
+<div id="teaminsert" >
+	
+<div id="d1" ></div>
 
 <div id="adminmatchinsert">
-<select id='addmatch1' style="display: none;">
-</select>
-<select id='addmatch2' style="display: none;">
 
-</select>
-
-
-<input type="button" id="matchinsert" value="경기등록">
 
 </div>
 </div>
 
 <div id="matchList"></div>
 <div id="Nomatch"></div>
-<input type="hidden" id="test11" >
->
+<div id="new">
+<input type="button" value="새로운팀추가" id="addTeam" class="button">
+		<input type="button" id="removeTeambtn" style="display: none;" value="팀추가끄기">
+	<div id="addTeam">
+		<input type="text" id="addTeamname" style="display: none;"> <input
+			type="button" id="addTeambtn" style="display: none;" value="팀추가"><br>
+	</div>
+	<input type="button" id="matchinsert" value="경기등록">
+	<select id='addmatch1' style="display: none;">
+</select>
+<select id='addmatch2' style="display: none;">
+
+</select>
+	
 </div>
-<div id='tb' style='width:700px;'>
-<table class="table">
- <tr><td><button type="button" class="btn btn-primary">매치번호</button></td><td><button type="button" class="btn btn-primary">팀team1</button></td><td><button type="button" class="btn btn-primary">팀이름</button></td></tr>
-</table>
+
+<input type="hidden" id="test11" >
+
+</div>
+<div id='tb'>
+
 </div>
 </body>
 <script type="text/javascript">
@@ -188,7 +189,7 @@ width: 40%; text-align: center;  display: inline-block; margin-left: 30%;"}
 			$("#addmatch2 option[value='" + team2 + "']").remove();
 		});
 		
-		   $('.ui-datepicker ').css({ "margin-left" : "500px", "margin-top": "-223px"});  
+		  
 		$("#d1").datepicker({
 			  dateFormat: 'yy/mm/dd',
 		        prevText: '이전 달',	
@@ -231,7 +232,7 @@ width: 40%; text-align: center;  display: inline-block; margin-left: 30%;"}
 		        			var a=	$("#test11").val();
 		        			var matchday=a.split("-");
 				        	var matchdayin=matchday[0]+"/"+matchday[1]+"/"+matchday[2];
-				        	$("#matchList").empty();
+				        	$("#tb").empty();
 				        	dateList(matchdayin);
 		        			console.log(a);
 		        			}
@@ -281,6 +282,8 @@ $("#addmatch2").change(function(){
 			$("#removeTeambtn").css({
 				display: "inline-block"
 			})
+			$("#addTeam").prop("disabled",true);
+			$("#addTeam").css('backgroundColor', 'gray');
 			$("#addTeambtn").click(function() {
 				var teamname = $("#addTeamname").val();
 				$.ajax({
@@ -314,6 +317,8 @@ $("#addmatch2").change(function(){
 			});
 			
 			$("#removeTeambtn").click(function() {
+				$("#addTeam").prop("disabled",false);
+				$("#addTeam").css('backgroundColor', '#4CAF50');
 				$("#addTeamname").css({
 					display : "none"
 				});
@@ -426,7 +431,7 @@ function teamList(){
 	}
 
 	function dateList(d){
-		$("#matchList").empty();
+		$("#tb").empty();
 		console.log(d);
 		if(!d){
 			return;
@@ -442,7 +447,7 @@ function teamList(){
 			success:function(data){
 				console.log(data.matchinfo.length);
 				if(data.matchinfo.length==0){
-				$("#matchList").append("<h3 style='padding-left:300px;'>진행된 경기가 없습니다.</h3>")
+				$("#tb").append("<h3>진행된 경기가 없습니다.</h3>")
 					
 				}  else{
 					
@@ -477,7 +482,7 @@ function teamList(){
 		 				str +="<div id='matchList3'>"+team1win+"vs"+team2win+"<br><span>클릭시 승리팀을 선택합니다.</span></div> ";
 						
 	 				}
-		 				$(str).appendTo("#matchList").addClass("matchList");
+		 				$(str).appendTo("#tb");
 	 				
 	 				
 	 				
