@@ -12,6 +12,7 @@
    position: absolute;
     left: 830px;
     top: 150px;
+    padding-left: 50px;
 }
 .btn-primary {
     color: #fff;
@@ -371,7 +372,7 @@ function b2win(data){
 	}
 }
 </script>
-<div id="allList" style="height: 800px; padding-left: 200px; ">
+<div id="allList" style="height: 800px; padding-left: 250px; ">
 <div id="d1" >
 </div>
 <div id="matchList">
