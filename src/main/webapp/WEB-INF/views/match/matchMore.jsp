@@ -70,7 +70,7 @@
 				    <a href="#" class="star_rating_5">★</a>
 				    <input type="hidden" class='ratingValue'>
 				</p>
-				<input type="button" id="ratingSubmit" value="평가하기">
+				<input type="button" id="ratingSubmit" class="btn btn-primary btn-sm" value="평가하기">
 			</div>
 		</div>
 	</div>
@@ -171,6 +171,11 @@
 							</c:forEach>
 						</div>
 						<div class="minimal_child" id="home_minimal_scoreArea" style="width: 20%;">
+							<div id="multikill" class="matchScore">
+								<span>${homeTeamMultikill[status.index] }</span>
+							</div>
+							<div class="matchScore">
+							</div>
 						</div>
 					</div>
 				</c:forEach>
@@ -272,6 +277,11 @@
 							</c:forEach>
 						</div>
 						<div class="minimal_child" id="away_minimal_scoreArea" style="width: 20%;">
+							<div id="multikill" class="matchScore">
+								<span>${awayTeamMultikill[status.index] }</span>
+							</div>
+							<div class="matchScore">
+							</div>
 						</div>
 					</div>
 				</c:forEach>

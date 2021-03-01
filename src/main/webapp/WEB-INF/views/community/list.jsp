@@ -47,7 +47,7 @@
 </style>
 </head>
 <body>
-	<a href="${pageContext.request.contextPath }/community/list" style=" width:200px; padding: 2%; font-size:35px; color: black;">전체</a>
+<%-- 	<a href="${pageContext.request.contextPath }/community/list" style=" width:200px; padding: 2%; font-size:35px; color: black;">전체</a> --%>
 	<c:choose>
 		<c:when test="${cNum == 0 }">
 			<c:set var="title" value="전체"/>
@@ -88,12 +88,11 @@
 				<th scope="col"><a href="javascript:page(4)">사건사고</a> </th>
 				<th scope="col"><a href="javascript:page(5)">Q&A</a> </th>
 				<th scope="col"><a href="javascript:page(6)">공지사항</a> </th>
-				<th scope="col"><a href="javascript:page(7)">경기일정</a> </th>
 			</tr>
 			<tr>
-				<td colspan="3"><a href="javascript:array1('viewCount')">인기 (조회수)</a></td>
-				<td colspan="3"><a href="javascript:array1('regdate')">최신 (등록날짜)</a></td>
-				<td colspan="3"><a href="javascript:array1('hit')">TOP (추천수)</a></td>
+				<td colspan="2"><a href="javascript:array1('viewCount')">인기 (조회수)</a></td>
+				<td colspan="2"><a href="javascript:array1('regdate')">최신 (등록날짜)</a></td>
+				<td colspan="2"><a href="javascript:array1('hit')">TOP (추천수)</a></td>
 			</tr>
 		</table>
 		<input type="hidden" name="cNum" value="${ cNum}">
