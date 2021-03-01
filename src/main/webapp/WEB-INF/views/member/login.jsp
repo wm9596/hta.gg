@@ -142,7 +142,7 @@ $(function(){
 					var code = $(data).find("code").text();
 					if(code == document.getElementById("pwd_confirm").value){
 						document.getElementById("confirmPwd").innerHTML="이메일 인증 완료!!!";
-						document.getElementById("pwdChange").disabled = false;
+// 						document.getElementById("pwdChange").disabled = false;
 					}else{
 						document.getElementById("confirmPwd").innerHTML="이메일 인증 실패!!! 인증번호를 확인해주세요.";
 					}
@@ -290,13 +290,18 @@ function checkChangePwd(){
 	}
 	if(pwd.length<4 || pwd.length>10){
 		document.getElementById("pwd_pwdcheck").innerHTML="비밀번호는 4~10자리로 설정해주세요.";
+		document.getElementById("pwdChange").disabled = true;
 		return;
 	}else if(pwd.length>=4 && pwd.length<=10){
 		document.getElementById("pwd_pwdcheck").innerHTML="";
+		if(document.getElementById("confirmPwd").textContent == "이메일 인증 완료!!!"){
+			document.getElementById("pwdChange").disabled = false;
+		}
 	}
 	for(let i=0; i<pwd.length; i++){
 		if(!(('0'<=pwd.charAt(i) && pwd.charAt(i)<='9') || ('a'<=pwd.charAt(i) && pwd.charAt(i)<='z') || ('A'<=pwd.charAt(i) && pwd.charAt(i)<='Z'))){
 			document.getElementById("pwd_pwdcheck").innerHTML="아이디는 영문과 숫자로만 입력해주세요...";
+			document.getElementById("pwdChange").disabled = true;
 			return;
 		}
 	}
@@ -348,6 +353,8 @@ $(document).ready(function(){
 		}else if(document.getElementById("nicknamecheck").textContent != ""){
 			alert("닉네임 설정 조건에 맞게 다시 입력해 주세요.(4~12자리)");
 			e.preventDefault();
+		}else{
+			alert("회원가입이 완료되었습니다.!!!!!");
 		}
 	});
 });
