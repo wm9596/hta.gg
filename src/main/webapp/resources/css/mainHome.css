@@ -116,7 +116,7 @@
 
 #sub_header_center .menu {
 	display: flex;
-	width: 33.3%;
+	width: 25%;
 	height: 50px;
 	float: left;
 	justify-content: center;

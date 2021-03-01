@@ -14,6 +14,7 @@
 		<div class="menu"><a href="${pageContext.request.contextPath }/champ/ChampList1">챔피언</a></div>
 		<div class="menu"><a href="${pageContext.request.contextPath }/itemlist">아이템</a></div>
 		<div class="menu"><a href="${pageContext.request.contextPath }/community/list">커뮤니티</a></div>
+		<div class="menu"><a href="javascript:page(7)">경기일정</a> </div>
 	</div>
 	<div id="header_right">
 		<div id="header_none">
@@ -108,3 +109,22 @@
 			</div>
 		</sec:authorize>
 	</div>
+<script>
+function page(n){
+	if(n==7){
+		var aa="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}";
+		if(aa){
+			console.log(aa);
+			location.href = '${pageContext.request.contextPath}/match/list';
+			console.log(aa);
+		
+		}else{
+			console.log(aa);
+			alert("로그인 후 이용해주세요.");
+			location.href = '${pageContext.request.contextPath}/member/login';
+		}
+	}else{
+	location.href="${pageContext.request.contextPath }/community/list?cNum="+n;
+	}
+}
+</script>
