@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<h1 style="text-align: center; padding-top: 70px;">내 정보</h1><br>
+<h3 style="text-align: center; padding-top: 70px;">내 정보</h3><br>
 <form method="post" action="${pageContext.request.contextPath}/member/update" style="text-align: center;">
 	<label style="width: 100px;">닉네임</label>
 	<input type="text" name="nickname" value="${vo.nickname}" style="width: 300px; padding: 0px; display: inline-block;" class="form-control"><br><br>
