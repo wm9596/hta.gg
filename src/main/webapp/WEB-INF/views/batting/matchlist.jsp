@@ -8,6 +8,17 @@
 
 <head>
 <style type="text/css">
+#matchList{
+   position: absolute;
+    left: 830px;
+    top: 150px;
+}
+.btn-primary {
+    color: #fff;
+    background-color: black;
+    border-color: black;
+}
+}
 .winloseBTN{
   background-color: #4CAF50; /* Green */
   border: none;
@@ -40,6 +51,16 @@
 
   font-size: 16px;
 
+}
+.winloseBTN{
+  background-color: black; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+
+  font-size: 16px;
 }
 
 </style>
@@ -260,7 +281,22 @@ $("#tomm").click(function(){
 
 }) */
 		
-
+$.ajax({
+	url:'/lol/match/teamrank',
+	dataType: 'json',
+	success:function(data){
+		console.log(data);
+		if(data){
+		$.each(data.teamrank,function(key,value){
+			$(".table").append("<tr><td><button type='button' class='btn btn-danger'>"+value.RANK+"</button></td><td>"
+					+"<button type='button' class='btn btn-success'>"+(value.WINCOUNT*3)+"</button></td><td><button type='button' class='btn btn-info'>"+value.TNAME+"</button></td></tr>")
+		})
+		}else{
+			$(".table").append("<tr><td>경기가 없습니다.</td></tr>")
+		}
+	}
+	
+})
 })
 function getday(){
 	   var date = new Date();
@@ -300,7 +336,7 @@ function b1win(data){
 		},
 		success:function(data){
 			alert("배팅완료");
-			console.log($("#pick").html(t1+"팀을 선택하셨습니다"))
+			$("#matchList").append(t1+"팀을 선택하셨습니다")
 		}
 	})
 	}else{
@@ -327,7 +363,7 @@ function b2win(data){
 		},
 		success:function(data){
 			alert("배팅완료");
-			console.log($("#pick").html(t2+"팀을 선택하셨습니다"))
+			$("#matchList").append(t2+"팀을 선택하셨습니다")
 		}
 	})
 	}else{
@@ -335,13 +371,16 @@ function b2win(data){
 	}
 }
 </script>
-<div id="allList" style="height: 700px; width: 1000px;">
-<div id="d1" style="padding-left: 500px">
+<div id="allList" style="height: 800px; padding-left: 200px; ">
+<div id="d1" >
 </div>
-<div id="matchList" style="padding-left: 500px">
+<div id="matchList">
 <span id="ss"></span></div>
-
-
+<div style="width: 270px;height:450px; ">
+<table class="table">
+ <tr><td><button type="button" class="btn btn-primary">순위</button></td><td><button type="button" class="btn btn-primary">승점</button></td><td><button type="button" class="btn btn-primary">팀이름</button></td></tr>
+</table>
+</div> 
 </div>
 
 </body>

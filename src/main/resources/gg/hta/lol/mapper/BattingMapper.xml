@@ -36,4 +36,9 @@ select username,To_Char(mdate,'yyyy/mm/dd') mdate,mrate,point from match inner j
   <update id="pointGo2" parameterType="int">
   update match set point=1 where mnum=#{mnum}
   </update>
+  <select id="teamrank" resultType="hashmap">
+select aa.* from(
+select count(mwinlose)wincount,mwinlose,tname,ROW_NUMBER() over(order by count(mwinlose) desc)rank from match inner join battingteaminfo on match.mwinlose=battingteaminfo.tnum group by mwinlose,tname
+)aa
+  </select>
   </mapper>

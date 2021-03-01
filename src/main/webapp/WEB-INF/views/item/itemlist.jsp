@@ -9,14 +9,23 @@
 position: relative;
 }
 .content {
-  border: 3px solid black;
+
   border-radius: 25px;
   background-color: #ffffff; 
   position:absolute;
- background-color:black;
-  width: 30%;
+ background-color:#343a40 ;
+  width: 400px;
   height: auto;
   color:white;
+
+}
+#info{
+
+height: 500px;
+width: 500px;
+position: fixed;
+left: 1050px;
+top:130px;
 
 }
 
@@ -34,6 +43,15 @@ color: #00ffff ;}
 <script type="text/javascript" src="/lol/resources/js/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 	$(function() {
+		$(window).scroll(function(event){
+			if(jQuery(window).scrollTop() > jQuery(".banner").offset().top) {
+			jQuery("#info").css("position", "fixed");
+			}
+			else if((jQuery(window).scrollTop() < jQuery(".banner").offset().top)) {
+			jQuery("#info").css("position", "static");
+			}
+
+		})
 		$
 				.ajax({
 					contentType : 'application/json',
@@ -94,33 +112,33 @@ color: #00ffff ;}
 				
 				
 	
-				var nameeffect="<div><h2>"+data.name+"</h2><p>가격:"+data.price+"<br><img src=http://ddragon.leagueoflegends.com/cdn/11.2.1/img/item/"+data.icon+" style='width:50px; height:50px;'><br>"+data.effect+"</div>";
+				var nameeffect="<div><h2>"+data.name+"</h2><p>가격:"+data.price+"<br><img src=http://ddragon.leagueoflegends.com/cdn/11.2.1/img/item/"+data.icon+" style='width:64px;'><br>"+data.effect+"</div>";
 				$("#effect").empty();
-					$(nameeffect).appendTo("#effect").toggleClass("content")
-					console.log(y)
-					$(".content").css("left",x+50+"px");
-					$(".content").css("top",y+"px");
+					$(nameeffect).appendTo("#info").addClass('content');
+			
 					//ddd
 			}
 		})
 	}
 	function iteminfo2(){
 	
-		$("#effect").empty();
+		$("#info").empty();
 	}
 </script>
 </head>
 <body>
-	<div style="width:100%;height: 100%; background-color: black" id="main">
+	<div style="width:800px;height: 100%; background-color: black" id="main">
 	<div id="start"><h1>스타팅추천</h1></div>
 	<div id="actives"><h1>특수사용효과</h1></div>
 	<div id="mana"><h1>마법공격</h1></div>
 	<div id="armor" ><h1>방어특화</h1></div>
-	<div id="attackSpeed"><h1>공격속도특화&&치명타</h1></div>
+	<div id="attackSpeed"><h1>공격속도특화_치명타</h1></div>
 	<div id="boots" ><h1>이동속도</h1></div>
 	<div id="demege" ><h1>물리공격</h1></div>
 	<div id="iteminfo" ></div>
 	<div id="effect"></div>
+	</div>
+	<div id="info">
 	
 	</div>
 	<c:if test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username eq 'admin'}">

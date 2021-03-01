@@ -53,5 +53,9 @@ public class BattingDao {
 	public int pointGo2(int mnum) {
 		return sqlSession.update(NAMESPACE+".pointGo2",mnum);
 	}
+	public List<HashMap<String, Object>> teamrank(){
+		return sqlSession.selectList(NAMESPACE+".teamrank");
+		
+	}
 
 }

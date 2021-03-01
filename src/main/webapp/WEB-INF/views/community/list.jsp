@@ -88,7 +88,7 @@
 				<th scope="col"><a href="javascript:page(4)">사건사고</a> </th>
 				<th scope="col"><a href="javascript:page(5)">Q&A</a> </th>
 				<th scope="col"><a href="javascript:page(6)">공지사항</a> </th>
-				<th scope="col"><a href="/lol/match/list">경기일정</a> </th>
+				<th scope="col"><a href="javascript:page(7)">경기일정</a> </th>
 			</tr>
 			<tr>
 				<td colspan="3"><a href="javascript:array1('viewCount')">인기 (조회수)</a></td>
@@ -232,7 +232,21 @@ $("#insertBtn").click(function() {
 })
 
 function page(n){
+	if(n==7){
+		var aa="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}";
+		if(aa){
+			console.log(aa);
+			location.href = '${pageContext.request.contextPath}/match/list';
+			console.log(aa);
+		
+		}else{
+			console.log(aa);
+			alert("로그인 후 이용해주세요.");
+			location.href = '${pageContext.request.contextPath}/member/login';
+		}
+	}else{
 	location.href="${pageContext.request.contextPath }/community/list?cNum="+n;
+	}
 	}
 
 		

@@ -9,7 +9,6 @@
 <html>
 <head>
  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
 <script type="text/javascript" src="/lol/resources/js/jquery-3.5.1.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript"
@@ -53,6 +52,7 @@ margin-left:40%;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  margin-left: 200px;
 }
 #span11{
    border-bottom:black;
@@ -128,8 +128,9 @@ width: 40%; text-align: center;  display: inline-block; margin-left: 30%;"}
 <title>Insert title here</title>
 </head>
 <body>
-<div id="adminList" style="width: 100px;">
-<div id="teaminsert"    style="padding-left: 500px;">
+<div id="adminList" style="width: 1000px;">
+<div id="d2"></div>
+<div id="teaminsert"    >
 	<input type="button" value="새로운팀추가" id="addTeam" class="button">
 		<input type="button" id="removeTeambtn" style="display: none;" value="팀추가끄기">
 	<div id="addTeam">
@@ -150,11 +151,16 @@ width: 40%; text-align: center;  display: inline-block; margin-left: 30%;"}
 
 </div>
 </div>
-<div id="d2"></div>
+
 <div id="matchList"></div>
 <div id="Nomatch"></div>
 <input type="hidden" id="test11" >
-
+>
+</div>
+<div id='tb' style='width:700px;'>
+<table class="table">
+ <tr><td><button type="button" class="btn btn-primary">매치번호</button></td><td><button type="button" class="btn btn-primary">팀team1</button></td><td><button type="button" class="btn btn-primary">팀이름</button></td></tr>
+</table>
 </div>
 </body>
 <script type="text/javascript">
@@ -340,6 +346,7 @@ $("#addmatch2").change(function(){
 	
 function yesorno(aa,bb,cc){
 	if(confirm("승리한팀이 맞습니까?")) {
+		
 		console.log("aaㅁㅁㅁㅁㅁ"+aa);
 		console.log("매치번호"+bb);
 		console.log("팀번호"+cc);
@@ -435,7 +442,7 @@ function teamList(){
 			success:function(data){
 				console.log(data.matchinfo.length);
 				if(data.matchinfo.length==0){
-					console.log("엘스@@@@@@@@@@@")
+				$("#matchList").append("<h3 style='padding-left:300px;'>진행된 경기가 없습니다.</h3>")
 					
 				}  else{
 					
@@ -460,8 +467,9 @@ function teamList(){
 	 					str +="<div id='matchList3' '>"+team1win+"vs"+team2win+"<br>"+
 	 					"<span id='span11'>"+data.matchinfo[key].B2NAME+"</span>팀이 승리한 경기입니다 클릭시 승리팀이 변경됩니다.</span><input type='button' id='"+key+4+"' onclick='pointgo("+data.matchinfo[key].MNUM+","+data.matchinfo[key].MWINLOSE+",event)' class='button' value='포인트지급'></div> ";
 	 				}else if(data.matchinfo[key].POINT==1){
-	 					str +="<div id='matchList3' '>"+team1win+"vs"+team2win+"<br>"+
+	 					str +="<div id='matchList3' '>"+data.matchinfo[key].B1NAME+"vs"+data.matchinfo[key].B2NAME+"<br>"+
 	 					"<span id='span11'></span>포인트 지급이 완료 되었습니다..</span></div> ";
+	 				
 	 				}else{
 	 					var team1win="<a href='javascript:yesorno("+key+","+data.matchinfo[key].MNUM+","+value.TNUM1+")'>"+data.matchinfo[key].B1NAME+"</a>";
 		 				var team2win="<a href='javascript:yesorno2("+key+","+data.matchinfo[key].MNUM+","+value.TNUM2+")'>"+data.matchinfo[key].B2NAME+"</a>";

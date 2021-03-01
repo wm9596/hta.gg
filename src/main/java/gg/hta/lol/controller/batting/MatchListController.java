@@ -38,6 +38,13 @@ public class MatchListController {
 		matchlist.put("matchinfo", service.matchinfo(mDate));
 
 		return matchlist;
-
 	}
+	@GetMapping(value="/match/teamrank")
+	@ResponseBody
+	public Map<String, Object> teamrank(){
+		Map<String,Object> teamrank=new HashMap<String, Object>();
+		teamrank.put("teamrank",service.teamrank());
+		return teamrank;
+	}
+	
 }

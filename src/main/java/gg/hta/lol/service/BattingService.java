@@ -50,5 +50,8 @@ public class BattingService {
 	}public int pointGo2(int mnum) {
 		return dao.pointGo2(mnum);
 	}
+	public List<HashMap<String, Object>> teamrank(){
+		return dao.teamrank();
+	}
 	
 }
