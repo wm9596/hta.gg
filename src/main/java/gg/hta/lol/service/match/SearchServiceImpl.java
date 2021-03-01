@@ -200,7 +200,7 @@ public class SearchServiceImpl implements SearchService {
 		
 		stream.filter(item->{
 			JsonObject match =item.getAsJsonObject();
-			System.out.println(match);
+//			System.out.println(match);
 			int gameTypeCode = match.get("queue").getAsInt();
 			
 			if(gameTypeCode==GameType.RANKED_FLEX_SR.getCode1() || gameTypeCode==GameType.RANKED_SOLO_5x5.getCode1() ||gameTypeCode==GameType.RANKED_SOLO_5x5.getCode2()) {
@@ -315,6 +315,7 @@ public class SearchServiceImpl implements SearchService {
 		if(list.size() < 1) {
 			return;
 		}
+		
 		banlistMapper.addBan(list);
 		champMapper.updateBan(list);
 	}

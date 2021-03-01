@@ -49,7 +49,7 @@
 	</update>
 	<select id="EmailAuthSelect" parameterType="string" resultType="gg.hta.lol.vo.AuthVo">
 		select * from auth 
-		where username =  (select username from member where email = #{email}) and enabled = 1
+		where username =  (select username from member where email = #{email} and enabled = 1)
 	</select>
 	<select id="PwdEmailselect" parameterType="hashmap" resultType="member">
 		select * from member where username=#{username} and email=#{email} and enabled = 1
