@@ -184,10 +184,9 @@ public class SearchServiceImpl implements SearchService {
 	@Transactional
 	public void readMatchList(String aid,int start,int end,String snickname) {
 		
-		List<String> oldMList = matchinfoMapper.getMatchList(snickname);
 		
-//		JsonObject matchInfo = dataRequester.getMatchList(aid,start,end);
-		JsonObject matchInfo = dataRequester.getMatchList(aid);
+		JsonObject matchInfo = dataRequester.getMatchList(aid,0	,20);
+//		JsonObject matchInfo = dataRequester.getMatchList(aid);
 		
 		JsonArray matchArr = matchInfo.get("matches").getAsJsonArray();
 		
@@ -196,6 +195,8 @@ public class SearchServiceImpl implements SearchService {
 		List<MatchInfosWrapper> mlist = new ArrayList<MatchInfosWrapper>();
 		
 		ThreadGroup group = new ThreadGroup("group");
+		
+		HashMap<String, Integer> map =  new HashMap<String, Integer>();
 		
 		stream.filter(item->{
 			JsonObject match =item.getAsJsonObject();
@@ -206,14 +207,17 @@ public class SearchServiceImpl implements SearchService {
 			}
 			return false;
 		})
-		.limit(20)
-		.filter(item->{
-			String str = item.getAsJsonObject().get("gameId").getAsString();
-			return !oldMList.contains(str);
-		})
 		.forEach(item->{
-			String gameId = item.getAsJsonObject().get("gameId").getAsString();
-			int gameTypeCode = item.getAsJsonObject().get("queue").getAsInt();
+			map.put(item.getAsJsonObject().get("gameId").getAsString(), item.getAsJsonObject().get("queue").getAsInt());
+		});
+		
+		System.out.println(map);
+		
+		List<String> matchinfoList = matchinfoMapper.getNotExistMatchinfo(new ArrayList<String>(map.keySet()));
+		
+		matchinfoList.forEach(item->{
+			String gameId = item;
+			int gameTypeCode = map.get(item);
 			Thread t = new Thread(group, gameId) {
 				@Override
 				public void run() {

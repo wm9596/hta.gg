@@ -15,6 +15,8 @@ public interface MatchInfoMapper {
 	
 	public List<MatchListVo> getMatchInfoList(@Param("snickname")String nickname,@Param("type")String type);
 	
+	public List<String> getNotExistMatchinfo(List<String> nicknames);
+	
 	public List<ParticipantsVo> getParticipants(List<String> nicknames);
 	
 	public List<String> getMatchList(String snickname);
