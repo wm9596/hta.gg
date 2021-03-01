@@ -20,6 +20,7 @@
  	<mapper resource="gg/hta/lol/mapper/VisitCountMapper.xml"/>
  	<mapper resource="gg/hta/lol/mapper/ChampMapper.xml"/>
  	<mapper resource="gg/hta/lol/mapper/PointMapper.xml"/>
+ 	<mapper resource="gg/hta/lol/mapper/hitLimitedMapper.xml"/>
  	<mapper resource="gg/hta/lol/mapper/MessageMapper.xml"/>
   </mappers>
 </configuration>

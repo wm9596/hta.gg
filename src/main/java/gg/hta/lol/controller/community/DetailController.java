@@ -35,10 +35,12 @@ import gg.hta.lol.service.CommunityService;
 import gg.hta.lol.service.PointService;
 import gg.hta.lol.service.ReplyService;
 import gg.hta.lol.service.ReportService;
+import gg.hta.lol.service.hitLimitedService;
 import gg.hta.lol.vo.CommunityVo;
 import gg.hta.lol.vo.PointVo;
 import gg.hta.lol.vo.ReplyVo;
 import gg.hta.lol.vo.ReportVo;
+import gg.hta.lol.vo.hitLimitedVo;
 import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
@@ -47,6 +49,7 @@ public class DetailController {
 	@Autowired ReplyService service1;
 	@Autowired private ReportService reportService;
 	@Autowired private PointService pointService;
+	@Autowired private hitLimitedService hitLimitedService;
 	
 	@GetMapping("/community/detailMy")
 	public String detailMy(int pNum, Model m) {
@@ -217,14 +220,20 @@ public class DetailController {
 		return sb.toString();
 	}
 	
-	@GetMapping(value = "/update/{pNum}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(value = "/update/{pNum}/{username}/{hit}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public int update(@PathVariable("pNum")int pNum, Principal principal) {
+	public int update(@PathVariable("pNum")int pNum, @PathVariable("username")String username, @PathVariable("hit")int hit, Principal principal) {
 		pointService.insert(new PointVo(0, principal.getName(), "게시글 추천", +10, null));
+		int n = hitLimitedService.insert(new hitLimitedVo(0,pNum,username,hit)); // 추천제한호출 hit = 0이면 추천 1 이면 반대.
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("username",principal.getName());
 		map.put("score",+10);
 		pointService.update(map);
+		
+		if(n == -99) {
+			return -99;
+		}
+		
 		return service.hit(pNum);
 	}
 	
