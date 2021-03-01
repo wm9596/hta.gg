@@ -21,3 +21,4 @@ public interface MatchInfoMapper {
 	
 	public List<String> getMatchList(String snickname);
 }
+
