@@ -345,7 +345,7 @@ function yesorno(aa,bb,cc,dd,key){
 		return;
 	}
 }function yesorno2(aa,bb,cc,dd,key){
-	if(confirm("승리한팀이 맞습니까?")) {
+	if(confirm("승리한팀이 맞습니까!?")) {
 		console.log("aaㅁㅁㅁㅁㅁ"+aa);
 		console.log("매치번호"+bb);
 		console.log("팀번호"+cc);
