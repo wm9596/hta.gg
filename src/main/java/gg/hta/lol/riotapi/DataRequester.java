@@ -114,6 +114,9 @@ public class DataRequester {
 
 				if (con.getResponseCode() != 200) {
 					System.out.println("api 요청 실패 에러코드 : " + con.getResponseCode());
+					if(con.getResponseCode() == 404) {
+						return null;
+					}
 					if(con.getResponseCode() == 429) {
 						System.out.println("연동 횟수 초과");
 						Thread.sleep(200);
