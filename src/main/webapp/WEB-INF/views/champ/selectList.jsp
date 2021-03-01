@@ -669,7 +669,7 @@ $(function(){
 						let spell_22="<img onmouseover='spell(event);'  onmouseout='spellout();' src='http://ddragon.leagueoflegends.com/cdn/11.4.1/img/spell/"+spell_2+"'>";
 						console.log(spell_2)
 							$("<tr><td>"+(key+1)+"</td><td>"+item1+"</td><td >"+item2+
-									"</td><td >"+item3+"</td><td >"+item4+"</div></td><td>"+item5+"</td><td >"+spell_11+"</td><td>"+spell_22+
+									"</td><td >"+item3+"</td><td >"+item4+"</div></td><td>"+item5+"</td><td>"+item6+"</td><td>"+spell_11+"</td><td>"+spell_22+
 									"</td><td> "+cc+
 									"</td><td>"+dd+"</td></tr>").appendTo("#table1 tbody");
 						}

@@ -106,7 +106,7 @@ inner join champion on champion.championid=teammemberinfo.championid where champ
 	<select id='itemtree' resultType="hashmap" parameterType="int">
         
        select a.* from(
-        (select   spell2,spell1,item1,item2, item3,item4,item5,item6,rune1,rune2, rank() over (order by item1 desc)rank from teammemberinfo inner join champion on 
+        (select   spell2,spell1,item1,item2, item3,item4,item5,item6,rune1,rune2, row_number() over (order by item1 desc)rank from teammemberinfo inner join champion on 
         champion.championid=teammemberinfo.championid inner join teaminfo on teammemberinfo.matchid=teaminfo.matchid where champion.championid=#{championid} and teaminfo.WINLOSE='Win' group by 
         item1,item2,item3,item4,item5,item6,spell1,spell2,rune1,rune2)a )
       where <![CDATA[
