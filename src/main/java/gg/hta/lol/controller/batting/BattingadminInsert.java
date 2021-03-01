@@ -76,7 +76,7 @@ public class BattingadminInsert {
 	@ResponseBody
 	public String winUpdate(MatchVo vo) {
 		service.winupdate(vo);
-		
+	
 		return "{\"code\":\"" + vo + "\"}";
 	}
 	@GetMapping(value="/battingdeleteTeam")
@@ -90,6 +90,7 @@ public class BattingadminInsert {
 	public Map<String,Object> pointgo(int mnum) {
 		System.out.println(mnum);
 		Map<String,Object> map=new HashMap<String,Object>();
+		service.pointGo2(mnum);
 		map.put("list", service.pointGo(mnum));
 		
 		return map;
@@ -98,7 +99,7 @@ public class BattingadminInsert {
 	@GetMapping(value="/batting/pointInsert")
 	@ResponseBody
 	public String pointInsert(int score,String username,int mNum) {
-
+		
 		BattingLogVo vo=new BattingLogVo(0,mNum,username,0);
 		PointVo pVo=new PointVo(0,username,null,score,null);
 		Pservice.battingInsertAdmin(pVo);

@@ -6,11 +6,10 @@
 <head>
 <meta charset="UTF-8">
 
- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <title>Insert title here</title>
-
 <script type="text/javascript" src="/lol/resources/js/jquery-3.5.1.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/resources/js/scrap.js"></script>
 <style type="text/css">
 .charFace img {
 	padding-top: 40px;

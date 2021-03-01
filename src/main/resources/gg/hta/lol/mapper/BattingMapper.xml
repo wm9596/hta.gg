@@ -10,13 +10,13 @@
   select * from battingteaminfo
   </select>
   <insert id="addMatch" parameterType="gg.hta.lol.vo.MatchVo">
-  insert into match values(mNum_seq.nextval,to_char(#{mDate},'yyyy/mm/dd'),#{mRate},null,#{tNum1},#{tNum2})
+  insert into match values(mNum_seq.nextval,to_char(#{mDate},'yyyy/mm/dd'),#{mRate},null,#{tNum1},#{tNum2},0)
   </insert>
   <select id="teaminfo" resultType="string">
   select tname from battingteaminfo where tnum=#{tnum}
   </select>
   <select id="matchinfo" parameterType="string" resultType="hashmap">
-select match.mnum,match.tnum1,match.tnum2,b1.tname b1name,b2.tname b2name,match.mrate,match.mwinlose from match inner join battingteaminfo b1 on match.tnum1=b1.tnum   inner join battingteaminfo b2 on match.tnum2=b2.tnum where to_char(mdate,'yyyy/mm/dd')=#{mdate}
+select match.mnum,match.tnum1,match.tnum2,b1.tname b1name,b2.tname b2name,match.mrate,match.mwinlose,match.point from match inner join battingteaminfo b1 on match.tnum1=b1.tnum   inner join battingteaminfo b2 on match.tnum2=b2.tnum where to_char(mdate,'yyyy/mm/dd')=#{mdate}
   </select>
   <update id="winupdate" parameterType="gg.hta.lol.vo.MatchVo">
   update match set mwinlose=#{mWinlose} where mnum=#{mNum}
@@ -31,6 +31,9 @@ MERGE INTO battingLog USING DUAL on (mNum=#{mNum} and username=#{username}) WHEN
   select * from battingLog where mNum=#{mNum} and username=#{username}
   </select>
   <select id="pointGo" parameterType="int" resultType="hashmap">
-select username,To_Char(mdate,'yyyy/mm/dd') mdate,mrate from match inner join battinglog on match.mnum=battinglog.mnum where  match.mnum=#{mnum}
+select username,To_Char(mdate,'yyyy/mm/dd') mdate,mrate,point from match inner join battinglog on match.mnum=battinglog.mnum where  match.mnum=#{mnum}
   </select>
+  <update id="pointGo2" parameterType="int">
+  update match set point=1 where mnum=#{mnum}
+  </update>
   </mapper>

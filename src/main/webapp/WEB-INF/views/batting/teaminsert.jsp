@@ -7,21 +7,25 @@
 
 
 <html>
- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <head>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/resources/js/scrap.js"></script>
 <script type="text/javascript" src="/lol/resources/js/jquery-3.5.1.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript"
+	src="${pageContext.request.contextPath }/resources/js/scrap.js"></script>
 
 <meta charset="UTF-8">
 <style type="text/css">
+.btn:not(:disabled):not(.disabled) {
+    cursor: alias;
+}
 #d1{
 margin-left:40%;
 }
-.mm.matchList{
-display: inline-block; width: 10%;
+#matchList3 span{
+   border-bottom: 3px solid #f00;
+
 }
 .button{
   background-color: #4CAF50; /* Green */
@@ -34,9 +38,7 @@ display: inline-block; width: 10%;
   font-size: 16px;
   margin-left: 40%;"
 }
-#matchList3.matchList{
-display: inline-block; width: 40%;
-}
+
 #addTeamname {
 	border:solid 2px black;
   font-size: 16px;
@@ -52,6 +54,9 @@ display: inline-block; width: 40%;
   display: inline-block;
   font-size: 16px;
 }
+#span11{
+   border-bottom:black;
+}
 #addTeambtn{
 background-color: black; /* Green */
   border: 1px;
@@ -63,7 +68,7 @@ background-color: black; /* Green */
   font-size: 13px;
 }
 select {
-width: 100px;
+width: 50px;
 
 border: 1px solid #999;
 
@@ -88,12 +93,14 @@ background-color: black; /* Green */
   margin-left: 40%;
 }
 #matchList{
-
-margin-top: 10px;
+width:700px;
+    position: absolute;
+    left: 400px;
+    top: 140px;
 }
 .matchList{
 
-width: 40%; text-align: center; border: 2px solid black; display: inline-block; margin-left: 30%;"}
+width: 40%; text-align: center;  display: inline-block; margin-left: 30%;"}
 #addmatch{
   background-color: #4CAF50; /* Green */
   border: none;
@@ -116,36 +123,38 @@ width: 40%; text-align: center; border: 2px solid black; display: inline-block; 
   font-size: 16px;
  
 }
+
 </style>
 <title>Insert title here</title>
 </head>
 <body>
-<div id="allList">
-<div id="addlist"></div>
+<div id="adminList" style="width: 100px;">
+<div id="teaminsert"    style="padding-left: 500px;">
 	<input type="button" value="새로운팀추가" id="addTeam" class="button">
 		<input type="button" id="removeTeambtn" style="display: none;" value="팀추가끄기">
 	<div id="addTeam">
 		<input type="text" id="addTeamname" style="display: none;"> <input
 			type="button" id="addTeambtn" style="display: none;" value="팀추가"><br>
 	</div>
-	</div>
-<div id="d1" ></div>
-<div id="addmatch" >
+<div id="d1" style="width:100%;"></div>
+
+<div id="adminmatchinsert">
 <select id='addmatch1' style="display: none;">
 </select>
-<input type="button" id="teamDelete" value="x">
 <select id='addmatch2' style="display: none;">
 
 </select>
-<input type="button" id="teamDelete2" value="x"><br>
+
 
 <input type="button" id="matchinsert" value="경기등록">
 
 </div>
+</div>
 <div id="d2"></div>
-<div id="matchList" style="width: 100%;"></div>
+<div id="matchList"></div>
 <div id="Nomatch"></div>
 <input type="hidden" id="test11" >
+
 </div>
 </body>
 <script type="text/javascript">
@@ -257,17 +266,14 @@ $("#addmatch2").change(function(){
 	}
 })
 		$("#addTeam").click(function() {
-			
-			$(this).attr("disabled", false);
-
 			$("#addTeamname").css({
-				display : "inline"
+				display : "inline-block"
 			});
 			$("#addTeambtn").css({
-				display : "inline"
+				display : "inline-block"
 			});
 			$("#removeTeambtn").css({
-				display: "inline"
+				display: "inline-block"
 			})
 			$("#addTeambtn").click(function() {
 				var teamname = $("#addTeamname").val();
@@ -437,19 +443,25 @@ function teamList(){
 	 			console.log(data.matchinfo);
 	 			console.log(value)
 	 			if(data.matchinfo.length>0){
+	 				console.log(data.matchinfo);
 	 				var team1win="<a href='javascript:yesorno("+key+","+data.matchinfo[key].MNUM+","+value.TNUM1+")'>"+data.matchinfo[key].B1NAME+"</a>";
 	 				var team2win="<a href='javascript:yesorno2("+key+","+data.matchinfo[key].MNUM+","+value.TNUM2+")'>"+data.matchinfo[key].B2NAME+"</a>";
 	 				var aa=value.TNUM1;
 	 				console.log(value.TNUM1);
-	 				var str="<div id='"+key+"' class='mm' style='background-color:Aquamarine;'><h3>"+(key+1)+"번째 경기<span></span></h3></div>";
+	 				var str="<div id='"+key+"' class='mm' '><h3>"+(key+1)+"번째 경기<span></span></h3></div>";
 	 				console.log(data.matchinfo[key].MWINLOSE+"아랄랄");
-	 				console.log(data.matchinfo[key].TNUM1+"dddddddddddddddd")
-	 				if(data.matchinfo[key].MWINLOSE==data.matchinfo[key].TNUM1){
-	 					str +="<div id='matchList3' style='background-color:DodgerBlue;'>"+team1win+"vs"+team2win+"<br>"+
-	 					"<span>"+data.matchinfo[key].B1NAME+"팀이 승리한 경기입니다 클릭시 승리팀이 변경됩니다.</span><input id='pointbtn' type='button' onclick='pointgo("+data.matchinfo[key].MNUM+","+data.matchinfo[key].MWINLOSE+")' value='포인트지급'></div> ";
-	 				}else if(data.matchinfo[key].MWINLOSE==data.matchinfo[key].TNUM2){
-	 					str +="<div id='matchList3' style='background-color:Cyan;'>"+team1win+"vs"+team2win+"<br>"+
-	 					"<span>"+data.matchinfo[key].B2NAME+"팀이 승리한 경기입니다 클릭시 승리팀이 변경됩니다.</span><input id='pointbtn' type='button' onclick='pointgo("+data.matchinfo[key].MNUM+","+data.matchinfo[key].MWINLOSE+")' value='포인트지급'></div> ";
+	 				console.log(data.matchinfo[key].TNUM1+"dddddddddddddddd");
+	 				console.log(data.matchinfo[key].point+"포인트")
+	 				
+	 				if(((data.matchinfo[key].MWINLOSE==data.matchinfo[key].TNUM1) && (data.matchinfo[key].POINT==0))){
+	 					str +="<div id='matchList3' '>"+team1win+"vs"+team2win+"<br>"+
+	 					"<span id='span11'>"+data.matchinfo[key].B1NAME+"</span>팀이 승리한 경기입니다 클릭시 승리팀이 변경됩니다.</span><input type='button' id='"+key+3+"' onclick='pointgo("+data.matchinfo[key].MNUM+","+data.matchinfo[key].MWINLOSE+",event)' class='button' value='포인트지급'></div> ";
+	 				}else if(((data.matchinfo[key].MWINLOSE==data.matchinfo[key].TNUM2) && (data.matchinfo[key].POINT==0)) ){
+	 					str +="<div id='matchList3' '>"+team1win+"vs"+team2win+"<br>"+
+	 					"<span id='span11'>"+data.matchinfo[key].B2NAME+"</span>팀이 승리한 경기입니다 클릭시 승리팀이 변경됩니다.</span><input type='button' id='"+key+4+"' onclick='pointgo("+data.matchinfo[key].MNUM+","+data.matchinfo[key].MWINLOSE+",event)' class='button' value='포인트지급'></div> ";
+	 				}else if(data.matchinfo[key].POINT==1){
+	 					str +="<div id='matchList3' '>"+team1win+"vs"+team2win+"<br>"+
+	 					"<span id='span11'></span>포인트 지급이 완료 되었습니다..</span></div> ";
 	 				}else{
 	 					var team1win="<a href='javascript:yesorno("+key+","+data.matchinfo[key].MNUM+","+value.TNUM1+")'>"+data.matchinfo[key].B1NAME+"</a>";
 		 				var team2win="<a href='javascript:yesorno2("+key+","+data.matchinfo[key].MNUM+","+value.TNUM2+")'>"+data.matchinfo[key].B2NAME+"</a>";
@@ -475,9 +487,13 @@ function teamList(){
 			}
 		})
 	}
-function pointgo(mnum,mwinlose){
-	console.log(mnum,mwinlose);
-	$("#pointbtn").css({
+function pointgo(mnum,mwinlose,e){
+
+		console.log(e.target);
+		var aa=e.target.id;
+	
+
+	$('#'+aa).css({
 		display: "none"
 	})
 	$.ajax({
