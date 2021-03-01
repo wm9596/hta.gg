@@ -9,6 +9,8 @@
 <title>/community/list.jsp</title>
 <style type="text/css">
  	a:hover { text-decoration:none; color:#EDA900;}
+ 	.navCenter{display: flex;justify-content: center;text-align: center;}
+
 /* 	th, td{text-align: center; border: 1px solid black;} */
 /* 	#g_menu_1{width:60px; margin-top:10px;font-weight:bold;font-size:15pt;display:inline-block; text-align:center;} */
 /* 	#g_menu_2{width:60px;margin-top:10px;font-weight:bold;font-size:15pt;display:inline-block; text-align:center;} */
@@ -177,27 +179,45 @@
 					<option value="title"<c:if test="${field=='title' }">selected</c:if>>제목</option>
 				</select>
 				<input type="text" name="keyword" value="${keyword }">
-				<input type="submit" value="검색">
-				
- 					<c:if test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username != null}">
-						<input type="button" id="insertBtn" value="글쓰기" style="float: right;">
- 					</c:if>
+				<input type="submit" value="검색"><br>
+				<input type="button" id="insertBtn" value="글쓰기" style="float: right;">
+
 			</form:form>
-			<div>
-				<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
+
+		<nav aria-label="Page navigation example" class="navCenter">
+			<ul class="pagination">
+				<c:if test="${pu.startPageNum>10 }">
+					<li class="page-item"><a class="page-link"
+						href="${pageContext.request.contextPath }/community/list?pageNum=${pu.pageNum-1}&field=${field}&keyword=${keyword}&cNum=${cNum}"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							<span class="sr-only">Previous</span>
+					</a></li>
+				</c:if>
+				<c:forEach var="i" begin="${pu.startPageNum}"
+					end="${pu.endPageNum }">
 					<c:choose>
 						<c:when test="${i==pu.pageNum }">
-							<a href="${pageContext.request.contextPath }/community/list?pageNum=${i}&field=${field}&keyword=${keyword}&cNum=${cNum}">
-							<span style='color: blue'>[${i }]</span></a>
+							<li class="page-item" style="margin: 0;"><a class="page-link"
+								href="${pageContext.request.contextPath }/community/list?pageNum=${i}&field=${field}&keyword=${keyword}&cNum=${cNum}"><span
+									style='color: blue;'>[${i }]</span></a></li>
 						</c:when>
 						<c:otherwise>
-							<a href="${pageContext.request.contextPath }/community/list?pageNum=${i}&field=${field}&keyword=${keyword}&cNum=${cNum}">
-							<span style='color: gray'>[${i }]</span></a>
+							<li class="page-item"><a class="page-link"
+								href="${pageContext.request.contextPath }/community/list?pageNum=${i}&field=${field}&keyword=${keyword}&cNum=${cNum}"><span
+									style='color: gray;'>[${i }]</span></a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
-			</div>
-	</div>
+				<c:if test="${pu.endPageNum<pu.totalPageCount }">
+					<li class="page-item"><a class="page-link"
+						href="${pageContext.request.contextPath }/community/list?pageNum=${pu.pageNum+1}&field=${field}&keyword=${keyword}&cNum=${cNum}"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
+							class="sr-only">Next</span>
+					</a></li>
+				</c:if>
+			</ul>
+		</nav>
+
 </body>
 <script type="text/javascript">
 
